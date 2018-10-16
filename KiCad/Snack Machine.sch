@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 2
+Sheet 1 3
 Title ""
 Date ""
 Rev ""
@@ -317,12 +317,8 @@ F 3 "" H 1850 2100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	1850 2100 1850 2050
-Text Label 6200 4800 0    50   ~ 0
-RX_USB
 Wire Wire Line
 	6200 4800 6000 4800
-Text Label 6200 4900 0    50   ~ 0
-TX_USB
 Wire Wire Line
 	6200 4900 6000 4900
 Text Label 6200 4100 0    50   ~ 0
@@ -961,6 +957,87 @@ F 3 "" H 10000 800 50  0001 C CNN
 	1    10000 800 
 	0    -1   -1   0   
 $EndComp
+$Comp
+L power:GND #PWR0140
+U 1 1 5BCA0AFE
+P 5000 6700
+F 0 "#PWR0140" H 5000 6450 50  0001 C CNN
+F 1 "GND" V 5005 6572 50  0000 R CNN
+F 2 "" H 5000 6700 50  0001 C CNN
+F 3 "" H 5000 6700 50  0001 C CNN
+	1    5000 6700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5000 6700 5200 6700
+NoConn ~ 4400 5000
+NoConn ~ 4400 5100
+NoConn ~ 4400 5200
+NoConn ~ 4400 5300
+NoConn ~ 4400 5400
+NoConn ~ 4400 5500
+NoConn ~ 4400 5700
+NoConn ~ 4400 5800
+NoConn ~ 4400 5900
+NoConn ~ 4400 6000
+NoConn ~ 4400 6100
+NoConn ~ 4400 6200
+NoConn ~ 6000 2100
+NoConn ~ 6000 2500
+NoConn ~ 6000 2600
+NoConn ~ 6000 2700
+NoConn ~ 6000 2800
+NoConn ~ 4400 2100
+NoConn ~ 4400 2200
+NoConn ~ 4400 2300
+NoConn ~ 4400 2400
+NoConn ~ 4400 2500
+NoConn ~ 4400 2600
+NoConn ~ 4400 2700
+NoConn ~ 4400 2800
+NoConn ~ 4400 3000
+NoConn ~ 4400 3100
+NoConn ~ 4400 3200
+NoConn ~ 4400 3300
+NoConn ~ 4400 3400
+NoConn ~ 4400 3500
+NoConn ~ 4400 3600
+NoConn ~ 4400 3700
+NoConn ~ 4400 4100
+NoConn ~ 4400 4200
+NoConn ~ 4400 4300
+NoConn ~ 4400 4400
+NoConn ~ 4400 4500
+NoConn ~ 4400 4600
+NoConn ~ 6000 5000
+NoConn ~ 6000 4300
+NoConn ~ 6000 4400
+NoConn ~ 6000 4500
+NoConn ~ 6000 4600
+NoConn ~ 6000 5700
+NoConn ~ 6000 5800
+NoConn ~ 6000 5900
+NoConn ~ 6000 6000
+NoConn ~ 6000 6100
+NoConn ~ 6000 6200
+NoConn ~ 6000 6300
+$Sheet
+S 6650 4600 550  300 
+U 5BCD883C
+F0 "USB_Serial" 50
+F1 "USB_Serial.sch" 50
+F2 "RX_USB" I L 6650 4700 50 
+F3 "TX_USB" I L 6650 4800 50 
+$EndSheet
+Wire Wire Line
+	6200 4900 6300 4800
+Wire Wire Line
+	6300 4800 6650 4800
+Wire Wire Line
+	6650 4700 6300 4700
+Wire Wire Line
+	6300 4700 6200 4800
+NoConn ~ 6000 6400
 Wire Bus Line
 	6300 1100 6300 1800
 Wire Bus Line
