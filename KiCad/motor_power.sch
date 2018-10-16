@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:Snack Machine-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -14,135 +15,328 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BA767F7
-P 1900 1450
-AR Path="/5BA767F7" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA767F7" Ref="Q?"  Part="1" 
-F 0 "Q?" H 2105 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 2105 1405 50  0000 L CNN
-F 2 "" H 2100 1550 50  0001 C CNN
-F 3 "~" H 1900 1450 50  0001 C CNN
-	1    1900 1450
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BA8E115
+P 1350 4450
+AR Path="/5BA8E115" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BA8E115" Ref="Q?"  Part="1" 
+F 0 "Q?" H 1556 4496 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 1556 4405 50  0000 L CNN
+F 2 "" H 1550 4550 50  0001 C CNN
+F 3 "~" H 1350 4450 50  0001 C CNN
+	1    1350 4450
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	1050 4450 1150 4450
 $Comp
 L Device:R R?
-U 1 1 5BA767FE
-P 1400 1450
-AR Path="/5BA767FE" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA767FE" Ref="R?"  Part="1" 
-F 0 "R?" V 1193 1450 50  0000 C CNN
-F 1 "R" V 1284 1450 50  0000 C CNN
-F 2 "" V 1330 1450 50  0001 C CNN
-F 3 "~" H 1400 1450 50  0001 C CNN
-	1    1400 1450
+U 1 1 5BA8E124
+P 1300 4950
+AR Path="/5BA8E124" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BA8E124" Ref="R?"  Part="1" 
+F 0 "R?" V 1093 4950 50  0000 C CNN
+F 1 "1K" V 1184 4950 50  0000 C CNN
+F 2 "" V 1230 4950 50  0001 C CNN
+F 3 "~" H 1300 4950 50  0001 C CNN
+	1    1300 4950
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	1550 1450 1700 1450
+	1450 4950 1450 4800
+Wire Wire Line
+	1650 4800 1450 4800
+Connection ~ 1450 4800
+Wire Wire Line
+	1450 4800 1450 4650
+Wire Wire Line
+	1150 4950 1150 4450
+Connection ~ 1150 4450
+Wire Wire Line
+	1050 4250 1450 4250
+Text HLabel 1050 4450 0    50   Input ~ 0
+col_1_ctrl
+Text Label 1650 4800 0    50   ~ 0
+motor_common_gnd
+Text Label 2600 7050 0    50   ~ 0
+motor_common_gnd
 $Comp
 L Device:R R?
-U 1 1 5BA76806
-P 2150 900
-AR Path="/5BA76806" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76806" Ref="R?"  Part="1" 
-F 0 "R?" H 2220 946 50  0000 L CNN
-F 1 "1K" H 2220 855 50  0000 L CNN
-F 2 "" V 2080 900 50  0001 C CNN
-F 3 "~" H 2150 900 50  0001 C CNN
-	1    2150 900 
+U 1 1 5BB1C4B9
+P 2400 7200
+F 0 "R?" H 2470 7246 50  0000 L CNN
+F 1 ".1" H 2470 7155 50  0000 L CNN
+F 2 "" V 2330 7200 50  0001 C CNN
+F 3 "~" H 2400 7200 50  0001 C CNN
+	1    2400 7200
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA7680D
-P 1850 1900
-AR Path="/5BA7680D" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA7680D" Ref="R?"  Part="1" 
-F 0 "R?" V 2057 1900 50  0000 C CNN
-F 1 "1K" V 1966 1900 50  0000 C CNN
-F 2 "" V 1780 1900 50  0001 C CNN
-F 3 "~" H 1850 1900 50  0001 C CNN
-	1    1850 1900
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
-	1700 1900 1700 1450
-Connection ~ 1700 1450
+	2400 7350 2300 7350
 Wire Wire Line
-	2000 1650 2000 1750
+	2300 7350 2300 7250
+Wire Wire Line
+	2300 7250 2050 7250
+Wire Wire Line
+	2050 7150 2300 7150
+Wire Wire Line
+	2300 7150 2300 7050
+Wire Wire Line
+	2300 7050 2400 7050
+Wire Wire Line
+	2600 7050 2400 7050
+Connection ~ 2400 7050
 $Comp
 L power:GND #PWR?
-U 1 1 5BA76817
-P 2200 1750
-AR Path="/5BA76817" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA76817" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 2200 1500 50  0001 C CNN
-F 1 "GND" H 2205 1577 50  0000 C CNN
-F 2 "" H 2200 1750 50  0001 C CNN
-F 3 "" H 2200 1750 50  0001 C CNN
-	1    2200 1750
+U 1 1 5BB27603
+P 2600 7350
+F 0 "#PWR?" H 2600 7100 50  0001 C CNN
+F 1 "GND" H 2605 7177 50  0000 C CNN
+F 2 "" H 2600 7350 50  0001 C CNN
+F 3 "" H 2600 7350 50  0001 C CNN
+	1    2600 7350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2200 1750 2000 1750
-Connection ~ 2000 1750
+	2600 7350 2400 7350
+Connection ~ 2400 7350
 Wire Wire Line
-	2000 1750 2000 1900
+	2300 7350 2050 7350
+Connection ~ 2300 7350
 $Comp
-L power:+24V #PWR?
-U 1 1 5BA76820
-P 2000 750
-AR Path="/5BA76820" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA76820" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 2000 600 50  0001 C CNN
-F 1 "+24V" H 2015 923 50  0000 C CNN
-F 2 "" H 2000 750 50  0001 C CNN
-F 3 "" H 2000 750 50  0001 C CNN
-	1    2000 750 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BA76826
-P 1800 950
-AR Path="/5BA76826" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA76826" Ref="Q?"  Part="1" 
-F 0 "Q?" H 2006 904 50  0000 L CNN
-F 1 "Q_PMOS_DGS" H 2006 995 50  0000 L CNN
-F 2 "" H 2000 1050 50  0001 C CNN
-F 3 "~" H 1800 950 50  0001 C CNN
-	1    1800 950 
+L power:VCC #PWR?
+U 1 1 5BB2FE84
+P 2200 7450
+F 0 "#PWR?" H 2200 7300 50  0001 C CNN
+F 1 "VCC" H 2218 7623 50  0000 C CNN
+F 2 "" H 2200 7450 50  0001 C CNN
+F 3 "" H 2200 7450 50  0001 C CNN
+	1    2200 7450
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	1700 750  2000 750 
+	2200 7450 2050 7450
+Text HLabel 900  7450 0    50   Input ~ 0
+SCL
 Wire Wire Line
-	1700 1150 1200 1150
+	900  7450 1050 7450
+Text HLabel 900  7350 0    50   Input ~ 0
+SDA
 Wire Wire Line
-	1250 1450 1200 1450
+	900  7350 1050 7350
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5BCCBAF4
+P 1950 900
+AR Path="/5BCCBAF4" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCCBAF4" Ref="Q?"  Part="1" 
+F 0 "Q?" V 2300 850 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 2200 850 50  0000 L CNN
+F 2 "" H 2150 1000 50  0001 C CNN
+F 3 "~" H 1950 900 50  0001 C CNN
+	1    1950 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BCCBC60
+P 1550 800
+AR Path="/5BCCBC60" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BCCBC60" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1550 650 50  0001 C CNN
+F 1 "+24V" H 1565 973 50  0000 C CNN
+F 2 "" H 1550 800 50  0001 C CNN
+F 3 "" H 1550 800 50  0001 C CNN
+	1    1550 800 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1750 800  1650 800 
+$Comp
+L Device:R R?
+U 1 1 5BCD1BC4
+P 1650 1000
+AR Path="/5BCD1BC4" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCD1BC4" Ref="R?"  Part="1" 
+F 0 "R?" H 1720 1046 50  0000 L CNN
+F 1 "1K" H 1720 955 50  0000 L CNN
+F 2 "" V 1580 1000 50  0001 C CNN
+F 3 "~" H 1650 1000 50  0001 C CNN
+	1    1650 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 850  1650 800 
+Connection ~ 1650 800 
+Wire Wire Line
+	1650 800  1550 800 
+Wire Wire Line
+	1650 1150 1650 1250
+Wire Wire Line
+	1650 1250 1950 1250
+Wire Wire Line
+	1950 1250 1950 1100
 $Comp
 L Device:Q_NMOS_DGS Q?
-U 1 1 5BA76835
-P 4100 1450
-AR Path="/5BA76835" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA76835" Ref="Q?"  Part="1" 
-F 0 "Q?" H 4305 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 4305 1405 50  0000 L CNN
-F 2 "" H 4300 1550 50  0001 C CNN
-F 3 "~" H 4100 1450 50  0001 C CNN
-	1    4100 1450
+U 1 1 5BCEAFC3
+P 1850 1450
+AR Path="/5BCEAFC3" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCEAFC3" Ref="Q?"  Part="1" 
+F 0 "Q?" H 2055 1496 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 2055 1405 50  0000 L CNN
+F 2 "" H 2050 1550 50  0001 C CNN
+F 3 "~" H 1850 1450 50  0001 C CNN
+	1    1850 1450
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R?
-U 1 1 5BA7683C
+U 1 1 5BCEAFCA
+P 1250 1450
+AR Path="/5BCEAFCA" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCEAFCA" Ref="R?"  Part="1" 
+F 0 "R?" V 1350 1450 50  0000 C CNN
+F 1 "R" V 1450 1450 50  0000 C CNN
+F 2 "" V 1180 1450 50  0001 C CNN
+F 3 "~" H 1250 1450 50  0001 C CNN
+	1    1250 1450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1400 1450 1550 1450
+$Comp
+L Device:R R?
+U 1 1 5BCEAFD2
+P 1550 1700
+AR Path="/5BCEAFD2" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCEAFD2" Ref="R?"  Part="1" 
+F 0 "R?" H 1650 1750 50  0000 C CNN
+F 1 "1K" H 1650 1650 50  0000 C CNN
+F 2 "" V 1480 1700 50  0001 C CNN
+F 3 "~" H 1550 1700 50  0001 C CNN
+	1    1550 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BCEAFDC
+P 1950 2050
+AR Path="/5BCEAFDC" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BCEAFDC" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1950 1800 50  0001 C CNN
+F 1 "GND" H 1955 1877 50  0000 C CNN
+F 2 "" H 1950 2050 50  0001 C CNN
+F 3 "" H 1950 2050 50  0001 C CNN
+	1    1950 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1100 1450 950  1450
+Text HLabel 950  1450 0    50   Input ~ 0
+row_a_ctrl
+Connection ~ 1950 1250
+Wire Wire Line
+	1950 1650 1950 1950
+Wire Wire Line
+	1550 1450 1550 1550
+Connection ~ 1550 1450
+Wire Wire Line
+	1550 1450 1650 1450
+Wire Wire Line
+	1550 1850 1550 1950
+Wire Wire Line
+	1550 1950 1950 1950
+Connection ~ 1950 1950
+Wire Wire Line
+	1950 1950 1950 2050
+$Comp
+L Snack_Machine:INA219 U?
+U 1 1 5BC6BBF3
+P 1550 7300
+F 0 "U?" H 1550 7715 50  0000 C CNN
+F 1 "INA219" H 1550 7624 50  0000 C CNN
+F 2 "" H 1550 7300 50  0001 C CNN
+F 3 "" H 1550 7300 50  0001 C CNN
+	1    1550 7300
+	1    0    0    -1  
+$EndComp
+Text HLabel 2250 800  2    50   Input ~ 0
+row_a_motor
+Wire Wire Line
+	2250 800  2150 800 
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5BC7E4F3
+P 4300 900
+AR Path="/5BC7E4F3" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC7E4F3" Ref="Q?"  Part="1" 
+F 0 "Q?" V 4650 850 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 4550 850 50  0000 L CNN
+F 2 "" H 4500 1000 50  0001 C CNN
+F 3 "~" H 4300 900 50  0001 C CNN
+	1    4300 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BC7E4FA
+P 3900 800
+AR Path="/5BC7E4FA" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC7E4FA" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 3900 650 50  0001 C CNN
+F 1 "+24V" H 3915 973 50  0000 C CNN
+F 2 "" H 3900 800 50  0001 C CNN
+F 3 "" H 3900 800 50  0001 C CNN
+	1    3900 800 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 800  4000 800 
+$Comp
+L Device:R R?
+U 1 1 5BC7E501
+P 4000 1000
+AR Path="/5BC7E501" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC7E501" Ref="R?"  Part="1" 
+F 0 "R?" H 4070 1046 50  0000 L CNN
+F 1 "1K" H 4070 955 50  0000 L CNN
+F 2 "" V 3930 1000 50  0001 C CNN
+F 3 "~" H 4000 1000 50  0001 C CNN
+	1    4000 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 850  4000 800 
+Connection ~ 4000 800 
+Wire Wire Line
+	4000 800  3900 800 
+Wire Wire Line
+	4000 1150 4000 1250
+Wire Wire Line
+	4000 1250 4300 1250
+Wire Wire Line
+	4300 1250 4300 1100
+$Comp
+L Device:Q_NMOS_DGS Q?
+U 1 1 5BC7E50E
+P 4200 1450
+AR Path="/5BC7E50E" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC7E50E" Ref="Q?"  Part="1" 
+F 0 "Q?" H 4405 1496 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 4405 1405 50  0000 L CNN
+F 2 "" H 4400 1550 50  0001 C CNN
+F 3 "~" H 4200 1450 50  0001 C CNN
+	1    4200 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5BC7E515
 P 3600 1450
-AR Path="/5BA7683C" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA7683C" Ref="R?"  Part="1" 
-F 0 "R?" V 3393 1450 50  0000 C CNN
-F 1 "R" V 3484 1450 50  0000 C CNN
+AR Path="/5BC7E515" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC7E515" Ref="R?"  Part="1" 
+F 0 "R?" V 3700 1450 50  0000 C CNN
+F 1 "R" V 3800 1450 50  0000 C CNN
 F 2 "" V 3530 1450 50  0001 C CNN
 F 3 "~" H 3600 1450 50  0001 C CNN
 	1    3600 1450
@@ -152,1278 +346,1177 @@ Wire Wire Line
 	3750 1450 3900 1450
 $Comp
 L Device:R R?
-U 1 1 5BA76844
-P 4350 900
-AR Path="/5BA76844" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76844" Ref="R?"  Part="1" 
-F 0 "R?" H 4420 946 50  0000 L CNN
-F 1 "1K" H 4420 855 50  0000 L CNN
-F 2 "" V 4280 900 50  0001 C CNN
-F 3 "~" H 4350 900 50  0001 C CNN
-	1    4350 900 
+U 1 1 5BC7E51D
+P 3900 1700
+AR Path="/5BC7E51D" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC7E51D" Ref="R?"  Part="1" 
+F 0 "R?" H 4000 1750 50  0000 C CNN
+F 1 "1K" H 4000 1650 50  0000 C CNN
+F 2 "" V 3830 1700 50  0001 C CNN
+F 3 "~" H 3900 1700 50  0001 C CNN
+	1    3900 1700
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R?
-U 1 1 5BA7684B
-P 4050 1900
-AR Path="/5BA7684B" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA7684B" Ref="R?"  Part="1" 
-F 0 "R?" V 4257 1900 50  0000 C CNN
-F 1 "1K" V 4166 1900 50  0000 C CNN
-F 2 "" V 3980 1900 50  0001 C CNN
-F 3 "~" H 4050 1900 50  0001 C CNN
-	1    4050 1900
-	0    -1   -1   0   
+L power:GND #PWR?
+U 1 1 5BC7E524
+P 4300 2050
+AR Path="/5BC7E524" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC7E524" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 4300 1800 50  0001 C CNN
+F 1 "GND" H 4305 1877 50  0000 C CNN
+F 2 "" H 4300 2050 50  0001 C CNN
+F 3 "" H 4300 2050 50  0001 C CNN
+	1    4300 2050
+	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3900 1900 3900 1450
+	3450 1450 3300 1450
+Text HLabel 3300 1450 0    50   Input ~ 0
+row_b_ctrl
+Connection ~ 4300 1250
+Wire Wire Line
+	4300 1650 4300 1950
+Wire Wire Line
+	3900 1450 3900 1550
 Connection ~ 3900 1450
 Wire Wire Line
-	4200 1650 4200 1750
-$Comp
-L power:GND #PWR?
-U 1 1 5BA76855
-P 4400 1750
-AR Path="/5BA76855" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA76855" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 4400 1500 50  0001 C CNN
-F 1 "GND" H 4405 1577 50  0000 C CNN
-F 2 "" H 4400 1750 50  0001 C CNN
-F 3 "" H 4400 1750 50  0001 C CNN
-	1    4400 1750
-	1    0    0    -1  
-$EndComp
+	3900 1450 4000 1450
 Wire Wire Line
-	4400 1750 4200 1750
-Connection ~ 4200 1750
+	3900 1850 3900 1950
 Wire Wire Line
-	4200 1750 4200 1900
-$Comp
-L power:+24V #PWR?
-U 1 1 5BA7685E
-P 4200 750
-AR Path="/5BA7685E" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA7685E" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 4200 600 50  0001 C CNN
-F 1 "+24V" H 4215 923 50  0000 C CNN
-F 2 "" H 4200 750 50  0001 C CNN
-F 3 "" H 4200 750 50  0001 C CNN
-	1    4200 750 
-	1    0    0    -1  
-$EndComp
+	3900 1950 4300 1950
+Connection ~ 4300 1950
+Wire Wire Line
+	4300 1950 4300 2050
+Text HLabel 4600 800  2    50   Input ~ 0
+row_b_motor
+Wire Wire Line
+	4600 800  4500 800 
 $Comp
 L Device:Q_PMOS_DGS Q?
-U 1 1 5BA76864
-P 4000 950
-AR Path="/5BA76864" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA76864" Ref="Q?"  Part="1" 
-F 0 "Q?" H 4206 904 50  0000 L CNN
-F 1 "Q_PMOS_DGS" H 4206 995 50  0000 L CNN
-F 2 "" H 4200 1050 50  0001 C CNN
-F 3 "~" H 4000 950 50  0001 C CNN
-	1    4000 950 
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3900 750  4200 750 
-Wire Wire Line
-	3900 1150 3400 1150
-Wire Wire Line
-	3450 1450 3400 1450
-$Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BA76873
-P 6250 1450
-AR Path="/5BA76873" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA76873" Ref="Q?"  Part="1" 
-F 0 "Q?" H 6455 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 6455 1405 50  0000 L CNN
-F 2 "" H 6450 1550 50  0001 C CNN
-F 3 "~" H 6250 1450 50  0001 C CNN
-	1    6250 1450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA7687A
-P 5750 1450
-AR Path="/5BA7687A" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA7687A" Ref="R?"  Part="1" 
-F 0 "R?" V 5543 1450 50  0000 C CNN
-F 1 "R" V 5634 1450 50  0000 C CNN
-F 2 "" V 5680 1450 50  0001 C CNN
-F 3 "~" H 5750 1450 50  0001 C CNN
-	1    5750 1450
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	5900 1450 6050 1450
-$Comp
-L Device:R R?
-U 1 1 5BA76882
-P 6500 900
-AR Path="/5BA76882" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76882" Ref="R?"  Part="1" 
-F 0 "R?" H 6570 946 50  0000 L CNN
-F 1 "1K" H 6570 855 50  0000 L CNN
-F 2 "" V 6430 900 50  0001 C CNN
-F 3 "~" H 6500 900 50  0001 C CNN
-	1    6500 900 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA76889
-P 6200 1900
-AR Path="/5BA76889" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76889" Ref="R?"  Part="1" 
-F 0 "R?" V 6407 1900 50  0000 C CNN
-F 1 "1K" V 6316 1900 50  0000 C CNN
-F 2 "" V 6130 1900 50  0001 C CNN
-F 3 "~" H 6200 1900 50  0001 C CNN
-	1    6200 1900
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	6050 1900 6050 1450
-Connection ~ 6050 1450
-Wire Wire Line
-	6350 1650 6350 1750
-$Comp
-L power:GND #PWR?
-U 1 1 5BA76893
-P 6550 1750
-AR Path="/5BA76893" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA76893" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 6550 1500 50  0001 C CNN
-F 1 "GND" H 6555 1577 50  0000 C CNN
-F 2 "" H 6550 1750 50  0001 C CNN
-F 3 "" H 6550 1750 50  0001 C CNN
-	1    6550 1750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6550 1750 6350 1750
-Connection ~ 6350 1750
-Wire Wire Line
-	6350 1750 6350 1900
-$Comp
-L power:+24V #PWR?
-U 1 1 5BA7689C
-P 6350 750
-AR Path="/5BA7689C" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA7689C" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 6350 600 50  0001 C CNN
-F 1 "+24V" H 6365 923 50  0000 C CNN
-F 2 "" H 6350 750 50  0001 C CNN
-F 3 "" H 6350 750 50  0001 C CNN
-	1    6350 750 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BA768A2
-P 6150 950
-AR Path="/5BA768A2" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA768A2" Ref="Q?"  Part="1" 
-F 0 "Q?" H 6356 904 50  0000 L CNN
-F 1 "Q_PMOS_DGS" H 6356 995 50  0000 L CNN
-F 2 "" H 6350 1050 50  0001 C CNN
-F 3 "~" H 6150 950 50  0001 C CNN
-	1    6150 950 
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	6050 750  6350 750 
-Wire Wire Line
-	6050 1150 5550 1150
-Wire Wire Line
-	5600 1450 5550 1450
-$Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BA768B1
-P 1900 3000
-AR Path="/5BA768B1" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA768B1" Ref="Q?"  Part="1" 
-F 0 "Q?" H 2105 3046 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 2105 2955 50  0000 L CNN
-F 2 "" H 2100 3100 50  0001 C CNN
-F 3 "~" H 1900 3000 50  0001 C CNN
-	1    1900 3000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA768B8
-P 1400 3000
-AR Path="/5BA768B8" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA768B8" Ref="R?"  Part="1" 
-F 0 "R?" V 1193 3000 50  0000 C CNN
-F 1 "R" V 1284 3000 50  0000 C CNN
-F 2 "" V 1330 3000 50  0001 C CNN
-F 3 "~" H 1400 3000 50  0001 C CNN
-	1    1400 3000
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1550 3000 1700 3000
-$Comp
-L Device:R R?
-U 1 1 5BA768C0
-P 2200 2450
-AR Path="/5BA768C0" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA768C0" Ref="R?"  Part="1" 
-F 0 "R?" H 2270 2496 50  0000 L CNN
-F 1 "1K" H 2270 2405 50  0000 L CNN
-F 2 "" V 2130 2450 50  0001 C CNN
-F 3 "~" H 2200 2450 50  0001 C CNN
-	1    2200 2450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA768C7
-P 1850 3450
-AR Path="/5BA768C7" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA768C7" Ref="R?"  Part="1" 
-F 0 "R?" V 2057 3450 50  0000 C CNN
-F 1 "1K" V 1966 3450 50  0000 C CNN
-F 2 "" V 1780 3450 50  0001 C CNN
-F 3 "~" H 1850 3450 50  0001 C CNN
-	1    1850 3450
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	1700 3450 1700 3000
-Connection ~ 1700 3000
-Wire Wire Line
-	2000 3200 2000 3300
-$Comp
-L power:GND #PWR?
-U 1 1 5BA768D1
-P 2200 3300
-AR Path="/5BA768D1" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA768D1" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 2200 3050 50  0001 C CNN
-F 1 "GND" H 2205 3127 50  0000 C CNN
-F 2 "" H 2200 3300 50  0001 C CNN
-F 3 "" H 2200 3300 50  0001 C CNN
-	1    2200 3300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2200 3300 2000 3300
-Connection ~ 2000 3300
-Wire Wire Line
-	2000 3300 2000 3450
-$Comp
-L power:+24V #PWR?
-U 1 1 5BA768DA
-P 2000 2300
-AR Path="/5BA768DA" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA768DA" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 2000 2150 50  0001 C CNN
-F 1 "+24V" H 2015 2473 50  0000 C CNN
-F 2 "" H 2000 2300 50  0001 C CNN
-F 3 "" H 2000 2300 50  0001 C CNN
-	1    2000 2300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BA768E0
-P 1800 2500
-AR Path="/5BA768E0" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA768E0" Ref="Q?"  Part="1" 
-F 0 "Q?" H 2006 2454 50  0000 L CNN
-F 1 "Q_PMOS_DGS" H 2006 2545 50  0000 L CNN
-F 2 "" H 2000 2600 50  0001 C CNN
-F 3 "~" H 1800 2500 50  0001 C CNN
-	1    1800 2500
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	1700 2300 2000 2300
-Wire Wire Line
-	1700 2700 1200 2700
-Wire Wire Line
-	1250 3000 1200 3000
-$Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BA768EF
-P 10500 1450
-AR Path="/5BA768EF" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA768EF" Ref="Q?"  Part="1" 
-F 0 "Q?" H 10705 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 10705 1405 50  0000 L CNN
-F 2 "" H 10700 1550 50  0001 C CNN
-F 3 "~" H 10500 1450 50  0001 C CNN
-	1    10500 1450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA768F6
-P 10000 1450
-AR Path="/5BA768F6" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA768F6" Ref="R?"  Part="1" 
-F 0 "R?" V 9793 1450 50  0000 C CNN
-F 1 "R" V 9884 1450 50  0000 C CNN
-F 2 "" V 9930 1450 50  0001 C CNN
-F 3 "~" H 10000 1450 50  0001 C CNN
-	1    10000 1450
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	10150 1450 10300 1450
-$Comp
-L Device:R R?
-U 1 1 5BA768FE
-P 10800 900
-AR Path="/5BA768FE" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA768FE" Ref="R?"  Part="1" 
-F 0 "R?" H 10870 946 50  0000 L CNN
-F 1 "1K" H 10870 855 50  0000 L CNN
-F 2 "" V 10730 900 50  0001 C CNN
-F 3 "~" H 10800 900 50  0001 C CNN
-	1    10800 900 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA76905
-P 10450 1900
-AR Path="/5BA76905" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76905" Ref="R?"  Part="1" 
-F 0 "R?" V 10657 1900 50  0000 C CNN
-F 1 "1K" V 10566 1900 50  0000 C CNN
-F 2 "" V 10380 1900 50  0001 C CNN
-F 3 "~" H 10450 1900 50  0001 C CNN
-	1    10450 1900
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	10300 1900 10300 1450
-Connection ~ 10300 1450
-Wire Wire Line
-	10600 1650 10600 1750
-$Comp
-L power:GND #PWR?
-U 1 1 5BA7690F
-P 10800 1750
-AR Path="/5BA7690F" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA7690F" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 10800 1500 50  0001 C CNN
-F 1 "GND" H 10805 1577 50  0000 C CNN
-F 2 "" H 10800 1750 50  0001 C CNN
-F 3 "" H 10800 1750 50  0001 C CNN
-	1    10800 1750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	10800 1750 10600 1750
-Connection ~ 10600 1750
-Wire Wire Line
-	10600 1750 10600 1900
-$Comp
-L power:+24V #PWR?
-U 1 1 5BA76918
-P 10600 750
-AR Path="/5BA76918" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA76918" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 10600 600 50  0001 C CNN
-F 1 "+24V" H 10615 923 50  0000 C CNN
-F 2 "" H 10600 750 50  0001 C CNN
-F 3 "" H 10600 750 50  0001 C CNN
-	1    10600 750 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BA7691E
-P 10400 950
-AR Path="/5BA7691E" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA7691E" Ref="Q?"  Part="1" 
-F 0 "Q?" H 10606 904 50  0000 L CNN
-F 1 "Q_PMOS_DGS" H 10606 995 50  0000 L CNN
-F 2 "" H 10600 1050 50  0001 C CNN
-F 3 "~" H 10400 950 50  0001 C CNN
-	1    10400 950 
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	10300 750  10600 750 
-Wire Wire Line
-	10300 1150 9800 1150
-Wire Wire Line
-	9850 1450 9800 1450
-$Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BA7692D
-P 8350 1450
-AR Path="/5BA7692D" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA7692D" Ref="Q?"  Part="1" 
-F 0 "Q?" H 8555 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 8555 1405 50  0000 L CNN
-F 2 "" H 8550 1550 50  0001 C CNN
-F 3 "~" H 8350 1450 50  0001 C CNN
-	1    8350 1450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA76934
-P 7850 1450
-AR Path="/5BA76934" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76934" Ref="R?"  Part="1" 
-F 0 "R?" V 7643 1450 50  0000 C CNN
-F 1 "R" V 7734 1450 50  0000 C CNN
-F 2 "" V 7780 1450 50  0001 C CNN
-F 3 "~" H 7850 1450 50  0001 C CNN
-	1    7850 1450
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8000 1450 8150 1450
-$Comp
-L Device:R R?
-U 1 1 5BA7693C
-P 8600 900
-AR Path="/5BA7693C" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA7693C" Ref="R?"  Part="1" 
-F 0 "R?" H 8670 946 50  0000 L CNN
-F 1 "1K" H 8670 855 50  0000 L CNN
-F 2 "" V 8530 900 50  0001 C CNN
-F 3 "~" H 8600 900 50  0001 C CNN
-	1    8600 900 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA76943
-P 8300 1900
-AR Path="/5BA76943" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76943" Ref="R?"  Part="1" 
-F 0 "R?" V 8507 1900 50  0000 C CNN
-F 1 "1K" V 8416 1900 50  0000 C CNN
-F 2 "" V 8230 1900 50  0001 C CNN
-F 3 "~" H 8300 1900 50  0001 C CNN
-	1    8300 1900
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	8150 1900 8150 1450
-Connection ~ 8150 1450
-Wire Wire Line
-	8450 1650 8450 1750
-$Comp
-L power:GND #PWR?
-U 1 1 5BA7694D
-P 8650 1750
-AR Path="/5BA7694D" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA7694D" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 8650 1500 50  0001 C CNN
-F 1 "GND" H 8655 1577 50  0000 C CNN
-F 2 "" H 8650 1750 50  0001 C CNN
-F 3 "" H 8650 1750 50  0001 C CNN
-	1    8650 1750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8650 1750 8450 1750
-Connection ~ 8450 1750
-Wire Wire Line
-	8450 1750 8450 1900
-$Comp
-L power:+24V #PWR?
-U 1 1 5BA76956
-P 8450 750
-AR Path="/5BA76956" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA76956" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 8450 600 50  0001 C CNN
-F 1 "+24V" H 8465 923 50  0000 C CNN
-F 2 "" H 8450 750 50  0001 C CNN
-F 3 "" H 8450 750 50  0001 C CNN
-	1    8450 750 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BA7695C
-P 8250 950
-AR Path="/5BA7695C" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA7695C" Ref="Q?"  Part="1" 
-F 0 "Q?" H 8456 904 50  0000 L CNN
-F 1 "Q_PMOS_DGS" H 8456 995 50  0000 L CNN
-F 2 "" H 8450 1050 50  0001 C CNN
-F 3 "~" H 8250 950 50  0001 C CNN
-	1    8250 950 
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	8150 750  8450 750 
-Wire Wire Line
-	8150 1150 7650 1150
-Wire Wire Line
-	7700 1450 7650 1450
-$Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BA7696B
-P 4100 3000
-AR Path="/5BA7696B" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA7696B" Ref="Q?"  Part="1" 
-F 0 "Q?" H 4305 3046 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 4305 2955 50  0000 L CNN
-F 2 "" H 4300 3100 50  0001 C CNN
-F 3 "~" H 4100 3000 50  0001 C CNN
-	1    4100 3000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA76972
-P 3600 3000
-AR Path="/5BA76972" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76972" Ref="R?"  Part="1" 
-F 0 "R?" V 3393 3000 50  0000 C CNN
-F 1 "R" V 3484 3000 50  0000 C CNN
-F 2 "" V 3530 3000 50  0001 C CNN
-F 3 "~" H 3600 3000 50  0001 C CNN
-	1    3600 3000
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	3750 3000 3900 3000
-$Comp
-L Device:R R?
-U 1 1 5BA7697A
-P 4400 2450
-AR Path="/5BA7697A" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA7697A" Ref="R?"  Part="1" 
-F 0 "R?" H 4470 2496 50  0000 L CNN
-F 1 "1K" H 4470 2405 50  0000 L CNN
-F 2 "" V 4330 2450 50  0001 C CNN
-F 3 "~" H 4400 2450 50  0001 C CNN
-	1    4400 2450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5BA76981
-P 4050 3450
-AR Path="/5BA76981" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA76981" Ref="R?"  Part="1" 
-F 0 "R?" V 4257 3450 50  0000 C CNN
-F 1 "1K" V 4166 3450 50  0000 C CNN
-F 2 "" V 3980 3450 50  0001 C CNN
-F 3 "~" H 4050 3450 50  0001 C CNN
-	1    4050 3450
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	3900 3450 3900 3000
-Connection ~ 3900 3000
-Wire Wire Line
-	4200 3200 4200 3300
-$Comp
-L power:GND #PWR?
-U 1 1 5BA7698B
-P 4400 3300
-AR Path="/5BA7698B" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA7698B" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 4400 3050 50  0001 C CNN
-F 1 "GND" H 4405 3127 50  0000 C CNN
-F 2 "" H 4400 3300 50  0001 C CNN
-F 3 "" H 4400 3300 50  0001 C CNN
-	1    4400 3300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4400 3300 4200 3300
-Connection ~ 4200 3300
-Wire Wire Line
-	4200 3300 4200 3450
-$Comp
-L power:+24V #PWR?
-U 1 1 5BA76994
-P 4200 2300
-AR Path="/5BA76994" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BA76994" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 4200 2150 50  0001 C CNN
-F 1 "+24V" H 4215 2473 50  0000 C CNN
-F 2 "" H 4200 2300 50  0001 C CNN
-F 3 "" H 4200 2300 50  0001 C CNN
-	1    4200 2300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BA7699A
-P 4000 2500
-AR Path="/5BA7699A" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA7699A" Ref="Q?"  Part="1" 
-F 0 "Q?" H 4206 2454 50  0000 L CNN
-F 1 "Q_PMOS_DGS" H 4206 2545 50  0000 L CNN
-F 2 "" H 4200 2600 50  0001 C CNN
-F 3 "~" H 4000 2500 50  0001 C CNN
-	1    4000 2500
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3900 2300 4200 2300
-Wire Wire Line
-	3900 2700 3400 2700
-Wire Wire Line
-	3450 3000 3400 3000
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BA8E115
-P 1250 4400
-AR Path="/5BA8E115" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA8E115" Ref="Q?"  Part="1" 
-F 0 "Q?" H 1456 4446 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 1456 4355 50  0000 L CNN
-F 2 "" H 1450 4500 50  0001 C CNN
-F 3 "~" H 1250 4400 50  0001 C CNN
-	1    1250 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	950  4400 1050 4400
-$Comp
-L Device:R R?
-U 1 1 5BA8E124
-P 1200 4900
-AR Path="/5BA8E124" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA8E124" Ref="R?"  Part="1" 
-F 0 "R?" V 993 4900 50  0000 C CNN
-F 1 "1K" V 1084 4900 50  0000 C CNN
-F 2 "" V 1130 4900 50  0001 C CNN
-F 3 "~" H 1200 4900 50  0001 C CNN
-	1    1200 4900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1350 4900 1350 4750
-Wire Wire Line
-	1550 4750 1350 4750
-Connection ~ 1350 4750
-Wire Wire Line
-	1350 4750 1350 4600
-Wire Wire Line
-	1050 4900 1050 4400
-Connection ~ 1050 4400
-Wire Wire Line
-	950  4200 1350 4200
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BA8F9BB
-P 3000 4400
-AR Path="/5BA8F9BB" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA8F9BB" Ref="Q?"  Part="1" 
-F 0 "Q?" H 3206 4446 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 3206 4355 50  0000 L CNN
-F 2 "" H 3200 4500 50  0001 C CNN
-F 3 "~" H 3000 4400 50  0001 C CNN
-	1    3000 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2700 4400 2800 4400
-$Comp
-L Device:R R?
-U 1 1 5BA8F9C9
-P 2950 4900
-AR Path="/5BA8F9C9" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA8F9C9" Ref="R?"  Part="1" 
-F 0 "R?" V 2743 4900 50  0000 C CNN
-F 1 "1K" V 2834 4900 50  0000 C CNN
-F 2 "" V 2880 4900 50  0001 C CNN
-F 3 "~" H 2950 4900 50  0001 C CNN
-	1    2950 4900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	3100 4900 3100 4750
-Wire Wire Line
-	3300 4750 3100 4750
-Connection ~ 3100 4750
-Wire Wire Line
-	3100 4750 3100 4600
-Wire Wire Line
-	2800 4900 2800 4400
-Connection ~ 2800 4400
-Wire Wire Line
-	2700 4200 3100 4200
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BA944B5
-P 4750 4400
-AR Path="/5BA944B5" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA944B5" Ref="Q?"  Part="1" 
-F 0 "Q?" H 4956 4446 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 4956 4355 50  0000 L CNN
-F 2 "" H 4950 4500 50  0001 C CNN
-F 3 "~" H 4750 4400 50  0001 C CNN
-	1    4750 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4450 4400 4550 4400
-$Comp
-L Device:R R?
-U 1 1 5BA944C3
-P 4700 4900
-AR Path="/5BA944C3" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA944C3" Ref="R?"  Part="1" 
-F 0 "R?" V 4493 4900 50  0000 C CNN
-F 1 "1K" V 4584 4900 50  0000 C CNN
-F 2 "" V 4630 4900 50  0001 C CNN
-F 3 "~" H 4700 4900 50  0001 C CNN
-	1    4700 4900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	4850 4900 4850 4750
-Wire Wire Line
-	5050 4750 4850 4750
-Connection ~ 4850 4750
-Wire Wire Line
-	4850 4750 4850 4600
-Wire Wire Line
-	4550 4900 4550 4400
-Connection ~ 4550 4400
-Wire Wire Line
-	4450 4200 4850 4200
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BA97F05
-P 6600 4400
-AR Path="/5BA97F05" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA97F05" Ref="Q?"  Part="1" 
-F 0 "Q?" H 6806 4446 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 6806 4355 50  0000 L CNN
-F 2 "" H 6800 4500 50  0001 C CNN
-F 3 "~" H 6600 4400 50  0001 C CNN
-	1    6600 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6300 4400 6400 4400
-$Comp
-L Device:R R?
-U 1 1 5BA97F13
-P 6550 4900
-AR Path="/5BA97F13" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA97F13" Ref="R?"  Part="1" 
-F 0 "R?" V 6343 4900 50  0000 C CNN
-F 1 "1K" V 6434 4900 50  0000 C CNN
-F 2 "" V 6480 4900 50  0001 C CNN
-F 3 "~" H 6550 4900 50  0001 C CNN
-	1    6550 4900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	6700 4900 6700 4750
-Wire Wire Line
-	6900 4750 6700 4750
-Connection ~ 6700 4750
-Wire Wire Line
-	6700 4750 6700 4600
-Wire Wire Line
-	6400 4900 6400 4400
-Connection ~ 6400 4400
-Wire Wire Line
-	6300 4200 6700 4200
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BA9A216
-P 8100 4400
-AR Path="/5BA9A216" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA9A216" Ref="Q?"  Part="1" 
-F 0 "Q?" H 8306 4446 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 8306 4355 50  0000 L CNN
-F 2 "" H 8300 4500 50  0001 C CNN
-F 3 "~" H 8100 4400 50  0001 C CNN
-	1    8100 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7800 4400 7900 4400
-$Comp
-L Device:R R?
-U 1 1 5BA9A224
-P 8050 4900
-AR Path="/5BA9A224" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BA9A224" Ref="R?"  Part="1" 
-F 0 "R?" V 7843 4900 50  0000 C CNN
-F 1 "1K" V 7934 4900 50  0000 C CNN
-F 2 "" V 7980 4900 50  0001 C CNN
-F 3 "~" H 8050 4900 50  0001 C CNN
-	1    8050 4900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8200 4900 8200 4750
-Wire Wire Line
-	8400 4750 8200 4750
-Connection ~ 8200 4750
-Wire Wire Line
-	8200 4750 8200 4600
-Wire Wire Line
-	7900 4900 7900 4400
-Connection ~ 7900 4400
-Wire Wire Line
-	7800 4200 8200 4200
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BAA0E9C
-P 9900 4400
-AR Path="/5BAA0E9C" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BAA0E9C" Ref="Q?"  Part="1" 
-F 0 "Q?" H 10106 4446 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 10106 4355 50  0000 L CNN
-F 2 "" H 10100 4500 50  0001 C CNN
-F 3 "~" H 9900 4400 50  0001 C CNN
-	1    9900 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9600 4400 9700 4400
-$Comp
-L Device:R R?
-U 1 1 5BAA0EAA
-P 9850 4900
-AR Path="/5BAA0EAA" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BAA0EAA" Ref="R?"  Part="1" 
-F 0 "R?" V 9643 4900 50  0000 C CNN
-F 1 "1K" V 9734 4900 50  0000 C CNN
-F 2 "" V 9780 4900 50  0001 C CNN
-F 3 "~" H 9850 4900 50  0001 C CNN
-	1    9850 4900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	10000 4900 10000 4750
-Wire Wire Line
-	10200 4750 10000 4750
-Connection ~ 10000 4750
-Wire Wire Line
-	10000 4750 10000 4600
-Wire Wire Line
-	9700 4900 9700 4400
-Connection ~ 9700 4400
-Wire Wire Line
-	9600 4200 10000 4200
-$Comp
-L Connector_Generic:Conn_01x18 J?
-U 1 1 5BAA6946
-P 6600 6650
-AR Path="/5BAA6946" Ref="J?"  Part="1" 
-AR Path="/5BA75957/5BAA6946" Ref="J?"  Part="1" 
-F 0 "J?" V 6700 7400 50  0000 L CNN
-F 1 "Motor connector" V 6700 5700 50  0000 L CNN
-F 2 "" H 6600 6650 50  0001 C CNN
-F 3 "~" H 6600 6650 50  0001 C CNN
-	1    6600 6650
-	1    0    0    -1  
-$EndComp
-NoConn ~ 6400 6250
-NoConn ~ 6400 6350
-NoConn ~ 6400 6450
-NoConn ~ 6400 6550
-NoConn ~ 6400 6650
-Wire Wire Line
-	6350 5850 6400 5850
-Wire Wire Line
-	6350 5950 6400 5950
-Wire Wire Line
-	6350 6050 6400 6050
-Wire Wire Line
-	6350 6150 6400 6150
-Wire Wire Line
-	6350 6750 6400 6750
-Wire Wire Line
-	6350 6850 6400 6850
-Wire Wire Line
-	6350 6950 6400 6950
-Wire Wire Line
-	6350 7050 6400 7050
-Wire Wire Line
-	6350 7150 6400 7150
-Wire Wire Line
-	6350 7250 6400 7250
-Wire Wire Line
-	6350 7350 6400 7350
-Wire Wire Line
-	6350 7450 6400 7450
-Wire Wire Line
-	6350 7550 6400 7550
-Text Label 1200 1150 2    50   ~ 0
-motor_white_red
-Text Label 6350 7550 2    50   ~ 0
-motor_white_red
-Text HLabel 1200 1450 0    50   Input ~ 0
-row_a_ctrl
-Text Label 3400 1150 2    50   ~ 0
-motor_white_green
-Text Label 6350 7450 2    50   ~ 0
-motor_white_green
-Text HLabel 3400 1450 0    50   Input ~ 0
-row_b_ctrl
-Text Label 5550 1150 2    50   ~ 0
-motor_white_blue
-Text Label 6350 7350 2    50   ~ 0
-motor_white_blue
-Text HLabel 5550 1450 0    50   Input ~ 0
-row_c_ctrl
-Text Label 7650 1150 2    50   ~ 0
-motor_white_tan
-Text Label 6350 7250 2    50   ~ 0
-motor_white_tan
-Text HLabel 7650 1450 0    50   Input ~ 0
-row_d_ctrl
-Text Label 9800 1150 2    50   ~ 0
-motor_white_gray
-Text Label 6350 7150 2    50   ~ 0
-motor_white_gray
-Text HLabel 9800 1450 0    50   Input ~ 0
-row_e_ctrl
-Text Label 1200 2700 2    50   ~ 0
-motor_white_pink
-Text Label 6350 7050 2    50   ~ 0
-motor_white_pink
-Text HLabel 1200 3000 0    50   Input ~ 0
-row_f_ctrl
-Text Label 3400 2700 2    50   ~ 0
-motor_white_purple
-Text Label 6350 6950 2    50   ~ 0
-motor_white_purple
-Text HLabel 3400 3000 0    50   Input ~ 0
-row_g_ctrl
-Text Label 950  4200 2    50   ~ 0
-motor_red
-Text Label 6350 6750 2    50   ~ 0
-motor_red
-Text HLabel 950  4400 0    50   Input ~ 0
-col_1_ctrl
-Text Label 6350 6850 2    50   ~ 0
-motor_red_white
-Text Label 2700 4200 2    50   ~ 0
-motor_red_white
-Text HLabel 2700 4400 0    50   Input ~ 0
-col_2_ctrl
-Text Label 4450 4200 2    50   ~ 0
-motor_green_red
-Text Label 6350 5850 2    50   ~ 0
-motor_green_red
-Text HLabel 4450 4400 0    50   Input ~ 0
-col_3_ctrl
-Text Label 6300 4200 2    50   ~ 0
-motor_green_white
-Text Label 6350 5950 2    50   ~ 0
-motor_green_white
-Text HLabel 6300 4400 0    50   Input ~ 0
-col_4_ctrl
-Text Label 7800 4200 2    50   ~ 0
-motor_blue
-Text Label 6350 6050 2    50   ~ 0
-motor_blue
-Text HLabel 7800 4400 0    50   Input ~ 0
-col_5_ctrl
-Text Label 9600 4200 2    50   ~ 0
-motor_blue_white
-Text Label 6350 6150 2    50   ~ 0
-motor_blue_white
-Text HLabel 9600 4400 0    50   Input ~ 0
-col_6_ctrl
-Text Label 1550 4750 0    50   ~ 0
-motor_common_gnd
-Text Label 3300 4750 0    50   ~ 0
-motor_common_gnd
-Text Label 5050 4750 0    50   ~ 0
-motor_common_gnd
-Text Label 6900 4750 0    50   ~ 0
-motor_common_gnd
-Text Label 8400 4750 0    50   ~ 0
-motor_common_gnd
-Text Label 10200 4750 0    50   ~ 0
-motor_common_gnd
-Text Label 3450 6100 0    50   ~ 0
-motor_common_gnd
-$Comp
-L Device:R R?
-U 1 1 5BB1C4B9
-P 3250 6250
-F 0 "R?" H 3320 6296 50  0000 L CNN
-F 1 ".1" H 3320 6205 50  0000 L CNN
-F 2 "" V 3180 6250 50  0001 C CNN
-F 3 "~" H 3250 6250 50  0001 C CNN
-	1    3250 6250
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3250 6400 3150 6400
-Wire Wire Line
-	3150 6400 3150 6300
-Wire Wire Line
-	3150 6300 2900 6300
-Wire Wire Line
-	2900 6200 3150 6200
-Wire Wire Line
-	3150 6200 3150 6100
-Wire Wire Line
-	3150 6100 3250 6100
-Wire Wire Line
-	3450 6100 3250 6100
-Connection ~ 3250 6100
-$Comp
-L power:GND #PWR?
-U 1 1 5BB27603
-P 3450 6400
-F 0 "#PWR?" H 3450 6150 50  0001 C CNN
-F 1 "GND" H 3455 6227 50  0000 C CNN
-F 2 "" H 3450 6400 50  0001 C CNN
-F 3 "" H 3450 6400 50  0001 C CNN
-	1    3450 6400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3450 6400 3250 6400
-Connection ~ 3250 6400
-Wire Wire Line
-	3150 6400 2900 6400
-Connection ~ 3150 6400
-$Comp
-L power:VCC #PWR?
-U 1 1 5BB2FE84
-P 3050 6500
-F 0 "#PWR?" H 3050 6350 50  0001 C CNN
-F 1 "VCC" H 3068 6673 50  0000 C CNN
-F 2 "" H 3050 6500 50  0001 C CNN
-F 3 "" H 3050 6500 50  0001 C CNN
-	1    3050 6500
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3050 6500 2900 6500
-Text HLabel 1750 6500 0    50   Input ~ 0
-SCL
-Wire Wire Line
-	1750 6500 1900 6500
-Text HLabel 1750 6400 0    50   Input ~ 0
-SDA
-Wire Wire Line
-	1750 6400 1900 6400
-Wire Wire Line
-	2000 750  2150 750 
-Connection ~ 2000 750 
-Wire Wire Line
-	2000 950  2000 1050
-Wire Wire Line
-	2150 1050 2000 1050
-Connection ~ 2000 1050
-Wire Wire Line
-	2000 1050 2000 1250
-Wire Wire Line
-	4350 750  4200 750 
-Connection ~ 4200 750 
-Wire Wire Line
-	4200 950  4200 1050
-Wire Wire Line
-	4350 1050 4200 1050
-Connection ~ 4200 1050
-Wire Wire Line
-	4200 1050 4200 1250
-Wire Wire Line
-	6500 750  6350 750 
-Connection ~ 6350 750 
-Wire Wire Line
-	6350 950  6350 1050
-Wire Wire Line
-	6500 1050 6350 1050
-Connection ~ 6350 1050
-Wire Wire Line
-	6350 1050 6350 1250
-Wire Wire Line
-	8600 750  8450 750 
-Connection ~ 8450 750 
-Wire Wire Line
-	8450 950  8450 1050
-Connection ~ 8450 1050
-Wire Wire Line
-	8450 1050 8450 1250
-Wire Wire Line
-	8450 1050 8600 1050
-Wire Wire Line
-	10800 750  10600 750 
-Connection ~ 10600 750 
-Wire Wire Line
-	10600 950  10600 1050
-Wire Wire Line
-	10800 1050 10600 1050
-Connection ~ 10600 1050
-Wire Wire Line
-	10600 1050 10600 1250
-Wire Wire Line
-	2200 2300 2000 2300
-Connection ~ 2000 2300
-Wire Wire Line
-	2000 2500 2000 2600
-Wire Wire Line
-	2200 2600 2000 2600
-Connection ~ 2000 2600
-Wire Wire Line
-	2000 2600 2000 2800
-Wire Wire Line
-	4400 2300 4200 2300
-Connection ~ 4200 2300
-Wire Wire Line
-	4200 2500 4200 2600
-Wire Wire Line
-	4400 2600 4200 2600
-Wire Wire Line
-	4200 2600 4200 2800
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BCCBAF4
-P 6500 2550
-AR Path="/5BCCBAF4" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCCBAF4" Ref="Q?"  Part="1" 
-F 0 "Q?" V 6850 2500 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 6750 2500 50  0000 L CNN
-F 2 "" H 6700 2650 50  0001 C CNN
-F 3 "~" H 6500 2550 50  0001 C CNN
-	1    6500 2550
+U 1 1 5BC81D00
+P 6650 900
+AR Path="/5BC81D00" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC81D00" Ref="Q?"  Part="1" 
+F 0 "Q?" V 7000 850 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 6900 850 50  0000 L CNN
+F 2 "" H 6850 1000 50  0001 C CNN
+F 3 "~" H 6650 900 50  0001 C CNN
+	1    6650 900 
 	0    1    -1   0   
 $EndComp
 $Comp
 L power:+24V #PWR?
-U 1 1 5BCCBC60
-P 6100 2450
-AR Path="/5BCCBC60" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BCCBC60" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 6100 2300 50  0001 C CNN
-F 1 "+24V" H 6115 2623 50  0000 C CNN
-F 2 "" H 6100 2450 50  0001 C CNN
-F 3 "" H 6100 2450 50  0001 C CNN
-	1    6100 2450
+U 1 1 5BC81D07
+P 6250 800
+AR Path="/5BC81D07" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC81D07" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6250 650 50  0001 C CNN
+F 1 "+24V" H 6265 973 50  0000 C CNN
+F 2 "" H 6250 800 50  0001 C CNN
+F 3 "" H 6250 800 50  0001 C CNN
+	1    6250 800 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6300 2450 6200 2450
+	6450 800  6350 800 
 $Comp
 L Device:R R?
-U 1 1 5BCD1BC4
-P 6200 2650
-AR Path="/5BCD1BC4" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BCD1BC4" Ref="R?"  Part="1" 
-F 0 "R?" H 6270 2696 50  0000 L CNN
-F 1 "1K" H 6270 2605 50  0000 L CNN
-F 2 "" V 6130 2650 50  0001 C CNN
-F 3 "~" H 6200 2650 50  0001 C CNN
-	1    6200 2650
+U 1 1 5BC81D0E
+P 6350 1000
+AR Path="/5BC81D0E" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC81D0E" Ref="R?"  Part="1" 
+F 0 "R?" H 6420 1046 50  0000 L CNN
+F 1 "1K" H 6420 955 50  0000 L CNN
+F 2 "" V 6280 1000 50  0001 C CNN
+F 3 "~" H 6350 1000 50  0001 C CNN
+	1    6350 1000
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6200 2500 6200 2450
-Connection ~ 6200 2450
+	6350 850  6350 800 
+Connection ~ 6350 800 
 Wire Wire Line
-	6200 2450 6100 2450
+	6350 800  6250 800 
 Wire Wire Line
-	6200 2800 6200 2900
+	6350 1150 6350 1250
 Wire Wire Line
-	6200 2900 6500 2900
+	6350 1250 6650 1250
 Wire Wire Line
-	6500 2900 6500 2750
-Connection ~ 4200 2600
+	6650 1250 6650 1100
 $Comp
 L Device:Q_NMOS_DGS Q?
-U 1 1 5BCEAFC3
-P 6400 3100
-AR Path="/5BCEAFC3" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCEAFC3" Ref="Q?"  Part="1" 
-F 0 "Q?" H 6605 3146 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 6605 3055 50  0000 L CNN
-F 2 "" H 6600 3200 50  0001 C CNN
-F 3 "~" H 6400 3100 50  0001 C CNN
-	1    6400 3100
+U 1 1 5BC81D1B
+P 6550 1450
+AR Path="/5BC81D1B" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC81D1B" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6755 1496 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 6755 1405 50  0000 L CNN
+F 2 "" H 6750 1550 50  0001 C CNN
+F 3 "~" H 6550 1450 50  0001 C CNN
+	1    6550 1450
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R?
-U 1 1 5BCEAFCA
-P 5800 3100
-AR Path="/5BCEAFCA" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BCEAFCA" Ref="R?"  Part="1" 
-F 0 "R?" V 5900 3100 50  0000 C CNN
-F 1 "R" V 6000 3100 50  0000 C CNN
-F 2 "" V 5730 3100 50  0001 C CNN
-F 3 "~" H 5800 3100 50  0001 C CNN
-	1    5800 3100
+U 1 1 5BC81D22
+P 5950 1450
+AR Path="/5BC81D22" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC81D22" Ref="R?"  Part="1" 
+F 0 "R?" V 6050 1450 50  0000 C CNN
+F 1 "R" V 6150 1450 50  0000 C CNN
+F 2 "" V 5880 1450 50  0001 C CNN
+F 3 "~" H 5950 1450 50  0001 C CNN
+	1    5950 1450
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5950 3100 6100 3100
+	6100 1450 6250 1450
 $Comp
 L Device:R R?
-U 1 1 5BCEAFD2
-P 6100 3350
-AR Path="/5BCEAFD2" Ref="R?"  Part="1" 
-AR Path="/5BA75957/5BCEAFD2" Ref="R?"  Part="1" 
-F 0 "R?" H 6200 3400 50  0000 C CNN
-F 1 "1K" H 6200 3300 50  0000 C CNN
-F 2 "" V 6030 3350 50  0001 C CNN
-F 3 "~" H 6100 3350 50  0001 C CNN
-	1    6100 3350
+U 1 1 5BC81D2A
+P 6250 1700
+AR Path="/5BC81D2A" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC81D2A" Ref="R?"  Part="1" 
+F 0 "R?" H 6350 1750 50  0000 C CNN
+F 1 "1K" H 6350 1650 50  0000 C CNN
+F 2 "" V 6180 1700 50  0001 C CNN
+F 3 "~" H 6250 1700 50  0001 C CNN
+	1    6250 1700
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
-U 1 1 5BCEAFDC
-P 6500 3700
-AR Path="/5BCEAFDC" Ref="#PWR?"  Part="1" 
-AR Path="/5BA75957/5BCEAFDC" Ref="#PWR?"  Part="1" 
-F 0 "#PWR?" H 6500 3450 50  0001 C CNN
-F 1 "GND" H 6505 3527 50  0000 C CNN
-F 2 "" H 6500 3700 50  0001 C CNN
-F 3 "" H 6500 3700 50  0001 C CNN
-	1    6500 3700
+U 1 1 5BC81D31
+P 6650 2050
+AR Path="/5BC81D31" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC81D31" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6650 1800 50  0001 C CNN
+F 1 "GND" H 6655 1877 50  0000 C CNN
+F 2 "" H 6650 2050 50  0001 C CNN
+F 3 "" H 6650 2050 50  0001 C CNN
+	1    6650 2050
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5650 3100 5500 3100
-Text HLabel 5500 3100 0    50   Input ~ 0
-row_g_ctrl
-Connection ~ 6500 2900
+	5800 1450 5650 1450
+Text HLabel 5650 1450 0    50   Input ~ 0
+row_c_ctrl
+Connection ~ 6650 1250
 Wire Wire Line
-	6500 3300 6500 3600
+	6650 1650 6650 1950
 Wire Wire Line
-	6100 3100 6100 3200
-Connection ~ 6100 3100
+	6250 1450 6250 1550
+Connection ~ 6250 1450
 Wire Wire Line
-	6100 3100 6200 3100
+	6250 1450 6350 1450
 Wire Wire Line
-	6100 3500 6100 3600
+	6250 1850 6250 1950
 Wire Wire Line
-	6100 3600 6500 3600
-Connection ~ 6500 3600
+	6250 1950 6650 1950
+Connection ~ 6650 1950
 Wire Wire Line
-	6500 3600 6500 3700
+	6650 1950 6650 2050
+Text HLabel 6950 800  2    50   Input ~ 0
+row_c_motor
 Wire Wire Line
-	6700 2450 7550 2450
-Text Label 7550 2450 2    50   ~ 0
-motor_white_purple
+	6950 800  6850 800 
 $Comp
-L Snack_Machine:INA219 U?
-U 1 1 5BC6BBF3
-P 2400 6350
-F 0 "U?" H 2400 6765 50  0000 C CNN
-F 1 "INA219" H 2400 6674 50  0000 C CNN
-F 2 "" H 2400 6350 50  0001 C CNN
-F 3 "" H 2400 6350 50  0001 C CNN
-	1    2400 6350
+L Device:Q_PMOS_DGS Q?
+U 1 1 5BC86906
+P 9000 900
+AR Path="/5BC86906" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC86906" Ref="Q?"  Part="1" 
+F 0 "Q?" V 9350 850 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 9250 850 50  0000 L CNN
+F 2 "" H 9200 1000 50  0001 C CNN
+F 3 "~" H 9000 900 50  0001 C CNN
+	1    9000 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BC8690D
+P 8600 800
+AR Path="/5BC8690D" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC8690D" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 8600 650 50  0001 C CNN
+F 1 "+24V" H 8615 973 50  0000 C CNN
+F 2 "" H 8600 800 50  0001 C CNN
+F 3 "" H 8600 800 50  0001 C CNN
+	1    8600 800 
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	8800 800  8700 800 
+$Comp
+L Device:R R?
+U 1 1 5BC86914
+P 8700 1000
+AR Path="/5BC86914" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC86914" Ref="R?"  Part="1" 
+F 0 "R?" H 8770 1046 50  0000 L CNN
+F 1 "1K" H 8770 955 50  0000 L CNN
+F 2 "" V 8630 1000 50  0001 C CNN
+F 3 "~" H 8700 1000 50  0001 C CNN
+	1    8700 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 850  8700 800 
+Connection ~ 8700 800 
+Wire Wire Line
+	8700 800  8600 800 
+Wire Wire Line
+	8700 1150 8700 1250
+Wire Wire Line
+	8700 1250 9000 1250
+Wire Wire Line
+	9000 1250 9000 1100
+$Comp
+L Device:Q_NMOS_DGS Q?
+U 1 1 5BC86921
+P 8900 1450
+AR Path="/5BC86921" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC86921" Ref="Q?"  Part="1" 
+F 0 "Q?" H 9105 1496 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 9105 1405 50  0000 L CNN
+F 2 "" H 9100 1550 50  0001 C CNN
+F 3 "~" H 8900 1450 50  0001 C CNN
+	1    8900 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5BC86928
+P 8300 1450
+AR Path="/5BC86928" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC86928" Ref="R?"  Part="1" 
+F 0 "R?" V 8400 1450 50  0000 C CNN
+F 1 "R" V 8500 1450 50  0000 C CNN
+F 2 "" V 8230 1450 50  0001 C CNN
+F 3 "~" H 8300 1450 50  0001 C CNN
+	1    8300 1450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8450 1450 8600 1450
+$Comp
+L Device:R R?
+U 1 1 5BC86930
+P 8600 1700
+AR Path="/5BC86930" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC86930" Ref="R?"  Part="1" 
+F 0 "R?" H 8700 1750 50  0000 C CNN
+F 1 "1K" H 8700 1650 50  0000 C CNN
+F 2 "" V 8530 1700 50  0001 C CNN
+F 3 "~" H 8600 1700 50  0001 C CNN
+	1    8600 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BC86937
+P 9000 2050
+AR Path="/5BC86937" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC86937" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 9000 1800 50  0001 C CNN
+F 1 "GND" H 9005 1877 50  0000 C CNN
+F 2 "" H 9000 2050 50  0001 C CNN
+F 3 "" H 9000 2050 50  0001 C CNN
+	1    9000 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8150 1450 8000 1450
+Text HLabel 8000 1450 0    50   Input ~ 0
+row_d_ctrl
+Connection ~ 9000 1250
+Wire Wire Line
+	9000 1650 9000 1950
+Wire Wire Line
+	8600 1450 8600 1550
+Connection ~ 8600 1450
+Wire Wire Line
+	8600 1450 8700 1450
+Wire Wire Line
+	8600 1850 8600 1950
+Wire Wire Line
+	8600 1950 9000 1950
+Connection ~ 9000 1950
+Wire Wire Line
+	9000 1950 9000 2050
+Text HLabel 9300 800  2    50   Input ~ 0
+row_d_motor
+Wire Wire Line
+	9300 800  9200 800 
+Wire Notes Line
+	450  2300 9850 2300
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5BC92720
+P 1950 2750
+AR Path="/5BC92720" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC92720" Ref="Q?"  Part="1" 
+F 0 "Q?" V 2300 2700 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 2200 2700 50  0000 L CNN
+F 2 "" H 2150 2850 50  0001 C CNN
+F 3 "~" H 1950 2750 50  0001 C CNN
+	1    1950 2750
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BC92727
+P 1550 2650
+AR Path="/5BC92727" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC92727" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1550 2500 50  0001 C CNN
+F 1 "+24V" H 1565 2823 50  0000 C CNN
+F 2 "" H 1550 2650 50  0001 C CNN
+F 3 "" H 1550 2650 50  0001 C CNN
+	1    1550 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1750 2650 1650 2650
+$Comp
+L Device:R R?
+U 1 1 5BC9272E
+P 1650 2850
+AR Path="/5BC9272E" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC9272E" Ref="R?"  Part="1" 
+F 0 "R?" H 1720 2896 50  0000 L CNN
+F 1 "1K" H 1720 2805 50  0000 L CNN
+F 2 "" V 1580 2850 50  0001 C CNN
+F 3 "~" H 1650 2850 50  0001 C CNN
+	1    1650 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 2700 1650 2650
+Connection ~ 1650 2650
+Wire Wire Line
+	1650 2650 1550 2650
+Wire Wire Line
+	1650 3000 1650 3100
+Wire Wire Line
+	1650 3100 1950 3100
+Wire Wire Line
+	1950 3100 1950 2950
+$Comp
+L Device:Q_NMOS_DGS Q?
+U 1 1 5BC9273B
+P 1850 3300
+AR Path="/5BC9273B" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC9273B" Ref="Q?"  Part="1" 
+F 0 "Q?" H 2055 3346 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 2055 3255 50  0000 L CNN
+F 2 "" H 2050 3400 50  0001 C CNN
+F 3 "~" H 1850 3300 50  0001 C CNN
+	1    1850 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5BC92742
+P 1250 3300
+AR Path="/5BC92742" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC92742" Ref="R?"  Part="1" 
+F 0 "R?" V 1350 3300 50  0000 C CNN
+F 1 "R" V 1450 3300 50  0000 C CNN
+F 2 "" V 1180 3300 50  0001 C CNN
+F 3 "~" H 1250 3300 50  0001 C CNN
+	1    1250 3300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1400 3300 1550 3300
+$Comp
+L Device:R R?
+U 1 1 5BC9274A
+P 1550 3550
+AR Path="/5BC9274A" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC9274A" Ref="R?"  Part="1" 
+F 0 "R?" H 1650 3600 50  0000 C CNN
+F 1 "1K" H 1650 3500 50  0000 C CNN
+F 2 "" V 1480 3550 50  0001 C CNN
+F 3 "~" H 1550 3550 50  0001 C CNN
+	1    1550 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BC92751
+P 1950 3900
+AR Path="/5BC92751" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC92751" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1950 3650 50  0001 C CNN
+F 1 "GND" H 1955 3727 50  0000 C CNN
+F 2 "" H 1950 3900 50  0001 C CNN
+F 3 "" H 1950 3900 50  0001 C CNN
+	1    1950 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1100 3300 950  3300
+Text HLabel 950  3300 0    50   Input ~ 0
+row_e_ctrl
+Connection ~ 1950 3100
+Wire Wire Line
+	1950 3500 1950 3800
+Wire Wire Line
+	1550 3300 1550 3400
+Connection ~ 1550 3300
+Wire Wire Line
+	1550 3300 1650 3300
+Wire Wire Line
+	1550 3700 1550 3800
+Wire Wire Line
+	1550 3800 1950 3800
+Connection ~ 1950 3800
+Wire Wire Line
+	1950 3800 1950 3900
+Text HLabel 2250 2650 2    50   Input ~ 0
+row_e_motor
+Wire Wire Line
+	2250 2650 2150 2650
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5BC92765
+P 4300 2750
+AR Path="/5BC92765" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC92765" Ref="Q?"  Part="1" 
+F 0 "Q?" V 4650 2700 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 4550 2700 50  0000 L CNN
+F 2 "" H 4500 2850 50  0001 C CNN
+F 3 "~" H 4300 2750 50  0001 C CNN
+	1    4300 2750
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BC9276C
+P 3900 2650
+AR Path="/5BC9276C" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC9276C" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 3900 2500 50  0001 C CNN
+F 1 "+24V" H 3915 2823 50  0000 C CNN
+F 2 "" H 3900 2650 50  0001 C CNN
+F 3 "" H 3900 2650 50  0001 C CNN
+	1    3900 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 2650 4000 2650
+$Comp
+L Device:R R?
+U 1 1 5BC92773
+P 4000 2850
+AR Path="/5BC92773" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC92773" Ref="R?"  Part="1" 
+F 0 "R?" H 4070 2896 50  0000 L CNN
+F 1 "1K" H 4070 2805 50  0000 L CNN
+F 2 "" V 3930 2850 50  0001 C CNN
+F 3 "~" H 4000 2850 50  0001 C CNN
+	1    4000 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 2700 4000 2650
+Connection ~ 4000 2650
+Wire Wire Line
+	4000 2650 3900 2650
+Wire Wire Line
+	4000 3000 4000 3100
+Wire Wire Line
+	4000 3100 4300 3100
+Wire Wire Line
+	4300 3100 4300 2950
+$Comp
+L Device:Q_NMOS_DGS Q?
+U 1 1 5BC92780
+P 4200 3300
+AR Path="/5BC92780" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC92780" Ref="Q?"  Part="1" 
+F 0 "Q?" H 4405 3346 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 4405 3255 50  0000 L CNN
+F 2 "" H 4400 3400 50  0001 C CNN
+F 3 "~" H 4200 3300 50  0001 C CNN
+	1    4200 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5BC92787
+P 3600 3300
+AR Path="/5BC92787" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC92787" Ref="R?"  Part="1" 
+F 0 "R?" V 3700 3300 50  0000 C CNN
+F 1 "R" V 3800 3300 50  0000 C CNN
+F 2 "" V 3530 3300 50  0001 C CNN
+F 3 "~" H 3600 3300 50  0001 C CNN
+	1    3600 3300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3750 3300 3900 3300
+$Comp
+L Device:R R?
+U 1 1 5BC9278F
+P 3900 3550
+AR Path="/5BC9278F" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC9278F" Ref="R?"  Part="1" 
+F 0 "R?" H 4000 3600 50  0000 C CNN
+F 1 "1K" H 4000 3500 50  0000 C CNN
+F 2 "" V 3830 3550 50  0001 C CNN
+F 3 "~" H 3900 3550 50  0001 C CNN
+	1    3900 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BC92796
+P 4300 3900
+AR Path="/5BC92796" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC92796" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 4300 3650 50  0001 C CNN
+F 1 "GND" H 4305 3727 50  0000 C CNN
+F 2 "" H 4300 3900 50  0001 C CNN
+F 3 "" H 4300 3900 50  0001 C CNN
+	1    4300 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 3300 3300 3300
+Text HLabel 3300 3300 0    50   Input ~ 0
+row_f_ctrl
+Connection ~ 4300 3100
+Wire Wire Line
+	4300 3500 4300 3800
+Wire Wire Line
+	3900 3300 3900 3400
+Connection ~ 3900 3300
+Wire Wire Line
+	3900 3300 4000 3300
+Wire Wire Line
+	3900 3700 3900 3800
+Wire Wire Line
+	3900 3800 4300 3800
+Connection ~ 4300 3800
+Wire Wire Line
+	4300 3800 4300 3900
+Text HLabel 4600 2650 2    50   Input ~ 0
+row_f_motor
+Wire Wire Line
+	4600 2650 4500 2650
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5BC927AA
+P 6650 2750
+AR Path="/5BC927AA" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC927AA" Ref="Q?"  Part="1" 
+F 0 "Q?" V 7000 2700 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 6900 2700 50  0000 L CNN
+F 2 "" H 6850 2850 50  0001 C CNN
+F 3 "~" H 6650 2750 50  0001 C CNN
+	1    6650 2750
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BC927B1
+P 6250 2650
+AR Path="/5BC927B1" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC927B1" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6250 2500 50  0001 C CNN
+F 1 "+24V" H 6265 2823 50  0000 C CNN
+F 2 "" H 6250 2650 50  0001 C CNN
+F 3 "" H 6250 2650 50  0001 C CNN
+	1    6250 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6450 2650 6350 2650
+$Comp
+L Device:R R?
+U 1 1 5BC927B8
+P 6350 2850
+AR Path="/5BC927B8" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC927B8" Ref="R?"  Part="1" 
+F 0 "R?" H 6420 2896 50  0000 L CNN
+F 1 "1K" H 6420 2805 50  0000 L CNN
+F 2 "" V 6280 2850 50  0001 C CNN
+F 3 "~" H 6350 2850 50  0001 C CNN
+	1    6350 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6350 2700 6350 2650
+Connection ~ 6350 2650
+Wire Wire Line
+	6350 2650 6250 2650
+Wire Wire Line
+	6350 3000 6350 3100
+Wire Wire Line
+	6350 3100 6650 3100
+Wire Wire Line
+	6650 3100 6650 2950
+$Comp
+L Device:Q_NMOS_DGS Q?
+U 1 1 5BC927C5
+P 6550 3300
+AR Path="/5BC927C5" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC927C5" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6755 3346 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 6755 3255 50  0000 L CNN
+F 2 "" H 6750 3400 50  0001 C CNN
+F 3 "~" H 6550 3300 50  0001 C CNN
+	1    6550 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5BC927CC
+P 5950 3300
+AR Path="/5BC927CC" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC927CC" Ref="R?"  Part="1" 
+F 0 "R?" V 6050 3300 50  0000 C CNN
+F 1 "R" V 6150 3300 50  0000 C CNN
+F 2 "" V 5880 3300 50  0001 C CNN
+F 3 "~" H 5950 3300 50  0001 C CNN
+	1    5950 3300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6100 3300 6250 3300
+$Comp
+L Device:R R?
+U 1 1 5BC927D4
+P 6250 3550
+AR Path="/5BC927D4" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC927D4" Ref="R?"  Part="1" 
+F 0 "R?" H 6350 3600 50  0000 C CNN
+F 1 "1K" H 6350 3500 50  0000 C CNN
+F 2 "" V 6180 3550 50  0001 C CNN
+F 3 "~" H 6250 3550 50  0001 C CNN
+	1    6250 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BC927DB
+P 6650 3900
+AR Path="/5BC927DB" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC927DB" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6650 3650 50  0001 C CNN
+F 1 "GND" H 6655 3727 50  0000 C CNN
+F 2 "" H 6650 3900 50  0001 C CNN
+F 3 "" H 6650 3900 50  0001 C CNN
+	1    6650 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5800 3300 5650 3300
+Text HLabel 5650 3300 0    50   Input ~ 0
+row_g_ctrl
+Connection ~ 6650 3100
+Wire Wire Line
+	6650 3500 6650 3800
+Wire Wire Line
+	6250 3300 6250 3400
+Connection ~ 6250 3300
+Wire Wire Line
+	6250 3300 6350 3300
+Wire Wire Line
+	6250 3700 6250 3800
+Wire Wire Line
+	6250 3800 6650 3800
+Connection ~ 6650 3800
+Wire Wire Line
+	6650 3800 6650 3900
+Text HLabel 6950 2650 2    50   Input ~ 0
+row_g_motor
+Wire Wire Line
+	6950 2650 6850 2650
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5BC927EF
+P 9000 2750
+AR Path="/5BC927EF" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC927EF" Ref="Q?"  Part="1" 
+F 0 "Q?" V 9350 2700 50  0000 L CNN
+F 1 "Q_PMOS_DGS" V 9250 2700 50  0000 L CNN
+F 2 "" H 9200 2850 50  0001 C CNN
+F 3 "~" H 9000 2750 50  0001 C CNN
+	1    9000 2750
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BC927F6
+P 8600 2650
+AR Path="/5BC927F6" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC927F6" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 8600 2500 50  0001 C CNN
+F 1 "+24V" H 8615 2823 50  0000 C CNN
+F 2 "" H 8600 2650 50  0001 C CNN
+F 3 "" H 8600 2650 50  0001 C CNN
+	1    8600 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8800 2650 8700 2650
+$Comp
+L Device:R R?
+U 1 1 5BC927FD
+P 8700 2850
+AR Path="/5BC927FD" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC927FD" Ref="R?"  Part="1" 
+F 0 "R?" H 8770 2896 50  0000 L CNN
+F 1 "1K" H 8770 2805 50  0000 L CNN
+F 2 "" V 8630 2850 50  0001 C CNN
+F 3 "~" H 8700 2850 50  0001 C CNN
+	1    8700 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 2700 8700 2650
+Connection ~ 8700 2650
+Wire Wire Line
+	8700 2650 8600 2650
+Wire Wire Line
+	8700 3000 8700 3100
+Wire Wire Line
+	8700 3100 9000 3100
+Wire Wire Line
+	9000 3100 9000 2950
+$Comp
+L Device:Q_NMOS_DGS Q?
+U 1 1 5BC9280A
+P 8900 3300
+AR Path="/5BC9280A" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BC9280A" Ref="Q?"  Part="1" 
+F 0 "Q?" H 9105 3346 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 9105 3255 50  0000 L CNN
+F 2 "" H 9100 3400 50  0001 C CNN
+F 3 "~" H 8900 3300 50  0001 C CNN
+	1    8900 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5BC92811
+P 8300 3300
+AR Path="/5BC92811" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC92811" Ref="R?"  Part="1" 
+F 0 "R?" V 8400 3300 50  0000 C CNN
+F 1 "R" V 8500 3300 50  0000 C CNN
+F 2 "" V 8230 3300 50  0001 C CNN
+F 3 "~" H 8300 3300 50  0001 C CNN
+	1    8300 3300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8450 3300 8600 3300
+$Comp
+L Device:R R?
+U 1 1 5BC92819
+P 8600 3550
+AR Path="/5BC92819" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BC92819" Ref="R?"  Part="1" 
+F 0 "R?" H 8700 3600 50  0000 C CNN
+F 1 "1K" H 8700 3500 50  0000 C CNN
+F 2 "" V 8530 3550 50  0001 C CNN
+F 3 "~" H 8600 3550 50  0001 C CNN
+	1    8600 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BC92820
+P 9000 3900
+AR Path="/5BC92820" Ref="#PWR?"  Part="1" 
+AR Path="/5BA75957/5BC92820" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 9000 3650 50  0001 C CNN
+F 1 "GND" H 9005 3727 50  0000 C CNN
+F 2 "" H 9000 3900 50  0001 C CNN
+F 3 "" H 9000 3900 50  0001 C CNN
+	1    9000 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8150 3300 8000 3300
+Text HLabel 8000 3300 0    50   Input ~ 0
+row_h_ctrl
+Connection ~ 9000 3100
+Wire Wire Line
+	9000 3500 9000 3800
+Wire Wire Line
+	8600 3300 8600 3400
+Connection ~ 8600 3300
+Wire Wire Line
+	8600 3300 8700 3300
+Wire Wire Line
+	8600 3700 8600 3800
+Wire Wire Line
+	8600 3800 9000 3800
+Connection ~ 9000 3800
+Wire Wire Line
+	9000 3800 9000 3900
+Text HLabel 9300 2650 2    50   Input ~ 0
+row_h_motor
+Wire Wire Line
+	9300 2650 9200 2650
+Wire Notes Line
+	450  4150 9850 4150
+Text HLabel 1050 4250 0    50   Input ~ 0
+col_1_motor
+$Comp
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BCA89F6
+P 3700 4450
+AR Path="/5BCA89F6" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCA89F6" Ref="Q?"  Part="1" 
+F 0 "Q?" H 3906 4496 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 3906 4405 50  0000 L CNN
+F 2 "" H 3900 4550 50  0001 C CNN
+F 3 "~" H 3700 4450 50  0001 C CNN
+	1    3700 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3400 4450 3500 4450
+$Comp
+L Device:R R?
+U 1 1 5BCA89FE
+P 3650 4950
+AR Path="/5BCA89FE" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCA89FE" Ref="R?"  Part="1" 
+F 0 "R?" V 3443 4950 50  0000 C CNN
+F 1 "1K" V 3534 4950 50  0000 C CNN
+F 2 "" V 3580 4950 50  0001 C CNN
+F 3 "~" H 3650 4950 50  0001 C CNN
+	1    3650 4950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3800 4950 3800 4800
+Wire Wire Line
+	4000 4800 3800 4800
+Connection ~ 3800 4800
+Wire Wire Line
+	3800 4800 3800 4650
+Wire Wire Line
+	3500 4950 3500 4450
+Connection ~ 3500 4450
+Wire Wire Line
+	3400 4250 3800 4250
+Text HLabel 3400 4450 0    50   Input ~ 0
+col_2_ctrl
+Text Label 4000 4800 0    50   ~ 0
+motor_common_gnd
+Text HLabel 3400 4250 0    50   Input ~ 0
+col_2_motor
+$Comp
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BCADB68
+P 6050 4450
+AR Path="/5BCADB68" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCADB68" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6256 4496 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 6256 4405 50  0000 L CNN
+F 2 "" H 6250 4550 50  0001 C CNN
+F 3 "~" H 6050 4450 50  0001 C CNN
+	1    6050 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 4450 5850 4450
+$Comp
+L Device:R R?
+U 1 1 5BCADB70
+P 6000 4950
+AR Path="/5BCADB70" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCADB70" Ref="R?"  Part="1" 
+F 0 "R?" V 5793 4950 50  0000 C CNN
+F 1 "1K" V 5884 4950 50  0000 C CNN
+F 2 "" V 5930 4950 50  0001 C CNN
+F 3 "~" H 6000 4950 50  0001 C CNN
+	1    6000 4950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6150 4950 6150 4800
+Wire Wire Line
+	6350 4800 6150 4800
+Connection ~ 6150 4800
+Wire Wire Line
+	6150 4800 6150 4650
+Wire Wire Line
+	5850 4950 5850 4450
+Connection ~ 5850 4450
+Wire Wire Line
+	5750 4250 6150 4250
+Text HLabel 5750 4450 0    50   Input ~ 0
+col_3_ctrl
+Text Label 6350 4800 0    50   ~ 0
+motor_common_gnd
+Text HLabel 5750 4250 0    50   Input ~ 0
+col_3_motor
+$Comp
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BCADB82
+P 8400 4450
+AR Path="/5BCADB82" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCADB82" Ref="Q?"  Part="1" 
+F 0 "Q?" H 8606 4496 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 8606 4405 50  0000 L CNN
+F 2 "" H 8600 4550 50  0001 C CNN
+F 3 "~" H 8400 4450 50  0001 C CNN
+	1    8400 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8100 4450 8200 4450
+$Comp
+L Device:R R?
+U 1 1 5BCADB8A
+P 8350 4950
+AR Path="/5BCADB8A" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCADB8A" Ref="R?"  Part="1" 
+F 0 "R?" V 8143 4950 50  0000 C CNN
+F 1 "1K" V 8234 4950 50  0000 C CNN
+F 2 "" V 8280 4950 50  0001 C CNN
+F 3 "~" H 8350 4950 50  0001 C CNN
+	1    8350 4950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8500 4950 8500 4800
+Wire Wire Line
+	8700 4800 8500 4800
+Connection ~ 8500 4800
+Wire Wire Line
+	8500 4800 8500 4650
+Wire Wire Line
+	8200 4950 8200 4450
+Connection ~ 8200 4450
+Wire Wire Line
+	8100 4250 8500 4250
+Text HLabel 8100 4450 0    50   Input ~ 0
+col_4_ctrl
+Text Label 8700 4800 0    50   ~ 0
+motor_common_gnd
+Text HLabel 8100 4250 0    50   Input ~ 0
+col_4_motor
+Wire Notes Line
+	450  5050 9850 5050
+$Comp
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BCB38D1
+P 1350 5350
+AR Path="/5BCB38D1" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCB38D1" Ref="Q?"  Part="1" 
+F 0 "Q?" H 1556 5396 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 1556 5305 50  0000 L CNN
+F 2 "" H 1550 5450 50  0001 C CNN
+F 3 "~" H 1350 5350 50  0001 C CNN
+	1    1350 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1050 5350 1150 5350
+$Comp
+L Device:R R?
+U 1 1 5BCB38D9
+P 1300 5850
+AR Path="/5BCB38D9" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCB38D9" Ref="R?"  Part="1" 
+F 0 "R?" V 1093 5850 50  0000 C CNN
+F 1 "1K" V 1184 5850 50  0000 C CNN
+F 2 "" V 1230 5850 50  0001 C CNN
+F 3 "~" H 1300 5850 50  0001 C CNN
+	1    1300 5850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1450 5850 1450 5700
+Wire Wire Line
+	1650 5700 1450 5700
+Connection ~ 1450 5700
+Wire Wire Line
+	1450 5700 1450 5550
+Wire Wire Line
+	1150 5850 1150 5350
+Connection ~ 1150 5350
+Wire Wire Line
+	1050 5150 1450 5150
+Text HLabel 1050 5350 0    50   Input ~ 0
+col_5_ctrl
+Text Label 1650 5700 0    50   ~ 0
+motor_common_gnd
+Text HLabel 1050 5150 0    50   Input ~ 0
+col_5_motor
+$Comp
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BCB38EB
+P 3700 5350
+AR Path="/5BCB38EB" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCB38EB" Ref="Q?"  Part="1" 
+F 0 "Q?" H 3906 5396 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 3906 5305 50  0000 L CNN
+F 2 "" H 3900 5450 50  0001 C CNN
+F 3 "~" H 3700 5350 50  0001 C CNN
+	1    3700 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3400 5350 3500 5350
+$Comp
+L Device:R R?
+U 1 1 5BCB38F3
+P 3650 5850
+AR Path="/5BCB38F3" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCB38F3" Ref="R?"  Part="1" 
+F 0 "R?" V 3443 5850 50  0000 C CNN
+F 1 "1K" V 3534 5850 50  0000 C CNN
+F 2 "" V 3580 5850 50  0001 C CNN
+F 3 "~" H 3650 5850 50  0001 C CNN
+	1    3650 5850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3800 5850 3800 5700
+Wire Wire Line
+	4000 5700 3800 5700
+Connection ~ 3800 5700
+Wire Wire Line
+	3800 5700 3800 5550
+Wire Wire Line
+	3500 5850 3500 5350
+Connection ~ 3500 5350
+Wire Wire Line
+	3400 5150 3800 5150
+Text HLabel 3400 5350 0    50   Input ~ 0
+col_6_ctrl
+Text Label 4000 5700 0    50   ~ 0
+motor_common_gnd
+Text HLabel 3400 5150 0    50   Input ~ 0
+col_6_motor
+$Comp
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BCB3905
+P 6050 5350
+AR Path="/5BCB3905" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCB3905" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6256 5396 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 6256 5305 50  0000 L CNN
+F 2 "" H 6250 5450 50  0001 C CNN
+F 3 "~" H 6050 5350 50  0001 C CNN
+	1    6050 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 5350 5850 5350
+$Comp
+L Device:R R?
+U 1 1 5BCB390D
+P 6000 5850
+AR Path="/5BCB390D" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCB390D" Ref="R?"  Part="1" 
+F 0 "R?" V 5793 5850 50  0000 C CNN
+F 1 "1K" V 5884 5850 50  0000 C CNN
+F 2 "" V 5930 5850 50  0001 C CNN
+F 3 "~" H 6000 5850 50  0001 C CNN
+	1    6000 5850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6150 5850 6150 5700
+Wire Wire Line
+	6350 5700 6150 5700
+Connection ~ 6150 5700
+Wire Wire Line
+	6150 5700 6150 5550
+Wire Wire Line
+	5850 5850 5850 5350
+Connection ~ 5850 5350
+Wire Wire Line
+	5750 5150 6150 5150
+Text HLabel 5750 5350 0    50   Input ~ 0
+col_7_ctrl
+Text Label 6350 5700 0    50   ~ 0
+motor_common_gnd
+Text HLabel 5750 5150 0    50   Input ~ 0
+col_7_motor
+$Comp
+L Device:Q_PMOS_SGD Q?
+U 1 1 5BCB391E
+P 8400 5350
+AR Path="/5BCB391E" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5BCB391E" Ref="Q?"  Part="1" 
+F 0 "Q?" H 8606 5396 50  0000 L CNN
+F 1 "Q_PMOS_SGD" H 8606 5305 50  0000 L CNN
+F 2 "" H 8600 5450 50  0001 C CNN
+F 3 "~" H 8400 5350 50  0001 C CNN
+	1    8400 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8100 5350 8200 5350
+$Comp
+L Device:R R?
+U 1 1 5BCB3926
+P 8350 5850
+AR Path="/5BCB3926" Ref="R?"  Part="1" 
+AR Path="/5BA75957/5BCB3926" Ref="R?"  Part="1" 
+F 0 "R?" V 8143 5850 50  0000 C CNN
+F 1 "1K" V 8234 5850 50  0000 C CNN
+F 2 "" V 8280 5850 50  0001 C CNN
+F 3 "~" H 8350 5850 50  0001 C CNN
+	1    8350 5850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8500 5850 8500 5700
+Wire Wire Line
+	8700 5700 8500 5700
+Connection ~ 8500 5700
+Wire Wire Line
+	8500 5700 8500 5550
+Wire Wire Line
+	8200 5850 8200 5350
+Connection ~ 8200 5350
+Wire Wire Line
+	8100 5150 8500 5150
+Text HLabel 8100 5350 0    50   Input ~ 0
+col_8_ctrl
+Text Label 8700 5700 0    50   ~ 0
+motor_common_gnd
+Text HLabel 8100 5150 0    50   Input ~ 0
+col_8_motor
+Wire Notes Line
+	450  5950 9850 5950
+Wire Notes Line
+	2800 450  2800 5950
+Wire Notes Line
+	5150 450  5150 5950
+Wire Notes Line
+	7500 450  7500 5950
+Wire Notes Line
+	9850 450  9850 5950
+Wire Notes Line
+	10000 4150 10150 4150
+Wire Notes Line
+	10150 450  10000 450 
+Text Notes 10800 3950 1    197  ~ 0
+High Side\nMotor Driving
+Wire Notes Line
+	10150 5950 10000 5950
+Wire Notes Line
+	10150 450  10150 5950
+Text Notes 11100 5750 1    197  ~ 0
+Low Side\nMotor\nDriving
 $EndSCHEMATC
