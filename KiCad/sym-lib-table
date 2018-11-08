@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name Snack_Machine)(type Legacy)(uri "${KIPRJMOD}/Snack Machine.lib")(options "")(descr ""))
+  (lib (name Snack-Machine-rescue)(type Legacy)(uri "${KIPRJMOD}/Snack Machine-rescue.lib")(options "")(descr ""))
 )

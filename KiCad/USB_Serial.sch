@@ -19,7 +19,7 @@ RX_USB
 Text HLabel 6300 2450 2    50   Input ~ 0
 TX_USB
 $Comp
-L MCU_Microchip_ATmega:ATmega8U2-AU U?
+L Snack-Machine-rescue:ATmega8U2-AU-MCU_Microchip_ATmega U?
 U 1 1 5BC6B5AA
 P 4900 2800
 F 0 "U?" H 4900 1314 50  0000 C CNN

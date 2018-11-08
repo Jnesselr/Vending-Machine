@@ -245,7 +245,7 @@ $EndComp
 Wire Wire Line
 	1050 2100 1050 2050
 $Comp
-L MCU_Microchip_ATmega:ATmega2560-16AU U2
+L Snack-Machine-rescue:ATmega2560-16AU-MCU_Microchip_ATmega U2
 U 1 1 5BB84FB8
 P 5200 3800
 F 0 "U2" H 5200 814 50  0000 C CNN
@@ -1169,6 +1169,39 @@ Wire Wire Line
 Connection ~ 1300 4350
 Wire Wire Line
 	1300 4350 1600 4350
+$Comp
+L Snack_Machine:LM2576HV-5.0 U?
+U 1 1 5BE47F0A
+P 8900 5150
+F 0 "U?" H 9375 5765 50  0000 C CNN
+F 1 "LM2576HV-5.0" H 9375 5674 50  0000 C CNN
+F 2 "" H 8900 5150 50  0001 C CNN
+F 3 "" H 8900 5150 50  0001 C CNN
+	1    8900 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C?
+U 1 1 5BE48031
+P 8500 5150
+F 0 "C?" H 8618 5196 50  0000 L CNN
+F 1 "47uF 35V" H 8618 5105 50  0000 L CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-X_EIA-7343-43_Hand" H 8538 5000 50  0001 C CNN
+F 3 "~" H 8500 5150 50  0001 C CNN
+	1    8500 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C?
+U 1 1 5BE48C6B
+P 7900 5150
+F 0 "C?" H 8018 5196 50  0000 L CNN
+F 1 "47uF 35V" H 8018 5105 50  0000 L CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-X_EIA-7343-43_Hand" H 7938 5000 50  0001 C CNN
+F 3 "~" H 7900 5150 50  0001 C CNN
+	1    7900 5150
+	1    0    0    -1  
+$EndComp
 Wire Bus Line
 	6300 1100 6300 1800
 Wire Bus Line
@@ -1177,4 +1210,15 @@ Wire Bus Line
 	8300 1100 8300 2350
 Wire Bus Line
 	6300 2550 6300 3600
+$Comp
+L Device:D_Schottky_AKA D?
+U 1 1 5BE59799
+P 10450 5050
+F 0 "D?" V 10429 5191 50  0000 L CNN
+F 1 "D_Schottky_AKA" V 10520 5191 50  0000 L CNN
+F 2 "TO_SOT_Packages_SMD:TO-252-2" H 10450 5050 50  0001 C CNN
+F 3 "~" H 10450 5050 50  0001 C CNN
+	1    10450 5050
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
