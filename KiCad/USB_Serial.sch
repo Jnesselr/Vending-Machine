@@ -800,7 +800,7 @@ NoConn ~ 6200 4000
 NoConn ~ 6200 4100
 NoConn ~ 6200 4400
 NoConn ~ 6200 4900
-Text Notes 8100 5100 0    50   ~ 0
+Text Notes 8100 5150 0    50   ~ 0
 NOTE: This is the RESET line for the ATMEGA2560
 Wire Wire Line
 	6200 3500 6600 3500
@@ -881,4 +881,6 @@ Wire Wire Line
 	2900 1700 2900 1600
 Wire Wire Line
 	5500 2350 5500 2400
+Text HLabel 8000 5000 2    50   Input ~ 0
+~RESET
 $EndSCHEMATC

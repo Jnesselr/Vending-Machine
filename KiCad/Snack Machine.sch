@@ -325,9 +325,9 @@ NoConn ~ 13250 7450
 NoConn ~ 13250 7550
 NoConn ~ 13250 7650
 NoConn ~ 13250 7750
-Text Label 12550 7450 2    50   ~ 0
+Text Label 12350 7450 2    50   ~ 0
 TX_DISPLAY
-Text Label 12550 7550 2    50   ~ 0
+Text Label 12350 7550 2    50   ~ 0
 RX_DISPLAY
 $Comp
 L power:GND #PWR0120
@@ -341,7 +341,7 @@ F 3 "" H 12700 7850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 12500 7750 2    50   ~ 0
-~RESET
+RESET_DISPLAY
 $Comp
 L Connector:Conn_01x05_Male J2
 U 1 1 5BBFAD05
@@ -740,12 +740,13 @@ NoConn ~ 9100 7900
 NoConn ~ 9100 8000
 NoConn ~ 9100 8100
 $Sheet
-S 9450 6400 550  300 
+S 9450 6400 700  350 
 U 5BCD883C
 F0 "USB_Serial" 50
 F1 "USB_Serial.sch" 50
 F2 "RX_USB" I L 9450 6500 50 
 F3 "TX_USB" I L 9450 6600 50 
+F4 "~RESET" I R 10150 6650 50 
 $EndSheet
 Wire Wire Line
 	9250 6700 9250 6600
@@ -757,10 +758,10 @@ Wire Wire Line
 	9200 6500 9200 6600
 NoConn ~ 9100 8200
 $Comp
-L Connector_Generic:Conn_02x03_Top_Bottom J6
+L Connector_Generic:Conn_02x03_Top_Bottom J?
 U 1 1 5BD02A51
 P 4550 6650
-F 0 "J6" H 4600 6325 50  0000 C CNN
+F 0 "J?" H 4600 6325 50  0000 C CNN
 F 1 "MDB" H 4600 6416 50  0000 C CNN
 F 2 "" H 4550 6650 50  0001 C CNN
 F 3 "~" H 4550 6650 50  0001 C CNN
@@ -1107,11 +1108,11 @@ Wire Wire Line
 Wire Wire Line
 	9100 6000 9800 6000
 Wire Wire Line
-	12100 7550 12750 7550
+	11850 7550 12750 7550
 Wire Wire Line
-	12100 7450 12750 7450
+	11850 7450 12750 7450
 Wire Wire Line
-	12100 7750 12750 7750
+	11850 7750 12750 7750
 Wire Wire Line
 	12750 7350 12700 7350
 Wire Wire Line
@@ -1215,7 +1216,7 @@ Wire Wire Line
 	5800 7150 6100 7150
 Connection ~ 6100 7150
 Wire Wire Line
-	4850 6650 5600 6650
+	4850 6650 5050 6650
 Text Notes 5350 7300 0    50   ~ 0
 NOTE: pick resistor vals
 $Comp
@@ -1916,14 +1917,6 @@ Wire Wire Line
 	5300 9350 4750 9350
 Wire Wire Line
 	4750 9450 5300 9450
-Wire Bus Line
-	10900 2900 10900 3600
-Wire Bus Line
-	9400 2900 9400 3600
-Wire Bus Line
-	10900 3800 10900 4500
-Wire Bus Line
-	10050 4500 10050 5400
 Text Notes 9350 2650 0    50   ~ 0
 CONFLICT? PA0 is AN0
 Text Notes 11200 5200 0    50   ~ 0
@@ -1940,4 +1933,92 @@ Text Notes 10250 9300 0    50   ~ 0
 MOUNT HOLES
 Text Notes 650  600  0    50   ~ 0
 NOTE: This file is a work-in-progress.  There are many notes which will be removed before release.
+$Comp
+L Connector_Generic:Conn_02x03_Top_Bottom J?
+U 1 1 5BF4B2DB
+P 2650 6650
+F 0 "J?" H 2700 6325 50  0000 C CNN
+F 1 "MDB" H 2700 6416 50  0000 C CNN
+F 2 "" H 2650 6650 50  0001 C CNN
+F 3 "~" H 2650 6650 50  0001 C CNN
+	1    2650 6650
+	1    0    0    1   
+$EndComp
+NoConn ~ 2450 6550
+$Comp
+L power:GND #PWR?
+U 1 1 5BF4B2E3
+P 3000 6850
+F 0 "#PWR?" H 3000 6600 50  0001 C CNN
+F 1 "GND" H 3000 6700 50  0000 C CNN
+F 2 "" H 3000 6850 50  0001 C CNN
+F 3 "" H 3000 6850 50  0001 C CNN
+	1    3000 6850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 6550 3000 6550
+Wire Wire Line
+	3000 6550 3000 6850
+Wire Wire Line
+	2450 6650 2400 6650
+Wire Wire Line
+	2400 6650 2400 6850
+Wire Wire Line
+	2450 6750 2300 6750
+Wire Wire Line
+	2300 6750 2300 6350
+Wire Wire Line
+	2950 6750 3550 6750
+Wire Wire Line
+	2950 6650 3700 6650
+$Comp
+L power:GND #PWR?
+U 1 1 5BF4B2F1
+P 2400 6850
+F 0 "#PWR?" H 2400 6600 50  0001 C CNN
+F 1 "GND" H 2400 6700 50  0000 C CNN
+F 2 "" H 2400 6850 50  0001 C CNN
+F 3 "" H 2400 6850 50  0001 C CNN
+	1    2400 6850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5BF4B2F7
+P 2300 6350
+F 0 "#PWR?" H 2300 6200 50  0001 C CNN
+F 1 "+24V" H 2300 6500 50  0000 C CNN
+F 2 "" H 2300 6350 50  0001 C CNN
+F 3 "" H 2300 6350 50  0001 C CNN
+	1    2300 6350
+	1    0    0    -1  
+$EndComp
+Text Label 3150 6750 0    50   ~ 0
+RX_MDB
+Wire Wire Line
+	3700 6650 3700 6050
+Wire Wire Line
+	3700 6050 5050 6050
+Wire Wire Line
+	5050 6050 5050 6650
+Connection ~ 5050 6650
+Wire Wire Line
+	5050 6650 5600 6650
+Text Label 10500 7700 2    50   ~ 0
+RESET_DISPLAY
+Wire Wire Line
+	10700 7700 9800 7700
+Wire Wire Line
+	10150 6650 10550 6650
+Text Label 10250 6650 0    50   ~ 0
+~RESET
+Wire Bus Line
+	10900 2900 10900 3600
+Wire Bus Line
+	9400 2900 9400 3600
+Wire Bus Line
+	10900 3800 10900 4500
+Wire Bus Line
+	10050 4500 10050 5400
 $EndSCHEMATC
