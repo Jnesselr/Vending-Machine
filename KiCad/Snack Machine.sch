@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr USLedger 17000 11000
 encoding utf-8
-Sheet 1 3
+Sheet 1 4
 Title ""
 Date ""
 Rev ""
@@ -1063,21 +1063,6 @@ F 3 "~" H 9400 4300 50  0001 C CNN
 	1    9200 4300
 	0    1    1    0   
 $EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C5B905E
-P 9200 3900
-AR Path="/5BCD883C/5C5B905E" Ref="TP?"  Part="1" 
-AR Path="/5C5B905E" Ref="TP1"  Part="1" 
-F 0 "TP1" V 9150 3850 50  0000 L CNN
-F 1 "TestPoint" V 9150 4100 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 9400 3900 50  0001 C CNN
-F 3 "~" H 9400 3900 50  0001 C CNN
-	1    9200 3900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9200 3900 9100 3900
 Wire Wire Line
 	9200 4300 9100 4300
 Wire Wire Line
@@ -3604,4 +3589,14 @@ Wire Wire Line
 	3950 2500 4050 2500
 Wire Wire Line
 	3950 2900 3950 3000
+Wire Wire Line
+	9100 3900 9900 3900
+Text Label 9400 3900 0    50   ~ 0
+CS
+$Sheet
+S 15200 750  1050 900 
+U 5C06FA8E
+F0 "Ethernet" 50
+F1 "Ethernet.sch" 50
+$EndSheet
 $EndSCHEMATC
