@@ -1152,17 +1152,6 @@ F 3 "~" H 9400 3900 50  0001 C CNN
 	1    9200 3900
 	0    1    1    0   
 $EndComp
-$Comp
-L Snack-Machine-rescue:ATmega2560-16AU-MCU_Microchip_ATmega U3
-U 1 1 5BB84FB8
-P 8300 5600
-F 0 "U3" H 8650 2800 50  0000 C CNN
-F 1 "ATmega2560-16AU" H 8750 2700 50  0000 C CNN
-F 2 "Package_QFP:TQFP-100_14x14mm_P0.5mm" H 8300 5600 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf" H 8300 5600 50  0001 C CNN
-	1    8300 5600
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	9200 3900 9100 3900
 Wire Wire Line
@@ -2067,4 +2056,15 @@ Wire Wire Line
 Connection ~ 7100 6700
 Wire Wire Line
 	7100 6700 7500 6700
+$Comp
+L MCU_Microchip_ATmega:ATmega2560-16AU U?
+U 1 1 5BFE17CA
+P 8300 5600
+F 0 "U?" H 8300 2614 50  0000 C CNN
+F 1 "ATmega2560-16AU" H 8300 2523 50  0000 C CNN
+F 2 "Package_QFP:TQFP-100_14x14mm_P0.5mm" H 8300 5600 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf" H 8300 5600 50  0001 C CNN
+	1    8300 5600
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
