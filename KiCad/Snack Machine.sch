@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:Snack Machine-cache
 EELAYER 26 0
 EELAYER END
 $Descr USLedger 17000 11000
@@ -3594,9 +3593,29 @@ Wire Wire Line
 Text Label 9400 3900 0    50   ~ 0
 CS
 $Sheet
-S 15200 750  1050 900 
+S 15200 750  600  500 
 U 5C06FA8E
 F0 "Ethernet" 50
 F1 "Ethernet.sch" 50
+F2 "MOSI" I L 15200 850 50 
+F3 "SCK" I L 15200 1050 50 
+F4 "CS" I L 15200 1150 50 
+F5 "MISO" I L 15200 950 50 
 $EndSheet
+Text Label 14900 850  0    50   ~ 0
+MOSI
+Text Label 14900 950  0    50   ~ 0
+MISO
+Text Label 14900 1050 0    50   ~ 0
+SCK
+Text Label 14900 1150 0    50   ~ 0
+CS
+Wire Wire Line
+	14900 850  15200 850 
+Wire Wire Line
+	14900 950  15200 950 
+Wire Wire Line
+	14900 1050 15200 1050
+Wire Wire Line
+	14900 1150 15200 1150
 $EndSCHEMATC
