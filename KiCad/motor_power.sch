@@ -96,19 +96,6 @@ SDA
 Wire Wire Line
 	4250 7000 4400 7000
 $Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BCCBAF4
-P 1950 900
-AR Path="/5BCCBAF4" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCCBAF4" Ref="Q2"  Part="1" 
-F 0 "Q2" V 2300 850 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 2200 850 50  0000 L CNN
-F 2 "" H 2150 1000 50  0001 C CNN
-F 3 "~" H 1950 900 50  0001 C CNN
-	1    1950 900 
-	0    1    -1   0   
-$EndComp
-$Comp
 L power:+24V #PWR?
 U 1 1 5BCCBC60
 P 1550 800
@@ -148,19 +135,6 @@ Wire Wire Line
 Wire Wire Line
 	1950 1250 1950 1100
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BCEAFC3
-P 1850 1450
-AR Path="/5BCEAFC3" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCEAFC3" Ref="Q6"  Part="1" 
-F 0 "Q6" H 2055 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 2055 1405 50  0000 L CNN
-F 2 "" H 2050 1550 50  0001 C CNN
-F 3 "~" H 1850 1450 50  0001 C CNN
-	1    1850 1450
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 5BCEAFCA
 P 1250 1450
@@ -181,7 +155,7 @@ U 1 1 5BCEAFD2
 P 1550 1700
 AR Path="/5BCEAFD2" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BCEAFD2" Ref="R21"  Part="1" 
-F 0 "R21" H 1650 1750 50  0000 C CNN
+F 0 "R21" H 1700 1750 50  0000 C CNN
 F 1 "1K" H 1650 1650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1480 1700 50  0001 C CNN
 F 3 "~" H 1550 1700 50  0001 C CNN
@@ -205,7 +179,6 @@ Wire Wire Line
 	1100 1450 950  1450
 Text HLabel 950  1450 0    50   Input ~ 0
 row_a_ctrl
-Connection ~ 1950 1250
 Wire Wire Line
 	1950 1650 1950 1950
 Wire Wire Line
@@ -235,19 +208,6 @@ Text HLabel 2250 800  2    50   Input ~ 0
 row_a_motor
 Wire Wire Line
 	2250 800  2150 800 
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BC7E4F3
-P 4300 900
-AR Path="/5BC7E4F3" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC7E4F3" Ref="Q3"  Part="1" 
-F 0 "Q3" V 4650 850 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 4550 850 50  0000 L CNN
-F 2 "" H 4500 1000 50  0001 C CNN
-F 3 "~" H 4300 900 50  0001 C CNN
-	1    4300 900 
-	0    1    -1   0   
-$EndComp
 $Comp
 L power:+24V #PWR?
 U 1 1 5BC7E4FA
@@ -288,19 +248,6 @@ Wire Wire Line
 Wire Wire Line
 	4300 1250 4300 1100
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BC7E50E
-P 4200 1450
-AR Path="/5BC7E50E" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC7E50E" Ref="Q7"  Part="1" 
-F 0 "Q7" H 4405 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 4405 1405 50  0000 L CNN
-F 2 "" H 4400 1550 50  0001 C CNN
-F 3 "~" H 4200 1450 50  0001 C CNN
-	1    4200 1450
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 5BC7E515
 P 3600 1450
@@ -321,7 +268,7 @@ U 1 1 5BC7E51D
 P 3900 1700
 AR Path="/5BC7E51D" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BC7E51D" Ref="R22"  Part="1" 
-F 0 "R22" H 4000 1750 50  0000 C CNN
+F 0 "R22" H 4050 1750 50  0000 C CNN
 F 1 "1K" H 4000 1650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3830 1700 50  0001 C CNN
 F 3 "~" H 3900 1700 50  0001 C CNN
@@ -345,7 +292,6 @@ Wire Wire Line
 	3450 1450 3300 1450
 Text HLabel 3300 1450 0    50   Input ~ 0
 row_b_ctrl
-Connection ~ 4300 1250
 Wire Wire Line
 	4300 1650 4300 1950
 Wire Wire Line
@@ -364,19 +310,6 @@ Text HLabel 4600 800  2    50   Input ~ 0
 row_b_motor
 Wire Wire Line
 	4600 800  4500 800 
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BC81D00
-P 6650 900
-AR Path="/5BC81D00" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC81D00" Ref="Q4"  Part="1" 
-F 0 "Q4" V 7000 850 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 6900 850 50  0000 L CNN
-F 2 "" H 6850 1000 50  0001 C CNN
-F 3 "~" H 6650 900 50  0001 C CNN
-	1    6650 900 
-	0    1    -1   0   
-$EndComp
 $Comp
 L power:+24V #PWR?
 U 1 1 5BC81D07
@@ -417,19 +350,6 @@ Wire Wire Line
 Wire Wire Line
 	6650 1250 6650 1100
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BC81D1B
-P 6550 1450
-AR Path="/5BC81D1B" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC81D1B" Ref="Q8"  Part="1" 
-F 0 "Q8" H 6755 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 6755 1405 50  0000 L CNN
-F 2 "" H 6750 1550 50  0001 C CNN
-F 3 "~" H 6550 1450 50  0001 C CNN
-	1    6550 1450
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 5BC81D22
 P 5950 1450
@@ -450,7 +370,7 @@ U 1 1 5BC81D2A
 P 6250 1700
 AR Path="/5BC81D2A" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BC81D2A" Ref="R23"  Part="1" 
-F 0 "R23" H 6350 1750 50  0000 C CNN
+F 0 "R23" H 6400 1750 50  0000 C CNN
 F 1 "1K" H 6350 1650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6180 1700 50  0001 C CNN
 F 3 "~" H 6250 1700 50  0001 C CNN
@@ -474,7 +394,6 @@ Wire Wire Line
 	5800 1450 5650 1450
 Text HLabel 5650 1450 0    50   Input ~ 0
 row_c_ctrl
-Connection ~ 6650 1250
 Wire Wire Line
 	6650 1650 6650 1950
 Wire Wire Line
@@ -493,19 +412,6 @@ Text HLabel 6950 800  2    50   Input ~ 0
 row_c_motor
 Wire Wire Line
 	6950 800  6850 800 
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BC86906
-P 9000 900
-AR Path="/5BC86906" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC86906" Ref="Q5"  Part="1" 
-F 0 "Q5" V 9350 850 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 9250 850 50  0000 L CNN
-F 2 "" H 9200 1000 50  0001 C CNN
-F 3 "~" H 9000 900 50  0001 C CNN
-	1    9000 900 
-	0    1    -1   0   
-$EndComp
 $Comp
 L power:+24V #PWR?
 U 1 1 5BC8690D
@@ -546,19 +452,6 @@ Wire Wire Line
 Wire Wire Line
 	9000 1250 9000 1100
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BC86921
-P 8900 1450
-AR Path="/5BC86921" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC86921" Ref="Q9"  Part="1" 
-F 0 "Q9" H 9105 1496 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 9105 1405 50  0000 L CNN
-F 2 "" H 9100 1550 50  0001 C CNN
-F 3 "~" H 8900 1450 50  0001 C CNN
-	1    8900 1450
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 5BC86928
 P 8300 1450
@@ -579,7 +472,7 @@ U 1 1 5BC86930
 P 8600 1700
 AR Path="/5BC86930" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BC86930" Ref="R24"  Part="1" 
-F 0 "R24" H 8700 1750 50  0000 C CNN
+F 0 "R24" H 8750 1750 50  0000 C CNN
 F 1 "1K" H 8700 1650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8530 1700 50  0001 C CNN
 F 3 "~" H 8600 1700 50  0001 C CNN
@@ -603,7 +496,6 @@ Wire Wire Line
 	8150 1450 8000 1450
 Text HLabel 8000 1450 0    50   Input ~ 0
 row_d_ctrl
-Connection ~ 9000 1250
 Wire Wire Line
 	9000 1650 9000 1950
 Wire Wire Line
@@ -625,15 +517,17 @@ Wire Wire Line
 Wire Notes Line
 	450  2300 9850 2300
 $Comp
-L Device:Q_PMOS_DGS Q?
+L Device:Q_PMOS_GSD Q?
 U 1 1 5BC92720
 P 1950 2750
 AR Path="/5BC92720" Ref="Q?"  Part="1" 
 AR Path="/5BA75957/5BC92720" Ref="Q10"  Part="1" 
 F 0 "Q10" V 2300 2700 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 2200 2700 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 2200 2700 50  0000 L CNN
 F 2 "" H 2150 2850 50  0001 C CNN
 F 3 "~" H 1950 2750 50  0001 C CNN
+F 4 "Diodes Incorporated" V 1950 2750 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 1950 2750 50  0001 C CNN "Part Number"
 	1    1950 2750
 	0    1    -1   0   
 $EndComp
@@ -677,15 +571,17 @@ Wire Wire Line
 Wire Wire Line
 	1950 3100 1950 2950
 $Comp
-L Device:Q_NMOS_DGS Q?
+L Device:Q_NMOS_GSD Q?
 U 1 1 5BC9273B
 P 1850 3300
 AR Path="/5BC9273B" Ref="Q?"  Part="1" 
 AR Path="/5BA75957/5BC9273B" Ref="Q14"  Part="1" 
 F 0 "Q14" H 2055 3346 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 2055 3255 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 2055 3255 50  0000 L CNN
 F 2 "" H 2050 3400 50  0001 C CNN
 F 3 "~" H 1850 3300 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 1850 3300 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 1850 3300 50  0001 C CNN "Part Number"
 	1    1850 3300
 	1    0    0    -1  
 $EndComp
@@ -710,7 +606,7 @@ U 1 1 5BC9274A
 P 1550 3550
 AR Path="/5BC9274A" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BC9274A" Ref="R33"  Part="1" 
-F 0 "R33" H 1650 3600 50  0000 C CNN
+F 0 "R33" H 1700 3600 50  0000 C CNN
 F 1 "1K" H 1650 3500 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1480 3550 50  0001 C CNN
 F 3 "~" H 1550 3550 50  0001 C CNN
@@ -754,19 +650,6 @@ row_e_motor
 Wire Wire Line
 	2250 2650 2150 2650
 $Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BC92765
-P 4300 2750
-AR Path="/5BC92765" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC92765" Ref="Q11"  Part="1" 
-F 0 "Q11" V 4650 2700 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 4550 2700 50  0000 L CNN
-F 2 "" H 4500 2850 50  0001 C CNN
-F 3 "~" H 4300 2750 50  0001 C CNN
-	1    4300 2750
-	0    1    -1   0   
-$EndComp
-$Comp
 L power:+24V #PWR?
 U 1 1 5BC9276C
 P 3900 2650
@@ -806,19 +689,6 @@ Wire Wire Line
 Wire Wire Line
 	4300 3100 4300 2950
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BC92780
-P 4200 3300
-AR Path="/5BC92780" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC92780" Ref="Q15"  Part="1" 
-F 0 "Q15" H 4405 3346 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 4405 3255 50  0000 L CNN
-F 2 "" H 4400 3400 50  0001 C CNN
-F 3 "~" H 4200 3300 50  0001 C CNN
-	1    4200 3300
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 5BC92787
 P 3600 3300
@@ -839,7 +709,7 @@ U 1 1 5BC9278F
 P 3900 3550
 AR Path="/5BC9278F" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BC9278F" Ref="R34"  Part="1" 
-F 0 "R34" H 4000 3600 50  0000 C CNN
+F 0 "R34" H 4050 3600 50  0000 C CNN
 F 1 "1K" H 4000 3500 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3830 3550 50  0001 C CNN
 F 3 "~" H 3900 3550 50  0001 C CNN
@@ -863,7 +733,6 @@ Wire Wire Line
 	3450 3300 3300 3300
 Text HLabel 3300 3300 0    50   Input ~ 0
 row_f_ctrl
-Connection ~ 4300 3100
 Wire Wire Line
 	4300 3500 4300 3800
 Wire Wire Line
@@ -882,19 +751,6 @@ Text HLabel 4600 2650 2    50   Input ~ 0
 row_f_motor
 Wire Wire Line
 	4600 2650 4500 2650
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BC927AA
-P 6650 2750
-AR Path="/5BC927AA" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC927AA" Ref="Q12"  Part="1" 
-F 0 "Q12" V 7000 2700 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 6900 2700 50  0000 L CNN
-F 2 "" H 6850 2850 50  0001 C CNN
-F 3 "~" H 6650 2750 50  0001 C CNN
-	1    6650 2750
-	0    1    -1   0   
-$EndComp
 $Comp
 L power:+24V #PWR?
 U 1 1 5BC927B1
@@ -935,19 +791,6 @@ Wire Wire Line
 Wire Wire Line
 	6650 3100 6650 2950
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BC927C5
-P 6550 3300
-AR Path="/5BC927C5" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC927C5" Ref="Q16"  Part="1" 
-F 0 "Q16" H 6755 3346 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 6755 3255 50  0000 L CNN
-F 2 "" H 6750 3400 50  0001 C CNN
-F 3 "~" H 6550 3300 50  0001 C CNN
-	1    6550 3300
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 5BC927CC
 P 5950 3300
@@ -968,7 +811,7 @@ U 1 1 5BC927D4
 P 6250 3550
 AR Path="/5BC927D4" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BC927D4" Ref="R35"  Part="1" 
-F 0 "R35" H 6350 3600 50  0000 C CNN
+F 0 "R35" H 6400 3600 50  0000 C CNN
 F 1 "1K" H 6350 3500 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6180 3550 50  0001 C CNN
 F 3 "~" H 6250 3550 50  0001 C CNN
@@ -992,7 +835,6 @@ Wire Wire Line
 	5800 3300 5650 3300
 Text HLabel 5650 3300 0    50   Input ~ 0
 row_g_ctrl
-Connection ~ 6650 3100
 Wire Wire Line
 	6650 3500 6650 3800
 Wire Wire Line
@@ -1011,19 +853,6 @@ Text HLabel 6950 2650 2    50   Input ~ 0
 row_g_motor
 Wire Wire Line
 	6950 2650 6850 2650
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5BC927EF
-P 9000 2750
-AR Path="/5BC927EF" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC927EF" Ref="Q13"  Part="1" 
-F 0 "Q13" V 9350 2700 50  0000 L CNN
-F 1 "Q_PMOS_DGS" V 9250 2700 50  0000 L CNN
-F 2 "" H 9200 2850 50  0001 C CNN
-F 3 "~" H 9000 2750 50  0001 C CNN
-	1    9000 2750
-	0    1    -1   0   
-$EndComp
 $Comp
 L power:+24V #PWR?
 U 1 1 5BC927F6
@@ -1064,19 +893,6 @@ Wire Wire Line
 Wire Wire Line
 	9000 3100 9000 2950
 $Comp
-L Device:Q_NMOS_DGS Q?
-U 1 1 5BC9280A
-P 8900 3300
-AR Path="/5BC9280A" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BC9280A" Ref="Q17"  Part="1" 
-F 0 "Q17" H 9105 3346 50  0000 L CNN
-F 1 "Q_NMOS_DGS" H 9105 3255 50  0000 L CNN
-F 2 "" H 9100 3400 50  0001 C CNN
-F 3 "~" H 8900 3300 50  0001 C CNN
-	1    8900 3300
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 5BC92811
 P 8300 3300
@@ -1097,7 +913,7 @@ U 1 1 5BC92819
 P 8600 3550
 AR Path="/5BC92819" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BC92819" Ref="R36"  Part="1" 
-F 0 "R36" H 8700 3600 50  0000 C CNN
+F 0 "R36" H 8750 3600 50  0000 C CNN
 F 1 "1K" H 8700 3500 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8530 3550 50  0001 C CNN
 F 3 "~" H 8600 3550 50  0001 C CNN
@@ -1121,7 +937,6 @@ Wire Wire Line
 	8150 3300 8000 3300
 Text HLabel 8000 3300 0    50   Input ~ 0
 row_h_ctrl
-Connection ~ 9000 3100
 Wire Wire Line
 	9000 3500 9000 3800
 Wire Wire Line
@@ -1673,99 +1488,318 @@ Wire Wire Line
 Wire Wire Line
 	3800 6350 3800 6400
 $Comp
-L Device:Q_NMOS_SGD Q22
-U 1 1 5C011FCA
-P 6050 4450
-F 0 "Q22" H 6255 4496 50  0000 L CNN
-F 1 "Q_NMOS_SGD" H 6255 4405 50  0000 L CNN
-F 2 "" H 6250 4550 50  0001 C CNN
-F 3 "~" H 6050 4450 50  0001 C CNN
-	1    6050 4450
-	1    0    0    -1  
-$EndComp
-Connection ~ 5850 4450
-$Comp
-L Device:Q_NMOS_SGD Q23
-U 1 1 5C01211C
-P 6050 5350
-F 0 "Q23" H 6255 5396 50  0000 L CNN
-F 1 "Q_NMOS_SGD" H 6255 5305 50  0000 L CNN
-F 2 "" H 6250 5450 50  0001 C CNN
-F 3 "~" H 6050 5350 50  0001 C CNN
-	1    6050 5350
-	1    0    0    -1  
-$EndComp
-Connection ~ 5850 5350
-$Comp
-L Device:Q_NMOS_SGD Q20
-U 1 1 5C012297
-P 3700 4450
-F 0 "Q20" H 3905 4496 50  0000 L CNN
-F 1 "Q_NMOS_SGD" H 3905 4405 50  0000 L CNN
-F 2 "" H 3900 4550 50  0001 C CNN
-F 3 "~" H 3700 4450 50  0001 C CNN
-	1    3700 4450
-	1    0    0    -1  
-$EndComp
-Connection ~ 3500 4450
-$Comp
-L Device:Q_NMOS_SGD Q21
-U 1 1 5C01238B
-P 3700 5350
-F 0 "Q21" H 3905 5396 50  0000 L CNN
-F 1 "Q_NMOS_SGD" H 3905 5305 50  0000 L CNN
-F 2 "" H 3900 5450 50  0001 C CNN
-F 3 "~" H 3700 5350 50  0001 C CNN
-	1    3700 5350
-	1    0    0    -1  
-$EndComp
-Connection ~ 3500 5350
-$Comp
-L Device:Q_NMOS_SGD Q19
-U 1 1 5C0127DE
-P 1350 5350
-F 0 "Q19" H 1555 5396 50  0000 L CNN
-F 1 "Q_NMOS_SGD" H 1555 5305 50  0000 L CNN
-F 2 "" H 1550 5450 50  0001 C CNN
-F 3 "~" H 1350 5350 50  0001 C CNN
-	1    1350 5350
-	1    0    0    -1  
-$EndComp
-Connection ~ 1150 5350
-$Comp
-L Device:Q_NMOS_SGD Q18
+L Device:Q_NMOS_GSD Q18
 U 1 1 5C0128D5
 P 1350 4450
 F 0 "Q18" H 1555 4496 50  0000 L CNN
 F 1 "Q_NMOS_SGD" H 1555 4405 50  0000 L CNN
 F 2 "" H 1550 4550 50  0001 C CNN
 F 3 "~" H 1350 4450 50  0001 C CNN
+F 4 "ON Semiconductor" H 1350 4450 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 1350 4450 50  0001 C CNN "Part Number"
 	1    1350 4450
 	1    0    0    -1  
 $EndComp
 Connection ~ 1150 4450
 $Comp
-L Device:Q_NMOS_SGD Q24
-U 1 1 5C012D67
+L Device:Q_PMOS_GSD Q?
+U 1 1 5C02569C
+P 1950 900
+AR Path="/5C02569C" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C02569C" Ref="Q?"  Part="1" 
+F 0 "Q?" V 2300 850 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 2200 850 50  0000 L CNN
+F 2 "" H 2150 1000 50  0001 C CNN
+F 3 "~" H 1950 900 50  0001 C CNN
+F 4 "Diodes Incorporated" V 1950 900 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 1950 900 50  0001 C CNN "Part Number"
+	1    1950 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:Q_PMOS_GSD Q?
+U 1 1 5C0257CD
+P 4300 900
+AR Path="/5C0257CD" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C0257CD" Ref="Q?"  Part="1" 
+F 0 "Q?" V 4650 850 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 4550 850 50  0000 L CNN
+F 2 "" H 4500 1000 50  0001 C CNN
+F 3 "~" H 4300 900 50  0001 C CNN
+F 4 "Diodes Incorporated" V 4300 900 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 4300 900 50  0001 C CNN "Part Number"
+	1    4300 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:Q_PMOS_GSD Q?
+U 1 1 5C031359
+P 6650 900
+AR Path="/5C031359" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C031359" Ref="Q?"  Part="1" 
+F 0 "Q?" V 7000 850 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 6900 850 50  0000 L CNN
+F 2 "" H 6850 1000 50  0001 C CNN
+F 3 "~" H 6650 900 50  0001 C CNN
+F 4 "Diodes Incorporated" V 6650 900 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 6650 900 50  0001 C CNN "Part Number"
+	1    6650 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:Q_PMOS_GSD Q?
+U 1 1 5C03CEE4
+P 9000 900
+AR Path="/5C03CEE4" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C03CEE4" Ref="Q?"  Part="1" 
+F 0 "Q?" V 9350 850 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 9250 850 50  0000 L CNN
+F 2 "" H 9200 1000 50  0001 C CNN
+F 3 "~" H 9000 900 50  0001 C CNN
+F 4 "Diodes Incorporated" V 9000 900 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 9000 900 50  0001 C CNN "Part Number"
+	1    9000 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:Q_PMOS_GSD Q?
+U 1 1 5C048A6C
+P 4300 2750
+AR Path="/5C048A6C" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C048A6C" Ref="Q?"  Part="1" 
+F 0 "Q?" V 4650 2700 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 4550 2700 50  0000 L CNN
+F 2 "" H 4500 2850 50  0001 C CNN
+F 3 "~" H 4300 2750 50  0001 C CNN
+F 4 "Diodes Incorporated" V 4300 2750 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 4300 2750 50  0001 C CNN "Part Number"
+	1    4300 2750
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:Q_PMOS_GSD Q?
+U 1 1 5C0545EF
+P 6650 2750
+AR Path="/5C0545EF" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C0545EF" Ref="Q?"  Part="1" 
+F 0 "Q?" V 7000 2700 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 6900 2700 50  0000 L CNN
+F 2 "" H 6850 2850 50  0001 C CNN
+F 3 "~" H 6650 2750 50  0001 C CNN
+F 4 "Diodes Incorporated" V 6650 2750 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 6650 2750 50  0001 C CNN "Part Number"
+	1    6650 2750
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:Q_PMOS_GSD Q?
+U 1 1 5C06017B
+P 9000 2750
+AR Path="/5C06017B" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C06017B" Ref="Q?"  Part="1" 
+F 0 "Q?" V 9350 2700 50  0000 L CNN
+F 1 "P-CH 30V 3.8A" V 9250 2700 50  0000 L CNN
+F 2 "" H 9200 2850 50  0001 C CNN
+F 3 "~" H 9000 2750 50  0001 C CNN
+F 4 "Diodes Incorporated" V 9000 2750 50  0001 C CNN "Manufacturer"
+F 5 "DMP3099L-7" V 9000 2750 50  0001 C CNN "Part Number"
+	1    9000 2750
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C06BD83
+P 1850 1450
+AR Path="/5C06BD83" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C06BD83" Ref="Q?"  Part="1" 
+F 0 "Q?" H 2055 1496 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 2055 1405 50  0000 L CNN
+F 2 "" H 2050 1550 50  0001 C CNN
+F 3 "~" H 1850 1450 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 1850 1450 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 1850 1450 50  0001 C CNN "Part Number"
+	1    1850 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C077903
+P 4200 1450
+AR Path="/5C077903" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C077903" Ref="Q?"  Part="1" 
+F 0 "Q?" H 4405 1496 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 4405 1405 50  0000 L CNN
+F 2 "" H 4400 1550 50  0001 C CNN
+F 3 "~" H 4200 1450 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 4200 1450 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 4200 1450 50  0001 C CNN "Part Number"
+	1    4200 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C083490
+P 6550 1450
+AR Path="/5C083490" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C083490" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6755 1496 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 6755 1405 50  0000 L CNN
+F 2 "" H 6750 1550 50  0001 C CNN
+F 3 "~" H 6550 1450 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 6550 1450 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 6550 1450 50  0001 C CNN "Part Number"
+	1    6550 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C08F030
+P 8900 1450
+AR Path="/5C08F030" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C08F030" Ref="Q?"  Part="1" 
+F 0 "Q?" H 9105 1496 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 9105 1405 50  0000 L CNN
+F 2 "" H 9100 1550 50  0001 C CNN
+F 3 "~" H 8900 1450 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 8900 1450 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 8900 1450 50  0001 C CNN "Part Number"
+	1    8900 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C09ABCB
+P 8900 3300
+AR Path="/5C09ABCB" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C09ABCB" Ref="Q?"  Part="1" 
+F 0 "Q?" H 9105 3346 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 9105 3255 50  0000 L CNN
+F 2 "" H 9100 3400 50  0001 C CNN
+F 3 "~" H 8900 3300 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 8900 3300 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 8900 3300 50  0001 C CNN "Part Number"
+	1    8900 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0A677F
+P 6550 3300
+AR Path="/5C0A677F" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C0A677F" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6755 3346 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 6755 3255 50  0000 L CNN
+F 2 "" H 6750 3400 50  0001 C CNN
+F 3 "~" H 6550 3300 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 6550 3300 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 6550 3300 50  0001 C CNN "Part Number"
+	1    6550 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0B230E
+P 4200 3300
+AR Path="/5C0B230E" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5C0B230E" Ref="Q?"  Part="1" 
+F 0 "Q?" H 4405 3346 50  0000 L CNN
+F 1 "N-CH 50V 200mA" H 4405 3255 50  0000 L CNN
+F 2 "" H 4400 3400 50  0001 C CNN
+F 3 "~" H 4200 3300 50  0001 C CNN
+F 4 "Rohm Semiconductor" H 4200 3300 50  0001 C CNN "Manufacturer"
+F 5 "RUC002N05HZGT116" H 4200 3300 50  0001 C CNN "Part Number"
+	1    4200 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0BE13A
+P 1350 5350
+F 0 "Q?" H 1555 5396 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 1555 5305 50  0000 L CNN
+F 2 "" H 1550 5450 50  0001 C CNN
+F 3 "~" H 1350 5350 50  0001 C CNN
+F 4 "ON Semiconductor" H 1350 5350 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 1350 5350 50  0001 C CNN "Part Number"
+	1    1350 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0C9CCB
+P 3700 4450
+F 0 "Q?" H 3905 4496 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 3905 4405 50  0000 L CNN
+F 2 "" H 3900 4550 50  0001 C CNN
+F 3 "~" H 3700 4450 50  0001 C CNN
+F 4 "ON Semiconductor" H 3700 4450 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 3700 4450 50  0001 C CNN "Part Number"
+	1    3700 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0D5861
+P 6050 4450
+F 0 "Q?" H 6255 4496 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 6255 4405 50  0000 L CNN
+F 2 "" H 6250 4550 50  0001 C CNN
+F 3 "~" H 6050 4450 50  0001 C CNN
+F 4 "ON Semiconductor" H 6050 4450 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 6050 4450 50  0001 C CNN "Part Number"
+	1    6050 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0E13FC
 P 8400 4450
-F 0 "Q24" H 8605 4496 50  0000 L CNN
+F 0 "Q?" H 8605 4496 50  0000 L CNN
 F 1 "Q_NMOS_SGD" H 8605 4405 50  0000 L CNN
 F 2 "" H 8600 4550 50  0001 C CNN
 F 3 "~" H 8400 4450 50  0001 C CNN
+F 4 "ON Semiconductor" H 8400 4450 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 8400 4450 50  0001 C CNN "Part Number"
 	1    8400 4450
 	1    0    0    -1  
 $EndComp
-Connection ~ 8200 4450
 $Comp
-L Device:Q_NMOS_SGD Q25
-U 1 1 5C012E61
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0ECF9A
 P 8400 5350
-F 0 "Q25" H 8605 5396 50  0000 L CNN
+F 0 "Q?" H 8605 5396 50  0000 L CNN
 F 1 "Q_NMOS_SGD" H 8605 5305 50  0000 L CNN
 F 2 "" H 8600 5450 50  0001 C CNN
 F 3 "~" H 8400 5350 50  0001 C CNN
+F 4 "ON Semiconductor" H 8400 5350 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 8400 5350 50  0001 C CNN "Part Number"
 	1    8400 5350
 	1    0    0    -1  
 $EndComp
-Connection ~ 8200 5350
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C0F8B3D
+P 6050 5350
+F 0 "Q?" H 6255 5396 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 6255 5305 50  0000 L CNN
+F 2 "" H 6250 5450 50  0001 C CNN
+F 3 "~" H 6050 5350 50  0001 C CNN
+F 4 "ON Semiconductor" H 6050 5350 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 6050 5350 50  0001 C CNN "Part Number"
+	1    6050 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_GSD Q?
+U 1 1 5C1046DF
+P 3700 5350
+F 0 "Q?" H 3905 5396 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 3905 5305 50  0000 L CNN
+F 2 "" H 3900 5450 50  0001 C CNN
+F 3 "~" H 3700 5350 50  0001 C CNN
+F 4 "ON Semiconductor" H 3700 5350 50  0001 C CNN "Manufacturer"
+F 5 "NTR4003NT1G" H 3700 5350 50  0001 C CNN "Part Number"
+	1    3700 5350
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
