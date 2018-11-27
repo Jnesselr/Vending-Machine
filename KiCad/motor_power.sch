@@ -14,19 +14,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BA8E115
-P 1350 4450
-AR Path="/5BA8E115" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BA8E115" Ref="Q18"  Part="1" 
-F 0 "Q18" H 1556 4496 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 1556 4405 50  0000 L CNN
-F 2 "" H 1550 4550 50  0001 C CNN
-F 3 "~" H 1350 4450 50  0001 C CNN
-	1    1350 4450
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1050 4450 1150 4450
 $Comp
@@ -37,7 +24,7 @@ AR Path="/5BA8E124" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BA8E124" Ref="R37"  Part="1" 
 F 0 "R37" V 1093 4950 50  0000 C CNN
 F 1 "1K" V 1184 4950 50  0000 C CNN
-F 2 "" V 1230 4950 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1230 4950 50  0001 C CNN
 F 3 "~" H 1300 4950 50  0001 C CNN
 	1    1300 4950
 	0    1    1    0   
@@ -51,7 +38,6 @@ Wire Wire Line
 	1450 4800 1450 4650
 Wire Wire Line
 	1150 4950 1150 4450
-Connection ~ 1150 4450
 Wire Wire Line
 	1050 4250 1450 4250
 Text HLabel 1050 4450 0    50   Input ~ 0
@@ -66,7 +52,7 @@ U 1 1 5BB1C4B9
 P 5750 6850
 F 0 "R45" H 5820 6896 50  0000 L CNN
 F 1 "0.1R 1%" H 5820 6805 50  0000 L CNN
-F 2 "" V 5680 6850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 5680 6850 50  0001 C CNN
 F 3 "~" H 5750 6850 50  0001 C CNN
 	1    5750 6850
 	1    0    0    -1  
@@ -145,7 +131,7 @@ AR Path="/5BCD1BC4" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCD1BC4" Ref="R13"  Part="1" 
 F 0 "R13" H 1720 1046 50  0000 L CNN
 F 1 "1K" H 1720 955 50  0000 L CNN
-F 2 "" V 1580 1000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1580 1000 50  0001 C CNN
 F 3 "~" H 1650 1000 50  0001 C CNN
 	1    1650 1000
 	1    0    0    -1  
@@ -182,7 +168,7 @@ AR Path="/5BCEAFCA" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCEAFCA" Ref="R17"  Part="1" 
 F 0 "R17" V 1350 1450 50  0000 C CNN
 F 1 "R" V 1450 1450 50  0000 C CNN
-F 2 "" V 1180 1450 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1180 1450 50  0001 C CNN
 F 3 "~" H 1250 1450 50  0001 C CNN
 	1    1250 1450
 	0    1    1    0   
@@ -197,7 +183,7 @@ AR Path="/5BCEAFD2" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCEAFD2" Ref="R21"  Part="1" 
 F 0 "R21" H 1650 1750 50  0000 C CNN
 F 1 "1K" H 1650 1650 50  0000 C CNN
-F 2 "" V 1480 1700 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1480 1700 50  0001 C CNN
 F 3 "~" H 1550 1700 50  0001 C CNN
 	1    1550 1700
 	1    0    0    -1  
@@ -285,7 +271,7 @@ AR Path="/5BC7E501" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC7E501" Ref="R14"  Part="1" 
 F 0 "R14" H 4070 1046 50  0000 L CNN
 F 1 "1K" H 4070 955 50  0000 L CNN
-F 2 "" V 3930 1000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3930 1000 50  0001 C CNN
 F 3 "~" H 4000 1000 50  0001 C CNN
 	1    4000 1000
 	1    0    0    -1  
@@ -322,7 +308,7 @@ AR Path="/5BC7E515" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC7E515" Ref="R18"  Part="1" 
 F 0 "R18" V 3700 1450 50  0000 C CNN
 F 1 "R" V 3800 1450 50  0000 C CNN
-F 2 "" V 3530 1450 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3530 1450 50  0001 C CNN
 F 3 "~" H 3600 1450 50  0001 C CNN
 	1    3600 1450
 	0    1    1    0   
@@ -337,7 +323,7 @@ AR Path="/5BC7E51D" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC7E51D" Ref="R22"  Part="1" 
 F 0 "R22" H 4000 1750 50  0000 C CNN
 F 1 "1K" H 4000 1650 50  0000 C CNN
-F 2 "" V 3830 1700 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3830 1700 50  0001 C CNN
 F 3 "~" H 3900 1700 50  0001 C CNN
 	1    3900 1700
 	1    0    0    -1  
@@ -414,7 +400,7 @@ AR Path="/5BC81D0E" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC81D0E" Ref="R15"  Part="1" 
 F 0 "R15" H 6420 1046 50  0000 L CNN
 F 1 "1K" H 6420 955 50  0000 L CNN
-F 2 "" V 6280 1000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6280 1000 50  0001 C CNN
 F 3 "~" H 6350 1000 50  0001 C CNN
 	1    6350 1000
 	1    0    0    -1  
@@ -451,7 +437,7 @@ AR Path="/5BC81D22" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC81D22" Ref="R19"  Part="1" 
 F 0 "R19" V 6050 1450 50  0000 C CNN
 F 1 "R" V 6150 1450 50  0000 C CNN
-F 2 "" V 5880 1450 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5880 1450 50  0001 C CNN
 F 3 "~" H 5950 1450 50  0001 C CNN
 	1    5950 1450
 	0    1    1    0   
@@ -466,7 +452,7 @@ AR Path="/5BC81D2A" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC81D2A" Ref="R23"  Part="1" 
 F 0 "R23" H 6350 1750 50  0000 C CNN
 F 1 "1K" H 6350 1650 50  0000 C CNN
-F 2 "" V 6180 1700 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6180 1700 50  0001 C CNN
 F 3 "~" H 6250 1700 50  0001 C CNN
 	1    6250 1700
 	1    0    0    -1  
@@ -543,7 +529,7 @@ AR Path="/5BC86914" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC86914" Ref="R16"  Part="1" 
 F 0 "R16" H 8770 1046 50  0000 L CNN
 F 1 "1K" H 8770 955 50  0000 L CNN
-F 2 "" V 8630 1000 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8630 1000 50  0001 C CNN
 F 3 "~" H 8700 1000 50  0001 C CNN
 	1    8700 1000
 	1    0    0    -1  
@@ -580,7 +566,7 @@ AR Path="/5BC86928" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC86928" Ref="R20"  Part="1" 
 F 0 "R20" V 8400 1450 50  0000 C CNN
 F 1 "R" V 8500 1450 50  0000 C CNN
-F 2 "" V 8230 1450 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8230 1450 50  0001 C CNN
 F 3 "~" H 8300 1450 50  0001 C CNN
 	1    8300 1450
 	0    1    1    0   
@@ -595,7 +581,7 @@ AR Path="/5BC86930" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC86930" Ref="R24"  Part="1" 
 F 0 "R24" H 8700 1750 50  0000 C CNN
 F 1 "1K" H 8700 1650 50  0000 C CNN
-F 2 "" V 8530 1700 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8530 1700 50  0001 C CNN
 F 3 "~" H 8600 1700 50  0001 C CNN
 	1    8600 1700
 	1    0    0    -1  
@@ -674,7 +660,7 @@ AR Path="/5BC9272E" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC9272E" Ref="R25"  Part="1" 
 F 0 "R25" H 1720 2896 50  0000 L CNN
 F 1 "1K" H 1720 2805 50  0000 L CNN
-F 2 "" V 1580 2850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1580 2850 50  0001 C CNN
 F 3 "~" H 1650 2850 50  0001 C CNN
 	1    1650 2850
 	1    0    0    -1  
@@ -711,7 +697,7 @@ AR Path="/5BC92742" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC92742" Ref="R29"  Part="1" 
 F 0 "R29" V 1350 3300 50  0000 C CNN
 F 1 "R" V 1450 3300 50  0000 C CNN
-F 2 "" V 1180 3300 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1180 3300 50  0001 C CNN
 F 3 "~" H 1250 3300 50  0001 C CNN
 	1    1250 3300
 	0    1    1    0   
@@ -726,7 +712,7 @@ AR Path="/5BC9274A" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC9274A" Ref="R33"  Part="1" 
 F 0 "R33" H 1650 3600 50  0000 C CNN
 F 1 "1K" H 1650 3500 50  0000 C CNN
-F 2 "" V 1480 3550 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1480 3550 50  0001 C CNN
 F 3 "~" H 1550 3550 50  0001 C CNN
 	1    1550 3550
 	1    0    0    -1  
@@ -803,7 +789,7 @@ AR Path="/5BC92773" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC92773" Ref="R26"  Part="1" 
 F 0 "R26" H 4070 2896 50  0000 L CNN
 F 1 "1K" H 4070 2805 50  0000 L CNN
-F 2 "" V 3930 2850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3930 2850 50  0001 C CNN
 F 3 "~" H 4000 2850 50  0001 C CNN
 	1    4000 2850
 	1    0    0    -1  
@@ -840,7 +826,7 @@ AR Path="/5BC92787" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC92787" Ref="R30"  Part="1" 
 F 0 "R30" V 3700 3300 50  0000 C CNN
 F 1 "R" V 3800 3300 50  0000 C CNN
-F 2 "" V 3530 3300 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3530 3300 50  0001 C CNN
 F 3 "~" H 3600 3300 50  0001 C CNN
 	1    3600 3300
 	0    1    1    0   
@@ -855,7 +841,7 @@ AR Path="/5BC9278F" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC9278F" Ref="R34"  Part="1" 
 F 0 "R34" H 4000 3600 50  0000 C CNN
 F 1 "1K" H 4000 3500 50  0000 C CNN
-F 2 "" V 3830 3550 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3830 3550 50  0001 C CNN
 F 3 "~" H 3900 3550 50  0001 C CNN
 	1    3900 3550
 	1    0    0    -1  
@@ -932,7 +918,7 @@ AR Path="/5BC927B8" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC927B8" Ref="R27"  Part="1" 
 F 0 "R27" H 6420 2896 50  0000 L CNN
 F 1 "1K" H 6420 2805 50  0000 L CNN
-F 2 "" V 6280 2850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6280 2850 50  0001 C CNN
 F 3 "~" H 6350 2850 50  0001 C CNN
 	1    6350 2850
 	1    0    0    -1  
@@ -969,7 +955,7 @@ AR Path="/5BC927CC" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC927CC" Ref="R31"  Part="1" 
 F 0 "R31" V 6050 3300 50  0000 C CNN
 F 1 "R" V 6150 3300 50  0000 C CNN
-F 2 "" V 5880 3300 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5880 3300 50  0001 C CNN
 F 3 "~" H 5950 3300 50  0001 C CNN
 	1    5950 3300
 	0    1    1    0   
@@ -984,7 +970,7 @@ AR Path="/5BC927D4" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC927D4" Ref="R35"  Part="1" 
 F 0 "R35" H 6350 3600 50  0000 C CNN
 F 1 "1K" H 6350 3500 50  0000 C CNN
-F 2 "" V 6180 3550 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6180 3550 50  0001 C CNN
 F 3 "~" H 6250 3550 50  0001 C CNN
 	1    6250 3550
 	1    0    0    -1  
@@ -1061,7 +1047,7 @@ AR Path="/5BC927FD" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC927FD" Ref="R28"  Part="1" 
 F 0 "R28" H 8770 2896 50  0000 L CNN
 F 1 "1K" H 8770 2805 50  0000 L CNN
-F 2 "" V 8630 2850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8630 2850 50  0001 C CNN
 F 3 "~" H 8700 2850 50  0001 C CNN
 	1    8700 2850
 	1    0    0    -1  
@@ -1098,7 +1084,7 @@ AR Path="/5BC92811" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC92811" Ref="R32"  Part="1" 
 F 0 "R32" V 8400 3300 50  0000 C CNN
 F 1 "R" V 8500 3300 50  0000 C CNN
-F 2 "" V 8230 3300 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8230 3300 50  0001 C CNN
 F 3 "~" H 8300 3300 50  0001 C CNN
 	1    8300 3300
 	0    1    1    0   
@@ -1113,7 +1099,7 @@ AR Path="/5BC92819" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BC92819" Ref="R36"  Part="1" 
 F 0 "R36" H 8700 3600 50  0000 C CNN
 F 1 "1K" H 8700 3500 50  0000 C CNN
-F 2 "" V 8530 3550 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8530 3550 50  0001 C CNN
 F 3 "~" H 8600 3550 50  0001 C CNN
 	1    8600 3550
 	1    0    0    -1  
@@ -1158,19 +1144,6 @@ Wire Notes Line
 	450  4150 9850 4150
 Text HLabel 1050 4250 0    50   Input ~ 0
 col_1_motor
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BCA89F6
-P 3700 4450
-AR Path="/5BCA89F6" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCA89F6" Ref="Q19"  Part="1" 
-F 0 "Q19" H 3906 4496 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 3906 4405 50  0000 L CNN
-F 2 "" H 3900 4550 50  0001 C CNN
-F 3 "~" H 3700 4450 50  0001 C CNN
-	1    3700 4450
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	3400 4450 3500 4450
 $Comp
@@ -1181,7 +1154,7 @@ AR Path="/5BCA89FE" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCA89FE" Ref="R38"  Part="1" 
 F 0 "R38" V 3443 4950 50  0000 C CNN
 F 1 "1K" V 3534 4950 50  0000 C CNN
-F 2 "" V 3580 4950 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3580 4950 50  0001 C CNN
 F 3 "~" H 3650 4950 50  0001 C CNN
 	1    3650 4950
 	0    1    1    0   
@@ -1195,7 +1168,6 @@ Wire Wire Line
 	3800 4800 3800 4650
 Wire Wire Line
 	3500 4950 3500 4450
-Connection ~ 3500 4450
 Wire Wire Line
 	3400 4250 3800 4250
 Text HLabel 3400 4450 0    50   Input ~ 0
@@ -1204,19 +1176,6 @@ Text Label 4000 4800 0    50   ~ 0
 motor_common_gnd
 Text HLabel 3400 4250 0    50   Input ~ 0
 col_2_motor
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BCADB68
-P 6050 4450
-AR Path="/5BCADB68" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCADB68" Ref="Q20"  Part="1" 
-F 0 "Q20" H 6256 4496 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 6256 4405 50  0000 L CNN
-F 2 "" H 6250 4550 50  0001 C CNN
-F 3 "~" H 6050 4450 50  0001 C CNN
-	1    6050 4450
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	5750 4450 5850 4450
 $Comp
@@ -1227,7 +1186,7 @@ AR Path="/5BCADB70" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCADB70" Ref="R39"  Part="1" 
 F 0 "R39" V 5793 4950 50  0000 C CNN
 F 1 "1K" V 5884 4950 50  0000 C CNN
-F 2 "" V 5930 4950 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5930 4950 50  0001 C CNN
 F 3 "~" H 6000 4950 50  0001 C CNN
 	1    6000 4950
 	0    1    1    0   
@@ -1241,7 +1200,6 @@ Wire Wire Line
 	6150 4800 6150 4650
 Wire Wire Line
 	5850 4950 5850 4450
-Connection ~ 5850 4450
 Wire Wire Line
 	5750 4250 6150 4250
 Text HLabel 5750 4450 0    50   Input ~ 0
@@ -1250,19 +1208,6 @@ Text Label 6350 4800 0    50   ~ 0
 motor_common_gnd
 Text HLabel 5750 4250 0    50   Input ~ 0
 col_3_motor
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BCADB82
-P 8400 4450
-AR Path="/5BCADB82" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCADB82" Ref="Q21"  Part="1" 
-F 0 "Q21" H 8606 4496 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 8606 4405 50  0000 L CNN
-F 2 "" H 8600 4550 50  0001 C CNN
-F 3 "~" H 8400 4450 50  0001 C CNN
-	1    8400 4450
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	8100 4450 8200 4450
 $Comp
@@ -1273,7 +1218,7 @@ AR Path="/5BCADB8A" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCADB8A" Ref="R40"  Part="1" 
 F 0 "R40" V 8143 4950 50  0000 C CNN
 F 1 "1K" V 8234 4950 50  0000 C CNN
-F 2 "" V 8280 4950 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8280 4950 50  0001 C CNN
 F 3 "~" H 8350 4950 50  0001 C CNN
 	1    8350 4950
 	0    1    1    0   
@@ -1287,7 +1232,6 @@ Wire Wire Line
 	8500 4800 8500 4650
 Wire Wire Line
 	8200 4950 8200 4450
-Connection ~ 8200 4450
 Wire Wire Line
 	8100 4250 8500 4250
 Text HLabel 8100 4450 0    50   Input ~ 0
@@ -1298,19 +1242,6 @@ Text HLabel 8100 4250 0    50   Input ~ 0
 col_4_motor
 Wire Notes Line
 	450  5050 9850 5050
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BCB38D1
-P 1350 5350
-AR Path="/5BCB38D1" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCB38D1" Ref="Q22"  Part="1" 
-F 0 "Q22" H 1556 5396 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 1556 5305 50  0000 L CNN
-F 2 "" H 1550 5450 50  0001 C CNN
-F 3 "~" H 1350 5350 50  0001 C CNN
-	1    1350 5350
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1050 5350 1150 5350
 $Comp
@@ -1321,7 +1252,7 @@ AR Path="/5BCB38D9" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCB38D9" Ref="R41"  Part="1" 
 F 0 "R41" V 1093 5850 50  0000 C CNN
 F 1 "1K" V 1184 5850 50  0000 C CNN
-F 2 "" V 1230 5850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1230 5850 50  0001 C CNN
 F 3 "~" H 1300 5850 50  0001 C CNN
 	1    1300 5850
 	0    1    1    0   
@@ -1335,7 +1266,6 @@ Wire Wire Line
 	1450 5700 1450 5550
 Wire Wire Line
 	1150 5850 1150 5350
-Connection ~ 1150 5350
 Wire Wire Line
 	1050 5150 1450 5150
 Text HLabel 1050 5350 0    50   Input ~ 0
@@ -1344,19 +1274,6 @@ Text Label 1650 5700 0    50   ~ 0
 motor_common_gnd
 Text HLabel 1050 5150 0    50   Input ~ 0
 col_5_motor
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BCB38EB
-P 3700 5350
-AR Path="/5BCB38EB" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCB38EB" Ref="Q23"  Part="1" 
-F 0 "Q23" H 3906 5396 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 3906 5305 50  0000 L CNN
-F 2 "" H 3900 5450 50  0001 C CNN
-F 3 "~" H 3700 5350 50  0001 C CNN
-	1    3700 5350
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	3400 5350 3500 5350
 $Comp
@@ -1367,7 +1284,7 @@ AR Path="/5BCB38F3" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCB38F3" Ref="R42"  Part="1" 
 F 0 "R42" V 3443 5850 50  0000 C CNN
 F 1 "1K" V 3534 5850 50  0000 C CNN
-F 2 "" V 3580 5850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3580 5850 50  0001 C CNN
 F 3 "~" H 3650 5850 50  0001 C CNN
 	1    3650 5850
 	0    1    1    0   
@@ -1381,7 +1298,6 @@ Wire Wire Line
 	3800 5700 3800 5550
 Wire Wire Line
 	3500 5850 3500 5350
-Connection ~ 3500 5350
 Wire Wire Line
 	3400 5150 3800 5150
 Text HLabel 3400 5350 0    50   Input ~ 0
@@ -1390,19 +1306,6 @@ Text Label 4000 5700 0    50   ~ 0
 motor_common_gnd
 Text HLabel 3400 5150 0    50   Input ~ 0
 col_6_motor
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BCB3905
-P 6050 5350
-AR Path="/5BCB3905" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCB3905" Ref="Q24"  Part="1" 
-F 0 "Q24" H 6256 5396 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 6256 5305 50  0000 L CNN
-F 2 "" H 6250 5450 50  0001 C CNN
-F 3 "~" H 6050 5350 50  0001 C CNN
-	1    6050 5350
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	5750 5350 5850 5350
 $Comp
@@ -1413,7 +1316,7 @@ AR Path="/5BCB390D" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCB390D" Ref="R43"  Part="1" 
 F 0 "R43" V 5793 5850 50  0000 C CNN
 F 1 "1K" V 5884 5850 50  0000 C CNN
-F 2 "" V 5930 5850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5930 5850 50  0001 C CNN
 F 3 "~" H 6000 5850 50  0001 C CNN
 	1    6000 5850
 	0    1    1    0   
@@ -1427,7 +1330,6 @@ Wire Wire Line
 	6150 5700 6150 5550
 Wire Wire Line
 	5850 5850 5850 5350
-Connection ~ 5850 5350
 Wire Wire Line
 	5750 5150 6150 5150
 Text HLabel 5750 5350 0    50   Input ~ 0
@@ -1436,19 +1338,6 @@ Text Label 6350 5700 0    50   ~ 0
 motor_common_gnd
 Text HLabel 5750 5150 0    50   Input ~ 0
 col_7_motor
-$Comp
-L Device:Q_PMOS_SGD Q?
-U 1 1 5BCB391E
-P 8400 5350
-AR Path="/5BCB391E" Ref="Q?"  Part="1" 
-AR Path="/5BA75957/5BCB391E" Ref="Q25"  Part="1" 
-F 0 "Q25" H 8606 5396 50  0000 L CNN
-F 1 "Q_PMOS_SGD" H 8606 5305 50  0000 L CNN
-F 2 "" H 8600 5450 50  0001 C CNN
-F 3 "~" H 8400 5350 50  0001 C CNN
-	1    8400 5350
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	8100 5350 8200 5350
 $Comp
@@ -1459,7 +1348,7 @@ AR Path="/5BCB3926" Ref="R?"  Part="1"
 AR Path="/5BA75957/5BCB3926" Ref="R44"  Part="1" 
 F 0 "R44" V 8143 5850 50  0000 C CNN
 F 1 "1K" V 8234 5850 50  0000 C CNN
-F 2 "" V 8280 5850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8280 5850 50  0001 C CNN
 F 3 "~" H 8350 5850 50  0001 C CNN
 	1    8350 5850
 	0    1    1    0   
@@ -1473,7 +1362,6 @@ Wire Wire Line
 	8500 5700 8500 5550
 Wire Wire Line
 	8200 5850 8200 5350
-Connection ~ 8200 5350
 Wire Wire Line
 	8100 5150 8500 5150
 Text HLabel 8100 5350 0    50   Input ~ 0
@@ -1510,7 +1398,7 @@ U 1 1 5BCBF666
 P 3800 7100
 F 0 "R47" H 3870 7146 50  0000 L CNN
 F 1 "10k" H 3870 7055 50  0000 L CNN
-F 2 "" V 3730 7100 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3730 7100 50  0001 C CNN
 F 3 "~" H 3800 7100 50  0001 C CNN
 	1    3800 7100
 	1    0    0    -1  
@@ -1532,7 +1420,7 @@ U 1 1 5BCD303F
 P 5550 7500
 F 0 "C14" H 5665 7546 50  0000 L CNN
 F 1 "0.1uF" H 5665 7455 50  0000 L CNN
-F 2 "" H 5588 7350 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5588 7350 50  0001 C CNN
 F 3 "~" H 5550 7500 50  0001 C CNN
 	1    5550 7500
 	1    0    0    -1  
@@ -1576,7 +1464,7 @@ U 1 1 5C27F640
 P 1100 6450
 F 0 "C13" H 1215 6496 50  0000 L CNN
 F 1 "0.1uF" H 1215 6405 50  0000 L CNN
-F 2 "" H 1138 6300 50  0001 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 1138 6300 50  0001 C CNN
 F 3 "~" H 1100 6450 50  0001 C CNN
 	1    1100 6450
 	1    0    0    -1  
@@ -1621,7 +1509,7 @@ U 1 1 5C2D7083
 P 1350 7350
 F 0 "R48" H 1450 7300 50  0000 L CNN
 F 1 "0.1R 1%" H 1450 7400 50  0000 L CNN
-F 2 "" V 1280 7350 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1280 7350 50  0001 C CNN
 F 3 "~" H 1350 7350 50  0001 C CNN
 	1    1350 7350
 	-1   0    0    1   
@@ -1746,7 +1634,7 @@ U 1 1 5C466872
 P 3500 7100
 F 0 "R46" H 3570 7146 50  0000 L CNN
 F 1 "10k" H 3570 7055 50  0000 L CNN
-F 2 "" V 3430 7100 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3430 7100 50  0001 C CNN
 F 3 "~" H 3500 7100 50  0001 C CNN
 	1    3500 7100
 	1    0    0    -1  
@@ -1784,4 +1672,100 @@ Wire Wire Line
 	3500 6350 3500 6400
 Wire Wire Line
 	3800 6350 3800 6400
+$Comp
+L Device:Q_NMOS_SGD Q22
+U 1 1 5C011FCA
+P 6050 4450
+F 0 "Q22" H 6255 4496 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 6255 4405 50  0000 L CNN
+F 2 "" H 6250 4550 50  0001 C CNN
+F 3 "~" H 6050 4450 50  0001 C CNN
+	1    6050 4450
+	1    0    0    -1  
+$EndComp
+Connection ~ 5850 4450
+$Comp
+L Device:Q_NMOS_SGD Q23
+U 1 1 5C01211C
+P 6050 5350
+F 0 "Q23" H 6255 5396 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 6255 5305 50  0000 L CNN
+F 2 "" H 6250 5450 50  0001 C CNN
+F 3 "~" H 6050 5350 50  0001 C CNN
+	1    6050 5350
+	1    0    0    -1  
+$EndComp
+Connection ~ 5850 5350
+$Comp
+L Device:Q_NMOS_SGD Q20
+U 1 1 5C012297
+P 3700 4450
+F 0 "Q20" H 3905 4496 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 3905 4405 50  0000 L CNN
+F 2 "" H 3900 4550 50  0001 C CNN
+F 3 "~" H 3700 4450 50  0001 C CNN
+	1    3700 4450
+	1    0    0    -1  
+$EndComp
+Connection ~ 3500 4450
+$Comp
+L Device:Q_NMOS_SGD Q21
+U 1 1 5C01238B
+P 3700 5350
+F 0 "Q21" H 3905 5396 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 3905 5305 50  0000 L CNN
+F 2 "" H 3900 5450 50  0001 C CNN
+F 3 "~" H 3700 5350 50  0001 C CNN
+	1    3700 5350
+	1    0    0    -1  
+$EndComp
+Connection ~ 3500 5350
+$Comp
+L Device:Q_NMOS_SGD Q19
+U 1 1 5C0127DE
+P 1350 5350
+F 0 "Q19" H 1555 5396 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 1555 5305 50  0000 L CNN
+F 2 "" H 1550 5450 50  0001 C CNN
+F 3 "~" H 1350 5350 50  0001 C CNN
+	1    1350 5350
+	1    0    0    -1  
+$EndComp
+Connection ~ 1150 5350
+$Comp
+L Device:Q_NMOS_SGD Q18
+U 1 1 5C0128D5
+P 1350 4450
+F 0 "Q18" H 1555 4496 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 1555 4405 50  0000 L CNN
+F 2 "" H 1550 4550 50  0001 C CNN
+F 3 "~" H 1350 4450 50  0001 C CNN
+	1    1350 4450
+	1    0    0    -1  
+$EndComp
+Connection ~ 1150 4450
+$Comp
+L Device:Q_NMOS_SGD Q24
+U 1 1 5C012D67
+P 8400 4450
+F 0 "Q24" H 8605 4496 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 8605 4405 50  0000 L CNN
+F 2 "" H 8600 4550 50  0001 C CNN
+F 3 "~" H 8400 4450 50  0001 C CNN
+	1    8400 4450
+	1    0    0    -1  
+$EndComp
+Connection ~ 8200 4450
+$Comp
+L Device:Q_NMOS_SGD Q25
+U 1 1 5C012E61
+P 8400 5350
+F 0 "Q25" H 8605 5396 50  0000 L CNN
+F 1 "Q_NMOS_SGD" H 8605 5305 50  0000 L CNN
+F 2 "" H 8600 5450 50  0001 C CNN
+F 3 "~" H 8400 5350 50  0001 C CNN
+	1    8400 5350
+	1    0    0    -1  
+$EndComp
+Connection ~ 8200 5350
 $EndSCHEMATC
