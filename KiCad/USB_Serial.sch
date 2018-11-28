@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:Snack Machine-cache
 EELAYER 26 0
 EELAYER END
 $Descr USLetter 11000 8500
@@ -816,7 +817,7 @@ U 1 1 5C0260BF
 P 7900 2850
 F 0 "J18" H 7950 3067 50  0000 C CNN
 F 1 "Conn_02x02_Odd_Even" H 7950 2976 50  0000 C CNN
-F 2 "" H 7900 2850 50  0001 C CNN
+F 2 "Connector_PinHeader_1.00mm:PinHeader_2x02_P1.00mm_Vertical" H 7900 2850 50  0001 C CNN
 F 3 "~" H 7900 2850 50  0001 C CNN
 	1    7900 2850
 	1    0    0    -1  
