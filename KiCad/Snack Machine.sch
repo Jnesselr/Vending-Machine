@@ -64,7 +64,7 @@ U 1 1 5B8692D8
 P 11200 1500
 F 0 "J9" H 11350 2000 50  0000 R CNN
 F 1 "AVR-ISP-6" H 11700 1900 50  0000 R CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_2x03_P1.00mm_Vertical" V 10950 1550 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" V 10950 1550 50  0001 C CNN
 F 3 " ~" H 9925 950 50  0001 C CNN
 	1    11200 1500
 	1    0    0    -1  
@@ -295,21 +295,8 @@ Text Label 9300 5700 0    50   ~ 0
 SCL
 Text Label 9300 5800 0    50   ~ 0
 SDA
-Text Label 13700 7850 2    50   ~ 0
-TX_DISPLAY
 Text Label 13700 7950 2    50   ~ 0
 RX_DISPLAY
-$Comp
-L power:GND #PWR061
-U 1 1 5BBA6C9C
-P 14050 8250
-F 0 "#PWR061" H 14050 8000 50  0001 C CNN
-F 1 "GND" H 14100 8100 50  0000 R CNN
-F 2 "" H 14050 8250 50  0001 C CNN
-F 3 "" H 14050 8250 50  0001 C CNN
-	1    14050 8250
-	1    0    0    -1  
-$EndComp
 Text Label 13850 8150 2    50   ~ 0
 RESET_DISPLAY
 Wire Wire Line
@@ -914,19 +901,9 @@ Wire Wire Line
 Wire Wire Line
 	11250 5700 11950 5700
 Wire Wire Line
-	13200 7950 14100 7950
-Wire Wire Line
-	13200 7850 14100 7850
-Wire Wire Line
-	13200 8150 14100 8150
-Wire Wire Line
 	14100 7750 14050 7750
 Wire Wire Line
 	14050 7750 14050 7600
-Wire Wire Line
-	14100 8050 14050 8050
-Wire Wire Line
-	14050 8050 14050 8250
 Wire Wire Line
 	8300 2550 8300 2500
 Wire Wire Line
@@ -1188,7 +1165,7 @@ U 1 1 5BF9DA8F
 P 2050 4600
 F 0 "J3" H 2000 4300 50  0000 L CNN
 F 1 "RFID Serial Connector" H 1850 4200 50  0000 L CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_1x05_P1.00mm_Vertical" H 2050 4600 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 2050 4600 50  0001 C CNN
 F 3 "~" H 2050 4600 50  0001 C CNN
 	1    2050 4600
 	1    0    0    -1  
@@ -1199,7 +1176,7 @@ U 1 1 5BF9DB80
 P 2050 5600
 F 0 "J4" H 2000 5400 50  0000 L CNN
 F 1 "RFID Led Connector" H 1850 5300 50  0000 L CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_1x03_P1.00mm_Vertical" H 2050 5600 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 2050 5600 50  0001 C CNN
 F 3 "~" H 2050 5600 50  0001 C CNN
 	1    2050 5600
 	1    0    0    -1  
@@ -1315,7 +1292,7 @@ U 1 1 5C13BDF0
 P 4450 8400
 F 0 "J7" H 4500 8817 50  0000 C CNN
 F 1 "LCD EXP1" H 4500 8726 50  0000 C CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_2x05_P1.00mm_Vertical" H 4450 8400 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 4450 8400 50  0001 C CNN
 F 3 "~" H 4450 8400 50  0001 C CNN
 	1    4450 8400
 	1    0    0    -1  
@@ -1326,7 +1303,7 @@ U 1 1 5C13BE7E
 P 4450 9450
 F 0 "J8" H 4500 9867 50  0000 C CNN
 F 1 "LCD EXP2" H 4500 9776 50  0000 C CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_2x05_P1.00mm_Vertical" H 4450 9450 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 4450 9450 50  0001 C CNN
 F 3 "~" H 4450 9450 50  0001 C CNN
 	1    4450 9450
 	1    0    0    -1  
@@ -1661,7 +1638,7 @@ U 1 1 5C39C70B
 P 14600 6000
 F 0 "J13" H 14573 5930 50  0000 R CNN
 F 1 "RFID_CONNECTOR" H 14573 6021 50  0000 R CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_1x05_P1.00mm_Vertical" H 14600 6000 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 14600 6000 50  0001 C CNN
 F 3 "~" H 14600 6000 50  0001 C CNN
 	1    14600 6000
 	-1   0    0    1   
@@ -2962,97 +2939,11 @@ U 1 1 5CE792D6
 P 14950 4600
 F 0 "J14" H 15000 5517 50  0000 C CNN
 F 1 "Large Display Header" H 15000 5426 50  0000 C CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_2x15_P1.00mm_Vertical" H 14950 4600 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x15_P2.54mm_Vertical" H 14950 4600 50  0001 C CNN
 F 3 "~" H 14950 4600 50  0001 C CNN
 	1    14950 4600
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector_Generic:Conn_02x05_Counter_Clockwise J12
-U 1 1 5BB8533B
-P 14300 7950
-F 0 "J12" H 14350 8400 50  0000 C CNN
-F 1 "Display Serial Header" H 14700 8300 50  0000 C CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_2x05_P1.00mm_Vertical" H 14300 7950 50  0001 C CNN
-F 3 "~" H 14300 7950 50  0001 C CNN
-	1    14300 7950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CEC6160
-P 14800 8150
-AR Path="/5BCD883C/5CEC6160" Ref="TP?"  Part="1" 
-AR Path="/5CEC6160" Ref="TP69"  Part="1" 
-F 0 "TP69" V 14750 8100 50  0000 L CNN
-F 1 "TestPoint" V 14750 8350 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 8150 50  0001 C CNN
-F 3 "~" H 15000 8150 50  0001 C CNN
-	1    14800 8150
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	14800 8150 14600 8150
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CF128E8
-P 14800 8050
-AR Path="/5BCD883C/5CF128E8" Ref="TP?"  Part="1" 
-AR Path="/5CF128E8" Ref="TP68"  Part="1" 
-F 0 "TP68" V 14750 8000 50  0000 L CNN
-F 1 "TestPoint" V 14750 8250 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 8050 50  0001 C CNN
-F 3 "~" H 15000 8050 50  0001 C CNN
-	1    14800 8050
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	14800 8050 14600 8050
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CF38F2D
-P 14800 7950
-AR Path="/5BCD883C/5CF38F2D" Ref="TP?"  Part="1" 
-AR Path="/5CF38F2D" Ref="TP67"  Part="1" 
-F 0 "TP67" V 14750 7900 50  0000 L CNN
-F 1 "TestPoint" V 14750 8150 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 7950 50  0001 C CNN
-F 3 "~" H 15000 7950 50  0001 C CNN
-	1    14800 7950
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	14800 7950 14600 7950
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CF5F84C
-P 14800 7850
-AR Path="/5BCD883C/5CF5F84C" Ref="TP?"  Part="1" 
-AR Path="/5CF5F84C" Ref="TP66"  Part="1" 
-F 0 "TP66" V 14750 7800 50  0000 L CNN
-F 1 "TestPoint" V 14750 8050 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 7850 50  0001 C CNN
-F 3 "~" H 15000 7850 50  0001 C CNN
-	1    14800 7850
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	14800 7850 14600 7850
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CF86449
-P 14800 7750
-AR Path="/5BCD883C/5CF86449" Ref="TP?"  Part="1" 
-AR Path="/5CF86449" Ref="TP65"  Part="1" 
-F 0 "TP65" V 14750 7700 50  0000 L CNN
-F 1 "TestPoint" V 14750 7950 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 7750 50  0001 C CNN
-F 3 "~" H 15000 7750 50  0001 C CNN
-	1    14800 7750
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	14800 7750 14600 7750
 $Comp
 L Connector:TestPoint TP?
 U 1 1 5CFAE234
@@ -3621,4 +3512,113 @@ Wire Wire Line
 	14900 1050 15200 1050
 Wire Wire Line
 	14900 1150 15200 1150
+Text Label 13700 7850 2    50   ~ 0
+TX_DISPLAY
+Wire Wire Line
+	14800 7750 14600 7750
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5CF86449
+P 14800 7750
+AR Path="/5BCD883C/5CF86449" Ref="TP?"  Part="1" 
+AR Path="/5CF86449" Ref="TP65"  Part="1" 
+F 0 "TP65" V 14750 7700 50  0000 L CNN
+F 1 "TestPoint" V 14750 7950 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 7750 50  0001 C CNN
+F 3 "~" H 15000 7750 50  0001 C CNN
+	1    14800 7750
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	14800 7850 14600 7850
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5CF5F84C
+P 14800 7850
+AR Path="/5BCD883C/5CF5F84C" Ref="TP?"  Part="1" 
+AR Path="/5CF5F84C" Ref="TP66"  Part="1" 
+F 0 "TP66" V 14750 7800 50  0000 L CNN
+F 1 "TestPoint" V 14750 8050 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 7850 50  0001 C CNN
+F 3 "~" H 15000 7850 50  0001 C CNN
+	1    14800 7850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	14800 7950 14600 7950
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5CF38F2D
+P 14800 7950
+AR Path="/5BCD883C/5CF38F2D" Ref="TP?"  Part="1" 
+AR Path="/5CF38F2D" Ref="TP67"  Part="1" 
+F 0 "TP67" V 14750 7900 50  0000 L CNN
+F 1 "TestPoint" V 14750 8150 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 7950 50  0001 C CNN
+F 3 "~" H 15000 7950 50  0001 C CNN
+	1    14800 7950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	14800 8050 14600 8050
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5CF128E8
+P 14800 8050
+AR Path="/5BCD883C/5CF128E8" Ref="TP?"  Part="1" 
+AR Path="/5CF128E8" Ref="TP68"  Part="1" 
+F 0 "TP68" V 14750 8000 50  0000 L CNN
+F 1 "TestPoint" V 14750 8250 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 8050 50  0001 C CNN
+F 3 "~" H 15000 8050 50  0001 C CNN
+	1    14800 8050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	14800 8150 14600 8150
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5CEC6160
+P 14800 8150
+AR Path="/5BCD883C/5CEC6160" Ref="TP?"  Part="1" 
+AR Path="/5CEC6160" Ref="TP69"  Part="1" 
+F 0 "TP69" V 14750 8100 50  0000 L CNN
+F 1 "TestPoint" V 14750 8350 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 15000 8150 50  0001 C CNN
+F 3 "~" H 15000 8150 50  0001 C CNN
+	1    14800 8150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	14100 8050 14050 8050
+$Comp
+L power:GND #PWR061
+U 1 1 5BBA6C9C
+P 14050 8250
+F 0 "#PWR061" H 14050 8000 50  0001 C CNN
+F 1 "GND" H 14100 8100 50  0000 R CNN
+F 2 "" H 14050 8250 50  0001 C CNN
+F 3 "" H 14050 8250 50  0001 C CNN
+	1    14050 8250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	14050 8050 14050 8250
+Wire Wire Line
+	13200 8150 14100 8150
+Wire Wire Line
+	13200 7950 14100 7950
+Wire Wire Line
+	13200 7850 14100 7850
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J12
+U 1 1 5C1CD12A
+P 14300 7950
+F 0 "J12" H 14350 8367 50  0000 C CNN
+F 1 "Display Serial Header" H 14350 8276 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 14300 7950 50  0001 C CNN
+F 3 "~" H 14300 7950 50  0001 C CNN
+	1    14300 7950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

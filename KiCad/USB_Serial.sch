@@ -185,7 +185,7 @@ U 1 1 5BC73D10
 P 4950 1350
 F 0 "J17" H 4670 1446 50  0000 R CNN
 F 1 "AVR-ISP-6" H 4670 1355 50  0000 R CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_2x03_P1.00mm_Vertical_SMD" V 4700 1400 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" V 4700 1400 50  0001 C CNN
 F 3 " ~" H 3675 800 50  0001 C CNN
 	1    4950 1350
 	1    0    0    -1  
@@ -468,7 +468,7 @@ U 1 1 5BF070B3
 P 1650 4350
 F 0 "J15" H 1705 4817 50  0000 C CNN
 F 1 "USB_B_Mini" H 1705 4726 50  0000 C CNN
-F 2 "Connectors:USB_Mini-B" H 1800 4300 50  0001 C CNN
+F 2 "Connector_USB:USB_Mini-B_Lumberg_2486_01_Horizontal" H 1800 4300 50  0001 C CNN
 F 3 "~" H 1800 4300 50  0001 C CNN
 	1    1650 4350
 	1    0    0    -1  
@@ -817,7 +817,7 @@ U 1 1 5C0260BF
 P 7900 2850
 F 0 "J18" H 7950 3067 50  0000 C CNN
 F 1 "Conn_02x02_Odd_Even" H 7950 2976 50  0000 C CNN
-F 2 "Connector_PinHeader_1.00mm:PinHeader_2x02_P1.00mm_Vertical" H 7900 2850 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical" H 7900 2850 50  0001 C CNN
 F 3 "~" H 7900 2850 50  0001 C CNN
 	1    7900 2850
 	1    0    0    -1  
@@ -908,4 +908,8 @@ Wire Wire Line
 Connection ~ 3200 2600
 Wire Wire Line
 	3200 2600 3650 2600
+Text Label 4300 3400 0    50   ~ 0
+MICRO_D+
+Text Label 4300 3500 0    50   ~ 0
+MICRO_D-
 $EndSCHEMATC
