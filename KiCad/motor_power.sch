@@ -1318,17 +1318,6 @@ Wire Wire Line
 	5750 6700 5750 6350
 Wire Wire Line
 	5750 6350 4950 6350
-$Comp
-L Device:R R23
-U 1 1 5C2D7083
-P 1350 7350
-F 0 "R23" H 1450 7300 50  0000 L CNN
-F 1 "0.1R 1%" H 1450 7400 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1280 7350 50  0001 C CNN
-F 3 "~" H 1350 7350 50  0001 C CNN
-	1    1350 7350
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	2450 7150 2550 7150
 Text Label 550  7150 0    50   ~ 0
@@ -1351,16 +1340,7 @@ MOTOR_CURRENT
 Wire Wire Line
 	1600 6950 1300 6950
 Wire Wire Line
-	550  7150 1350 7150
-Wire Wire Line
 	1600 7050 1500 7050
-Wire Wire Line
-	1350 7150 1350 7200
-Connection ~ 1350 7150
-Wire Wire Line
-	1350 7150 1600 7150
-Wire Wire Line
-	1350 7500 1350 7550
 $Comp
 L power:GND #PWR065
 U 1 1 5C3C541B
@@ -1373,12 +1353,7 @@ F 3 "" H 1350 7750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1350 7550 2550 7550
-Wire Wire Line
 	2550 7150 2550 7550
-Connection ~ 1350 7550
-Wire Wire Line
-	1350 7550 1350 7750
 $Comp
 L power:+5V #PWR080
 U 1 1 5C4150EA
@@ -1801,5 +1776,30 @@ F 4 "ON Semiconductor" H 3700 5350 50  0001 C CNN "Manufacturer"
 F 5 "NTR4003NT1G" H 3700 5350 50  0001 C CNN "Part Number"
 	1    3700 5350
 	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 7150 1600 7150
+Wire Wire Line
+	550  7150 1350 7150
+Connection ~ 1350 7150
+Wire Wire Line
+	1350 7150 1350 7200
+Wire Wire Line
+	1350 7550 1350 7750
+Wire Wire Line
+	1350 7550 2550 7550
+Connection ~ 1350 7550
+Wire Wire Line
+	1350 7500 1350 7550
+$Comp
+L Device:R R23
+U 1 1 5C2D7083
+P 1350 7350
+F 0 "R23" H 1450 7300 50  0000 L CNN
+F 1 "0.1R 1%" H 1450 7400 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 1280 7350 50  0001 C CNN
+F 3 "~" H 1350 7350 50  0001 C CNN
+	1    1350 7350
+	-1   0    0    1   
 $EndComp
 $EndSCHEMATC

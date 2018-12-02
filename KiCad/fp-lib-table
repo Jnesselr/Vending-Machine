@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "Snack Machine")(type KiCad)(uri "${KIPRJMOD}/Snack Machine.pretty")(options "")(descr ""))
+)

@@ -798,7 +798,7 @@ AR Path="/5BCD883C/5C234251" Ref="D?"  Part="1"
 AR Path="/5C234251" Ref="D2"  Part="1" 
 F 0 "D2" V 6104 2179 50  0000 L CNN
 F 1 "D" V 6195 2179 50  0000 L CNN
-F 2 "Diodes_SMD:D_1206" H 6150 2100 50  0001 C CNN
+F 2 "Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 6150 2100 50  0001 C CNN
 F 3 "~" H 6150 2100 50  0001 C CNN
 F 4 "Bourns" V 6150 2100 50  0001 C CNN "Manufacturer"
 F 5 "CD1206-S01575" V 6150 2100 50  0001 C CNN "Part Number"
@@ -2939,7 +2939,7 @@ U 1 1 5CE792D6
 P 14950 4600
 F 0 "J14" H 15000 5517 50  0000 C CNN
 F 1 "Large Display Header" H 15000 5426 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x15_P2.54mm_Vertical" H 14950 4600 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x15_P2.54mm_Vertical" H 14950 4600 50  0001 C CNN
 F 3 "~" H 14950 4600 50  0001 C CNN
 	1    14950 4600
 	1    0    0    -1  
@@ -3616,7 +3616,7 @@ U 1 1 5C1CD12A
 P 14300 7950
 F 0 "J12" H 14350 8367 50  0000 C CNN
 F 1 "Display Serial Header" H 14350 8276 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 14300 7950 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical" H 14300 7950 50  0001 C CNN
 F 3 "~" H 14300 7950 50  0001 C CNN
 	1    14300 7950
 	1    0    0    -1  
