@@ -3622,4 +3622,6 @@ Wire Wire Line
 	14900 1050 15200 1050
 Wire Wire Line
 	14900 1150 15200 1150
+Text Notes 4200 7600 0    50   ~ 0
+NOTE: MDB opto-isolated
 $EndSCHEMATC
