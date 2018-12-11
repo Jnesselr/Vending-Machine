@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:Snack Machine-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -194,6 +193,8 @@ F 0 "Y3" H 1100 4418 50  0000 C CNN
 F 1 "Crystal" H 1100 4327 50  0000 C CNN
 F 2 "" H 1100 4150 50  0001 C CNN
 F 3 "~" H 1100 4150 50  0001 C CNN
+F 4 "EPSON" H 1100 4150 50  0001 C CNN "Manufacturer"
+F 5 "TSX-3225 25.0000MF10P-C0" H 1100 4150 50  0001 C CNN "Part Number"
 	1    1100 4150
 	1    0    0    -1  
 $EndComp
@@ -611,6 +612,8 @@ F 0 "FB2" V 4676 5900 50  0000 C CNN
 F 1 "Ferrite_Bead" V 4767 5900 50  0000 C CNN
 F 2 "" V 4880 5900 50  0001 C CNN
 F 3 "~" H 4950 5900 50  0001 C CNN
+F 4 "Murata" V 4950 5900 50  0001 C CNN "Manufacturer"
+F 5 "BLM21PG221SN1D" V 4950 5900 50  0001 C CNN "Part Number"
 	1    4950 5900
 	0    1    1    0   
 $EndComp
@@ -622,6 +625,8 @@ F 0 "FB3" V 4676 6400 50  0000 C CNN
 F 1 "Ferrite_Bead" V 4767 6400 50  0000 C CNN
 F 2 "" V 4880 6400 50  0001 C CNN
 F 3 "~" H 4950 6400 50  0001 C CNN
+F 4 "Murata" V 4950 6400 50  0001 C CNN "Manufacturer"
+F 5 "BLM21PG221SN1D" V 4950 6400 50  0001 C CNN "Part Number"
 	1    4950 6400
 	0    1    1    0   
 $EndComp

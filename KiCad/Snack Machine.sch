@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:Snack Machine-cache
 EELAYER 26 0
 EELAYER END
 $Descr USLedger 17000 11000
@@ -1045,6 +1044,8 @@ F 0 "F1" V 1853 1250 50  0000 C CNN
 F 1 "1A" V 1944 1250 50  0000 C CNN
 F 2 "" V 1980 1250 50  0001 C CNN
 F 3 "~" H 2050 1250 50  0001 C CNN
+F 4 "Keystone Electronics" V 2050 1250 50  0001 C CNN "Manufacturer"
+F 5 "3544-2" V 2050 1250 50  0001 C CNN "Part Number"
 	1    2050 1250
 	0    1    1    0   
 $EndComp
