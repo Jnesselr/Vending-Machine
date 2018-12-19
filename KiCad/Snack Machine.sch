@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:Snack Machine-cache
 EELAYER 26 0
 EELAYER END
 $Descr USLedger 17000 11000
@@ -1091,21 +1092,6 @@ Text Notes 3750 6200 0    50   ~ 0
 NOTE: Maybe same as motor driver?
 Wire Wire Line
 	4550 1250 4100 1250
-$Comp
-L Device:D_Zener D?
-U 1 1 5BF22396
-P 4700 1250
-AR Path="/5BCD883C/5BF22396" Ref="D?"  Part="1" 
-AR Path="/5BF22396" Ref="D1"  Part="1" 
-F 0 "D1" H 4700 1034 50  0000 C CNN
-F 1 "D_Zener" H 4700 1125 50  0000 C CNN
-F 2 "Diodes_SMD:D_SMB_Handsoldering" H 4700 1250 50  0001 C CNN
-F 3 "~" H 4700 1250 50  0001 C CNN
-F 4 "Micro Commercial" H 4700 1250 50  0001 C CNN "Manufacturer"
-F 5 "3SMBJ5925B-TP" H 4700 1250 50  0001 C CNN "Part Number"
-	1    4700 1250
-	-1   0    0    1   
-$EndComp
 $Comp
 L power:+5V #PWR?
 U 1 1 5BF2239D
@@ -3624,4 +3610,17 @@ Wire Wire Line
 	14900 1150 15200 1150
 Text Notes 4200 7600 0    50   ~ 0
 NOTE: MDB opto-isolated
+$Comp
+L Device:D_Schottky D7
+U 1 1 5C1DBF6A
+P 4700 1250
+F 0 "D7" H 4700 1034 50  0000 C CNN
+F 1 "D_Schottky" H 4700 1125 50  0000 C CNN
+F 2 "Diodes_SMD:D_SOD-323" H 4700 1250 50  0001 C CNN
+F 3 "~" H 4700 1250 50  0001 C CNN
+F 4 "Toshiba Semiconductor and Storage" H 4700 1250 50  0001 C CNN "Manufacturer"
+F 5 "CUS10S40,H3F" H 4700 1250 50  0001 C CNN "Part Number"
+	1    4700 1250
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

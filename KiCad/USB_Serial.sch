@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:Snack Machine-cache
 EELAYER 26 0
 EELAYER END
 $Descr USLetter 11000 8500
@@ -828,19 +829,6 @@ USBVCC
 Wire Wire Line
 	2450 1700 2000 1700
 $Comp
-L Device:D_Zener D3
-U 1 1 5C49C1BC
-P 2600 1700
-F 0 "D3" H 2600 1484 50  0000 C CNN
-F 1 "D_Zener" H 2600 1575 50  0000 C CNN
-F 2 "Diodes_SMD:D_SMB_Handsoldering" H 2600 1700 50  0001 C CNN
-F 3 "~" H 2600 1700 50  0001 C CNN
-F 4 "Micro Commercial" H 2600 1700 50  0001 C CNN "Manufacturer"
-F 5 "3SMBJ5925B-TP" H 2600 1700 50  0001 C CNN "Part Number"
-	1    2600 1700
-	-1   0    0    1   
-$EndComp
-$Comp
 L power:+5V #PWR093
 U 1 1 5C4A9D62
 P 2900 1600
@@ -851,8 +839,6 @@ F 3 "" H 2900 1600 50  0001 C CNN
 	1    2900 1600
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2750 1700 2900 1700
 Wire Wire Line
 	2900 1700 2900 1600
 Wire Wire Line
@@ -907,4 +893,19 @@ Wire Wire Line
 Connection ~ 3200 2600
 Wire Wire Line
 	3200 2600 3650 2600
+Wire Wire Line
+	2750 1700 2900 1700
+$Comp
+L Device:D_Schottky D8
+U 1 1 5C21EC9A
+P 2600 1700
+F 0 "D8" H 2600 1484 50  0000 C CNN
+F 1 "D_Schottky" H 2600 1575 50  0000 C CNN
+F 2 "Diodes_SMD:D_SOD-323" H 2600 1700 50  0001 C CNN
+F 3 "~" H 2600 1700 50  0001 C CNN
+F 4 "Toshiba Semiconductor and Storage" H 2600 1700 50  0001 C CNN "Manufacturer"
+F 5 "CUS08F30,H3F" H 2600 1700 50  0001 C CNN "Part Number"
+	1    2600 1700
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
