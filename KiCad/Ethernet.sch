@@ -342,9 +342,9 @@ Wire Wire Line
 	1700 3700 2250 3700
 Connection ~ 1700 5450
 Wire Wire Line
-	1250 3500 1250 4350
+	1250 3500 1250 4150
 Wire Wire Line
-	950  3400 950  4350
+	950  3400 950  3500
 $Comp
 L Device:R R68
 U 1 1 5C07DF85
@@ -979,4 +979,14 @@ Text Label 4050 4800 2    50   ~ 0
 AGND
 Wire Wire Line
 	4050 4800 3850 4800
+Connection ~ 1250 3500
+Connection ~ 950  3500
+Wire Wire Line
+	950  3500 950  4150
+Connection ~ 950  4150
+Wire Wire Line
+	950  4150 950  4350
+Connection ~ 1250 4150
+Wire Wire Line
+	1250 4150 1250 4350
 $EndSCHEMATC
