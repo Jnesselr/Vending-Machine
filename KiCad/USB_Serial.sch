@@ -461,25 +461,16 @@ Wire Wire Line
 Wire Wire Line
 	7400 5000 8000 5000
 $Comp
-L Connector:USB_B_Mini J15
-U 1 1 5BF070B3
-P 1650 4350
-F 0 "J15" H 1705 4817 50  0000 C CNN
-F 1 "USB_B_Mini" H 1705 4726 50  0000 C CNN
-F 2 "Connector_USB:USB_Mini-B_Lumberg_2486_01_Horizontal" H 1800 4300 50  0001 C CNN
-F 3 "~" H 1800 4300 50  0001 C CNN
-	1    1650 4350
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector:USB_B_Micro J16
 U 1 1 5BF07281
-P 1650 6200
-F 0 "J16" H 1705 6667 50  0000 C CNN
-F 1 "USB_B_Micro" H 1705 6576 50  0000 C CNN
-F 2 "" H 1800 6150 50  0001 C CNN
-F 3 "~" H 1800 6150 50  0001 C CNN
-	1    1650 6200
+P 1650 4350
+F 0 "J16" H 1705 4817 50  0000 C CNN
+F 1 "USB_B_Micro" H 1705 4726 50  0000 C CNN
+F 2 "Snack Machine:Amphenol_10118193-0001LF" H 1800 4300 50  0001 C CNN
+F 3 "~" H 1800 4300 50  0001 C CNN
+F 4 "Amphenol FCI" H 1650 4350 50  0001 C CNN "Manufacturer"
+F 5 "10118193-0001LF" H 1650 4350 50  0001 C CNN "Part Number"
+	1    1650 4350
 	1    0    0    -1  
 $EndComp
 Text Label 2000 4350 0    50   ~ 0
@@ -487,61 +478,24 @@ USB_D+
 Text Label 2000 4450 0    50   ~ 0
 USB_D-
 Wire Wire Line
-	1950 6000 2350 6000
+	1950 4550 2100 4550
 Wire Wire Line
-	1950 6200 2350 6200
+	1650 4750 1650 4900
 Wire Wire Line
-	1950 6300 2350 6300
-Wire Wire Line
-	1950 6400 2100 6400
-Wire Wire Line
-	1950 4550 2050 4550
-Text Label 2000 6000 0    50   ~ 0
-XVCC
-Text Label 2000 6200 0    50   ~ 0
-USB_D+
-Text Label 2000 6300 0    50   ~ 0
-USB_D-
-Wire Wire Line
-	1650 4750 1650 4800
-Wire Wire Line
-	1650 4800 2350 4800
-Text Label 1750 4800 0    50   ~ 0
-USB_GND
-Wire Wire Line
-	1650 6600 1650 6750
-Wire Wire Line
-	1650 6750 2350 6750
-Text Label 1850 6750 0    50   ~ 0
+	1650 4900 2350 4900
+Text Label 1850 4900 0    50   ~ 0
 USB_GND
 $Comp
 L Connector:TestPoint TP86
 U 1 1 5BF1286E
-P 2100 6400
-F 0 "TP86" V 2050 6350 50  0000 L CNN
-F 1 "TestPoint" V 2050 6600 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 2300 6400 50  0001 C CNN
-F 3 "~" H 2300 6400 50  0001 C CNN
-	1    2100 6400
+P 2100 4550
+F 0 "TP86" V 2050 4500 50  0000 L CNN
+F 1 "TestPoint" V 2050 4750 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 2300 4550 50  0001 C CNN
+F 3 "~" H 2300 4550 50  0001 C CNN
+	1    2100 4550
 	0    1    1    0   
 $EndComp
-$Comp
-L Connector:TestPoint TP85
-U 1 1 5BF144D7
-P 2050 4550
-F 0 "TP85" V 2000 4500 50  0000 L CNN
-F 1 "TestPoint" V 2000 4750 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 2250 4550 50  0001 C CNN
-F 3 "~" H 2250 4550 50  0001 C CNN
-	1    2050 4550
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1550 6600 1550 6850
-Wire Wire Line
-	1550 6850 2350 6850
-Text Label 1850 6850 0    50   ~ 0
-USB_SHIELD
 Wire Wire Line
 	1550 4750 1550 5300
 Wire Wire Line
@@ -914,6 +868,4 @@ Text Label 6200 4500 0    50   ~ 0
 MICRO_TX
 Text Label 6200 4600 0    50   ~ 0
 MICRO_RX
-Text Notes 750  5550 0    50   ~ 0
-USB Footprint
 $EndSCHEMATC
