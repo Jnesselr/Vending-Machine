@@ -827,19 +827,6 @@ USBVCC
 Wire Wire Line
 	2450 1700 2000 1700
 $Comp
-L Device:D_Zener D3
-U 1 1 5C49C1BC
-P 2600 1700
-F 0 "D3" H 2600 1484 50  0000 C CNN
-F 1 "D_Zener" H 2600 1575 50  0000 C CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 2600 1700 50  0001 C CNN
-F 3 "~" H 2600 1700 50  0001 C CNN
-F 4 "Micro Commercial" H 2600 1700 50  0001 C CNN "Manufacturer"
-F 5 "3SMBJ5925B-TP" H 2600 1700 50  0001 C CNN "Part Number"
-	1    2600 1700
-	-1   0    0    1   
-$EndComp
-$Comp
 L power:+5V #PWR093
 U 1 1 5C4A9D62
 P 2900 1600
