@@ -3528,6 +3528,7 @@ F 4 "Toshiba Semiconductor and Storage" H 4700 1250 50  0001 C CNN "Manufacturer
 F 5 "CUS10S40,H3F" H 4700 1250 50  0001 C CNN "Part Number"
 	1    4700 1250
 	-1   0    0    1   
+$EndComp
 Text Label 13700 7850 2    50   ~ 0
 TX_DISPLAY
 Wire Wire Line
