@@ -873,12 +873,12 @@ USBVCC
 Wire Wire Line
 	2600 1400 3050 1400
 $Comp
-L Connector:TestPoint TP?
+L Connector:TestPoint TP93
 U 1 1 5C3B0CCE
 P 3150 1500
-AR Path="/5BCD883C/5C3B0CCE" Ref="TP?"  Part="1" 
+AR Path="/5BCD883C/5C3B0CCE" Ref="TP93"  Part="1" 
 AR Path="/5C3B0CCE" Ref="TP?"  Part="1" 
-F 0 "TP?" V 3100 1450 50  0000 L CNN
+F 0 "TP93" V 3100 1450 50  0000 L CNN
 F 1 "TestPoint" V 3100 1700 50  0000 L CNN
 F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 3350 1500 50  0001 C CNN
 F 3 "~" H 3350 1500 50  0001 C CNN
@@ -886,12 +886,12 @@ F 3 "~" H 3350 1500 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L Connector:TestPoint TP92
 U 1 1 5C3B7E84
 P 3150 1400
-AR Path="/5BCD883C/5C3B7E84" Ref="TP?"  Part="1" 
+AR Path="/5BCD883C/5C3B7E84" Ref="TP92"  Part="1" 
 AR Path="/5C3B7E84" Ref="TP?"  Part="1" 
-F 0 "TP?" V 3100 1350 50  0000 L CNN
+F 0 "TP92" V 3100 1350 50  0000 L CNN
 F 1 "TestPoint" V 3100 1600 50  0000 L CNN
 F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 3350 1400 50  0001 C CNN
 F 3 "~" H 3350 1400 50  0001 C CNN
