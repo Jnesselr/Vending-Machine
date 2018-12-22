@@ -837,7 +837,7 @@ L Device:R R17
 U 1 1 5C327914
 P 13850 6850
 F 0 "R17" H 14000 6900 50  0000 C CNN
-F 1 "10K" H 14000 6800 50  0000 C CNN
+F 1 "1K" H 14000 6800 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 13780 6850 50  0001 C CNN
 F 3 "~" H 13850 6850 50  0001 C CNN
 	1    13850 6850
@@ -848,7 +848,7 @@ L Device:R R18
 U 1 1 5C327BDD
 P 14200 6850
 F 0 "R18" H 14350 6900 50  0000 C CNN
-F 1 "10K" H 14350 6800 50  0000 C CNN
+F 1 "1K" H 14350 6800 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 14130 6850 50  0001 C CNN
 F 3 "~" H 14200 6850 50  0001 C CNN
 	1    14200 6850
@@ -956,7 +956,7 @@ L Device:R R5
 U 1 1 5C42A4FB
 P 4600 7000
 F 0 "R5" V 4500 7000 50  0000 C CNN
-F 1 "10K" V 4400 7000 50  0000 C CNN
+F 1 "1K" V 4400 7000 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4530 7000 50  0001 C CNN
 F 3 "~" H 4600 7000 50  0001 C CNN
 	1    4600 7000
@@ -980,8 +980,6 @@ Wire Wire Line
 Wire Wire Line
 	4000 7000 4300 7000
 Connection ~ 4300 7000
-Text Notes 4000 7300 0    50   ~ 0
-NOTE: pick resistor vals
 $Comp
 L Connector:Screw_Terminal_01x02 J2
 U 1 1 5C4B78B9
@@ -1063,10 +1061,6 @@ Wire Wire Line
 	9100 5400 9500 5400
 Wire Wire Line
 	9100 5500 9500 5500
-Text Notes 6600 8750 0    50   ~ 0
-NOTE: TEST POINTS!
-Text Notes 3750 6200 0    50   ~ 0
-NOTE: Maybe same as motor driver?
 Wire Wire Line
 	4550 1250 4100 1250
 $Comp
@@ -1108,18 +1102,6 @@ F 2 "" H 14050 7600 50  0001 C CNN
 F 3 "" H 14050 7600 50  0001 C CNN
 	1    14050 7600
 	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Screw_Terminal_01x02 J6
-U 1 1 5BF43014
-P 3300 5450
-F 0 "J6" H 3300 5700 50  0000 C CNN
-F 1 "Door Switch Terminal" H 3600 5600 50  0000 C CNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 3300 5450 50  0001 C CNN
-F 3 "~" H 3300 5450 50  0001 C CNN
-F 4 "277-1667-ND" H 3300 5450 50  0001 C CNN "Part Number"
-	1    3300 5450
-	-1   0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR019
@@ -1543,8 +1525,6 @@ Wire Wire Line
 	5300 9350 4750 9350
 Wire Wire Line
 	4750 9450 5300 9450
-Text Notes 650  600  0    50   ~ 0
-NOTE: This file is a work-in-progress.  There are many notes which will be removed before release.
 Text Label 6650 7800 0    50   ~ 0
 RESET_DISPLAY
 Wire Wire Line
@@ -3499,8 +3479,6 @@ Wire Wire Line
 	14900 1050 15200 1050
 Wire Wire Line
 	14900 1150 15200 1150
-Text Notes 4200 7600 0    50   ~ 0
-NOTE: MDB opto-isolated
 $Comp
 L Device:D_Schottky D7
 U 1 1 5C1DBF6A
@@ -3622,5 +3600,156 @@ F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical" H 14300 7950 50
 F 3 "~" H 14300 7950 50  0001 C CNN
 	1    14300 7950
 	1    0    0    -1  
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 5C219549
+P 1300 2200
+F 0 "#PWR?" H 1300 2050 50  0001 C CNN
+F 1 "+24V" H 1300 2350 50  0000 C CNN
+F 2 "" H 1300 2200 50  0001 C CNN
+F 3 "" H 1300 2200 50  0001 C CNN
+	1    1300 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C219FCE
+P 1400 2300
+AR Path="/5BCD883C/5C219FCE" Ref="TP?"  Part="1" 
+AR Path="/5C219FCE" Ref="TP?"  Part="1" 
+F 0 "TP?" V 1350 2250 50  0000 L CNN
+F 1 "TestPoint" V 1350 2500 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 1600 2300 50  0001 C CNN
+F 3 "~" H 1600 2300 50  0001 C CNN
+	1    1400 2300
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C21AB48
+P 1400 2400
+AR Path="/5BCD883C/5C21AB48" Ref="TP?"  Part="1" 
+AR Path="/5C21AB48" Ref="TP?"  Part="1" 
+F 0 "TP?" V 1350 2350 50  0000 L CNN
+F 1 "TestPoint" V 1350 2600 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 1600 2400 50  0001 C CNN
+F 3 "~" H 1600 2400 50  0001 C CNN
+	1    1400 2400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1300 2200 1300 2300
+Wire Wire Line
+	1300 2400 1400 2400
+Wire Wire Line
+	1400 2300 1300 2300
+Connection ~ 1300 2300
+Wire Wire Line
+	1300 2300 1300 2400
+$Comp
+L power:GND #PWR?
+U 1 1 5C27B4BD
+P 1300 2800
+F 0 "#PWR?" H 1300 2550 50  0001 C CNN
+F 1 "GND" H 1300 2650 50  0000 C CNN
+F 2 "" H 1300 2800 50  0001 C CNN
+F 3 "" H 1300 2800 50  0001 C CNN
+	1    1300 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C27B5F6
+P 1400 2600
+AR Path="/5BCD883C/5C27B5F6" Ref="TP?"  Part="1" 
+AR Path="/5C27B5F6" Ref="TP?"  Part="1" 
+F 0 "TP?" V 1350 2550 50  0000 L CNN
+F 1 "TestPoint" V 1350 2800 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 1600 2600 50  0001 C CNN
+F 3 "~" H 1600 2600 50  0001 C CNN
+	1    1400 2600
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C27B912
+P 1400 2700
+AR Path="/5BCD883C/5C27B912" Ref="TP?"  Part="1" 
+AR Path="/5C27B912" Ref="TP?"  Part="1" 
+F 0 "TP?" V 1350 2650 50  0000 L CNN
+F 1 "TestPoint" V 1350 2900 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 1600 2700 50  0001 C CNN
+F 3 "~" H 1600 2700 50  0001 C CNN
+	1    1400 2700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1300 2800 1300 2700
+Wire Wire Line
+	1300 2600 1400 2600
+Wire Wire Line
+	1400 2700 1300 2700
+Connection ~ 1300 2700
+Wire Wire Line
+	1300 2700 1300 2600
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C30E40B
+P 6050 1000
+AR Path="/5BCD883C/5C30E40B" Ref="TP?"  Part="1" 
+AR Path="/5C30E40B" Ref="TP?"  Part="1" 
+F 0 "TP?" V 6000 950 50  0000 L CNN
+F 1 "TestPoint" V 6000 1200 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 6250 1000 50  0001 C CNN
+F 3 "~" H 6250 1000 50  0001 C CNN
+	1    6050 1000
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C30E595
+P 6050 1100
+AR Path="/5BCD883C/5C30E595" Ref="TP?"  Part="1" 
+AR Path="/5C30E595" Ref="TP?"  Part="1" 
+F 0 "TP?" V 6000 1050 50  0000 L CNN
+F 1 "TestPoint" V 6000 1300 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 6250 1100 50  0001 C CNN
+F 3 "~" H 6250 1100 50  0001 C CNN
+	1    6050 1100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5C30EA88
+P 5950 900
+AR Path="/5BCD883C/5C30EA88" Ref="#PWR?"  Part="1" 
+AR Path="/5C30EA88" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5950 750 50  0001 C CNN
+F 1 "+5V" H 5965 1073 50  0000 C CNN
+F 2 "" H 5950 900 50  0001 C CNN
+F 3 "" H 5950 900 50  0001 C CNN
+	1    5950 900 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5950 900  5950 1000
+Wire Wire Line
+	5950 1100 6050 1100
+Wire Wire Line
+	6050 1000 5950 1000
+Connection ~ 5950 1000
+Wire Wire Line
+	5950 1000 5950 1100
+$Comp
+L Connector_Generic:Conn_01x02 J?
+U 1 1 5C7C3A6B
+P 3300 5450
+F 0 "J?" H 3350 5700 50  0000 C CNN
+F 1 "Conn_01x02" H 3350 5600 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B02B-XH-A_1x02_P2.50mm_Vertical" H 3300 5450 50  0001 C CNN
+F 3 "~" H 3300 5450 50  0001 C CNN
+	1    3300 5450
+	-1   0    0    -1  
 $EndComp
 $EndSCHEMATC

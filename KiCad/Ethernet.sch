@@ -18,6 +18,8 @@ $Comp
 L Snack_Machine:W5500 U8
 U 1 1 5C0721C1
 P 3400 3450
+AR Path="/5C0721C1" Ref="U8"  Part="1" 
+AR Path="/5C06FA8E/5C0721C1" Ref="U8"  Part="1" 
 F 0 "U8" H 4250 2450 50  0000 L CNN
 F 1 "W5500" H 2450 2450 50  0000 L CNN
 F 2 "Package_QFP:TQFP-48_7x7mm_P0.5mm" H 3400 3450 50  0001 C CNN
@@ -1039,4 +1041,6 @@ Wire Wire Line
 Connection ~ 1200 3300
 Wire Wire Line
 	1200 3300 2250 3300
+Text Notes 2600 6400 0    50   ~ 0
+Bypass resistor for MISO
 $EndSCHEMATC

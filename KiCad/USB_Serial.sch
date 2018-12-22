@@ -776,23 +776,23 @@ F 3 "~" H 7900 2850 50  0001 C CNN
 $EndComp
 Text Label 6450 5000 0    50   ~ 0
 DTR
-Text Label 2350 1700 2    50   ~ 0
+Text Label 1650 1750 2    50   ~ 0
 USBVCC
 Wire Wire Line
-	2450 1700 2000 1700
+	1750 1750 1300 1750
 $Comp
 L power:+5V #PWR093
 U 1 1 5C4A9D62
-P 2900 1600
-F 0 "#PWR093" H 2900 1450 50  0001 C CNN
-F 1 "+5V" H 2915 1773 50  0000 C CNN
-F 2 "" H 2900 1600 50  0001 C CNN
-F 3 "" H 2900 1600 50  0001 C CNN
-	1    2900 1600
+P 2200 1650
+F 0 "#PWR093" H 2200 1500 50  0001 C CNN
+F 1 "+5V" H 2215 1823 50  0000 C CNN
+F 2 "" H 2200 1650 50  0001 C CNN
+F 3 "" H 2200 1650 50  0001 C CNN
+	1    2200 1650
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2900 1700 2900 1600
+	2200 1750 2200 1650
 Wire Wire Line
 	5500 2350 5500 2400
 Text HLabel 8000 5000 2    50   Input ~ 0
@@ -846,18 +846,18 @@ Connection ~ 3200 2600
 Wire Wire Line
 	3200 2600 3650 2600
 Wire Wire Line
-	2750 1700 2900 1700
+	2050 1750 2200 1750
 $Comp
 L Device:D_Schottky D8
 U 1 1 5C21EC9A
-P 2600 1700
-F 0 "D8" H 2600 1484 50  0000 C CNN
-F 1 "D_Schottky" H 2600 1575 50  0000 C CNN
-F 2 "Diode_SMD:D_SOD-323" H 2600 1700 50  0001 C CNN
-F 3 "~" H 2600 1700 50  0001 C CNN
-F 4 "Toshiba Semiconductor and Storage" H 2600 1700 50  0001 C CNN "Manufacturer"
-F 5 "CUS08F30,H3F" H 2600 1700 50  0001 C CNN "Part Number"
-	1    2600 1700
+P 1900 1750
+F 0 "D8" H 1900 1534 50  0000 C CNN
+F 1 "D_Schottky" H 1900 1625 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-323" H 1900 1750 50  0001 C CNN
+F 3 "~" H 1900 1750 50  0001 C CNN
+F 4 "Toshiba Semiconductor and Storage" H 1900 1750 50  0001 C CNN "Manufacturer"
+F 5 "CUS08F30,H3F" H 1900 1750 50  0001 C CNN "Part Number"
+	1    1900 1750
 	-1   0    0    1   
 $EndComp
 Text Label 4300 3400 0    50   ~ 0
@@ -868,4 +868,41 @@ Text Label 6200 4500 0    50   ~ 0
 MICRO_TX
 Text Label 6200 4600 0    50   ~ 0
 MICRO_RX
+Text Label 2650 1400 0    50   ~ 0
+USBVCC
+Wire Wire Line
+	2600 1400 3050 1400
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C3B0CCE
+P 3150 1500
+AR Path="/5BCD883C/5C3B0CCE" Ref="TP?"  Part="1" 
+AR Path="/5C3B0CCE" Ref="TP?"  Part="1" 
+F 0 "TP?" V 3100 1450 50  0000 L CNN
+F 1 "TestPoint" V 3100 1700 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 3350 1500 50  0001 C CNN
+F 3 "~" H 3350 1500 50  0001 C CNN
+	1    3150 1500
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C3B7E84
+P 3150 1400
+AR Path="/5BCD883C/5C3B7E84" Ref="TP?"  Part="1" 
+AR Path="/5C3B7E84" Ref="TP?"  Part="1" 
+F 0 "TP?" V 3100 1350 50  0000 L CNN
+F 1 "TestPoint" V 3100 1600 50  0000 L CNN
+F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 3350 1400 50  0001 C CNN
+F 3 "~" H 3350 1400 50  0001 C CNN
+	1    3150 1400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3050 1400 3050 1500
+Wire Wire Line
+	3050 1500 3150 1500
+Connection ~ 3050 1400
+Wire Wire Line
+	3050 1400 3150 1400
 $EndSCHEMATC
