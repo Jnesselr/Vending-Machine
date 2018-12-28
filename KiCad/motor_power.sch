@@ -515,7 +515,7 @@ U 1 1 5C3E46E6
 P 2200 2200
 F 0 "Q7" H 2391 2246 50  0000 L CNN
 F 1 "MMBT3904" H 2391 2155 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 2400 2125 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 2400 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 2200 2200 50  0001 L CNN
 	1    2200 2200
 	1    0    0    -1  
@@ -681,7 +681,7 @@ U 1 1 5C58D73E
 P 5000 2200
 F 0 "Q8" H 5191 2246 50  0000 L CNN
 F 1 "MMBT3904" H 5191 2155 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 5200 2125 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5200 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 5000 2200 50  0001 L CNN
 	1    5000 2200
 	1    0    0    -1  
@@ -727,7 +727,7 @@ U 1 1 5C594901
 P 3100 1500
 F 0 "D1" V 3050 1600 50  0000 L CNN
 F 1 "50V 2A" V 3150 1600 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 3100 1500 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 3100 1500 50  0001 C CNN
 F 3 "~" H 3100 1500 50  0001 C CNN
 F 4 "ON Semiconductor" H 3100 1500 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 3100 1500 50  0001 C CNN "Part Number"
@@ -789,7 +789,7 @@ U 1 1 5C5A3C30
 P 5900 1500
 F 0 "D3" V 5850 1600 50  0000 L CNN
 F 1 "50V 2A" V 5950 1600 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 5900 1500 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 5900 1500 50  0001 C CNN
 F 3 "~" H 5900 1500 50  0001 C CNN
 F 4 "ON Semiconductor" H 5900 1500 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 5900 1500 50  0001 C CNN "Part Number"
@@ -918,7 +918,7 @@ U 1 1 5C5AE62B
 P 7800 2200
 F 0 "Q9" H 7991 2246 50  0000 L CNN
 F 1 "MMBT3904" H 7991 2155 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 8000 2125 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 8000 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 7800 2200 50  0001 L CNN
 	1    7800 2200
 	1    0    0    -1  
@@ -1031,7 +1031,7 @@ U 1 1 5C5AE668
 P 10600 2200
 F 0 "Q10" H 10791 2246 50  0000 L CNN
 F 1 "MMBT3904" H 10791 2155 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 10800 2125 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 10800 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 10600 2200 50  0001 L CNN
 	1    10600 2200
 	1    0    0    -1  
@@ -1077,7 +1077,7 @@ U 1 1 5C5AE684
 P 8700 1500
 F 0 "D9" V 8650 1600 50  0000 L CNN
 F 1 "50V 2A" V 8750 1600 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 8700 1500 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 8700 1500 50  0001 C CNN
 F 3 "~" H 8700 1500 50  0001 C CNN
 F 4 "ON Semiconductor" H 8700 1500 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 8700 1500 50  0001 C CNN "Part Number"
@@ -1139,7 +1139,7 @@ U 1 1 5C5AE6A7
 P 11500 1500
 F 0 "D10" V 11450 1600 50  0000 L CNN
 F 1 "50V 2A" V 11550 1600 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 11500 1500 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 11500 1500 50  0001 C CNN
 F 3 "~" H 11500 1500 50  0001 C CNN
 F 4 "ON Semiconductor" H 11500 1500 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 11500 1500 50  0001 C CNN "Part Number"
@@ -1268,7 +1268,7 @@ U 1 1 5C5C3614
 P 2200 4150
 F 0 "Q15" H 2391 4196 50  0000 L CNN
 F 1 "MMBT3904" H 2391 4105 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 2400 4075 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 2400 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 2200 4150 50  0001 L CNN
 	1    2200 4150
 	1    0    0    -1  
@@ -1381,7 +1381,7 @@ U 1 1 5C5C3651
 P 5000 4150
 F 0 "Q16" H 5191 4196 50  0000 L CNN
 F 1 "MMBT3904" H 5191 4105 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 5200 4075 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5200 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 5000 4150 50  0001 L CNN
 	1    5000 4150
 	1    0    0    -1  
@@ -1427,7 +1427,7 @@ U 1 1 5C5C366D
 P 3100 3450
 F 0 "D11" V 3050 3550 50  0000 L CNN
 F 1 "50V 2A" V 3150 3550 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 3100 3450 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 3100 3450 50  0001 C CNN
 F 3 "~" H 3100 3450 50  0001 C CNN
 F 4 "ON Semiconductor" H 3100 3450 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 3100 3450 50  0001 C CNN "Part Number"
@@ -1489,7 +1489,7 @@ U 1 1 5C5C3690
 P 5900 3450
 F 0 "D12" V 5850 3550 50  0000 L CNN
 F 1 "50V 2A" V 5950 3550 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 5900 3450 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 5900 3450 50  0001 C CNN
 F 3 "~" H 5900 3450 50  0001 C CNN
 F 4 "ON Semiconductor" H 5900 3450 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 5900 3450 50  0001 C CNN "Part Number"
@@ -1618,7 +1618,7 @@ U 1 1 5C5C36D4
 P 7800 4150
 F 0 "Q17" H 7991 4196 50  0000 L CNN
 F 1 "MMBT3904" H 7991 4105 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 8000 4075 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 8000 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 7800 4150 50  0001 L CNN
 	1    7800 4150
 	1    0    0    -1  
@@ -1731,7 +1731,7 @@ U 1 1 5C5C3711
 P 10600 4150
 F 0 "Q18" H 10791 4196 50  0000 L CNN
 F 1 "MMBT3904" H 10791 4105 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 10800 4075 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 10800 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 10600 4150 50  0001 L CNN
 	1    10600 4150
 	1    0    0    -1  
@@ -1777,7 +1777,7 @@ U 1 1 5C5C372D
 P 8700 3450
 F 0 "D13" V 8650 3550 50  0000 L CNN
 F 1 "50V 2A" V 8750 3550 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 8700 3450 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 8700 3450 50  0001 C CNN
 F 3 "~" H 8700 3450 50  0001 C CNN
 F 4 "ON Semiconductor" H 8700 3450 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 8700 3450 50  0001 C CNN "Part Number"
@@ -1839,7 +1839,7 @@ U 1 1 5C5C3750
 P 11500 3450
 F 0 "D14" V 11450 3550 50  0000 L CNN
 F 1 "50V 2A" V 11550 3550 50  0000 L CNN
-F 2 "Diode_SMD:D_SMB_Handsoldering" H 11500 3450 50  0001 C CNN
+F 2 "Snack Machine:D_SMB_Handsoldering_Lite" H 11500 3450 50  0001 C CNN
 F 3 "~" H 11500 3450 50  0001 C CNN
 F 4 "ON Semiconductor" H 11500 3450 50  0001 C CNN "Manufacturer"
 F 5 "ES2A" H 11500 3450 50  0001 C CNN "Part Number"
