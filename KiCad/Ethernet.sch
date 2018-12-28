@@ -682,7 +682,7 @@ MISO_TRISTATE
 Text Label 1200 7000 2    50   ~ 0
 MISO_TRISTATE
 Wire Wire Line
-	600  7000 1300 7000
+	600  7000 700  7000
 Text HLabel 1200 6900 0    50   Input ~ 0
 CS
 Wire Wire Line
@@ -1041,6 +1041,29 @@ Wire Wire Line
 Connection ~ 1200 3300
 Wire Wire Line
 	1200 3300 2250 3300
-Text Notes 2600 6400 0    50   ~ 0
-Bypass resistor for MISO
+Text Notes 1100 7650 0    50   ~ 0
+(Bypass resistor for MISO)
+$Comp
+L Device:R R87
+U 1 1 5C32D791
+P 1550 7500
+F 0 "R87" V 1450 7450 50  0000 C CNN
+F 1 "OPEN" V 1550 7500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1480 7500 50  0001 C CNN
+F 3 "~" H 1550 7500 50  0001 C CNN
+	1    1550 7500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	700  7000 700  7500
+Wire Wire Line
+	700  7500 1400 7500
+Connection ~ 700  7000
+Wire Wire Line
+	700  7000 1300 7000
+Wire Wire Line
+	1700 7500 2300 7500
+Wire Wire Line
+	2300 7500 2300 7100
+Connection ~ 2300 7100
 $EndSCHEMATC
