@@ -491,7 +491,7 @@ U 1 1 5BF1286E
 P 2100 4550
 F 0 "TP86" V 2050 4500 50  0000 L CNN
 F 1 "TestPoint" V 2050 4750 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 2300 4550 50  0001 C CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 2300 4550 50  0001 C CNN
 F 3 "~" H 2300 4550 50  0001 C CNN
 	1    2100 4550
 	0    1    1    0   
@@ -880,7 +880,7 @@ AR Path="/5BCD883C/5C3B0CCE" Ref="TP93"  Part="1"
 AR Path="/5C3B0CCE" Ref="TP?"  Part="1" 
 F 0 "TP93" V 3100 1450 50  0000 L CNN
 F 1 "TestPoint" V 3100 1700 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 3350 1500 50  0001 C CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 3350 1500 50  0001 C CNN
 F 3 "~" H 3350 1500 50  0001 C CNN
 	1    3150 1500
 	0    1    1    0   
@@ -893,7 +893,7 @@ AR Path="/5BCD883C/5C3B7E84" Ref="TP92"  Part="1"
 AR Path="/5C3B7E84" Ref="TP?"  Part="1" 
 F 0 "TP92" V 3100 1350 50  0000 L CNN
 F 1 "TestPoint" V 3100 1600 50  0000 L CNN
-F 2 "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm" H 3350 1400 50  0001 C CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 3350 1400 50  0001 C CNN
 F 3 "~" H 3350 1400 50  0001 C CNN
 	1    3150 1400
 	0    1    1    0   
