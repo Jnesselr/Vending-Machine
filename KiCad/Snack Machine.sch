@@ -295,9 +295,9 @@ Text Label 9300 5700 0    50   ~ 0
 SCL
 Text Label 9300 5800 0    50   ~ 0
 SDA
-Text Label 13700 7950 2    50   ~ 0
+Text Label 13700 7850 2    50   ~ 0
 RX_DISPLAY
-Text Label 13850 8150 2    50   ~ 0
+Text Label 12350 8400 2    50   ~ 0
 RESET_DISPLAY
 Wire Wire Line
 	11100 3000 10850 3000
@@ -3492,7 +3492,7 @@ F 5 "CUS10S40,H3F" H 4700 1250 50  0001 C CNN "Part Number"
 	1    4700 1250
 	-1   0    0    1   
 $EndComp
-Text Label 13700 7850 2    50   ~ 0
+Text Label 13700 7950 2    50   ~ 0
 TX_DISPLAY
 Wire Wire Line
 	14800 7750 14600 7750
@@ -3585,7 +3585,7 @@ $EndComp
 Wire Wire Line
 	14050 8050 14050 8250
 Wire Wire Line
-	13200 8150 14100 8150
+	11700 8400 12600 8400
 Wire Wire Line
 	13200 7950 14100 7950
 Wire Wire Line
@@ -3595,7 +3595,7 @@ L Connector_Generic:Conn_02x05_Odd_Even J12
 U 1 1 5C1CD12A
 P 14300 7950
 F 0 "J12" H 14350 8367 50  0000 C CNN
-F 1 "Display Serial Header" H 14350 8276 50  0000 C CNN
+F 1 "Display Serial Header" H 14550 8300 50  0000 C CNN
 F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical" H 14300 7950 50  0001 C CNN
 F 3 "~" H 14300 7950 50  0001 C CNN
 	1    14300 7950
@@ -3752,4 +3752,76 @@ F 3 "~" H 3300 5450 50  0001 C CNN
 	1    3300 5450
 	-1   0    0    -1  
 $EndComp
+$Comp
+L Transistor_BJT:MMBT3904 Q?
+U 1 1 5C36F5E0
+P 13300 8400
+AR Path="/5BA75957/5C36F5E0" Ref="Q?"  Part="1" 
+AR Path="/5C36F5E0" Ref="Q26"  Part="1" 
+F 0 "Q26" H 13491 8446 50  0000 L CNN
+F 1 "MMBT3904" H 13491 8355 50  0000 L CNN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 13500 8325 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 13300 8400 50  0001 L CNN
+	1    13300 8400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R89
+U 1 1 5C3D4B8A
+P 12600 8650
+F 0 "R89" H 12750 8700 50  0000 C CNN
+F 1 "4.7k" H 12750 8600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 12530 8650 50  0001 C CNN
+F 3 "~" H 12600 8650 50  0001 C CNN
+	1    12600 8650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R88
+U 1 1 5C3D5486
+P 12850 8400
+F 0 "R88" V 12750 8400 50  0000 C CNN
+F 1 "4.7k" V 12850 8400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 12780 8400 50  0001 C CNN
+F 3 "~" H 12850 8400 50  0001 C CNN
+	1    12850 8400
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0139
+U 1 1 5C3D6338
+P 12600 8900
+F 0 "#PWR0139" H 12600 8650 50  0001 C CNN
+F 1 "GND" H 12650 8750 50  0000 R CNN
+F 2 "" H 12600 8900 50  0001 C CNN
+F 3 "" H 12600 8900 50  0001 C CNN
+	1    12600 8900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0138
+U 1 1 5C3D647F
+P 13400 8700
+F 0 "#PWR0138" H 13400 8450 50  0001 C CNN
+F 1 "GND" H 13450 8550 50  0000 R CNN
+F 2 "" H 13400 8700 50  0001 C CNN
+F 3 "" H 13400 8700 50  0001 C CNN
+	1    13400 8700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	12600 8500 12600 8400
+Wire Wire Line
+	12700 8400 12600 8400
+Connection ~ 12600 8400
+Wire Wire Line
+	12600 8800 12600 8900
+Wire Wire Line
+	13000 8400 13100 8400
+Wire Wire Line
+	13400 8200 13400 8150
+Wire Wire Line
+	13400 8150 14100 8150
+Wire Wire Line
+	13400 8600 13400 8700
 $EndSCHEMATC
