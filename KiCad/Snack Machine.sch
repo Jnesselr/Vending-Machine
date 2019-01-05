@@ -2144,7 +2144,7 @@ U 1 1 5C33F464
 P 11050 8850
 F 0 "H1" V 11004 9000 50  0000 L CNN
 F 1 "MountingHole_Pad" V 11095 9000 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm" H 11050 8850 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 8850 50  0001 C CNN
 F 3 "~" H 11050 8850 50  0001 C CNN
 	1    11050 8850
 	0    1    1    0   
@@ -2155,7 +2155,7 @@ U 1 1 5C358362
 P 11050 9050
 F 0 "H2" V 11004 9200 50  0000 L CNN
 F 1 "MountingHole_Pad" V 11095 9200 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm" H 11050 9050 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 9050 50  0001 C CNN
 F 3 "~" H 11050 9050 50  0001 C CNN
 	1    11050 9050
 	0    1    1    0   
@@ -2166,7 +2166,7 @@ U 1 1 5C358406
 P 11050 9250
 F 0 "H3" V 11004 9400 50  0000 L CNN
 F 1 "MountingHole_Pad" V 11095 9400 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm" H 11050 9250 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 9250 50  0001 C CNN
 F 3 "~" H 11050 9250 50  0001 C CNN
 	1    11050 9250
 	0    1    1    0   
@@ -2177,7 +2177,7 @@ U 1 1 5C3584A8
 P 11050 9450
 F 0 "H4" V 11004 9600 50  0000 L CNN
 F 1 "MountingHole_Pad" V 11095 9600 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm" H 11050 9450 50  0001 C CNN
+F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 9450 50  0001 C CNN
 F 3 "~" H 11050 9450 50  0001 C CNN
 	1    11050 9450
 	0    1    1    0   
