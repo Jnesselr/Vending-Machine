@@ -1,12 +1,11 @@
+#include "config.h"
 #include "vendingMachine.h"
 
-static VendingMachine* vendingMachine;
-
 void setup() {
-  vendingMachine->setup();
+  VendingMachine::instance->setup();
 }
 
 void loop() {
-  vendingMachine->loop();
+  VendingMachine::instance->loop();
 }
 
