@@ -2,14 +2,18 @@
 
 class GizmoDojoBoard: public VendingMachine {
   public:
-    void setup() {
-      Serial.begin(9600);
-    }
-    void loop() {
-      Serial.println("Hello World from the Gizmo Dojo!");
-    }
+    void setup();
+    void loop();
 };
 
 VendingMachine* VendingMachine::instance = new GizmoDojoBoard();
+
+void GizmoDojoBoard::setup() {
+  Serial.begin(9600);
+}
+
+void GizmoDojoBoard::loop() {
+  Serial.println("Hello World from the Gizmo Dojo!");
+}
 
 #endif
