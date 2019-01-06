@@ -1,0 +1,9 @@
+#ifndef _CONFIG_H_
+#define _CONFIG_H_
+
+#define DENHAC_BOARD_CONFIG
+#define GIZMODOJO_BOARD_CONFIG
+
+#define BOARD_CONFIG DENHAC_BOARD_CONFIG
+
+#endif
