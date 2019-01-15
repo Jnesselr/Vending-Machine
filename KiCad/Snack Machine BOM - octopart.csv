@@ -1,0 +1,77 @@
+Item,Qty,DH Qty,TGD Qty,Total Qty,Reference(s),Value,LibPart,Footprint,Datasheet,Manufacturer,Part Number,Notes
+1,1,1,1,2,C1,2.2uF 35V,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,TDK,C2012X7R1V225K085AC,
+2,1,1,1,2,C2,2.2uF 10V,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Samsung Electro-Mechanics,CL21B225KPFNNNE,
+3,2,2,2,4,"C3, C4",10uF 10V,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,AVX,0603ZD106KAT2A,
+4,5,5,5,10,"C5, C23, C25, C31, C32",22pF,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Kemet,C0603C220J1GACTU,
+5,8,0,0,0,"C6, C7, C8, C9, C17, C18, C19, C20",OPEN,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,-,-,
+6,9,9,9,18,"C10, C11, C12, C13, C14, C15, C24, C28, C30",100nF,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,CC0603KRX7R9BB104,Same as 0.1uF
+7,4,4,4,8,"C16, C26, C27, C29",1uF,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,TDK,C1608X7R1A105K080AC,
+8,8,8,8,16,"C21, C22, C34, C35, C37, C38, C39, C40",0.1uF,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,CC0603KRX7R9BB104,Same as 100nF
+9,3,3,3,6,"C33, C36, C41",10uF,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,AVX,0603ZD106KAT2A,
+10,2,2,2,4,"C42, C44",6.8nF,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,AVX,06031C682K4T2A,
+11,2,2,2,4,"C43, C45",10nF,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Samsung Electro-Mechanics,CL10B103KB8NCNC,
+12,8,8,8,16,"C46, C47, C48, C49, C50, C51, C52, C53",1uF 50V,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Samsung,CL10A105KB8NNNC,
+13,8,8,8,16,"D1, D3, D9, D10, D11, D12, D13, D14",50V 2A,Device:D,Snack Machine:D_SMB_Handsoldering_Lite,~,ON Semiconductor,ES2A,
+14,2,2,2,4,"D2, D4",D,Device:D,Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder,~,Bourns,CD1206-S01575,
+15,2,2,0,2,"D5, D6",YELLOW,Device:LED,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Wurth Electronics,150060YS75000,
+16,2,2,2,4,"D7, D8",D_Schottky,Device:D_Schottky,Diode_SMD:D_SOD-323,~,Toshiba Semiconductor and Storage,"CUS10S40,H3F",
+17,1,1,1,2,F1,1A,Device:Fuse,Snack Machine:Keystone_3544-2,~,Keystone Electronics,3544-2,
+18,1,1,1,2,F2,500mA,Device:Polyfuse,Snack Machine:MF-MSMF050-2,~,Bourns,MF-MSMF050-2,
+19,1,1,1,2,FB1,600R@100MHz,Device:Ferrite_Bead,Inductor_SMD:L_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,TDK,MPZ1608S601ATA00,
+20,2,2,2,4,"FB2, FB3",Ferrite_Bead,Device:Ferrite_Bead,Inductor_SMD:L_0805_2012Metric_Pad1.15x1.40mm_HandSolder,~,Murata,BLM21PG221SN1D,
+21,4,0,0,0,"H1, H2, H3, H4",MountingHole_Pad,Mechanical:MountingHole_Pad,MountingHole:MountingHole_3.5mm_Pad,~,-,-,
+22,2,2,0,2,"J1, J5",MDB,Connector_Generic:Conn_02x03_Top_Bottom,Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical,~,Molex,0039290063,
+23,1,1,1,2,J2,Power Screw Terminal,Connector:Screw_Terminal_01x02,"TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal",~,Phoenix Contact,1935161,
+24,1,0,0,0,J3,RFID Serial Connector,Connector:Conn_01x05_Female,Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical,~,-,-,
+25,1,0,0,0,J4,RFID Led Connector,Connector:Conn_01x03_Female,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,~,-,-,
+26,1,0,0,0,J6,Conn_01x02,Connector_Generic:Conn_01x02,Connector_JST:JST_XH_B02B-XH-A_1x02_P2.50mm_Vertical,~,JST,B2B-XH-A(LF)(SN),
+27,1,0,0,0,J7,LCD EXP1,Connector_Generic:Conn_02x05_Odd_Even,Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical,~,-,-,2x5 shrouded male
+28,1,0,0,0,J8,LCD EXP2,Connector_Generic:Conn_02x05_Odd_Even,Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical,~,-,-,2x5 shrouded male
+29,2,0,0,0,"J9, J17",AVR-ISP-6,Connector:AVR-ISP-6,Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical, ~,-,-,2x3 generic male
+30,1,1,1,2,J10,Row Screw Terminal,Connector:Screw_Terminal_01x08,"TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-8-5.0-H_1x08_P5.00mm_Horizontal",~,Phoenix Contact,1935226,
+31,1,1,0,1,J11,Column Screw Terminal,Connector:Screw_Terminal_01x08,"TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-8-5.0-H_1x08_P5.00mm_Horizontal",~,Amphenol Anytek,OQ0854500000G,
+32,1,1,0,1,J12,Display Serial Header,Connector_Generic:Conn_02x05_Odd_Even,Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical,~,-,-,2x5 generic female
+33,1,0,0,0,J13,RFID_CONNECTOR,Connector:Conn_01x05_Male,Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical,~,-,-,1x5 generic male
+34,1,1,0,1,J14,Large Display Header,Connector_Generic:Conn_02x15_Counter_Clockwise,Connector_PinSocket_2.54mm:PinSocket_2x15_P2.54mm_Vertical,~,-,-,2x15 generic female
+35,1,1,1,2,J16,USB_B_Micro,Connector:USB_B_Micro,Snack Machine:Amphenol_10118193-0001LF,~,Amphenol FCI,10118193-0001LF,
+36,1,0,0,0,J18,Conn_02x02_Odd_Even,Connector_Generic:Conn_02x02_Odd_Even,Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical,~,-,-,
+37,2,0,0,0,"JP1, JP2",SolderJumper_2_Open,Jumper:SolderJumper_2_Open,Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm,~,-,-,
+38,1,1,1,2,Q1,P-CH 30V 3.8A,Device:Q_PMOS_GSD,Snack Machine:SOT-23_Handsoldering_Lite,~,Diodes Incorporated,DMP3099L-7,
+39,8,8,8,16,"Q2, Q19, Q20, Q21, Q22, Q23, Q24, Q25",Q_NMOS_SGD,Device:Q_NMOS_GSD,Snack Machine:TSOT-23_HandSoldering_Lite,~,ON Semiconductor,NTR4003NT1G,
+40,8,8,8,16,"Q3, Q4, Q5, Q6, Q11, Q12, Q13, Q14",P-CH 30V 3.8A,Device:Q_PMOS_GSD,Snack Machine:TSOT-23_HandSoldering_Lite,~,Diodes Incorporated,DMP3099L-7,
+41,9,9,9,18,"Q7, Q8, Q9, Q10, Q15, Q16, Q17, Q18, Q26",MMBT3904,Transistor_BJT:MMBT3904,Snack Machine:SOT-23_Handsoldering_Lite,https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf,Micro Commercial,MMBT3904-TP,
+42,10,10,10,20,"R1, R2, R8, R9, R10, R11, R13, R14, R15, R16",0R,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603JR-070RL,
+43,4,4,4,8,"R3, R4, R12, R65",10K,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-0710KL,Same as 10k (schematic should be lower case k)
+44,20,20,20,40,"R5, R7, R17, R18, R20, R22, R24, R25, R26, R27, R29, R30, R35, R36, R37, R39, R40, R41, R42, R43",1K,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-071KL,Same as 1k (schematic should be lower case k)
+45,3,3,3,6,"R6, R55, R64",1M,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-071ML,
+46,21,21,21,42,"R19, R31, R32, R34, R44, R45, R46, R47, R48, R49, R50, R51, R59, R60, R61, R62, R63, R79, R80, R81, R82",1k,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-071KL,Same as 1K
+47,15,15,15,30,"R21, R28, R33, R52, R53, R54, R67, R69, R70, R71, R72, R83, R84, R85, R86",10k,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-0710KL,Same as 10K
+48,2,1,1,2,"R23, R38",0.1R 1%,Device:R,Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder,~,Samsung Electro-Mechanics,RUT2012FR100CS,Only need 1 of these
+49,2,2,2,4,"R56, R57",22R,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-0722RL,
+50,1,1,1,2,R58,R,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-0710KL,This resistor should be 10k in schematic
+51,2,2,2,4,"R66, R68",470,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-07470RL,
+52,1,1,1,2,R73,12.1k,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-0712K1L,
+53,4,4,4,8,"R74, R75, R76, R77",49.9,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-0749R9L,
+54,1,1,1,2,R78,10,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-0710RL,
+55,1,0,0,0,R87,OPEN,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,-,-,
+56,2,2,2,4,"R88, R89",4.7k,Device:R,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Yageo,RC0603FR-074K7L,
+57,2,2,2,4,"RV1, RV2",CG0603MLC,Device:Varistor_US,Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder,~,Bourns,CG0603MLC-05E,
+58,1,1,1,2,SW1,SW_SPST,Switch:SW_SPST,Button_Switch_SMD:SW_SPST_FSMSM,,TE Connectivity,FSMSM,
+59,1,1,1,2,U1,MEZD71201A-F,Regulator_Linear:uA7805,Snack Machine:mEZD71201A,~,Monolithic Power Systems Inc.,MEZD71201A-F,
+60,1,1,1,2,U2,MEZD71202A-G,Regulator_Linear:uA7805,Snack Machine:mEZD71201A,~,Monolithic Power Systems Inc.,MEZD71202A-G,
+61,1,1,1,2,U3,ATmega2560-16AU,MCU_Microchip_ATmega:ATmega2560-16AU,Package_QFP:TQFP-100_14x14mm_P0.5mm,http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf,Microchip Technology,ATMEGA2560-16AU,
+62,1,0,1,1,U4,INA180B3,Snack_Machine:INA180B3,Package_TO_SOT_SMD:SOT-23-5_HandSoldering,,Texas Instruments,INA180B3IDBVT,
+63,1,1,0,1,U5,INA219,Snack_Machine:INA219,Package_TO_SOT_SMD:TSOT-23-8_HandSoldering,,Texas Instruments,INA219AIDCNR,
+64,1,1,1,2,U6,ATmega16U2-MU,MCU_Microchip_ATmega:ATmega16U2-MU,Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.1x3.1mm,http://ww1.microchip.com/downloads/en/DeviceDoc/doc7799.pdf,Microchip Technology,ATMEGA16U2-MU,
+65,1,1,1,2,U7,74AHC1G125,Snack_Machine:74AHC1G125,Package_TO_SOT_SMD:SOT-23-5_HandSoldering,,Texas Instruments,SN74AHC1G125DBVR,
+66,1,1,1,2,U8,W5500,Snack_Machine:W5500,Package_QFP:TQFP-48_7x7mm_P0.5mm,,WIZnet,W5500,
+67,1,1,1,2,U9,RB1-125BAG1A,Snack_Machine:RB1-125BAG1A,Snack Machine:RB1-125BAG1A,,WIZnet,RB1-125BAG1A,
+68,2,2,2,4,"Y1, Y2",16MHz,Device:Crystal_GND2,Crystal:Resonator_SMD_muRata_CSTxExxV-3Pin_3.0x1.1mm_HandSoldering,~,Murata,CSTCE16M0V53C-R0,
+69,1,1,1,2,Y3,25MHz,Device:Crystal_GND24,Crystal:Crystal_SMD_SeikoEpson_TSX3225-4Pin_3.2x2.5mm_HandSoldering,~,EPSON,TSX-3225 25.0000MF10P-C0,
+,,,,,,,,,,,,
+Extra,,,,,,,,,,,,
+70,1,1,1,2,,,,,,Amphenol Anytek,TJ0851560000G,
+71,1,0,1,1,,,,,,Phoenix Contact,1935226,
+72,1,1,1,2,,1A Fuse,,,,,,needs to be mini fuse
+73,1,1,1,2,,0.1” vertical header male,,,,Sullins Connector Solutions,PREC040SFAN-RC,
+74,2,2,0,2,,0.1” vertical header female,,,,Chip Quik Inc.,HDR100IMP40F-G-V-TH,

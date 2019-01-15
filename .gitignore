@@ -23,8 +23,11 @@ _autosave-*
 
 # Exported BOM files
 *.xml
-*.csv
 
 .DS_Store
 datasheets
 reqs.txt
+*.jpeg
+*.jpg
+*.~lock*
+
