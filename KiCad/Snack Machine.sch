@@ -234,9 +234,9 @@ F 3 "" H 9100 1900 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9100 1900 9100 1850
-Text Label 11450 5600 0    50   ~ 0
-RX_DISPLAY
 Text Label 11450 5700 0    50   ~ 0
+RX_DISPLAY
+Text Label 11450 5600 0    50   ~ 0
 TX_DISPLAY
 Text Label 5350 6600 2    50   ~ 0
 RX_MDB
@@ -295,7 +295,7 @@ Text Label 9300 5700 0    50   ~ 0
 SCL
 Text Label 9300 5800 0    50   ~ 0
 SDA
-Text Label 13700 7850 2    50   ~ 0
+Text Label 13300 7950 0    50   ~ 0
 RX_DISPLAY
 Text Label 12350 8400 2    50   ~ 0
 RESET_DISPLAY
@@ -1225,11 +1225,11 @@ Text Label 1300 5500 0    50   ~ 0
 RFID_LED
 Wire Wire Line
 	11250 5400 11950 5400
-Text Label 11850 5400 2    50   ~ 0
+Text Label 11550 5300 0    50   ~ 0
 RFID_TX
 Wire Wire Line
 	11250 5300 11950 5300
-Text Label 11850 5300 2    50   ~ 0
+Text Label 11550 5400 0    50   ~ 0
 RFID_RX
 $Comp
 L Device:R R8
@@ -3280,7 +3280,7 @@ F 5 "CUS10S40,H3F" H 4700 1250 50  0001 C CNN "Part Number"
 	1    4700 1250
 	-1   0    0    1   
 $EndComp
-Text Label 13700 7950 2    50   ~ 0
+Text Label 13300 7850 0    50   ~ 0
 TX_DISPLAY
 Wire Wire Line
 	14800 7750 14600 7750
@@ -3818,9 +3818,9 @@ Wire Wire Line
 	4600 6100 5200 6100
 Wire Wire Line
 	4600 5050 5200 5050
-Text Label 4650 6100 0    50   ~ 0
-HUZZAH_TX
 Text Label 4650 5050 0    50   ~ 0
+HUZZAH_TX
+Text Label 4650 6100 0    50   ~ 0
 HUZZAH_RX
 Connection ~ 5200 5050
 Connection ~ 5200 6100
