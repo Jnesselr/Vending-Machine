@@ -1079,7 +1079,7 @@ F 0 "Q10" H 10791 2246 50  0000 L CNN
 F 1 "MMBT3904" H 10791 2155 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 10800 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 10600 2200 50  0001 L CNN
-F 4 "MMBT3904-TP" H 10600 2200 50  0001 C CNN "Part Numberr"
+F 4 "MMBT3904-TP" H 10600 2200 50  0001 C CNN "Part Number"
 F 5 "MCC" H 10600 2200 50  0001 C CNN "Manufacturer"
 	1    10600 2200
 	1    0    0    -1  
