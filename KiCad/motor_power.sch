@@ -28,6 +28,8 @@ F 0 "R38" H 7120 8896 50  0000 L CNN
 F 1 "0.1R 1%" H 7120 8805 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 6980 8850 50  0001 C CNN
 F 3 "~" H 7050 8850 50  0001 C CNN
+F 4 "RUT2012FR100CS" H 7050 8850 50  0001 C CNN "Part Number"
+F 5 "Samsung" H 7050 8850 50  0001 C CNN "Manufacturer"
 	1    7050 8850
 	1    0    0    -1  
 $EndComp
@@ -89,9 +91,11 @@ P 2050 1600
 AR Path="/5BCD1BC4" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5BCD1BC4" Ref="R26"  Part="1" 
 F 0 "R26" V 1950 1500 50  0000 L CNN
-F 1 "1K" V 2150 1550 50  0000 L CNN
+F 1 "1k" V 2150 1550 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1980 1600 50  0001 C CNN
 F 3 "~" H 2050 1600 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 2050 1600 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 2050 1600 50  0001 C CNN "Manufacturer"
 	1    2050 1600
 	0    1    1    0   
 $EndComp
@@ -105,6 +109,8 @@ F 0 "R19" V 1850 2200 50  0000 C CNN
 F 1 "1k" V 1950 2200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1680 2200 50  0001 C CNN
 F 3 "~" H 1750 2200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1750 2200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1750 2200 50  0001 C CNN "Manufacturer"
 	1    1750 2200
 	0    1    1    0   
 $EndComp
@@ -133,6 +139,8 @@ F 0 "U5" H 6200 9365 50  0000 C CNN
 F 1 "INA219" H 6200 9274 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:TSOT-23-8_HandSoldering" H 6200 8950 50  0001 C CNN
 F 3 "" H 6200 8950 50  0001 C CNN
+F 4 "INA219AIDCNR" H 6200 8950 50  0001 C CNN "Part Number"
+F 5 "Texas Instruments" H 6200 8950 50  0001 C CNN "Manufacturer"
 	1    6200 8950
 	1    0    0    -1  
 $EndComp
@@ -222,6 +230,8 @@ F 0 "R33" H 5170 9146 50  0000 L CNN
 F 1 "10k" H 5170 9055 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5030 9100 50  0001 C CNN
 F 3 "~" H 5100 9100 50  0001 C CNN
+F 4 "RC0603FR-0710KL" H 5100 9100 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 5100 9100 50  0001 C CNN "Manufacturer"
 	1    5100 9100
 	1    0    0    -1  
 $EndComp
@@ -241,9 +251,11 @@ L Device:C C22
 U 1 1 5BCD303F
 P 6850 9500
 F 0 "C22" H 6965 9546 50  0000 L CNN
-F 1 "0.1uF" H 6965 9455 50  0000 L CNN
+F 1 "100nF" H 6965 9455 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6888 9350 50  0001 C CNN
 F 3 "~" H 6850 9500 50  0001 C CNN
+F 4 "CC0603KRX7R9BB104" H 6850 9500 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 6850 9500 50  0001 C CNN "Manufacturer"
 	1    6850 9500
 	1    0    0    -1  
 $EndComp
@@ -285,9 +297,11 @@ L Device:C C21
 U 1 1 5C27F640
 P 2150 8450
 F 0 "C21" H 2265 8496 50  0000 L CNN
-F 1 "0.1uF" H 2265 8405 50  0000 L CNN
+F 1 "100nF" H 2265 8405 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 2188 8300 50  0001 C CNN
 F 3 "~" H 2150 8450 50  0001 C CNN
+F 4 "CC0603KRX7R9BB104" H 2150 8450 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 2150 8450 50  0001 C CNN "Manufacturer"
 	1    2150 8450
 	1    0    0    -1  
 $EndComp
@@ -433,6 +447,8 @@ F 0 "R28" H 4870 9146 50  0000 L CNN
 F 1 "10k" H 4870 9055 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4730 9100 50  0001 C CNN
 F 3 "~" H 4800 9100 50  0001 C CNN
+F 4 "RC0603FR-0710KL" H 4800 9100 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 4800 9100 50  0001 C CNN "Manufacturer"
 	1    4800 9100
 	1    0    0    -1  
 $EndComp
@@ -506,6 +522,8 @@ F 0 "R23" H 2500 9300 50  0000 L CNN
 F 1 "0.1R 1%" H 2500 9400 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 2330 9350 50  0001 C CNN
 F 3 "~" H 2400 9350 50  0001 C CNN
+F 4 "RUT2012FR100CS" H 2400 9350 50  0001 C CNN "Part Number"
+F 5 "Samsung" H 2400 9350 50  0001 C CNN "Manufacturer"
 	1    2400 9350
 	-1   0    0    1   
 $EndComp
@@ -517,6 +535,8 @@ F 0 "Q7" H 2391 2246 50  0000 L CNN
 F 1 "MMBT3904" H 2391 2155 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 2400 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 2200 2200 50  0001 L CNN
+F 4 "MMBT3904-TP" H 2200 2200 50  0001 C CNN "Part Number"
+F 5 "MCC" H 2200 2200 50  0001 C CNN "Manufacturer"
 	1    2200 2200
 	1    0    0    -1  
 $EndComp
@@ -531,9 +551,11 @@ P 2300 1800
 AR Path="/5C41FA49" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C41FA49" Ref="R25"  Part="1" 
 F 0 "R25" H 2370 1846 50  0000 L CNN
-F 1 "1K" H 2370 1755 50  0000 L CNN
+F 1 "1k" H 2370 1755 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2230 1800 50  0001 C CNN
 F 3 "~" H 2300 1800 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 2300 1800 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 2300 1800 50  0001 C CNN "Manufacturer"
 	1    2300 1800
 	1    0    0    -1  
 $EndComp
@@ -578,6 +600,8 @@ F 0 "R21" V 2050 5550 50  0000 C CNN
 F 1 "10k" V 2250 5550 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2080 5550 50  0001 C CNN
 F 3 "~" H 2150 5550 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 2150 5550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 2150 5550 50  0001 C CNN "Manufacturer"
 	1    2150 5550
 	0    1    1    0   
 $EndComp
@@ -605,6 +629,8 @@ F 0 "R48" V 1650 5200 50  0000 C CNN
 F 1 "1k" V 1850 5200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1680 5200 50  0001 C CNN
 F 3 "~" H 1750 5200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1750 5200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1750 5200 50  0001 C CNN "Manufacturer"
 	1    1750 5200
 	0    1    1    0   
 $EndComp
@@ -628,9 +654,11 @@ P 4850 1600
 AR Path="/5C58D721" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C58D721" Ref="R20"  Part="1" 
 F 0 "R20" V 4750 1500 50  0000 L CNN
-F 1 "1K" V 4950 1550 50  0000 L CNN
+F 1 "1k" V 4950 1550 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4780 1600 50  0001 C CNN
 F 3 "~" H 4850 1600 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 4850 1600 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4850 1600 50  0001 C CNN "Manufacturer"
 	1    4850 1600
 	0    1    1    0   
 $EndComp
@@ -644,6 +672,8 @@ F 0 "R31" V 4650 2200 50  0000 C CNN
 F 1 "1k" V 4750 2200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4480 2200 50  0001 C CNN
 F 3 "~" H 4550 2200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 4550 2200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4550 2200 50  0001 C CNN "Manufacturer"
 	1    4550 2200
 	0    1    1    0   
 $EndComp
@@ -683,6 +713,8 @@ F 0 "Q8" H 5191 2246 50  0000 L CNN
 F 1 "MMBT3904" H 5191 2155 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5200 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 5000 2200 50  0001 L CNN
+F 4 "MMBT3904-TP" H 5000 2200 50  0001 C CNN "Part Number"
+F 5 "MCC" H 5000 2200 50  0001 C CNN "Manufacturer"
 	1    5000 2200
 	1    0    0    -1  
 $EndComp
@@ -697,9 +729,11 @@ P 5100 1800
 AR Path="/5C58D747" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C58D747" Ref="R27"  Part="1" 
 F 0 "R27" H 5170 1846 50  0000 L CNN
-F 1 "1K" H 5170 1755 50  0000 L CNN
+F 1 "1k" H 5170 1755 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5030 1800 50  0001 C CNN
 F 3 "~" H 5100 1800 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 5100 1800 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 5100 1800 50  0001 C CNN "Manufacturer"
 	1    5100 1800
 	1    0    0    -1  
 $EndComp
@@ -861,9 +895,11 @@ P 7650 1600
 AR Path="/5C5AE608" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5AE608" Ref="R22"  Part="1" 
 F 0 "R22" V 7550 1500 50  0000 L CNN
-F 1 "1K" V 7750 1550 50  0000 L CNN
+F 1 "1k" V 7750 1550 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7580 1600 50  0001 C CNN
 F 3 "~" H 7650 1600 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 7650 1600 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7650 1600 50  0001 C CNN "Manufacturer"
 	1    7650 1600
 	0    1    1    0   
 $EndComp
@@ -877,6 +913,8 @@ F 0 "R32" V 7450 2200 50  0000 C CNN
 F 1 "1k" V 7550 2200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7280 2200 50  0001 C CNN
 F 3 "~" H 7350 2200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 7350 2200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7350 2200 50  0001 C CNN "Manufacturer"
 	1    7350 2200
 	0    1    1    0   
 $EndComp
@@ -920,6 +958,8 @@ F 0 "Q9" H 7991 2246 50  0000 L CNN
 F 1 "MMBT3904" H 7991 2155 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 8000 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 7800 2200 50  0001 L CNN
+F 4 "MMBT3904-TP" H 7800 2200 50  0001 C CNN "Part Number"
+F 5 "MCC" H 7800 2200 50  0001 C CNN "Manufacturer"
 	1    7800 2200
 	1    0    0    -1  
 $EndComp
@@ -934,9 +974,11 @@ P 7900 1800
 AR Path="/5C5AE634" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5AE634" Ref="R29"  Part="1" 
 F 0 "R29" H 7970 1846 50  0000 L CNN
-F 1 "1K" H 7970 1755 50  0000 L CNN
+F 1 "1k" H 7970 1755 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7830 1800 50  0001 C CNN
 F 3 "~" H 7900 1800 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 7900 1800 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 7900 1800 50  0001 C CNN "Manufacturer"
 	1    7900 1800
 	1    0    0    -1  
 $EndComp
@@ -978,9 +1020,11 @@ P 10450 1600
 AR Path="/5C5AE64B" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5AE64B" Ref="R24"  Part="1" 
 F 0 "R24" V 10350 1500 50  0000 L CNN
-F 1 "1K" V 10550 1550 50  0000 L CNN
+F 1 "1k" V 10550 1550 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10380 1600 50  0001 C CNN
 F 3 "~" H 10450 1600 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 10450 1600 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10450 1600 50  0001 C CNN "Manufacturer"
 	1    10450 1600
 	0    1    1    0   
 $EndComp
@@ -994,6 +1038,8 @@ F 0 "R34" V 10250 2200 50  0000 C CNN
 F 1 "1k" V 10350 2200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10080 2200 50  0001 C CNN
 F 3 "~" H 10150 2200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 10150 2200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10150 2200 50  0001 C CNN "Manufacturer"
 	1    10150 2200
 	0    1    1    0   
 $EndComp
@@ -1033,6 +1079,8 @@ F 0 "Q10" H 10791 2246 50  0000 L CNN
 F 1 "MMBT3904" H 10791 2155 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 10800 2125 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 10600 2200 50  0001 L CNN
+F 4 "MMBT3904-TP" H 10600 2200 50  0001 C CNN "Part Numberr"
+F 5 "MCC" H 10600 2200 50  0001 C CNN "Manufacturer"
 	1    10600 2200
 	1    0    0    -1  
 $EndComp
@@ -1047,9 +1095,11 @@ P 10700 1800
 AR Path="/5C5AE671" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5AE671" Ref="R30"  Part="1" 
 F 0 "R30" H 10770 1846 50  0000 L CNN
-F 1 "1K" H 10770 1755 50  0000 L CNN
+F 1 "1k" H 10770 1755 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10630 1800 50  0001 C CNN
 F 3 "~" H 10700 1800 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 10700 1800 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 10700 1800 50  0001 C CNN "Manufacturer"
 	1    10700 1800
 	1    0    0    -1  
 $EndComp
@@ -1211,9 +1261,11 @@ P 2050 3550
 AR Path="/5C5C35ED" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C35ED" Ref="R35"  Part="1" 
 F 0 "R35" V 1950 3450 50  0000 L CNN
-F 1 "1K" V 2150 3500 50  0000 L CNN
+F 1 "1k" V 2150 3500 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1980 3550 50  0001 C CNN
 F 3 "~" H 2050 3550 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 2050 3550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 2050 3550 50  0001 C CNN "Manufacturer"
 	1    2050 3550
 	0    1    1    0   
 $EndComp
@@ -1227,6 +1279,8 @@ F 0 "R44" V 1850 4150 50  0000 C CNN
 F 1 "1k" V 1950 4150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1680 4150 50  0001 C CNN
 F 3 "~" H 1750 4150 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1750 4150 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1750 4150 50  0001 C CNN "Manufacturer"
 	1    1750 4150
 	0    1    1    0   
 $EndComp
@@ -1270,6 +1324,8 @@ F 0 "Q15" H 2391 4196 50  0000 L CNN
 F 1 "MMBT3904" H 2391 4105 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 2400 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 2200 4150 50  0001 L CNN
+F 4 "MMBT3904-TP" H 2200 4150 50  0001 C CNN "Part Number"
+F 5 "MCC" H 2200 4150 50  0001 C CNN "Manufacturer"
 	1    2200 4150
 	1    0    0    -1  
 $EndComp
@@ -1284,9 +1340,11 @@ P 2300 3750
 AR Path="/5C5C361D" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C361D" Ref="R40"  Part="1" 
 F 0 "R40" H 2370 3796 50  0000 L CNN
-F 1 "1K" H 2370 3705 50  0000 L CNN
+F 1 "1k" H 2370 3705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2230 3750 50  0001 C CNN
 F 3 "~" H 2300 3750 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 2300 3750 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 2300 3750 50  0001 C CNN "Manufacturer"
 	1    2300 3750
 	1    0    0    -1  
 $EndComp
@@ -1328,9 +1386,11 @@ P 4850 3550
 AR Path="/5C5C3634" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C3634" Ref="R36"  Part="1" 
 F 0 "R36" V 4750 3450 50  0000 L CNN
-F 1 "1K" V 4950 3500 50  0000 L CNN
+F 1 "1k" V 4950 3500 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4780 3550 50  0001 C CNN
 F 3 "~" H 4850 3550 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 4850 3550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4850 3550 50  0001 C CNN "Manufacturer"
 	1    4850 3550
 	0    1    1    0   
 $EndComp
@@ -1344,6 +1404,8 @@ F 0 "R45" V 4650 4150 50  0000 C CNN
 F 1 "1k" V 4750 4150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4480 4150 50  0001 C CNN
 F 3 "~" H 4550 4150 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 4550 4150 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4550 4150 50  0001 C CNN "Manufacturer"
 	1    4550 4150
 	0    1    1    0   
 $EndComp
@@ -1383,6 +1445,8 @@ F 0 "Q16" H 5191 4196 50  0000 L CNN
 F 1 "MMBT3904" H 5191 4105 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5200 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 5000 4150 50  0001 L CNN
+F 4 "MMBT3904-TP" H 5000 4150 50  0001 C CNN "Part Number"
+F 5 "MCC" H 5000 4150 50  0001 C CNN "Manufacturer"
 	1    5000 4150
 	1    0    0    -1  
 $EndComp
@@ -1397,9 +1461,11 @@ P 5100 3750
 AR Path="/5C5C365A" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C365A" Ref="R41"  Part="1" 
 F 0 "R41" H 5170 3796 50  0000 L CNN
-F 1 "1K" H 5170 3705 50  0000 L CNN
+F 1 "1k" H 5170 3705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5030 3750 50  0001 C CNN
 F 3 "~" H 5100 3750 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 5100 3750 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 5100 3750 50  0001 C CNN "Manufacturer"
 	1    5100 3750
 	1    0    0    -1  
 $EndComp
@@ -1561,9 +1627,11 @@ P 7650 3550
 AR Path="/5C5C36B5" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C36B5" Ref="R37"  Part="1" 
 F 0 "R37" V 7550 3450 50  0000 L CNN
-F 1 "1K" V 7750 3500 50  0000 L CNN
+F 1 "1k" V 7750 3500 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7580 3550 50  0001 C CNN
 F 3 "~" H 7650 3550 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 7650 3550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7650 3550 50  0001 C CNN "Manufacturer"
 	1    7650 3550
 	0    1    1    0   
 $EndComp
@@ -1577,6 +1645,8 @@ F 0 "R46" V 7450 4150 50  0000 C CNN
 F 1 "1k" V 7550 4150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7280 4150 50  0001 C CNN
 F 3 "~" H 7350 4150 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 7350 4150 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7350 4150 50  0001 C CNN "Manufacturer"
 	1    7350 4150
 	0    1    1    0   
 $EndComp
@@ -1620,6 +1690,8 @@ F 0 "Q17" H 7991 4196 50  0000 L CNN
 F 1 "MMBT3904" H 7991 4105 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 8000 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 7800 4150 50  0001 L CNN
+F 4 "MMBT3904-TP" H 7800 4150 50  0001 C CNN "Part Number"
+F 5 "MCC" H 7800 4150 50  0001 C CNN "Manufacturer"
 	1    7800 4150
 	1    0    0    -1  
 $EndComp
@@ -1634,9 +1706,11 @@ P 7900 3750
 AR Path="/5C5C36DD" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C36DD" Ref="R42"  Part="1" 
 F 0 "R42" H 7970 3796 50  0000 L CNN
-F 1 "1K" H 7970 3705 50  0000 L CNN
+F 1 "1k" H 7970 3705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7830 3750 50  0001 C CNN
 F 3 "~" H 7900 3750 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 7900 3750 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 7900 3750 50  0001 C CNN "Manufacturer"
 	1    7900 3750
 	1    0    0    -1  
 $EndComp
@@ -1678,9 +1752,11 @@ P 10450 3550
 AR Path="/5C5C36F4" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C36F4" Ref="R39"  Part="1" 
 F 0 "R39" V 10350 3450 50  0000 L CNN
-F 1 "1K" V 10550 3500 50  0000 L CNN
+F 1 "1k" V 10550 3500 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10380 3550 50  0001 C CNN
 F 3 "~" H 10450 3550 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 10450 3550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10450 3550 50  0001 C CNN "Manufacturer"
 	1    10450 3550
 	0    1    1    0   
 $EndComp
@@ -1694,6 +1770,8 @@ F 0 "R47" V 10250 4150 50  0000 C CNN
 F 1 "1k" V 10350 4150 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10080 4150 50  0001 C CNN
 F 3 "~" H 10150 4150 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 10150 4150 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10150 4150 50  0001 C CNN "Manufacturer"
 	1    10150 4150
 	0    1    1    0   
 $EndComp
@@ -1733,6 +1811,8 @@ F 0 "Q18" H 10791 4196 50  0000 L CNN
 F 1 "MMBT3904" H 10791 4105 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 10800 4075 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 10600 4150 50  0001 L CNN
+F 4 "MMBT3904-TP" H 10600 4150 50  0001 C CNN "Part Number"
+F 5 "MCC" H 10600 4150 50  0001 C CNN "Manufacturer"
 	1    10600 4150
 	1    0    0    -1  
 $EndComp
@@ -1747,9 +1827,11 @@ P 10700 3750
 AR Path="/5C5C371A" Ref="R?"  Part="1" 
 AR Path="/5BA75957/5C5C371A" Ref="R43"  Part="1" 
 F 0 "R43" H 10770 3796 50  0000 L CNN
-F 1 "1K" H 10770 3705 50  0000 L CNN
+F 1 "1k" H 10770 3705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10630 3750 50  0001 C CNN
 F 3 "~" H 10700 3750 50  0001 C CNN
+F 4 "RC0603FR-071KL" H 10700 3750 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 10700 3750 50  0001 C CNN "Manufacturer"
 	1    10700 3750
 	1    0    0    -1  
 $EndComp
@@ -1916,6 +1998,8 @@ F 0 "R52" V 4850 5550 50  0000 C CNN
 F 1 "10k" V 5050 5550 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4880 5550 50  0001 C CNN
 F 3 "~" H 4950 5550 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 4950 5550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4950 5550 50  0001 C CNN "Manufacturer"
 	1    4950 5550
 	0    1    1    0   
 $EndComp
@@ -1943,6 +2027,8 @@ F 0 "R49" V 4450 5200 50  0000 C CNN
 F 1 "1k" V 4650 5200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4480 5200 50  0001 C CNN
 F 3 "~" H 4550 5200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 4550 5200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4550 5200 50  0001 C CNN "Manufacturer"
 	1    4550 5200
 	0    1    1    0   
 $EndComp
@@ -1971,6 +2057,8 @@ F 0 "R53" V 7650 5550 50  0000 C CNN
 F 1 "10k" V 7850 5550 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7680 5550 50  0001 C CNN
 F 3 "~" H 7750 5550 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 7750 5550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7750 5550 50  0001 C CNN "Manufacturer"
 	1    7750 5550
 	0    1    1    0   
 $EndComp
@@ -1998,6 +2086,8 @@ F 0 "R50" V 7250 5200 50  0000 C CNN
 F 1 "1k" V 7450 5200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7280 5200 50  0001 C CNN
 F 3 "~" H 7350 5200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 7350 5200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7350 5200 50  0001 C CNN "Manufacturer"
 	1    7350 5200
 	0    1    1    0   
 $EndComp
@@ -2026,6 +2116,8 @@ F 0 "R54" V 10450 5550 50  0000 C CNN
 F 1 "10k" V 10650 5550 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10480 5550 50  0001 C CNN
 F 3 "~" H 10550 5550 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 10550 5550 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10550 5550 50  0001 C CNN "Manufacturer"
 	1    10550 5550
 	0    1    1    0   
 $EndComp
@@ -2053,6 +2145,8 @@ F 0 "R51" V 10050 5200 50  0000 C CNN
 F 1 "1k" V 10250 5200 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10080 5200 50  0001 C CNN
 F 3 "~" H 10150 5200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 10150 5200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10150 5200 50  0001 C CNN "Manufacturer"
 	1    10150 5200
 	0    1    1    0   
 $EndComp
@@ -2081,6 +2175,8 @@ F 0 "R83" V 2050 6650 50  0000 C CNN
 F 1 "10k" V 2250 6650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2080 6650 50  0001 C CNN
 F 3 "~" H 2150 6650 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 2150 6650 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 2150 6650 50  0001 C CNN "Manufacturer"
 	1    2150 6650
 	0    1    1    0   
 $EndComp
@@ -2108,6 +2204,8 @@ F 0 "R79" V 1650 6300 50  0000 C CNN
 F 1 "1k" V 1850 6300 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1680 6300 50  0001 C CNN
 F 3 "~" H 1750 6300 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1750 6300 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1750 6300 50  0001 C CNN "Manufacturer"
 	1    1750 6300
 	0    1    1    0   
 $EndComp
@@ -2136,6 +2234,8 @@ F 0 "R84" V 4850 6650 50  0000 C CNN
 F 1 "10k" V 5050 6650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4880 6650 50  0001 C CNN
 F 3 "~" H 4950 6650 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 4950 6650 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4950 6650 50  0001 C CNN "Manufacturer"
 	1    4950 6650
 	0    1    1    0   
 $EndComp
@@ -2163,6 +2263,8 @@ F 0 "R80" V 4450 6300 50  0000 C CNN
 F 1 "1k" V 4650 6300 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4480 6300 50  0001 C CNN
 F 3 "~" H 4550 6300 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 4550 6300 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 4550 6300 50  0001 C CNN "Manufacturer"
 	1    4550 6300
 	0    1    1    0   
 $EndComp
@@ -2191,6 +2293,8 @@ F 0 "R85" V 7650 6650 50  0000 C CNN
 F 1 "10k" V 7850 6650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7680 6650 50  0001 C CNN
 F 3 "~" H 7750 6650 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 7750 6650 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7750 6650 50  0001 C CNN "Manufacturer"
 	1    7750 6650
 	0    1    1    0   
 $EndComp
@@ -2218,6 +2322,8 @@ F 0 "R81" V 7250 6300 50  0000 C CNN
 F 1 "1k" V 7450 6300 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7280 6300 50  0001 C CNN
 F 3 "~" H 7350 6300 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 7350 6300 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 7350 6300 50  0001 C CNN "Manufacturer"
 	1    7350 6300
 	0    1    1    0   
 $EndComp
@@ -2246,6 +2352,8 @@ F 0 "R86" V 10450 6650 50  0000 C CNN
 F 1 "10k" V 10650 6650 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10480 6650 50  0001 C CNN
 F 3 "~" H 10550 6650 50  0001 C CNN
+F 4 "RC0603FR-0710KL" V 10550 6650 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10550 6650 50  0001 C CNN "Manufacturer"
 	1    10550 6650
 	0    1    1    0   
 $EndComp
@@ -2273,6 +2381,8 @@ F 0 "R82" V 10050 6300 50  0000 C CNN
 F 1 "1k" V 10250 6300 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10080 6300 50  0001 C CNN
 F 3 "~" H 10150 6300 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 10150 6300 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10150 6300 50  0001 C CNN "Manufacturer"
 	1    10150 6300
 	0    1    1    0   
 $EndComp
