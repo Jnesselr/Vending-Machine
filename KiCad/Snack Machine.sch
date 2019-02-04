@@ -3732,7 +3732,7 @@ U 1 1 5C4CE902
 P 5500 6000
 F 0 "Q28" V 5750 5950 50  0000 C CNN
 F 1 "BSS138" V 5841 6000 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5700 5925 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5700 5925 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 5500 6000 50  0001 L CNN
 	1    5500 6000
 	0    1    1    0   
@@ -3821,7 +3821,7 @@ U 1 1 5C72BA5B
 P 5500 4950
 F 0 "Q27" V 5750 4900 50  0000 C CNN
 F 1 "BSS138" V 5841 4950 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5700 4875 50  0001 L CIN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5700 4875 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 5500 4950 50  0001 L CNN
 F 4 "BSS138" V 5500 4950 50  0001 C CNN "Part Number"
 F 5 "ON Semiconductor" V 5500 4950 50  0001 C CNN "Manufacturer"
@@ -3957,4 +3957,17 @@ Wire Wire Line
 Connection ~ 5800 6100
 Wire Wire Line
 	14700 1250 14900 1250
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C5AD102
+P 9900 3900
+AR Path="/5BCD883C/5C5AD102" Ref="TP?"  Part="1" 
+AR Path="/5C5AD102" Ref="TP94"  Part="1" 
+F 0 "TP94" V 9850 3850 50  0000 L CNN
+F 1 "TestPoint" V 9850 4100 50  0000 L CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 10100 3900 50  0001 C CNN
+F 3 "~" H 10100 3900 50  0001 C CNN
+	1    9900 3900
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC

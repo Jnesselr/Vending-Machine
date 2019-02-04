@@ -1,5 +1,5 @@
 Drill report for C:\Users\Tom\vending_machine\KiCad\Snack Machine.kicad_pcb
-Created on 1/31/2019 11:57:23 PM
+Created on 2/3/2019 5:01:12 PM
 
 Copper Layer Stackup:
     =============================================================
@@ -11,16 +11,16 @@ Drill file 'Snack Machine-PTH.drl' contains
     plated through holes:
     =============================================================
     T1  0.30mm  0.012"  (18 holes)
-    T2  0.40mm  0.016"  (197 holes)
+    T2  0.40mm  0.016"  (199 holes)
     T3  0.50mm  0.020"  (2 holes)  (with 2 slots)
-    T4  0.76mm  0.030"  (28 holes)
-    T5  1.00mm  0.039"  (94 holes)
+    T4  1.00mm  0.039"  (94 holes)
+    T5  1.02mm  0.040"  (28 holes)
     T6  1.30mm  0.051"  (18 holes)
     T7  1.40mm  0.055"  (12 holes)
     T8  1.65mm  0.065"  (4 holes)
     T9  3.50mm  0.138"  (4 holes)
 
-    Total plated holes count 377
+    Total plated holes count 379
 
 
 Drill file 'Snack Machine-NPTH.drl' contains
