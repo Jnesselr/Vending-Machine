@@ -1,0 +1,1064 @@
+EESchema Schematic File Version 4
+EELAYER 29 0
+EELAYER END
+$Descr USLetter 11000 8500
+encoding utf-8
+Sheet 1 1
+Title "Vending Machine Motor Driver Test PCB"
+Date "2019-07-16"
+Rev "0.1"
+Comp "Denhac"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L motor-test:TBD62083AFNGEL U3
+U 1 1 5D2EACE2
+P 7300 4300
+F 0 "U3" H 7300 5015 50  0000 C CNN
+F 1 "TBD62083AFNGEL" H 7300 4924 50  0000 C CNN
+F 2 "motor-test:SSOP-18_4.4x6.5mm_P0.65mm" H 7300 4850 50  0001 C CNN
+F 3 "https://toshiba.semicon-storage.com/info/docget.jsp?did=29893&prodName=TBD62083AFG" H 7300 4850 50  0001 C CNN
+	1    7300 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L motor-test:TBD62783AFNGEL U2
+U 1 1 5D2ECE94
+P 7300 2850
+F 0 "U2" H 7300 3565 50  0000 C CNN
+F 1 "TBD62783AFNGEL" H 7300 3474 50  0000 C CNN
+F 2 "motor-test:SSOP-18_4.4x6.5mm_P0.65mm" H 7300 3400 50  0001 C CNN
+F 3 "https://toshiba.semicon-storage.com/info/docget.jsp?did=30523&prodName=TBD62783AFG" H 7300 3400 50  0001 C CNN
+	1    7300 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5D2EDC96
+P 6950 4800
+F 0 "#PWR0101" H 6950 4550 50  0001 C CNN
+F 1 "GND" H 6955 4627 50  0000 C CNN
+F 2 "" H 6950 4800 50  0001 C CNN
+F 3 "" H 6950 4800 50  0001 C CNN
+	1    6950 4800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 4650 6950 4650
+Wire Wire Line
+	6950 4650 6950 4750
+Wire Wire Line
+	7000 4750 6950 4750
+Connection ~ 6950 4750
+Wire Wire Line
+	6950 4750 6950 4800
+$Comp
+L power:GND #PWR0102
+U 1 1 5D2EED3C
+P 6950 3350
+F 0 "#PWR0102" H 6950 3100 50  0001 C CNN
+F 1 "GND" H 6955 3177 50  0000 C CNN
+F 2 "" H 6950 3350 50  0001 C CNN
+F 3 "" H 6950 3350 50  0001 C CNN
+	1    6950 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 3300 6950 3300
+Wire Wire Line
+	6950 3300 6950 3350
+$Comp
+L Device:Q_TRIAC_A1A2G D2
+U 1 1 5D2F6EF9
+P 5950 2400
+F 0 "D2" V 6216 2400 50  0000 C CNN
+F 1 "Q_TRIAC_A1A2G" V 6125 2400 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 6025 2425 50  0001 C CNN
+F 3 "http://www.ween-semi.com/sites/default/files/2018-10/z0103mn0.pdf" V 5950 2400 50  0001 C CNN
+	1    5950 2400
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	7000 2400 6300 2400
+Wire Wire Line
+	5850 2550 5850 3100
+$Comp
+L power:GND #PWR0104
+U 1 1 5D2FC8E3
+P 5850 3800
+F 0 "#PWR0104" H 5850 3550 50  0001 C CNN
+F 1 "GND" H 5855 3627 50  0000 C CNN
+F 2 "" H 5850 3800 50  0001 C CNN
+F 3 "" H 5850 3800 50  0001 C CNN
+	1    5850 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5D2FCF20
+P 5850 3650
+F 0 "R1" H 5920 3696 50  0000 L CNN
+F 1 "2.2 k" H 5920 3605 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 5780 3650 50  0001 C CNN
+F 3 "~" H 5850 3650 50  0001 C CNN
+	1    5850 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 3300 5050 3300
+Text Label 5050 3300 0    50   ~ 0
+TRIAC0
+Text Label 5850 2950 1    50   ~ 0
+TRIAC1
+$Comp
+L capacitors:capacitor_0805 C2
+U 1 1 5D3005C5
+P 6300 2600
+F 0 "C2" H 6435 2646 50  0000 L CNN
+F 1 "100 nF" H 6435 2555 50  0000 L CNN
+F 2 "kicad_pcb:C_0603_1608Metric" V 6300 2600 50  0001 C CNN
+F 3 "" H 6300 2600 50  0000 C CNN
+	1    6300 2600
+	1    0    0    -1  
+$EndComp
+Connection ~ 6300 2400
+Wire Wire Line
+	6300 2400 6250 2400
+$Comp
+L power:GND #PWR0105
+U 1 1 5D300B40
+P 6300 2800
+F 0 "#PWR0105" H 6300 2550 50  0001 C CNN
+F 1 "GND" H 6305 2627 50  0000 C CNN
+F 2 "" H 6300 2800 50  0001 C CNN
+F 3 "" H 6300 2800 50  0001 C CNN
+	1    6300 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NPN_BEC Q1
+U 1 1 5D2FC06A
+P 5750 3300
+F 0 "Q1" H 5940 3346 50  0000 L CNN
+F 1 "MMBT3904" H 5940 3255 50  0000 L CNN
+F 2 "kicad_pcb:SOT-23" H 5950 3400 50  0001 C CNN
+F 3 "~" H 5750 3300 50  0001 C CNN
+	1    5750 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D D1
+U 1 1 5D304661
+P 5950 2000
+F 0 "D1" H 5950 2216 50  0000 C CNN
+F 1 "S1GTR" H 5950 2125 50  0000 C CNN
+F 2 "Diode_SMD:D_SMA" H 5950 2000 50  0001 C CNN
+F 3 "http://www.smc-diodes.com/propdf/S1A-S1M%20N0560%20REV.B.pdf" H 5950 2000 50  0001 C CNN
+	1    5950 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6100 2000 6250 2000
+Wire Wire Line
+	6250 2000 6250 2400
+Connection ~ 6250 2400
+Wire Wire Line
+	6250 2400 6100 2400
+Wire Wire Line
+	5800 2400 5550 2400
+Wire Wire Line
+	5550 2400 5550 2000
+Wire Wire Line
+	5550 2000 5800 2000
+$Comp
+L capacitors:capacitor_0805 C1
+U 1 1 5D307B24
+P 5350 2600
+F 0 "C1" H 5485 2646 50  0000 L CNN
+F 1 "2.2 μF" H 5485 2555 50  0000 L CNN
+F 2 "kicad_pcb:C_0603_1608Metric" V 5350 2600 50  0001 C CNN
+F 3 "" H 5350 2600 50  0000 C CNN
+	1    5350 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 5D307B2E
+P 5350 2800
+F 0 "#PWR0106" H 5350 2550 50  0001 C CNN
+F 1 "GND" H 5355 2627 50  0000 C CNN
+F 2 "" H 5350 2800 50  0001 C CNN
+F 3 "" H 5350 2800 50  0001 C CNN
+	1    5350 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 2400 5350 2400
+Connection ~ 5550 2400
+$Comp
+L ic:X7WBX U4
+U 1 1 5D31BC6A
+P 3100 2300
+F 0 "U4" H 3425 2465 50  0000 C CNN
+F 1 "X7WBX" H 3425 2374 50  0000 C CNN
+F 2 "kicad_pcb:QFN-17-Diodes1" H 3100 2350 50  0001 L CNN
+F 3 "$PARTS/X7WBX/DPS1133.pdf" V 3350 2300 50  0001 C CNN
+	1    3100 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L capacitors:capacitor_0805 C4
+U 1 1 5D32874A
+P 2250 2600
+F 0 "C4" H 2385 2646 50  0000 L CNN
+F 1 "2.2 μF" H 2385 2555 50  0000 L CNN
+F 2 "kicad_pcb:C_0603_1608Metric" V 2250 2600 50  0001 C CNN
+F 3 "" H 2250 2600 50  0000 C CNN
+	1    2250 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 5D328754
+P 2250 2800
+F 0 "#PWR0107" H 2250 2550 50  0001 C CNN
+F 1 "GND" H 2255 2627 50  0000 C CNN
+F 2 "" H 2250 2800 50  0001 C CNN
+F 3 "" H 2250 2800 50  0001 C CNN
+	1    2250 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 2400 2950 2400
+$Comp
+L Device:LED D3
+U 1 1 5D348433
+P 4050 1700
+F 0 "D3" V 4089 1583 50  0000 R CNN
+F 1 "LED" V 3998 1583 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 4050 1700 50  0001 C CNN
+F 3 "~" H 4050 1700 50  0001 C CNN
+	1    4050 1700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5D348C9F
+P 4050 2000
+F 0 "R2" H 4120 2046 50  0000 L CNN
+F 1 "5.1 k" H 4120 1955 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 3980 2000 50  0001 C CNN
+F 3 "~" H 4050 2000 50  0001 C CNN
+	1    4050 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 2500 4050 2500
+Wire Wire Line
+	4050 2500 4050 2150
+$Comp
+L combined:+5V #PWR0109
+U 1 1 5D349A95
+P 4050 1550
+F 0 "#PWR0109" H 4050 1640 50  0001 C CNN
+F 1 "+5V" H 4046 1693 50  0000 C CNN
+F 2 "" H 4050 1550 50  0000 C CNN
+F 3 "" H 4050 1550 50  0000 C CNN
+	1    4050 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0110
+U 1 1 5D34BEBE
+P 4900 3900
+F 0 "#PWR0110" H 4900 3650 50  0001 C CNN
+F 1 "GND" H 4905 3727 50  0000 C CNN
+F 2 "" H 4900 3900 50  0001 C CNN
+F 3 "" H 4900 3900 50  0001 C CNN
+	1    4900 3900
+	1    0    0    -1  
+$EndComp
+Text Label 3900 2600 0    50   ~ 0
+IMON
+Text Label 4050 2300 0    50   ~ 0
+FAULT
+$Comp
+L Device:R R3
+U 1 1 5D34E0E4
+P 4200 3150
+F 0 "R3" H 4270 3196 50  0000 L CNN
+F 1 "330 k" H 4270 3105 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 4130 3150 50  0001 C CNN
+F 3 "~" H 4200 3150 50  0001 C CNN
+	1    4200 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 5D34B817
+P 4900 3750
+F 0 "R5" H 4970 3796 50  0000 L CNN
+F 1 "100 k" H 4970 3705 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 4830 3750 50  0001 C CNN
+F 3 "~" H 4900 3750 50  0001 C CNN
+	1    4900 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 3600 4900 3550
+Wire Wire Line
+	3850 2400 3900 2400
+Connection ~ 5350 2400
+$Comp
+L power:GND #PWR0111
+U 1 1 5D36048F
+P 4200 3300
+F 0 "#PWR0111" H 4200 3050 50  0001 C CNN
+F 1 "GND" H 4205 3127 50  0000 C CNN
+F 2 "" H 4200 3300 50  0001 C CNN
+F 3 "" H 4200 3300 50  0001 C CNN
+	1    4200 3300
+	1    0    0    -1  
+$EndComp
+Text Label 3900 2800 0    50   ~ 0
+VLIM
+Text Label 3900 2900 0    50   ~ 0
+ILIM
+Text Notes 4200 2600 0    50   ~ 0
+10 μA / A\n1 V/A with 100k
+$Comp
+L power:GND #PWR0112
+U 1 1 5D365E9A
+P 2950 3050
+F 0 "#PWR0112" H 2950 2800 50  0001 C CNN
+F 1 "GND" H 2955 2877 50  0000 C CNN
+F 2 "" H 2950 3050 50  0001 C CNN
+F 3 "" H 2950 3050 50  0001 C CNN
+	1    2950 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 3000 2950 3000
+Wire Wire Line
+	2950 3000 2950 3050
+$Comp
+L capacitors:capacitor_0805 C5
+U 1 1 5D36BE28
+P 2600 3300
+F 0 "C5" H 2735 3346 50  0000 L CNN
+F 1 "100 nF" H 2735 3255 50  0000 L CNN
+F 2 "kicad_pcb:C_0603_1608Metric" V 2600 3300 50  0001 C CNN
+F 3 "" H 2600 3300 50  0000 C CNN
+	1    2600 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0113
+U 1 1 5D36BE32
+P 2600 3500
+F 0 "#PWR0113" H 2600 3250 50  0001 C CNN
+F 1 "GND" H 2605 3327 50  0000 C CNN
+F 2 "" H 2600 3500 50  0001 C CNN
+F 3 "" H 2600 3500 50  0001 C CNN
+	1    2600 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 2900 2600 2900
+Wire Wire Line
+	2600 2900 2600 3100
+Wire Wire Line
+	2950 3000 2950 2800
+Wire Wire Line
+	2950 2700 3000 2700
+Connection ~ 2950 3000
+Wire Wire Line
+	3000 2800 2950 2800
+Connection ~ 2950 2800
+Wire Wire Line
+	2950 2800 2950 2700
+Wire Wire Line
+	2950 2700 2950 2600
+Wire Wire Line
+	2950 2600 3000 2600
+Connection ~ 2950 2700
+Wire Wire Line
+	3000 2500 2750 2500
+Wire Wire Line
+	2750 2500 2750 2100
+Wire Wire Line
+	2750 2100 2500 2100
+$Comp
+L capacitors:capacitor_0805 C7
+U 1 1 5D37F1F3
+P 4400 3750
+F 0 "C7" H 4535 3796 50  0000 L CNN
+F 1 "100 nF" H 4535 3705 50  0000 L CNN
+F 2 "kicad_pcb:C_0603_1608Metric" V 4400 3750 50  0001 C CNN
+F 3 "" H 4400 3750 50  0000 C CNN
+	1    4400 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0114
+U 1 1 5D37F1FD
+P 4400 3950
+F 0 "#PWR0114" H 4400 3700 50  0001 C CNN
+F 1 "GND" H 4405 3777 50  0000 C CNN
+F 2 "" H 4400 3950 50  0001 C CNN
+F 3 "" H 4400 3950 50  0001 C CNN
+	1    4400 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4400 3550 4900 3550
+Connection ~ 4900 3550
+Wire Wire Line
+	4900 3550 4900 2600
+$Comp
+L capacitors:capacitor_0805 C6
+U 1 1 5D38DB37
+P 3900 3250
+F 0 "C6" V 3750 3200 50  0000 L CNN
+F 1 "100 nF" V 4050 3100 50  0000 L CNN
+F 2 "kicad_pcb:C_0603_1608Metric" V 3900 3250 50  0001 C CNN
+F 3 "" H 3900 3250 50  0000 C CNN
+	1    3900 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0115
+U 1 1 5D38DB41
+P 3900 3450
+F 0 "#PWR0115" H 3900 3200 50  0001 C CNN
+F 1 "GND" H 3905 3277 50  0000 C CNN
+F 2 "" H 3900 3450 50  0001 C CNN
+F 3 "" H 3900 3450 50  0001 C CNN
+	1    3900 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 3000 3900 3000
+Wire Wire Line
+	3900 3000 3900 3050
+$Comp
+L Device:R R4
+U 1 1 5D3970B3
+P 4550 3150
+F 0 "R4" H 4620 3196 50  0000 L CNN
+F 1 "270 k" H 4620 3105 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 4480 3150 50  0001 C CNN
+F 3 "~" H 4550 3150 50  0001 C CNN
+	1    4550 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0116
+U 1 1 5D3970BD
+P 4550 3300
+F 0 "#PWR0116" H 4550 3050 50  0001 C CNN
+F 1 "GND" H 4555 3127 50  0000 C CNN
+F 2 "" H 4550 3300 50  0001 C CNN
+F 3 "" H 4550 3300 50  0001 C CNN
+	1    4550 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 2800 4550 2800
+Wire Wire Line
+	4200 2900 4200 3000
+Wire Wire Line
+	3850 2900 4200 2900
+Wire Wire Line
+	4550 2800 4550 3000
+Wire Wire Line
+	3850 2600 4900 2600
+Text Notes 3850 4300 0    50   ~ 0
+ILIM = 100 k / RILIM
+$Comp
+L Switch:SW_DIP_x08 SW1
+U 1 1 5D3B6769
+P 1200 6700
+F 0 "SW1" H 1200 7367 50  0000 C CNN
+F 1 "SW_DIP_x08" H 1200 7276 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm" H 1200 6700 50  0001 C CNN
+F 3 "~" H 1200 6700 50  0001 C CNN
+	1    1200 6700
+	1    0    0    -1  
+$EndComp
+Text Label 2500 2100 0    50   ~ 0
+CB_EN
+Wire Wire Line
+	7000 4150 6950 4150
+Wire Wire Line
+	6950 4150 6950 4250
+Connection ~ 6950 4650
+Wire Wire Line
+	7000 4550 6950 4550
+Connection ~ 6950 4550
+Wire Wire Line
+	6950 4550 6950 4650
+Wire Wire Line
+	7000 4450 6950 4450
+Connection ~ 6950 4450
+Wire Wire Line
+	6950 4450 6950 4550
+Wire Wire Line
+	7000 4350 6950 4350
+Connection ~ 6950 4350
+Wire Wire Line
+	6950 4350 6950 4450
+Wire Wire Line
+	7000 4250 6950 4250
+Connection ~ 6950 4250
+Wire Wire Line
+	6950 4250 6950 4350
+Wire Wire Line
+	7000 2800 6950 2800
+Wire Wire Line
+	6950 2800 6950 2900
+Connection ~ 6950 3300
+Wire Wire Line
+	7000 3200 6950 3200
+Connection ~ 6950 3200
+Wire Wire Line
+	6950 3200 6950 3300
+Wire Wire Line
+	7000 3100 6950 3100
+Connection ~ 6950 3100
+Wire Wire Line
+	6950 3100 6950 3200
+Wire Wire Line
+	7000 3000 6950 3000
+Connection ~ 6950 3000
+Wire Wire Line
+	6950 3000 6950 3100
+Wire Wire Line
+	7000 2900 6950 2900
+Connection ~ 6950 2900
+Wire Wire Line
+	6950 2900 6950 3000
+Wire Wire Line
+	900  6900 850  6900
+Wire Wire Line
+	850  6900 850  7000
+Wire Wire Line
+	900  7000 850  7000
+Wire Wire Line
+	900  6400 850  6400
+Wire Wire Line
+	850  6400 850  6500
+Connection ~ 850  6900
+Wire Wire Line
+	900  6800 850  6800
+Connection ~ 850  6800
+Wire Wire Line
+	850  6800 850  6900
+Wire Wire Line
+	900  6700 850  6700
+Connection ~ 850  6700
+Wire Wire Line
+	850  6700 850  6800
+Wire Wire Line
+	900  6600 850  6600
+Connection ~ 850  6600
+Wire Wire Line
+	850  6600 850  6700
+Wire Wire Line
+	900  6500 850  6500
+Connection ~ 850  6500
+Wire Wire Line
+	850  6500 850  6600
+Wire Wire Line
+	900  6300 850  6300
+Wire Wire Line
+	850  6300 850  6400
+Connection ~ 850  6400
+Text Label 4600 2400 0    50   ~ 0
+CB_OUT
+Text Label 6500 2400 0    50   ~ 0
+TRIAC_OUT
+$Comp
+L Device:R R6
+U 1 1 5D440BC1
+P 1600 7200
+F 0 "R6" H 1670 7246 50  0000 L CNN
+F 1 "5.1 k" H 1670 7155 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 1530 7200 50  0001 C CNN
+F 3 "~" H 1600 7200 50  0001 C CNN
+	1    1600 7200
+	1    0    0    1   
+$EndComp
+$Comp
+L combined:+5V #PWR0103
+U 1 1 5D443A4C
+P 850 6300
+F 0 "#PWR0103" H 850 6390 50  0001 C CNN
+F 1 "+5V" H 846 6443 50  0000 C CNN
+F 2 "" H 850 6300 50  0000 C CNN
+F 3 "" H 850 6300 50  0000 C CNN
+	1    850  6300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R7
+U 1 1 5D4455EC
+P 1950 7200
+F 0 "R7" H 2020 7246 50  0000 L CNN
+F 1 "5.1 k" H 2020 7155 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 1880 7200 50  0001 C CNN
+F 3 "~" H 1950 7200 50  0001 C CNN
+	1    1950 7200
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	1600 7450 1600 7400
+Wire Wire Line
+	1600 7400 1950 7400
+Wire Wire Line
+	1950 7400 1950 7350
+Connection ~ 1600 7400
+Wire Wire Line
+	1600 7400 1600 7350
+$Comp
+L Device:R R8
+U 1 1 5D45A85B
+P 2300 7200
+F 0 "R8" H 2370 7246 50  0000 L CNN
+F 1 "5.1 k" H 2370 7155 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 2230 7200 50  0001 C CNN
+F 3 "~" H 2300 7200 50  0001 C CNN
+	1    2300 7200
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R9
+U 1 1 5D45A865
+P 2650 7200
+F 0 "R9" H 2720 7246 50  0000 L CNN
+F 1 "5.1 k" H 2720 7155 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 2580 7200 50  0001 C CNN
+F 3 "~" H 2650 7200 50  0001 C CNN
+	1    2650 7200
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	1950 7400 2300 7400
+Wire Wire Line
+	2300 7400 2300 7350
+Connection ~ 1950 7400
+Wire Wire Line
+	2300 7400 2650 7400
+Wire Wire Line
+	2650 7400 2650 7350
+Connection ~ 2300 7400
+Wire Wire Line
+	1500 7000 1600 7000
+Wire Wire Line
+	1600 7000 1600 7050
+Wire Wire Line
+	1950 6900 1950 7050
+Wire Wire Line
+	2300 7050 2300 6800
+Wire Wire Line
+	2650 6700 2650 7050
+Wire Wire Line
+	1600 7000 4500 7000
+Connection ~ 1600 7000
+Text Label 4500 7000 2    50   ~ 0
+CB_EN
+$Comp
+L Device:R R10
+U 1 1 5D4998B8
+P 3000 7200
+F 0 "R10" H 3070 7246 50  0000 L CNN
+F 1 "5.1 k" H 3070 7155 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 2930 7200 50  0001 C CNN
+F 3 "~" H 3000 7200 50  0001 C CNN
+	1    3000 7200
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R11
+U 1 1 5D4998C2
+P 3350 7200
+F 0 "R11" H 3420 7246 50  0000 L CNN
+F 1 "5.1 k" H 3420 7155 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 3280 7200 50  0001 C CNN
+F 3 "~" H 3350 7200 50  0001 C CNN
+	1    3350 7200
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R12
+U 1 1 5D4A0F4B
+P 3700 7200
+F 0 "R12" H 3770 7246 50  0000 L CNN
+F 1 "5.1 k" H 3770 7155 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 3630 7200 50  0001 C CNN
+F 3 "~" H 3700 7200 50  0001 C CNN
+	1    3700 7200
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	3000 7400 3350 7400
+Wire Wire Line
+	3350 7400 3350 7350
+Wire Wire Line
+	3350 7400 3700 7400
+Wire Wire Line
+	3700 7400 3700 7350
+Connection ~ 3350 7400
+Wire Wire Line
+	3000 7350 3000 7400
+Wire Wire Line
+	3000 7400 2650 7400
+Connection ~ 3000 7400
+Connection ~ 2650 7400
+Wire Wire Line
+	3000 7050 3000 6600
+Wire Wire Line
+	3000 6600 1500 6600
+Wire Wire Line
+	1500 6500 3350 6500
+Wire Wire Line
+	3350 6500 3350 7050
+Wire Wire Line
+	1500 6400 3700 6400
+Wire Wire Line
+	3700 6400 3700 7050
+Text Label 6750 2500 0    50   ~ 0
+HS0
+Wire Wire Line
+	7000 2500 6750 2500
+Text Label 6750 2600 0    50   ~ 0
+HS1
+Wire Wire Line
+	7000 2600 6750 2600
+Text Label 6750 2700 0    50   ~ 0
+HS2
+Wire Wire Line
+	7000 2700 6750 2700
+Text Label 6750 3850 0    50   ~ 0
+LS0
+Wire Wire Line
+	7000 3850 6750 3850
+Text Label 6750 3950 0    50   ~ 0
+LS1
+Wire Wire Line
+	7000 3950 6750 3950
+Text Label 6750 4050 0    50   ~ 0
+LS2
+Wire Wire Line
+	7000 4050 6750 4050
+Wire Wire Line
+	1500 6700 2650 6700
+Wire Wire Line
+	2300 6800 1500 6800
+Wire Wire Line
+	1500 6900 1950 6900
+Text Label 1700 6600 0    50   ~ 0
+LS0
+Text Label 1700 6500 0    50   ~ 0
+LS1
+Text Label 1700 6400 0    50   ~ 0
+LS2
+Text Label 1700 6900 0    50   ~ 0
+HS0
+Text Label 1700 6800 0    50   ~ 0
+HS1
+Text Label 1700 6700 0    50   ~ 0
+HS2
+$Comp
+L Device:CP C3
+U 1 1 5D54B42E
+P 1700 2600
+F 0 "C3" H 1818 2646 50  0000 L CNN
+F 1 "220 uF" H 1818 2555 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 1738 2450 50  0001 C CNN
+F 3 "~" H 1700 2600 50  0001 C CNN
+	1    1700 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0108
+U 1 1 5D54C429
+P 1700 2750
+F 0 "#PWR0108" H 1700 2500 50  0001 C CNN
+F 1 "GND" H 1705 2577 50  0000 C CNN
+F 2 "" H 1700 2750 50  0001 C CNN
+F 3 "" H 1700 2750 50  0001 C CNN
+	1    1700 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 2400 2000 2400
+Wire Wire Line
+	1700 2400 1700 2450
+Connection ~ 2250 2400
+$Comp
+L power:+24V #PWR0118
+U 1 1 5D553468
+P 1700 2400
+F 0 "#PWR0118" H 1700 2250 50  0001 C CNN
+F 1 "+24V" H 1715 2573 50  0000 C CNN
+F 2 "" H 1700 2400 50  0001 C CNN
+F 3 "" H 1700 2400 50  0001 C CNN
+	1    1700 2400
+	1    0    0    -1  
+$EndComp
+Connection ~ 1700 2400
+$Comp
+L Connector:Conn_01x06_Male J1
+U 1 1 5D558540
+P 8500 2700
+F 0 "J1" H 8472 2674 50  0000 R CNN
+F 1 "Conn_01x06_Male" H 8472 2583 50  0000 R CNN
+F 2 "kicad_pcb:DF3_6" H 8500 2700 50  0001 C CNN
+F 3 "~" H 8500 2700 50  0001 C CNN
+	1    8500 2700
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 2500 8300 2500
+Wire Wire Line
+	7600 2600 8300 2600
+Wire Wire Line
+	8300 2700 7600 2700
+Wire Wire Line
+	8300 2800 8000 2800
+Wire Wire Line
+	8000 2800 8000 3850
+Wire Wire Line
+	8000 3850 7600 3850
+Wire Wire Line
+	8300 2900 8100 2900
+Wire Wire Line
+	8100 2900 8100 3950
+Wire Wire Line
+	8100 3950 7600 3950
+Wire Wire Line
+	7600 4050 8200 4050
+Wire Wire Line
+	8200 4050 8200 3000
+Wire Wire Line
+	8200 3000 8300 3000
+NoConn ~ 7600 2800
+NoConn ~ 7600 2900
+NoConn ~ 7600 3000
+NoConn ~ 7600 3100
+NoConn ~ 7600 3200
+NoConn ~ 7600 4150
+NoConn ~ 7600 4250
+NoConn ~ 7600 4350
+NoConn ~ 7600 4450
+NoConn ~ 7600 4550
+$Comp
+L misc:tooling_hole TH1
+U 1 1 5D5B1BD0
+P 9800 3700
+F 0 "TH1" H 9878 3700 50  0000 L CNN
+F 1 "tooling_hole" H 9950 3700 50  0001 L CNN
+F 2 "kicad_pcb:tooling_hole_2.55" H 9950 3800 50  0001 L CNN
+F 3 "" V 10000 3900 50  0001 C CNN
+	1    9800 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L misc:tooling_hole TH2
+U 1 1 5D5B2091
+P 9800 3900
+F 0 "TH2" H 9878 3900 50  0000 L CNN
+F 1 "tooling_hole" H 9950 3900 50  0001 L CNN
+F 2 "kicad_pcb:tooling_hole_2.55" H 9950 4000 50  0001 L CNN
+F 3 "" V 10000 4100 50  0001 C CNN
+	1    9800 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J2
+U 1 1 5D5BECF8
+P 950 2400
+F 0 "J2" H 1058 2581 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 1058 2490 50  0000 C CNN
+F 2 "kicad_pcb:DF3_2" H 950 2400 50  0001 C CNN
+F 3 "~" H 950 2400 50  0001 C CNN
+	1    950  2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1700 2750 1150 2750
+Wire Wire Line
+	1150 2750 1150 2500
+Wire Wire Line
+	1150 2400 1700 2400
+Connection ~ 1700 2750
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 5D5DB219
+P 950 1500
+F 0 "J3" H 1058 1681 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 1058 1590 50  0000 C CNN
+F 2 "kicad_pcb:DF3_2" H 950 1500 50  0001 C CNN
+F 3 "~" H 950 1500 50  0001 C CNN
+	1    950  1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0119
+U 1 1 5D5E1BF8
+P 1150 1600
+F 0 "#PWR0119" H 1150 1350 50  0001 C CNN
+F 1 "GND" H 1155 1427 50  0000 C CNN
+F 2 "" H 1150 1600 50  0001 C CNN
+F 3 "" H 1150 1600 50  0001 C CNN
+	1    1150 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L combined:+5V #PWR0120
+U 1 1 5D5E28E6
+P 1150 1500
+F 0 "#PWR0120" H 1150 1590 50  0001 C CNN
+F 1 "+5V" V 1146 1598 50  0000 L CNN
+F 2 "" H 1150 1500 50  0000 C CNN
+F 3 "" H 1150 1500 50  0000 C CNN
+	1    1150 1500
+	0    1    1    0   
+$EndComp
+Connection ~ 850  6300
+$Comp
+L power:GND #PWR0117
+U 1 1 5D602919
+P 1600 7450
+F 0 "#PWR0117" H 1600 7200 50  0001 C CNN
+F 1 "GND" H 1605 7277 50  0000 C CNN
+F 2 "" H 1600 7450 50  0001 C CNN
+F 3 "" H 1600 7450 50  0001 C CNN
+	1    1600 7450
+	1    0    0    -1  
+$EndComp
+$Comp
+L misc:TTWY4 S1
+U 1 1 5D629DA3
+P 4950 1750
+F 0 "S1" V 4950 1606 50  0000 R CNN
+F 1 "TTWY4" H 4950 1600 50  0001 L BNN
+F 2 "PB_3.5x6" H 4950 1750 50  0001 C CNN
+F 3 "" H 4950 1750 50  0001 C CNN
+	1    4950 1750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L combined:+5V #PWR0121
+U 1 1 5D62D05E
+P 5050 1500
+F 0 "#PWR0121" H 5050 1590 50  0001 C CNN
+F 1 "+5V" H 5046 1643 50  0000 C CNN
+F 2 "" H 5050 1500 50  0000 C CNN
+F 3 "" H 5050 1500 50  0000 C CNN
+	1    5050 1500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5050 2000 5050 3300
+$Comp
+L Device:D D4
+U 1 1 5D63CADC
+P 3400 1950
+F 0 "D4" H 3400 2166 50  0000 C CNN
+F 1 "S1GTR" H 3400 2075 50  0000 C CNN
+F 2 "Diode_SMD:D_SMA" H 3400 1950 50  0001 C CNN
+F 3 "http://www.smc-diodes.com/propdf/S1A-S1M%20N0560%20REV.B.pdf" H 3400 1950 50  0001 C CNN
+	1    3400 1950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3550 1950 3900 1950
+Wire Wire Line
+	3900 1950 3900 2400
+Connection ~ 3900 2400
+Wire Wire Line
+	3900 2400 5350 2400
+Wire Wire Line
+	3250 1950 2950 1950
+Wire Wire Line
+	2950 1950 2950 2400
+Connection ~ 2950 2400
+Wire Wire Line
+	2950 2400 2250 2400
+NoConn ~ 1500 6300
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 5D66AD6B
+P 2000 2400
+F 0 "#FLG0101" H 2000 2475 50  0001 C CNN
+F 1 "PWR_FLAG" H 2000 2573 50  0000 C CNN
+F 2 "" H 2000 2400 50  0001 C CNN
+F 3 "~" H 2000 2400 50  0001 C CNN
+	1    2000 2400
+	1    0    0    -1  
+$EndComp
+Connection ~ 2000 2400
+Wire Wire Line
+	2000 2400 1700 2400
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 5D66B900
+P 1450 3650
+F 0 "#FLG0102" H 1450 3725 50  0001 C CNN
+F 1 "PWR_FLAG" H 1450 3823 50  0000 C CNN
+F 2 "" H 1450 3650 50  0001 C CNN
+F 3 "~" H 1450 3650 50  0001 C CNN
+	1    1450 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0122
+U 1 1 5D66BCED
+P 1450 3650
+F 0 "#PWR0122" H 1450 3400 50  0001 C CNN
+F 1 "GND" H 1455 3477 50  0000 C CNN
+F 2 "" H 1450 3650 50  0001 C CNN
+F 3 "" H 1450 3650 50  0001 C CNN
+	1    1450 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0103
+U 1 1 5D67007D
+P 6250 2000
+F 0 "#FLG0103" H 6250 2075 50  0001 C CNN
+F 1 "PWR_FLAG" H 6250 2173 50  0000 C CNN
+F 2 "" H 6250 2000 50  0001 C CNN
+F 3 "~" H 6250 2000 50  0001 C CNN
+	1    6250 2000
+	1    0    0    -1  
+$EndComp
+Connection ~ 6250 2000
+$Comp
+L combined:+5V #PWR0123
+U 1 1 5D676465
+P 2800 1200
+F 0 "#PWR0123" H 2800 1290 50  0001 C CNN
+F 1 "+5V" H 2796 1343 50  0000 C CNN
+F 2 "" H 2800 1200 50  0000 C CNN
+F 3 "" H 2800 1200 50  0000 C CNN
+	1    2800 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0104
+U 1 1 5D67686D
+P 2800 1200
+F 0 "#FLG0104" H 2800 1275 50  0001 C CNN
+F 1 "PWR_FLAG" H 2800 1373 50  0000 C CNN
+F 2 "" H 2800 1200 50  0001 C CNN
+F 3 "~" H 2800 1200 50  0001 C CNN
+	1    2800 1200
+	-1   0    0    1   
+$EndComp
+$EndSCHEMATC

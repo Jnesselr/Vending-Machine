@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name motor-test)(type Legacy)(uri ${KIPRJMOD}/motor-test.lib)(options "")(descr ""))
+)

@@ -1,0 +1,13 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP TBD62083AFNGEL
+D 8 channel low side driver
+F https://toshiba.semicon-storage.com/info/docget.jsp?did=29893&prodName=TBD62083AFG
+$ENDCMP
+#
+$CMP TBD62783AFNGEL
+D 8 channel high side driver
+F https://toshiba.semicon-storage.com/info/docget.jsp?did=30523&prodName=TBD62783AFG
+$ENDCMP
+#
+#End Doc Library
