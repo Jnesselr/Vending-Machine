@@ -562,7 +562,7 @@
     (fp_text reference R12 (at 0 -1.22) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "5.1 k" (at 0 1.22) (layer F.Fab)
+    (fp_text value DNP (at 0 1.22) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0) (layer F.Fab)
@@ -598,7 +598,7 @@
     (fp_text reference R11 (at 0 -1.22 90) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "5.1 k" (at 0 1.22 90) (layer F.Fab)
+    (fp_text value DNP (at 0 1.22 90) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0 90) (layer F.Fab)
@@ -634,7 +634,7 @@
     (fp_text reference R10 (at 0 -1.22) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "5.1 k" (at 0 1.22) (layer F.Fab)
+    (fp_text value DNP (at 0 1.22) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0) (layer F.Fab)
@@ -670,7 +670,7 @@
     (fp_text reference R9 (at 0 -1.22) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "5.1 k" (at 0 1.22) (layer F.Fab)
+    (fp_text value DNP (at 0 1.22) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0) (layer F.Fab)
@@ -706,7 +706,7 @@
     (fp_text reference R8 (at 0 -1.22) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "5.1 k" (at 0 1.22) (layer F.Fab)
+    (fp_text value DNP (at 0 1.22) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0) (layer F.Fab)
@@ -742,7 +742,7 @@
     (fp_text reference R7 (at 0 -1.22) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "5.1 k" (at 0 1.22) (layer F.Fab)
+    (fp_text value DNP (at 0 1.22) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0) (layer F.Fab)
@@ -1502,7 +1502,7 @@
     (fp_text reference C2 (at 0 -1.22 90) (layer F.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "100 nF" (at 0 1.22 90) (layer F.Fab)
+    (fp_text value "10 nF" (at 0 1.22 90) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text user %R (at 0 0 90) (layer F.Fab)
