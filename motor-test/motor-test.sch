@@ -15,17 +15,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L motor-test:TBD62083AFNGEL U3
-U 1 1 5D2EACE2
-P 7300 4300
-F 0 "U3" H 7300 5015 50  0000 C CNN
-F 1 "TBD62083AFNGEL" H 7300 4924 50  0000 C CNN
-F 2 "motor-test:SSOP-18_4.4x6.5mm_P0.65mm" H 7300 4850 50  0001 C CNN
-F 3 "https://toshiba.semicon-storage.com/info/docget.jsp?did=29893&prodName=TBD62083AFG" H 7300 4850 50  0001 C CNN
-	1    7300 4300
-	1    0    0    -1  
-$EndComp
-$Comp
 L motor-test:TBD62783AFNGEL U2
 U 1 1 5D2ECE94
 P 7300 2850
@@ -36,26 +25,6 @@ F 3 "https://toshiba.semicon-storage.com/info/docget.jsp?did=30523&prodName=TBD6
 	1    7300 2850
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:GND #PWR0101
-U 1 1 5D2EDC96
-P 6950 4800
-F 0 "#PWR0101" H 6950 4550 50  0001 C CNN
-F 1 "GND" H 6955 4627 50  0000 C CNN
-F 2 "" H 6950 4800 50  0001 C CNN
-F 3 "" H 6950 4800 50  0001 C CNN
-	1    6950 4800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7000 4650 6950 4650
-Wire Wire Line
-	6950 4650 6950 4750
-Wire Wire Line
-	7000 4750 6950 4750
-Connection ~ 6950 4750
-Wire Wire Line
-	6950 4750 6950 4800
 $Comp
 L power:GND #PWR0102
 U 1 1 5D2EED3C
@@ -74,82 +43,16 @@ Wire Wire Line
 $Comp
 L Device:Q_TRIAC_A1A2G D2
 U 1 1 5D2F6EF9
-P 5950 2400
-F 0 "D2" V 6216 2400 50  0000 C CNN
-F 1 "Z0103MN0" V 6125 2400 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 6025 2425 50  0001 C CNN
-F 3 "http://www.ween-semi.com/sites/default/files/2018-10/z0103mn0.pdf" V 5950 2400 50  0001 C CNN
-	1    5950 2400
-	0    1    -1   0   
-$EndComp
-Wire Wire Line
-	7000 2400 6300 2400
-Wire Wire Line
-	5850 2550 5850 4100
-$Comp
-L power:GND #PWR0104
-U 1 1 5D2FC8E3
-P 5850 4800
-F 0 "#PWR0104" H 5850 4550 50  0001 C CNN
-F 1 "GND" H 5855 4627 50  0000 C CNN
-F 2 "" H 5850 4800 50  0001 C CNN
-F 3 "" H 5850 4800 50  0001 C CNN
-	1    5850 4800
+P 8200 4200
+F 0 "D2" V 8466 4200 50  0000 C CNN
+F 1 "Z0103MN0" V 8375 4200 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 8275 4225 50  0001 C CNN
+F 3 "http://www.ween-semi.com/sites/default/files/2018-10/z0103mn0.pdf" V 8200 4200 50  0001 C CNN
+	1    8200 4200
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:R R1
-U 1 1 5D2FCF20
-P 5850 4650
-F 0 "R1" H 5920 4696 50  0000 L CNN
-F 1 "1 k" H 5920 4605 50  0000 L CNN
-F 2 "kicad_pcb:R_0603_1608Metric" V 5780 4650 50  0001 C CNN
-F 3 "~" H 5850 4650 50  0001 C CNN
-	1    5850 4650
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5550 4300 5450 4300
 Text Label 5450 4250 1    50   ~ 0
 TRIAC0
-Text Label 5850 2950 1    50   ~ 0
-TRIAC1
-$Comp
-L capacitors:capacitor_0805 C2
-U 1 1 5D3005C5
-P 6300 2600
-F 0 "C2" H 6435 2646 50  0000 L CNN
-F 1 "10 nF" H 6435 2555 50  0000 L CNN
-F 2 "kicad_pcb:C_0603_1608Metric" V 6300 2600 50  0001 C CNN
-F 3 "" H 6300 2600 50  0000 C CNN
-	1    6300 2600
-	1    0    0    -1  
-$EndComp
-Connection ~ 6300 2400
-Wire Wire Line
-	6300 2400 6250 2400
-$Comp
-L power:GND #PWR0105
-U 1 1 5D300B40
-P 6300 2800
-F 0 "#PWR0105" H 6300 2550 50  0001 C CNN
-F 1 "GND" H 6305 2627 50  0000 C CNN
-F 2 "" H 6300 2800 50  0001 C CNN
-F 3 "" H 6300 2800 50  0001 C CNN
-	1    6300 2800
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Q_NPN_BEC Q1
-U 1 1 5D2FC06A
-P 5750 4300
-F 0 "Q1" H 5940 4346 50  0000 L CNN
-F 1 "MMBT3904" H 5940 4255 50  0000 L CNN
-F 2 "kicad_pcb:SOT-23" H 5950 4400 50  0001 C CNN
-F 3 "~" H 5750 4300 50  0001 C CNN
-	1    5750 4300
-	1    0    0    -1  
-$EndComp
 $Comp
 L Device:D D1
 U 1 1 5D304661
@@ -166,8 +69,6 @@ Wire Wire Line
 Wire Wire Line
 	6250 2000 6250 2400
 Connection ~ 6250 2400
-Wire Wire Line
-	6250 2400 6100 2400
 $Comp
 L capacitors:capacitor_0805 C1
 U 1 1 5D307B24
@@ -474,31 +375,6 @@ $EndComp
 Text Label 2600 2500 0    50   ~ 0
 CB_EN
 Wire Wire Line
-	7000 4150 6950 4150
-Wire Wire Line
-	6950 4150 6950 4250
-Connection ~ 6950 4650
-Wire Wire Line
-	7000 4550 6950 4550
-Connection ~ 6950 4550
-Wire Wire Line
-	6950 4550 6950 4650
-Wire Wire Line
-	7000 4450 6950 4450
-Connection ~ 6950 4450
-Wire Wire Line
-	6950 4450 6950 4550
-Wire Wire Line
-	7000 4350 6950 4350
-Connection ~ 6950 4350
-Wire Wire Line
-	6950 4350 6950 4450
-Wire Wire Line
-	7000 4250 6950 4250
-Connection ~ 6950 4250
-Wire Wire Line
-	6950 4250 6950 4350
-Wire Wire Line
 	7000 2800 6950 2800
 Wire Wire Line
 	6950 2800 6950 2900
@@ -724,18 +600,6 @@ Text Label 6750 2700 0    50   ~ 0
 HS2
 Wire Wire Line
 	7000 2700 6750 2700
-Text Label 6750 3850 0    50   ~ 0
-LS0
-Wire Wire Line
-	7000 3850 6750 3850
-Text Label 6750 3950 0    50   ~ 0
-LS1
-Wire Wire Line
-	7000 3950 6750 3950
-Text Label 6750 4050 0    50   ~ 0
-LS2
-Wire Wire Line
-	7000 4050 6750 4050
 Wire Wire Line
 	1500 6700 2650 6700
 Wire Wire Line
@@ -823,8 +687,6 @@ Wire Wire Line
 Wire Wire Line
 	8100 3950 7600 3950
 Wire Wire Line
-	7600 4050 8200 4050
-Wire Wire Line
 	8200 4050 8200 3000
 Wire Wire Line
 	8200 3000 8300 3000
@@ -833,11 +695,6 @@ NoConn ~ 7600 2900
 NoConn ~ 7600 3000
 NoConn ~ 7600 3100
 NoConn ~ 7600 3200
-NoConn ~ 7600 4150
-NoConn ~ 7600 4250
-NoConn ~ 7600 4350
-NoConn ~ 7600 4450
-NoConn ~ 7600 4550
 $Comp
 L misc:tooling_hole TH1
 U 1 1 5D5B1BD0
@@ -1017,8 +874,6 @@ F 3 "~" H 2800 1200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	5350 2400 5800 2400
-Wire Wire Line
 	3850 2400 5350 2400
 Wire Wire Line
 	2250 2400 3000 2400
@@ -1037,4 +892,32 @@ Wire Wire Line
 	5450 3900 5450 4300
 Wire Wire Line
 	2600 2500 3000 2500
+$Comp
+L power:GND #PWR?
+U 1 1 5D429C65
+P 8200 4350
+F 0 "#PWR?" H 8200 4100 50  0001 C CNN
+F 1 "GND" H 8205 4177 50  0000 C CNN
+F 2 "" H 8200 4350 50  0001 C CNN
+F 3 "" H 8200 4350 50  0001 C CNN
+	1    8200 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5D42A8F9
+P 7900 4300
+F 0 "R?" H 7970 4346 50  0000 L CNN
+F 1 "1 k" H 7970 4255 50  0000 L CNN
+F 2 "kicad_pcb:R_0603_1608Metric" V 7830 4300 50  0001 C CNN
+F 3 "~" H 7900 4300 50  0001 C CNN
+	1    7900 4300
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5350 2400 6250 2400
+Wire Wire Line
+	5450 4300 7750 4300
+Wire Wire Line
+	6250 2400 7000 2400
 $EndSCHEMATC
