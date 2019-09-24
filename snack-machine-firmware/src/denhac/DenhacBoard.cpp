@@ -1,11 +1,12 @@
 #include "denhac/DenhacBoard.h"
 
-// Library: Diablo16-Serial-Arduino-Library
+EvtManager DenhacBoard::eventManager;
 
 HardwareSerial DenhacBoard::DisplaySerial = Serial1;
 Diablo_Serial_4DLib DenhacBoard::Display(&DenhacBoard::DisplaySerial);
 
-void DenhacBoard::setup() {
+void DenhacBoard::setup()
+{
   Serial.begin(9600);
   DisplaySerial.begin(9600);
   Display.gfx_ScreenMode(PORTRAIT_R);
@@ -13,12 +14,18 @@ void DenhacBoard::setup() {
   Display.println("Denhac Vending Machine");
 
   MDB::setup();
+
+  eventManager.addListener(
+      new EvtTimeListener(250, true,
+                          (EvtAction)[&](EvtListener *, EvtContext *)->bool{
+                            BillValidator::loop();
+                            return false;
+                          }));
 }
 
-void DenhacBoard::loop() {
-  // DenhacBoard::coinChanger.loop();
-  // DenhacBoard::billValidator.loop();
-  delay(1000);
+void DenhacBoard::loop()
+{
+  eventManager.loopIteration();
 }
 
 /**

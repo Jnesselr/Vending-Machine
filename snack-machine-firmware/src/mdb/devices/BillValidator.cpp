@@ -6,6 +6,7 @@ static const uint16_t CMD_SETUP[] = { 0x109 };
 
 bool BillValidator::devicePolled = false;
 bool BillValidator::setup = false;
+MDBResult BillValidator::mdbResult;
 
 void BillValidator::loop() {
   sendPoll();
