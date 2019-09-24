@@ -1,11 +1,13 @@
+#include "Arduino.h"
+
 #include "config.h"
 #include "vendingMachine.h"
 
 void setup() {
-  VendingMachine::instance->setup();
+  VendingMachine::setup();
 }
 
 void loop() {
-  VendingMachine::instance->loop();
+  VendingMachine::loop();
 }
 
