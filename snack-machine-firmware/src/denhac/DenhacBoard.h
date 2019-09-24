@@ -17,4 +17,6 @@ class DenhacBoard: public VendingMachine {
 
     static HardwareSerial DisplaySerial;
     static Diablo_Serial_4DLib Display;
+
+    static EvtTimeListener billValidatorLoop;
 };
