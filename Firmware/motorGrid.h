@@ -6,13 +6,14 @@
 class MotorGrid {
   public:
     MotorGrid();
+    void setup();
     boolean isPresent(const int row, const int col);
     boolean vend(const int row, const int col);
+    boolean currentFlowing();
 
   private:
     void on(const int row, const int col);
     void off();
-    boolean currentFlowing();
 
     const int PIN_ROW_1 = 49;
     const int PIN_ROW_2 = 48;

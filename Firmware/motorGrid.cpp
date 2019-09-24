@@ -1,11 +1,6 @@
 #include "motorGrid.h"
 
-#include <Adafruit_INA219.h>
-
 MotorGrid::MotorGrid() {
-  this->ina219 = new Adafruit_INA219();
-//  this->ina219->begin();
-
   pinMode(MotorGrid::PIN_ROW_1, OUTPUT);
   pinMode(MotorGrid::PIN_ROW_2, OUTPUT);
   pinMode(MotorGrid::PIN_ROW_3, OUTPUT);
@@ -25,17 +20,33 @@ MotorGrid::MotorGrid() {
   pinMode(MotorGrid::PIN_COL_8, OUTPUT);
 }
 
+void MotorGrid::setup() {
+  this->off();
+}
+
 boolean MotorGrid::currentFlowing() {
-  return this->ina219->getCurrent_mA() > 0;
+  float a = analogRead(A0);
+  Serial.print(a);
+  Serial.print(" ");
+  boolean retval = a >= 4.0;
+  Serial.println(retval);
+  Serial.flush();
+  return retval;
 }
 
 boolean MotorGrid::isPresent(int row, int col) {
   this->on(row, col);
-  delay(1000);
+  boolean retval = this->currentFlowing();
+  for(int count = 0; count < 100; count++) {
+    retval = this->currentFlowing();
+  }
   this->off();
-//  boolean retval = this->currentFlowing();
+  Serial.println("Off");
+  for(int count = 0; count < 100; count++) {
+    retval = this->currentFlowing();
+  }
 
-  return false;
+  return retval;
 }
 
 boolean MotorGrid::vend(int row, int col) {

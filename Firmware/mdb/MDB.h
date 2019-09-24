@@ -4,6 +4,7 @@
 class MDB {
   public:
     static MDB* getInstance();
+    void setup();
 };
 
 #endif
