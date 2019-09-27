@@ -26,6 +26,14 @@ ResetCallback CoinChanger::onJustReset = NULL;
 void CoinChanger::loop()
 {
   sendPoll();
+
+  if(state == CoinChangerState::UNKNOWN) {
+    sendReset();
+  }
+
+  if(state == CoinChangerState::SETUP) {
+    sendCoinSetup();
+  }
 }
 
 void CoinChanger::copyAtMost16(const MDBResult &mdbResult, uint8_t start, uint8_t destination[16]) {
@@ -49,7 +57,6 @@ void CoinChanger::sendPoll()
   {
     pollFailures++;
     devicePolled = false;
-    state = CoinChangerState::UNKNOWN;
     Serial.println("Coin Timeout");
     return;
   }
@@ -59,15 +66,8 @@ void CoinChanger::sendPoll()
 
   if(pollFailures > 0) {
     pollFailures = 0;
-    sendReset();
-  }
-
-  if(state == CoinChangerState::UNKNOWN) {
-    sendReset();
-  }
-
-  if(state == CoinChangerState::SETUP) {
-    sendCoinSetup();
+    state = CoinChangerState::UNKNOWN;
+    return;
   }
 
   if (mdbResult.data[0] == mdbResult.ACK)
@@ -213,7 +213,7 @@ void CoinChanger::sendReset()
 
   if (mdbResult.data[0] == mdbResult.ACK)
   {
-    Serial.println("CoinReset");
+    Serial.println("Coin Reset");
     MDB::ack();
   }
 }
@@ -244,6 +244,8 @@ void CoinChanger::sendCoinSetup() {
   
   MDB::writeForResult(CMD_COIN_SETUP, LENGTH(CMD_COIN_SETUP), &mdbResult);
   // TODO Handle timeout/ack
+
+  Serial.println("coin idle");
 
   state = CoinChangerState::IDLE;
 }

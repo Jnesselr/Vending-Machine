@@ -31,7 +31,6 @@ class CoinChanger {
     static uint8_t pollFailures;
     static CoinChangerState state;
     static bool devicePolled;
-    static bool setup;
 
     // Setup
     static uint8_t featureLevel;

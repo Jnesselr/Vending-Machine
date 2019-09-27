@@ -88,9 +88,9 @@ void MDBResult::reset() {
 }
 
 void MDBResult::print(const char type[]) {
-  // if(this->data[0] == MDBResult::ACK) {
-  //   return;
-  // }
+  if(this->data[0] == MDBResult::ACK) {
+    return;
+  }
 
   uint8_t i = 0;
   Serial.print(type);

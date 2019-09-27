@@ -54,7 +54,6 @@ void DenhacBoard::setup()
   MDB::setup();
 
   Serial.println("MDB Done");
-  BillValidator::setup();
 
   eventManager.addListener(&billValidatorLoop);
   eventManager.addListener(&coinChangerLoop);

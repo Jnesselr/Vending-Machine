@@ -12,15 +12,17 @@ enum class BillValidatorState {
 
 class BillValidator {
   public:
-    static void setup();
     static void loop();
 
   private:
-    static bool devicePolled;
+    static uint8_t pollFailures;
     static BillValidatorState state;
+    static bool devicePolled;
 
     static void sendPoll();
+    static void sendReset();
     static void sendSetup();
+    static void sendBillSetup();
 };
 
 #endif
