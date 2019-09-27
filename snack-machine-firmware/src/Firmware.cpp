@@ -10,4 +10,3 @@ void setup() {
 void loop() {
   VendingMachine::loop();
 }
-

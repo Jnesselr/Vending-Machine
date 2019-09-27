@@ -3,15 +3,21 @@
 
 #include "mdb/MDB.h"
 
+enum class BillValidatorState {
+  UNKNOWN,
+  RESET,
+  SETUP,
+  IDLE
+};
+
 class BillValidator {
   public:
+    static void setup();
     static void loop();
 
   private:
-    static MDBResult mdbResult;
-
     static bool devicePolled;
-    static bool setup;
+    static BillValidatorState state;
 
     static void sendPoll();
     static void sendSetup();

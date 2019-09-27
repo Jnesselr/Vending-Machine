@@ -9,6 +9,8 @@ class MDBResult {
 
     void reset();
 
+    void print(const char type[]);
+
     uint16_t data[64];
     uint8_t length;
     bool timeout;

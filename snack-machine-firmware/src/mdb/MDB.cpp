@@ -87,6 +87,23 @@ void MDBResult::reset() {
   timeout = false;
 }
 
+void MDBResult::print(const char type[]) {
+  // if(this->data[0] == MDBResult::ACK) {
+  //   return;
+  // }
+
+  uint8_t i = 0;
+  Serial.print(type);
+  Serial.print(" recv: ");
+  while (i < this->length)
+  {
+    Serial.print(F(" 0x"));
+    Serial.print(this->data[i], HEX);
+    i++;
+  }
+  Serial.println();
+}
+
 void MDB::ack() {
   transmitBuffer.push(0x0);
 

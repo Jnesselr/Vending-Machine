@@ -1,5 +1,6 @@
 #include <Diablo_Serial_4DLib.h>
 #include <Eventually.h>
+#include <DirectIO.h>
 
 #include "mdb/MDB.h"
 #include "mdb/devices/BillValidator.h"
@@ -15,8 +16,10 @@ class DenhacBoard: public VendingMachine {
   private:
     static EvtManager eventManager;
 
-    static HardwareSerial DisplaySerial;
-    static Diablo_Serial_4DLib Display;
+    static OutputPort<PORT_G, 3, 1> displayResetPin;
+    static HardwareSerial displaySerial;
+    static Diablo_Serial_4DLib display;
 
     static EvtTimeListener billValidatorLoop;
+    static EvtTimeListener coinChangerLoop;
 };
