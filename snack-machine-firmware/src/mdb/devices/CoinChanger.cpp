@@ -4,7 +4,7 @@
 static const uint16_t CMD_POLL[] = {0x10B};
 static const uint16_t CMD_RESET[] = {0x108};
 static const uint16_t CMD_SETUP[] = {0x109};
-static const uint16_t CMD_COIN_SETUP[] = {0x10C, 0xFF, 0xFF, 0xFF, 0xFF};
+static const uint16_t CMD_COIN_TYPE_SETUP[] = {0x10C, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_TUBE_STATUS[] = {0x10A};
 
 uint8_t CoinChanger::pollFailures = 0;
@@ -29,10 +29,17 @@ void CoinChanger::loop()
 
   if(state == CoinChangerState::UNKNOWN) {
     sendReset();
+    return;
+  }
+
+  if(state == CoinChangerState::RESET) {
+    sendSetup();
+    return;
   }
 
   if(state == CoinChangerState::SETUP) {
     sendCoinSetup();
+    return;
   }
 }
 
@@ -56,11 +63,10 @@ void CoinChanger::sendPoll()
   if (mdbResult.timeout)
   {
     pollFailures++;
+    DEBUG("Coin poll timeout");
     devicePolled = false;
-    Serial.println("Coin Timeout");
     return;
   }
-  mdbResult.print((char *) "COIN");
 
   MDB::ack();
 
@@ -176,13 +182,13 @@ void CoinChanger::sendPoll()
     {
       // Changer was Reset
       state = CoinChangerState::RESET;
-      sendSetup();
-      return;
 
       if (onJustReset != NULL)
       {
         onJustReset();
       }
+
+      return;
     }
     else if (data == 0x0C)
     {
@@ -202,18 +208,16 @@ void CoinChanger::sendReset()
 {
   static MDBResult mdbResult;
 
-  Serial.println("Sending coin reset");
   MDB::writeForResult(CMD_RESET, LENGTH(CMD_RESET), &mdbResult);
 
   if (mdbResult.timeout)
   {
-    Serial.println("Reset timed out");
+    state = CoinChangerState::UNKNOWN;
     return;
   }
 
   if (mdbResult.data[0] == mdbResult.ACK)
   {
-    Serial.println("Coin Reset");
     MDB::ack();
   }
 }
@@ -222,9 +226,13 @@ void CoinChanger::sendSetup()
 {
   static MDBResult mdbResult;
 
-  Serial.println("Setting up coin");
   MDB::writeForResult(CMD_SETUP, LENGTH(CMD_SETUP), &mdbResult);
-  // TODO Handle timeout/ack
+
+  if (mdbResult.timeout)
+  {
+    state = CoinChangerState::UNKNOWN;
+    return;
+  }
 
   featureLevel = mdbResult.data[0];
   countryCode = BYTE2WORD(mdbResult.data[1], mdbResult.data[2]);
@@ -232,9 +240,6 @@ void CoinChanger::sendSetup()
   decimalPlaces = mdbResult.data[4];
   coinTypeRouting = BYTE2WORD(mdbResult.data[5], mdbResult.data[6]);
   copyAtMost16(mdbResult, 7, coinTypeCredit);
-  
-  MDB::writeForResult(CMD_COIN_SETUP, LENGTH(CMD_COIN_SETUP), &mdbResult);
-  // TODO Handle timeout/ack
 
   state = CoinChangerState::SETUP;
 }
@@ -242,10 +247,15 @@ void CoinChanger::sendSetup()
 void CoinChanger::sendCoinSetup() {
   static MDBResult mdbResult;
   
-  MDB::writeForResult(CMD_COIN_SETUP, LENGTH(CMD_COIN_SETUP), &mdbResult);
-  // TODO Handle timeout/ack
+  MDB::writeForResult(CMD_COIN_TYPE_SETUP, LENGTH(CMD_COIN_TYPE_SETUP), &mdbResult);
+  
+  if (mdbResult.timeout)
+  {
+    state = CoinChangerState::UNKNOWN;
+    return;
+  }
 
-  Serial.println("coin idle");
+  Serial.println("Coin Type setup done");
 
   state = CoinChangerState::IDLE;
 }

@@ -28,7 +28,6 @@ void mycallback(int ErrCode, unsigned char Errorbyte)
 void DenhacBoard::setup()
 {
   Serial.begin(9600);
-  Serial.println("Hey");
 
   // display.Callback4D = mycallback ;
 

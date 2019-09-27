@@ -6,6 +6,7 @@ static const uint16_t CMD_POLL[] = {0x133};
 static const uint16_t CMD_SETUP[] = {0x131};
 static const uint16_t CMD_BILL_SETUP[] = {0x134, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_BILL_STACKER[] = {0x136};
+static const uint16_t CMD_ACCEPT_BILL[] = {0x135, 0x1};
 
 uint8_t BillValidator::pollFailures = 0;
 bool BillValidator::devicePolled = false;
@@ -13,12 +14,17 @@ BillValidatorState BillValidator::state = BillValidatorState::UNKNOWN;
 
 void BillValidator::loop()
 {
-  static MDBResult mdbResult;
   sendPoll();
 
   if (state == BillValidatorState::UNKNOWN)
   {
     sendReset();
+    return;
+  }
+
+  if (state == BillValidatorState::RESET) {
+    sendSetup();
+    return;
   }
 
   if (state == BillValidatorState::SETUP)
@@ -38,10 +44,8 @@ void BillValidator::sendPoll()
   {
     pollFailures++;
     devicePolled = false;
-    Serial.println("Cash Timeout");
     return;
   }
-  mdbResult.print((char *)"CASH");
 
   MDB::ack();
 
@@ -60,26 +64,36 @@ void BillValidator::sendPoll()
   if (mdbResult.data[0] == 0x06)
   {
     state = BillValidatorState::RESET;
-    sendSetup();
   }
+
+  if (mdbResult.data[0] & 0x80) {
+    if(mdbResult.data[0] & 0x10) {
+      Serial.println(mdbResult.data[0] & 0xF, HEX);
+      acceptBill();
+    }
+  }
+}
+
+void BillValidator::acceptBill()
+{
+  static MDBResult mdbResult;
+
+  MDB::writeForResult(CMD_ACCEPT_BILL, LENGTH(CMD_ACCEPT_BILL), &mdbResult);
 }
 
 void BillValidator::sendReset()
 {
   static MDBResult mdbResult;
 
-  Serial.println("Sending cash reset");
   MDB::writeForResult(CMD_RESET, LENGTH(CMD_RESET), &mdbResult);
 
   if (mdbResult.timeout)
   {
-    Serial.println("Reset timed out");
     return;
   }
 
   if (mdbResult.data[0] == mdbResult.ACK)
   {
-    Serial.println("Cash Reset");
     MDB::ack();
   }
 }
@@ -88,12 +102,16 @@ void BillValidator::sendSetup()
 {
   static MDBResult mdbResult;
 
-  Serial.println("Entering setup");
   MDB::writeForResult(CMD_SETUP, LENGTH(CMD_SETUP), &mdbResult);
-  mdbResult.print("CASH_SETUP");
+  
+  if (mdbResult.timeout)
+  {
+    state = BillValidatorState::UNKNOWN;
+    return;
+  }
+
   MDB::ack();
 
-  Serial.println("Setup done");
   state = BillValidatorState::SETUP;
 }
 
@@ -102,7 +120,12 @@ void BillValidator::sendBillSetup()
   static MDBResult mdbResult;
 
   MDB::writeForResult(CMD_BILL_SETUP, LENGTH(CMD_BILL_SETUP), &mdbResult);
-  Serial.println("cash idle");
+  
+  if (mdbResult.timeout)
+  {
+    state = BillValidatorState::UNKNOWN;
+    return;
+  }
 
   state = BillValidatorState::IDLE;
 

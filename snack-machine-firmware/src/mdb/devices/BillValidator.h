@@ -23,6 +23,8 @@ class BillValidator {
     static void sendReset();
     static void sendSetup();
     static void sendBillSetup();
+
+    static void acceptBill();
 };
 
 #endif
