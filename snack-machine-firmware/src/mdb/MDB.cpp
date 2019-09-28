@@ -145,3 +145,15 @@ void MDB::writeForResult(const uint16_t data[], size_t length, MDBResult* result
     i++;
   }
 }
+
+
+void MDB::copyAtMost16(const MDBResult &mdbResult, uint8_t start, uint8_t destination[16]) {
+  memset(destination, 0, 16);
+
+  for (uint8_t i = start; i < 18; i++)
+  {
+    if(i < mdbResult.length) {
+      destination[i - start] = mdbResult.data[i];
+    }
+  }
+}

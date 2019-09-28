@@ -2,6 +2,7 @@
 #define _COIN_CHANGER_H_
 
 #include "mdb/MDB.h"
+#include "utils.h"
 
 enum class CoinChangerState {
   UNKNOWN,
@@ -10,18 +11,14 @@ enum class CoinChangerState {
   IDLE
 };
 
-typedef void (*ResetCallback)();
-
 class CoinChanger {
   public:
     static void loop();
 
     // Callbacks
-    static ResetCallback onJustReset;
+    static VoidCallback onJustReset;
 
   private:
-    static inline void copyAtMost16(const MDBResult &mdbResult, uint8_t start, uint8_t destination[16]);
-
     static void sendPoll();
     static void sendReset();
     static void sendSetup();

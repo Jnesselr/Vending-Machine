@@ -25,6 +25,16 @@ class BillValidator {
     static void sendBillSetup();
 
     static void acceptBill();
+
+    // Setup
+    static uint8_t featureLevel;
+    static uint16_t currencyCode;
+    static uint16_t billScalingFactor;
+    static uint8_t decimalPlaces;
+    static uint16_t stackerCapacity;
+    static uint16_t billSecurityLevels;
+    static bool canEscrow;
+    static uint8_t billTypeCredit[16];
 };
 
 #endif

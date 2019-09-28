@@ -21,7 +21,7 @@ uint8_t CoinChanger::coinTypeCredit[16];
 uint16_t CoinChanger::tubeFullStatus = 0;
 uint8_t CoinChanger::tubeStatus[16];
 
-ResetCallback CoinChanger::onJustReset = NULL;
+VoidCallback CoinChanger::onJustReset = NULL;
 
 void CoinChanger::loop()
 {
@@ -40,17 +40,6 @@ void CoinChanger::loop()
   if(state == CoinChangerState::SETUP) {
     sendCoinSetup();
     return;
-  }
-}
-
-void CoinChanger::copyAtMost16(const MDBResult &mdbResult, uint8_t start, uint8_t destination[16]) {
-  memset(destination, 0, 16);
-
-  for (uint8_t i = start; i < 18; i++)
-  {
-    if(i < mdbResult.length) {
-      destination[i - start] = mdbResult.data[i];
-    }
   }
 }
 
@@ -76,9 +65,10 @@ void CoinChanger::sendPoll()
     return;
   }
 
+  devicePolled = true;
+
   if (mdbResult.data[0] == mdbResult.ACK)
   {
-    devicePolled = true;
     return;
   }
 
@@ -91,6 +81,8 @@ void CoinChanger::sendPoll()
     if (data & 0x100)
     {
       // Checksum byte
+      // TODO NAK/ACK based on correctness
+      // Not here though because we'll have already processed everything if it's wrong
     }
     else if (data & 0x80)
     {
@@ -233,13 +225,15 @@ void CoinChanger::sendSetup()
     state = CoinChangerState::UNKNOWN;
     return;
   }
+  
+  MDB::ack();
 
   featureLevel = mdbResult.data[0];
   countryCode = BYTE2WORD(mdbResult.data[1], mdbResult.data[2]);
   coinScalingFactor = mdbResult.data[3];
   decimalPlaces = mdbResult.data[4];
   coinTypeRouting = BYTE2WORD(mdbResult.data[5], mdbResult.data[6]);
-  copyAtMost16(mdbResult, 7, coinTypeCredit);
+  MDB::copyAtMost16(mdbResult, 7, coinTypeCredit);
 
   state = CoinChangerState::SETUP;
 }
@@ -266,7 +260,7 @@ void CoinChanger::sendTubeStatus()
   MDB::writeForResult(CMD_TUBE_STATUS, LENGTH(CMD_TUBE_STATUS), &mdbResult);
 
   tubeFullStatus = BYTE2WORD(mdbResult.data[0], mdbResult.data[1]);
-  copyAtMost16(mdbResult, 2, tubeStatus);
+  MDB::copyAtMost16(mdbResult, 2, tubeStatus);
 }
 
 /**

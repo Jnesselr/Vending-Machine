@@ -12,6 +12,15 @@ uint8_t BillValidator::pollFailures = 0;
 bool BillValidator::devicePolled = false;
 BillValidatorState BillValidator::state = BillValidatorState::UNKNOWN;
 
+uint8_t BillValidator::featureLevel;
+uint16_t BillValidator::currencyCode;
+uint16_t BillValidator::billScalingFactor;
+uint8_t BillValidator::decimalPlaces;
+uint16_t BillValidator::stackerCapacity;
+uint16_t BillValidator::billSecurityLevels;
+bool BillValidator::canEscrow;
+uint8_t BillValidator::billTypeCredit[16];
+
 void BillValidator::loop()
 {
   sendPoll();
@@ -61,16 +70,121 @@ void BillValidator::sendPoll()
     return;
   }
 
-  if (mdbResult.data[0] == 0x06)
-  {
-    state = BillValidatorState::RESET;
-  }
+  mdbResult.print("CASH");
 
-  if (mdbResult.data[0] & 0x80) {
-    if(mdbResult.data[0] & 0x10) {
-      Serial.println(mdbResult.data[0] & 0xF, HEX);
-      acceptBill();
+  uint8_t i = 0;
+
+  while(i < mdbResult.length) {
+    uint16_t data = mdbResult.data[i];
+
+    if(data & 0x100) {
+      // Checksum byte
+      // TODO NAK/ACK based on correctness
+      // Not here though because we'll have already processed everything if it's wrong
     }
+    else if (data & 0x80)
+    {
+      // Bill inserted
+      if(data & 0x10) {
+        Serial.println(data & 0xF, HEX);
+        acceptBill();
+      }
+    }
+    else if (data == 0x01)
+    {
+      // Defective Motor
+    }
+    else if (data == 0x02)
+    {
+      // Sensor Problem
+    }
+    else if (data == 0x03)
+    {
+      // Validator Busy
+    }
+    else if (data == 0x04)
+    {
+      // ROM Checksum Error
+    }
+    else if (data == 0x05)
+    {
+      // Validator Jammed
+    }
+    else if (data == 0x06)
+    {
+      // Validator was Reset
+      state = BillValidatorState::RESET;
+    }
+    else if (data == 0x07)
+    {
+      // Bill Removed
+    }
+    else if (data == 0x08)
+    {
+      // Cash Box out of Position
+    }
+    else if (data == 0x09)
+    {
+      // Validator Disabled
+    }
+    else if (data == 0x0A)
+    {
+      // Invalid Escrow request
+    }
+    else if (data == 0x0B)
+    {
+      // Bill Rejected
+    }
+    else if (data == 0x0C)
+    {
+      // Possible Credit Bill Removal
+    }
+    else if (data & 0x40)
+    {
+      // Number of attempts to input a bill while validator is disabled
+      // & 0x1F
+    }
+    else if (data == 0x21)
+    {
+      // Bill Recycler Escrow Request
+    }
+    else if (data == 0x22)
+    {
+      // Bill Recycler Dispernser Payout Busy
+    }
+    else if (data == 0x23)
+    {
+      // Bill Recycler Dispenser Busy
+    }
+    else if (data == 0x24)
+    {
+      // Bill Recycler Defective Dispenser Sensor
+    }
+    else if (data == 0x26)
+    {
+      // Bill Recycler Dispensor did not start / motor problem
+    }
+    else if (data == 0x27)
+    {
+      // Bill Recycler Dispenser Jam
+    }
+    else if (data == 0x28)
+    {
+      // Bill Recycler ROM checksum
+    }
+    else if (data == 0x29)
+    {
+      // Bill Recycler Dispenser disabled
+    }
+    else if (data == 0x2A)
+    {
+      // Bill Recycler Bill waiting
+    }
+    else if (data == 0x2F)
+    {
+      // Bill Recycler Filled key pressed
+    }
+    i++;
   }
 }
 
@@ -111,6 +225,17 @@ void BillValidator::sendSetup()
   }
 
   MDB::ack();
+
+  mdbResult.print("CASH SETUP");
+
+  featureLevel = mdbResult.data[0];
+  currencyCode = BYTE2WORD(mdbResult.data[1], mdbResult.data[2]);
+  billScalingFactor = BYTE2WORD(mdbResult.data[3], mdbResult.data[4]);
+  decimalPlaces = mdbResult.data[5];
+  stackerCapacity = BYTE2WORD(mdbResult.data[6], mdbResult.data[7]);
+  billSecurityLevels = BYTE2WORD(mdbResult.data[8], mdbResult.data[9]);
+  canEscrow = mdbResult.data[10] == 0xFF;
+  MDB::copyAtMost16(mdbResult, 11, billTypeCredit);
 
   state = BillValidatorState::SETUP;
 }

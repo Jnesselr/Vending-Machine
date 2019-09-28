@@ -26,6 +26,7 @@ class MDB {
     static void writeForResult(const uint16_t data[], size_t length, MDBResult* result);
 
     static void ack();
+    static void copyAtMost16(const MDBResult &mdbResult, uint8_t start, uint8_t destination[16]);
   private:
     static const int BAUD_RATE = 9600;
 };
