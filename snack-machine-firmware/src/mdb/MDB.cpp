@@ -1,7 +1,7 @@
 #include "MDB.h"
 
-static RingBuffer receiveBuffer;
-static RingBuffer transmitBuffer;
+static RingBuffer<uint16_t> receiveBuffer;
+static RingBuffer<uint16_t> transmitBuffer;
 
 void enableSend() {
   // Enable the UDRI to begin transmit
