@@ -7,12 +7,12 @@ OutputPort<PORT_G, 3, 1> DenhacBoard::displayResetPin;
 HardwareSerial DenhacBoard::displaySerial = Serial1;
 Diablo_Serial_4DLib DenhacBoard::display(&DenhacBoard::displaySerial);
 
-EvtTimeListener DenhacBoard::billValidatorLoop(250, true, LISTENER {
+EvtTimeListener DenhacBoard::billValidatorLoop(200, true, LISTENER {
   BillValidator::loop();
   return false;
 });
 
-EvtTimeListener DenhacBoard::coinChangerLoop(250, true, LISTENER {
+EvtTimeListener DenhacBoard::coinChangerLoop(200, true, LISTENER {
   CoinChanger::loop();
   return false;
 });

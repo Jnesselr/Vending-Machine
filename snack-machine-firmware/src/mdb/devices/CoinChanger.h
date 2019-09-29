@@ -19,11 +19,16 @@ class CoinChanger {
     static VoidCallback onJustReset;
 
   private:
-    static void sendPoll();
+    static RingBuffer<MDBCommand*> commandBuffer;
+
     static void sendReset();
     static void sendSetup();
-    static void sendCoinSetup();
     static void sendTubeStatus();
+    static void sendPoll();
+    static void handlePollData(MDBResult);
+    static void sendCoinTypeSetup();
+
+    static void onTimeout(MDBResult mdbResult);
 
     static uint8_t pollFailures;
     static CoinChangerState state;

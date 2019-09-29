@@ -9,6 +9,11 @@
 
 #define DEBUG(text) if(true) { Serial.println(text); }
 
+#define COPY(a, b, length) \
+  for(uint8_t i = 0; i < length; i++) { \
+    b[i] = a[i]; \
+  }
+
 typedef void (*VoidCallback)();
 
 #endif

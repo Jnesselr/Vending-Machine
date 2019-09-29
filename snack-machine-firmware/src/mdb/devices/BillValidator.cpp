@@ -197,12 +197,14 @@ void BillValidator::acceptBill()
 
 void BillValidator::sendReset()
 {
+  DEBUG("Sending cash reset")
   static MDBResult mdbResult;
 
   MDB::writeForResult(CMD_RESET, LENGTH(CMD_RESET), &mdbResult);
 
   if (mdbResult.timeout)
   {
+    Serial.println("Cash reset timed out");
     return;
   }
 
@@ -214,12 +216,14 @@ void BillValidator::sendReset()
 
 void BillValidator::sendSetup()
 {
+  DEBUG("Sending Cash Setup")
   static MDBResult mdbResult;
 
   MDB::writeForResult(CMD_SETUP, LENGTH(CMD_SETUP), &mdbResult);
   
   if (mdbResult.timeout)
   {
+    DEBUG("Cash Setup timed out")
     state = BillValidatorState::UNKNOWN;
     return;
   }
