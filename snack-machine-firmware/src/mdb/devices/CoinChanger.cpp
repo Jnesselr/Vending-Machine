@@ -91,6 +91,7 @@ void CoinChanger::sendPoll()
 
         if (pollFailures > 25)
         {
+          pollFailures = 0; // Give it a chance to recover
           DEBUG("Coin Poll failures > 25");
           state = CoinChangerState::UNKNOWN;
           return;
