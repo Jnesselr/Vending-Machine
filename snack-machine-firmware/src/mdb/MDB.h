@@ -25,6 +25,7 @@ class MDBCommand {
   public:
     MDBCommand();
     MDBCommand(const uint16_t* data, size_t length);
+    MDBCommand(const uint16_t* data, size_t length, MDBCallback timeout);
     MDBCommand(const uint16_t* data, size_t length, MDBCallback timeout, MDBCallback success);
     MDBCommand(const MDBCommand&);
 

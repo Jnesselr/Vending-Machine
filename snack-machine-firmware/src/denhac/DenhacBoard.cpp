@@ -25,6 +25,8 @@ void mycallback(int ErrCode, unsigned char Errorbyte)
   Serial.println(Errorbyte);
 }
 
+uint8_t coinsDispensed = 0;
+
 void DenhacBoard::setup()
 {
   Serial.begin(9600);
@@ -53,6 +55,11 @@ void DenhacBoard::setup()
   MDB::setup();
 
   Serial.println("MDB Done");
+
+  // TODO
+  // - How to handle coin value added
+  // - How to handle coin "vend" token
+  // - How to handle coin value removed
 
   eventManager.addListener(&billValidatorLoop);
   eventManager.addListener(&coinChangerLoop);

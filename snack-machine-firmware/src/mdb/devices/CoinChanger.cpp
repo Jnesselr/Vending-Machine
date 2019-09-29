@@ -23,7 +23,21 @@ uint8_t CoinChanger::coinTypeCredit[16];
 uint16_t CoinChanger::tubeFullStatus = 0;
 uint8_t CoinChanger::tubeStatus[16];
 
+CoinDispensedCallback CoinChanger::onCoinDispensed = NULL;
+CoinDepositedCallback CoinChanger::onCoinDeposited = NULL;
+VoidCallback CoinChanger::onEscrowRequest = NULL;
+VoidCallback CoinChanger::onChangerPayoutBusy = NULL;
+VoidCallback CoinChanger::onNoCredit = NULL;
+VoidCallback CoinChanger::onDefectiveTubeSensor = NULL;
+VoidCallback CoinChanger::onDoubleArrival = NULL;
+VoidCallback CoinChanger::onAcceptorUnplugged = NULL;
+VoidCallback CoinChanger::onTubeJam = NULL;
+VoidCallback CoinChanger::onROMChecksumError = NULL;
+VoidCallback CoinChanger::onCoinRoutingError = NULL;
+VoidCallback CoinChanger::onChangerBusy = NULL;
 VoidCallback CoinChanger::onJustReset = NULL;
+VoidCallback CoinChanger::onCoinJam = NULL;
+VoidCallback CoinChanger::onPossibleCreditedCoinRemoval = NULL;
 
 void CoinChanger::loop()
 {
@@ -52,6 +66,20 @@ void CoinChanger::loop()
   }
 }
 
+void CoinChanger::dispense(uint8_t coinType, uint8_t coinCount) {
+  uint8_t coinData = (coinCount & 0xF) << 4 | (coinType & 0xF);
+  uint16_t* dispenseBuffer = new uint16_t[2] { 0x10D, coinData };
+
+  MDBCommand* dispenseCommand = new MDBCommand(
+    dispenseBuffer, 2,
+    onTimeout
+  );
+
+  delete dispenseBuffer;
+
+  commandBuffer.push(dispenseCommand);
+}
+
 void CoinChanger::sendPoll()
 {
   MDBCommand pollCommand(
@@ -64,10 +92,11 @@ void CoinChanger::sendPoll()
         if (pollFailures > 25)
         {
           DEBUG("Coin Poll failures > 25");
-          pollFailures = 0;
           state = CoinChangerState::UNKNOWN;
           return;
         }
+        
+        pollFailures = 0;
 
         if (mdbResult.data[0] == mdbResult.ACK)
         {
@@ -82,6 +111,7 @@ void CoinChanger::sendPoll()
 
 void CoinChanger::handlePollData(MDBResult mdbResult)
 {
+  mdbResult.print("COIN POLL");
   uint8_t i = 0;
 
   while (i < mdbResult.length)
@@ -95,88 +125,114 @@ void CoinChanger::handlePollData(MDBResult mdbResult)
     else if (data & 0x80)
     {
       // Coins Dispensed Manually
+      uint8_t numberDispensed = (data & 0x70) >> 4;
+      uint8_t coinType = (data & 0xF);
+      for (uint8_t i = 0; i < numberDispensed; i++)
+      {
+        if (onCoinDispensed != NULL)
+        {
+          onCoinDispensed(coinType);
+        }
+      }
+
       i++; // Two byte code
+      // Second byte is the number of coins in the tube
     }
     else if (data & 0x40)
     {
       // Coins Deposited
-      uint8_t coinRouting = (data & 0x30) >> 4;
+      uint8_t coinRoutingCode = (data & 0x30) >> 4;
       uint8_t coinType = (data & 0x0F);
-      uint8_t coinCount = mdbResult.data[i + 1];
+      CoinRouting coinRouting =
+          coinRoutingCode == 0x00
+              ? CoinRouting::CASH_BOX
+              : coinRoutingCode == 0x01
+                    ? CoinRouting::TUBES
+                    : CoinRouting::REJECT;
 
-      Serial.print(coinCount);
-      Serial.print(" ");
-
-      if (coinType == 0x2)
-      {
-        Serial.print("quarter");
-      }
-      if (coinType == 0x0)
-      {
-        Serial.print("nickel");
+      if(onCoinDeposited != NULL) {
+        onCoinDeposited(coinRouting, coinType);
       }
 
-      if (coinRouting == 0x0)
-      {
-        Serial.println(" in cash box");
-      }
-      if (coinRouting == 0x1)
-      {
-        Serial.println(" in tubes");
-      }
-      if (coinRouting == 0x2)
-      {
-        Serial.println(" unused");
-      }
-      if (coinRouting == 0x3)
-      {
-        Serial.println(" rejected");
-      }
       i++; // Two byte code
+      // Second byte is the number of coins in the tube
     }
     else if (data & 0x20)
     {
       // Slug
     }
-    else if (data == 0x01)
+    else {
+    }
+    
+    if (data == 0x01)
     {
       // Escrow request
+      if(onEscrowRequest != NULL) {
+        onEscrowRequest();
+      }
     }
     else if (data == 0x02)
     {
       // Changer Payout Busy
+      if(onChangerPayoutBusy != NULL) {
+        onChangerPayoutBusy();
+      }
     }
     else if (data == 0x03)
     {
       // No Credit
+      if(onNoCredit != NULL) {
+        onNoCredit();
+      }
     }
     else if (data == 0x04)
     {
       // Defective Tube Sensor
+      if(onDefectiveTubeSensor != NULL) {
+        onDefectiveTubeSensor();
+      }
     }
     else if (data == 0x05)
     {
       // Double Arrival
+      if(onDoubleArrival != NULL) {
+        onDoubleArrival();
+      }
     }
     else if (data == 0x06)
     {
       // Acceptor Unplugged
+      if(onAcceptorUnplugged != NULL) {
+        onAcceptorUnplugged();
+      }
     }
     else if (data == 0x07)
     {
       // Tube Jam
+      if(onTubeJam != NULL) {
+        onTubeJam();
+      }
     }
     else if (data == 0x08)
     {
       // ROM checksum error
+      if(onROMChecksumError != NULL) {
+        onROMChecksumError();
+      }
     }
     else if (data == 0x09)
     {
       // Coin Routing error
+      if(onCoinRoutingError != NULL) {
+        onCoinRoutingError();
+      }
     }
     else if (data == 0x0A)
     {
       // Changer Busy
+      if(onChangerBusy != NULL) {
+        onChangerBusy();
+      }
     }
     else if (data == 0x0B)
     {
@@ -193,10 +249,16 @@ void CoinChanger::handlePollData(MDBResult mdbResult)
     else if (data == 0x0C)
     {
       // Coin Jam
+      if(onCoinJam != NULL) {
+        onCoinJam();
+      }
     }
     else if (data == 0x0D)
     {
       // Possible Credited Coin Removal
+      if(onPossibleCreditedCoinRemoval != NULL) {
+        onPossibleCreditedCoinRemoval();
+      }
     }
     i++;
   }
@@ -255,6 +317,9 @@ void CoinChanger::sendTubeStatus()
       CMD_TUBE_STATUS, LENGTH(CMD_TUBE_STATUS),
       onTimeout,
       [](MDBResult mdbResult) {
+        tubeFullStatus = BYTE2WORD(mdbResult.data[0], mdbResult.data[1]);
+        MDB::copyAtMost16(mdbResult, 2, tubeStatus);
+
         MDB::ack();
       });
 

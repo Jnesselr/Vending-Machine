@@ -130,7 +130,10 @@ MDBCommand::MDBCommand() : MDBCommand(NULL, 0)
 }
 
 MDBCommand::MDBCommand(const uint16_t *data, size_t length)
-    : MDBCommand(data, length, NULL, NULL) {}
+    : MDBCommand(data, length, NULL) {}
+
+MDBCommand::MDBCommand(const uint16_t* data, size_t length, MDBCallback timeout)
+    : MDBCommand(data, length, timeout, NULL) {}
 
 MDBCommand::MDBCommand(
     const uint16_t *data,

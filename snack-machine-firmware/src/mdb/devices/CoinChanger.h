@@ -10,13 +10,39 @@ enum class CoinChangerState {
   IDLE
 };
 
+enum class CoinRouting {
+  CASH_BOX,
+  TUBES,
+  REJECT
+};
+
+typedef void (*CoinDispensedCallback)(uint8_t coinType);
+typedef void (*CoinDepositedCallback)(CoinRouting, uint8_t coinType);
+
 class CoinChanger {
   public:
     static void loop();
 
-    // Callbacks
-    static VoidCallback onJustReset;
+    static void dispense(uint8_t coinType, uint8_t coinCount);
 
+    // Callbacks
+    static CoinDispensedCallback onCoinDispensed;
+    static CoinDepositedCallback onCoinDeposited;
+    static VoidCallback onEscrowRequest;
+    static VoidCallback onChangerPayoutBusy;
+    static VoidCallback onNoCredit;
+    static VoidCallback onDefectiveTubeSensor;
+    static VoidCallback onDoubleArrival;
+    static VoidCallback onAcceptorUnplugged;
+    static VoidCallback onTubeJam;
+    static VoidCallback onROMChecksumError;
+    static VoidCallback onCoinRoutingError;
+    static VoidCallback onChangerBusy;
+    static VoidCallback onJustReset;
+    static VoidCallback onCoinJam;
+    static VoidCallback onPossibleCreditedCoinRemoval;
+
+    static CoinChangerState state;
   private:
     static RingBuffer<MDBCommand*> commandBuffer;
 
@@ -30,7 +56,6 @@ class CoinChanger {
     static void onTimeout(MDBResult mdbResult);
 
     static uint8_t pollFailures;
-    static CoinChangerState state;
     static bool devicePolled;
 
     // Setup
