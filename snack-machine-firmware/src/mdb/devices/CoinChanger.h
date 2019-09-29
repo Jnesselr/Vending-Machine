@@ -7,7 +7,6 @@
 enum class CoinChangerState {
   UNKNOWN,
   RESET,
-  SETUP,
   IDLE
 };
 

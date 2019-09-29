@@ -43,15 +43,10 @@ void CoinChanger::loop()
     return;
   }
 
-  if (state == CoinChangerState::RESET)
+  if (state == CoinChangerState::RESET && commandBuffer.isEmpty())
   {
     commandBuffer.clear();
     sendSetup();
-    return;
-  }
-
-  if (state == CoinChangerState::SETUP)
-  {
     sendCoinTypeSetup();
     return;
   }
@@ -235,8 +230,6 @@ void CoinChanger::sendSetup()
         decimalPlaces = mdbResult.data[4];
         coinTypeRouting = BYTE2WORD(mdbResult.data[5], mdbResult.data[6]);
         MDB::copyAtMost16(mdbResult, 7, coinTypeCredit);
-
-        state = CoinChangerState::SETUP;
       });
 
   commandBuffer.push(setupCommand);
@@ -274,22 +267,3 @@ void CoinChanger::onTimeout(MDBResult mdbResult)
   pollFailures++;
   devicePolled = false;
 }
-
-/**
- * I like the idea of doing higher level stuff as opposed to low level.
- * I think it's possible to configure the changer however we want, then have it handle setup
- * automatically when the loop starts. Basically, we'd start at an unknown state, start polling,
- * and go from there. 
- * 
- * Too many poll failures? State is now "disconnected" or something. We can do a callback on that
- * state change.
- * 
- * In summary:
- * - Initial setup before calling the event manager loop
- * - Changes to config calls the appropriate function, if the state is correct (idle?)
- *  - What to do if not idle? Queue the change somehow?
- * - Anything that happens that needs to be known about a level up gets a callback.
- *  - onReset
- *  - onCoinDeposited
- *  - onCoinDispensed
- */
