@@ -112,7 +112,7 @@ void CoinChanger::sendPoll()
 
 void CoinChanger::handlePollData(MDBResult mdbResult)
 {
-  mdbResult.print("COIN POLL");
+  // mdbResult.print("COIN POLL");
   uint8_t i = 0;
 
   while (i < mdbResult.length)
@@ -267,7 +267,7 @@ void CoinChanger::handlePollData(MDBResult mdbResult)
 
 void CoinChanger::sendReset()
 {
-  DEBUG("Calling Coin reset");
+  // DEBUG("Calling Coin reset");
   MDBCommand resetCommand(
       CMD_RESET, LENGTH(CMD_RESET),
       onTimeout,
@@ -329,7 +329,7 @@ void CoinChanger::sendTubeStatus()
 
 void CoinChanger::onTimeout(MDBResult mdbResult)
 {
-  DEBUG("Coin On timeout");
+  // DEBUG("Coin On timeout");
   pollFailures++;
   devicePolled = false;
 }

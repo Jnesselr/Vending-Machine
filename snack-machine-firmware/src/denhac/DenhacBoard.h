@@ -6,6 +6,8 @@
 #include "mdb/devices/BillValidator.h"
 #include "mdb/devices/CoinChanger.h"
 
+#include "hid_rfid.h"
+
 #include "vendingMachine.h"
 
 
@@ -22,4 +24,5 @@ class DenhacBoard: public VendingMachine {
 
     static EvtTimeListener billValidatorLoop;
     static EvtTimeListener coinChangerLoop;
+    static EvtTimeListener rfidLoop;
 };

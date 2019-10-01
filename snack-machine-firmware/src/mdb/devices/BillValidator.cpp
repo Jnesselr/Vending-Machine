@@ -70,7 +70,7 @@ void BillValidator::sendPoll()
     return;
   }
 
-  mdbResult.print("CASH");
+  // mdbResult.print("CASH");
 
   uint8_t i = 0;
 
@@ -86,7 +86,6 @@ void BillValidator::sendPoll()
     {
       // Bill inserted
       if(data & 0x10) {
-        Serial.println(data & 0xF, HEX);
         acceptBill();
       }
     }
@@ -197,14 +196,14 @@ void BillValidator::acceptBill()
 
 void BillValidator::sendReset()
 {
-  DEBUG("Sending cash reset")
+  // DEBUG("Sending cash reset")
   static MDBResult mdbResult;
 
   MDB::writeForResult(CMD_RESET, LENGTH(CMD_RESET), &mdbResult);
 
   if (mdbResult.timeout)
   {
-    Serial.println("Cash reset timed out");
+    // Serial.println("Cash reset timed out");
     return;
   }
 
@@ -216,21 +215,21 @@ void BillValidator::sendReset()
 
 void BillValidator::sendSetup()
 {
-  DEBUG("Sending Cash Setup")
+  // DEBUG("Sending Cash Setup")
   static MDBResult mdbResult;
 
   MDB::writeForResult(CMD_SETUP, LENGTH(CMD_SETUP), &mdbResult);
   
   if (mdbResult.timeout)
   {
-    DEBUG("Cash Setup timed out")
+    // DEBUG("Cash Setup timed out")
     state = BillValidatorState::UNKNOWN;
     return;
   }
 
   MDB::ack();
 
-  mdbResult.print("CASH SETUP");
+  // mdbResult.print("CASH SETUP");
 
   featureLevel = mdbResult.data[0];
   currencyCode = BYTE2WORD(mdbResult.data[1], mdbResult.data[2]);

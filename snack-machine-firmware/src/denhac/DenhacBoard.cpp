@@ -17,6 +17,11 @@ EvtTimeListener DenhacBoard::coinChangerLoop(200, true, LISTENER {
   return false;
 });
 
+EvtTimeListener DenhacBoard::rfidLoop(20, true, LISTENER {
+  RFID::loop();
+  return false;
+});
+
 void mycallback(int ErrCode, unsigned char Errorbyte)
 {
   Serial.print("Code: ");
@@ -24,8 +29,6 @@ void mycallback(int ErrCode, unsigned char Errorbyte)
   Serial.print("Byte: ");
   Serial.println(Errorbyte);
 }
-
-uint8_t coinsDispensed = 0;
 
 void DenhacBoard::setup()
 {
@@ -37,7 +40,10 @@ void DenhacBoard::setup()
   // Serial.println("Began serial for display");
   
   // displayResetPin.setup();
-  // displayResetPin.write(0x1);
+  // Serial.println("Writing 0 to pin hopefully");
+  // displayResetPin.write(0xFF);
+  // Serial.println("Done");
+  // Serial.flush();
   // delay(100);
   // displayResetPin.write(0x0);
 
@@ -53,8 +59,11 @@ void DenhacBoard::setup()
   // Serial.println("Display serial done");
 
   MDB::setup();
+  RFID::setup();
 
-  Serial.println("MDB Done");
+  RFID::onCardScanned = [](unsigned long cardCode) {
+    Serial.println(cardCode);
+  };
 
   // TODO
   // - How to handle coin value added
@@ -63,6 +72,7 @@ void DenhacBoard::setup()
 
   eventManager.addListener(&billValidatorLoop);
   eventManager.addListener(&coinChangerLoop);
+  eventManager.addListener(&rfidLoop);
 }
 
 void DenhacBoard::loop()
