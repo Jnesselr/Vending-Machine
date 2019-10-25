@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 4
+Sheet 4 5
 Title ""
 Date ""
 Rev ""
@@ -237,6 +237,7 @@ U 1 1 5DE58D00
 P 6850 1300
 AR Path="/5BA75957/5DE58D00" Ref="Q?"  Part="1" 
 AR Path="/5DE58D00" Ref="Q?"  Part="1" 
+AR Path="/5DE1B8F8/5DE58D00" Ref="Q?"  Part="1" 
 F 0 "Q?" H 7041 1346 50  0000 L CNN
 F 1 "MMBT3904" H 7041 1255 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 7050 1225 50  0001 L CIN
