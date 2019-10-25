@@ -1,10 +1,10 @@
 EESchema Schematic File Version 4
 LIBS:Snack Machine-cache
-EELAYER 26 0
+EELAYER 29 0
 EELAYER END
 $Descr USLedger 17000 11000
 encoding utf-8
-Sheet 1 3
+Sheet 1 4
 Title ""
 Date ""
 Rev ""
@@ -131,28 +131,27 @@ F11 "col_3_ctrl" I L 11100 4100 50
 F12 "col_4_ctrl" I L 11100 4200 50 
 F13 "col_5_ctrl" I L 11100 4300 50 
 F14 "col_6_ctrl" I L 11100 4400 50 
-F15 "SCL" I L 11100 4900 50 
-F16 "SDA" I L 11100 4800 50 
-F17 "row_a_motor" I R 12400 3000 50 
-F18 "row_b_motor" I R 12400 3100 50 
-F19 "row_c_motor" I R 12400 3200 50 
-F20 "row_d_motor" I R 12400 3300 50 
-F21 "row_e_motor" I R 12400 3400 50 
-F22 "row_f_motor" I R 12400 3500 50 
-F23 "row_g_motor" I R 12400 3600 50 
-F24 "row_h_ctrl" I L 11100 3700 50 
-F25 "row_h_motor" I R 12400 3700 50 
-F26 "col_1_motor" I R 12400 3900 50 
-F27 "col_2_motor" I R 12400 4000 50 
-F28 "col_3_motor" I R 12400 4100 50 
-F29 "col_4_motor" I R 12400 4200 50 
-F30 "col_5_motor" I R 12400 4300 50 
-F31 "col_6_motor" I R 12400 4400 50 
-F32 "col_7_ctrl" I L 11100 4500 50 
-F33 "col_7_motor" I R 12400 4500 50 
-F34 "col_8_ctrl" I L 11100 4600 50 
-F35 "col_8_motor" I R 12400 4600 50 
-F36 "MOTOR_CURRENT" I R 12400 4900 50 
+F15 "row_a_motor" O R 12400 3000 50 
+F16 "row_b_motor" O R 12400 3100 50 
+F17 "row_c_motor" O R 12400 3200 50 
+F18 "row_d_motor" O R 12400 3300 50 
+F19 "row_e_motor" O R 12400 3400 50 
+F20 "row_f_motor" O R 12400 3500 50 
+F21 "row_g_motor" O R 12400 3600 50 
+F22 "row_h_ctrl" I L 11100 3700 50 
+F23 "row_h_motor" O R 12400 3700 50 
+F24 "col_1_motor" O R 12400 3900 50 
+F25 "col_2_motor" O R 12400 4000 50 
+F26 "col_3_motor" O R 12400 4100 50 
+F27 "col_4_motor" O R 12400 4200 50 
+F28 "col_5_motor" O R 12400 4300 50 
+F29 "col_6_motor" O R 12400 4400 50 
+F30 "col_7_ctrl" I L 11100 4500 50 
+F31 "col_7_motor" O R 12400 4500 50 
+F32 "col_8_ctrl" I L 11100 4600 50 
+F33 "col_8_motor" O R 12400 4600 50 
+F34 "MOTOR_CURRENT" O R 12400 4900 50 
+F35 "MOTOR_FAULT" O R 12400 4800 50 
 $EndSheet
 $Comp
 L Device:C C12
@@ -301,10 +300,6 @@ Wire Wire Line
 	9100 4100 9900 4100
 Wire Wire Line
 	9900 4200 9100 4200
-Text Label 9300 5700 0    50   ~ 0
-SCL
-Text Label 9300 5800 0    50   ~ 0
-SDA
 Text Label 13300 7950 0    50   ~ 0
 RX_DISPLAY
 Text Label 12350 8400 2    50   ~ 0
@@ -477,14 +472,6 @@ Wire Wire Line
 	12600 4500 12400 4500
 Wire Wire Line
 	12600 4600 12400 4600
-Text Label 10900 4800 2    50   ~ 0
-SDA
-Text Label 10900 4900 2    50   ~ 0
-SCL
-Wire Wire Line
-	10700 4800 11100 4800
-Wire Wire Line
-	10700 4900 11100 4900
 $Comp
 L power:+5V #PWR038
 U 1 1 5BC8E5E9
@@ -850,70 +837,6 @@ Wire Wire Line
 Connection ~ 5800 2300
 Wire Wire Line
 	8200 1850 8200 1900
-$Comp
-L Device:R R17
-U 1 1 5C327914
-P 13350 5500
-F 0 "R17" H 13500 5550 50  0000 C CNN
-F 1 "1k" H 13500 5450 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 13280 5500 50  0001 C CNN
-F 3 "~" H 13350 5500 50  0001 C CNN
-F 4 "RC0603FR-071KL" H 13350 5500 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 13350 5500 50  0001 C CNN "Manufacturer"
-	1    13350 5500
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R18
-U 1 1 5C327BDD
-P 13700 5500
-F 0 "R18" H 13850 5550 50  0000 C CNN
-F 1 "1k" H 13850 5450 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 13630 5500 50  0001 C CNN
-F 3 "~" H 13700 5500 50  0001 C CNN
-F 4 "RC0603FR-071KL" H 13700 5500 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 13700 5500 50  0001 C CNN "Manufacturer"
-	1    13700 5500
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+5V #PWR059
-U 1 1 5C327C47
-P 13350 5300
-F 0 "#PWR059" H 13350 5150 50  0001 C CNN
-F 1 "+5V" H 13300 5450 50  0000 L CNN
-F 2 "" H 13350 5300 50  0001 C CNN
-F 3 "" H 13350 5300 50  0001 C CNN
-	1    13350 5300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	13350 5650 13350 5700
-Wire Wire Line
-	13350 5700 12950 5700
-Wire Wire Line
-	13700 5650 13700 5800
-Wire Wire Line
-	13700 5800 12950 5800
-Text Label 13050 5800 0    50   ~ 0
-SDA
-Text Label 13050 5700 0    50   ~ 0
-SCL
-$Comp
-L power:+5V #PWR062
-U 1 1 5C33D82C
-P 13700 5300
-F 0 "#PWR062" H 13700 5150 50  0001 C CNN
-F 1 "+5V" H 13650 5450 50  0000 L CNN
-F 2 "" H 13700 5300 50  0001 C CNN
-F 3 "" H 13700 5300 50  0001 C CNN
-	1    13700 5300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	13350 5300 13350 5350
-Wire Wire Line
-	13700 5300 13700 5350
 Wire Wire Line
 	9100 5700 9800 5700
 Wire Wire Line
@@ -1056,21 +979,6 @@ Wire Wire Line
 Wire Wire Line
 	2200 1250 2350 1250
 Connection ~ 2350 1250
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C5B900C
-P 9200 4300
-AR Path="/5BCD883C/5C5B900C" Ref="TP?"  Part="1" 
-AR Path="/5C5B900C" Ref="TP28"  Part="1" 
-F 0 "TP28" V 9150 4250 50  0000 L CNN
-F 1 "TestPoint" V 9150 4500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9400 4300 50  0001 C CNN
-F 3 "~" H 9400 4300 50  0001 C CNN
-	1    9200 4300
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9200 4300 9100 4300
 Wire Wire Line
 	9100 4800 9500 4800
 Wire Wire Line
@@ -1147,10 +1055,6 @@ Wire Wire Line
 Wire Wire Line
 	3500 5450 3600 5450
 Text Label 3750 5450 0    50   ~ 0
-DOOR_SW
-Wire Wire Line
-	7500 5900 6900 5900
-Text Label 6950 5900 0    50   ~ 0
 DOOR_SW
 Wire Wire Line
 	5000 7000 4750 7000
@@ -1431,9 +1335,6 @@ Wire Wire Line
 	5300 8600 4750 8600
 Wire Wire Line
 	5300 8100 5300 8600
-NoConn ~ 4750 8500
-NoConn ~ 4750 8400
-NoConn ~ 4250 8500
 Wire Wire Line
 	4250 8600 4150 8600
 Wire Wire Line
@@ -1444,123 +1345,19 @@ Wire Wire Line
 	4750 8200 5200 8200
 Wire Wire Line
 	4250 8200 3650 8200
-Wire Wire Line
-	4250 8300 3500 8300
-Wire Wire Line
-	4250 8400 3500 8400
-Text Label 4850 8300 0    50   ~ 0
+Text Label 5200 8300 2    50   ~ 0
 LCD_CS
-Text Label 4850 8200 0    50   ~ 0
+Text Label 5200 8200 2    50   ~ 0
 BTN_ENC
-Text Label 3800 8300 0    50   ~ 0
-LCD_SDA
-Text Label 3800 8400 0    50   ~ 0
-LCD_SCL
-Text Label 3800 8200 0    50   ~ 0
-BEEPER
-Wire Wire Line
-	4250 9350 3700 9350
-Wire Wire Line
-	4250 9450 3700 9450
-Text Label 3750 9350 0    50   ~ 0
+Text Label 3650 8200 0    50   ~ 0
+LCD_BEEP
+Text Label 3650 9350 0    50   ~ 0
 BTN_EN2
-Text Label 3750 9450 0    50   ~ 0
+Text Label 3650 9450 0    50   ~ 0
 BTN_EN1
-$Comp
-L power:GND #PWR025
-U 1 1 5C1822AD
-P 4150 9750
-F 0 "#PWR025" H 4150 9500 50  0001 C CNN
-F 1 "GND" H 4150 9600 50  0000 C CNN
-F 2 "" H 4150 9750 50  0001 C CNN
-F 3 "" H 4150 9750 50  0001 C CNN
-	1    4150 9750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4250 9650 4150 9650
-Wire Wire Line
-	4150 9650 4150 9750
-Wire Wire Line
-	4750 9550 5250 9550
-Text Label 4900 9550 0    50   ~ 0
-LCD_PB
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C1D4D6F
-P 5300 9250
-AR Path="/5BCD883C/5C1D4D6F" Ref="TP?"  Part="1" 
-AR Path="/5C1D4D6F" Ref="TP6"  Part="1" 
-F 0 "TP6" V 5250 9200 50  0000 L CNN
-F 1 "TestPoint" V 5250 9450 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 5500 9250 50  0001 C CNN
-F 3 "~" H 5500 9250 50  0001 C CNN
-	1    5300 9250
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C1D4FBC
-P 5300 9350
-AR Path="/5BCD883C/5C1D4FBC" Ref="TP?"  Part="1" 
-AR Path="/5C1D4FBC" Ref="TP7"  Part="1" 
-F 0 "TP7" V 5250 9300 50  0000 L CNN
-F 1 "TestPoint" V 5250 9550 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 5500 9350 50  0001 C CNN
-F 3 "~" H 5500 9350 50  0001 C CNN
-	1    5300 9350
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C1D502C
-P 5300 9450
-AR Path="/5BCD883C/5C1D502C" Ref="TP?"  Part="1" 
-AR Path="/5C1D502C" Ref="TP8"  Part="1" 
-F 0 "TP8" V 5250 9400 50  0000 L CNN
-F 1 "TestPoint" V 5250 9650 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 5500 9450 50  0001 C CNN
-F 3 "~" H 5500 9450 50  0001 C CNN
-	1    5300 9450
-	0    1    1    0   
-$EndComp
+Text Label 5200 9550 2    50   ~ 0
+LCD_RESET
 NoConn ~ 4750 9650
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C1F400F
-P 3600 9250
-AR Path="/5BCD883C/5C1F400F" Ref="TP?"  Part="1" 
-AR Path="/5C1F400F" Ref="TP4"  Part="1" 
-F 0 "TP4" V 3550 9200 50  0000 L CNN
-F 1 "TestPoint" V 3550 9450 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 3800 9250 50  0001 C CNN
-F 3 "~" H 3800 9250 50  0001 C CNN
-	1    3600 9250
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C1F40D3
-P 3600 9550
-AR Path="/5BCD883C/5C1F40D3" Ref="TP?"  Part="1" 
-AR Path="/5C1F40D3" Ref="TP5"  Part="1" 
-F 0 "TP5" V 3550 9500 50  0000 L CNN
-F 1 "TestPoint" V 3550 9750 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 3800 9550 50  0001 C CNN
-F 3 "~" H 3800 9550 50  0001 C CNN
-	1    3600 9550
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	3600 9250 4250 9250
-Wire Wire Line
-	4250 9550 3600 9550
-Wire Wire Line
-	4750 9250 5300 9250
-Wire Wire Line
-	5300 9350 4750 9350
-Wire Wire Line
-	4750 9450 5300 9450
 Text Label 6650 7800 0    50   ~ 0
 RESET_DISPLAY
 Wire Wire Line
@@ -1569,13 +1366,7 @@ Wire Wire Line
 	12250 6750 12800 6750
 Text Label 12350 6750 0    50   ~ 0
 ~RESET
-Wire Wire Line
-	12400 4900 13350 4900
-Text Label 12550 4900 0    50   ~ 0
-MOTOR_CURRENT
-Wire Wire Line
-	9100 3000 10100 3000
-Text Label 9300 3000 0    50   ~ 0
+Text Label 13200 4900 2    50   ~ 0
 MOTOR_CURRENT
 Text Label 14050 6850 0    50   ~ 0
 RFID_DATA_0
@@ -1634,8 +1425,6 @@ Wire Wire Line
 	6500 7600 7500 7600
 Wire Wire Line
 	6500 7700 7500 7700
-Text Label 9400 4600 0    50   ~ 0
-RFID_BEEP
 Wire Wire Line
 	9100 4600 9900 4600
 $Comp
@@ -1677,8 +1466,6 @@ Wire Wire Line
 	2550 7000 2550 6600
 Wire Wire Line
 	3200 7000 3800 7000
-Wire Wire Line
-	3200 6900 3400 6900
 $Comp
 L power:GND #PWR011
 U 1 1 5C81570B
@@ -1701,76 +1488,6 @@ F 3 "" H 2550 6600 50  0001 C CNN
 	1    2550 6600
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector_Generic:Conn_02x03_Top_Bottom J1
-U 1 1 5C815717
-P 1000 6900
-F 0 "J1" H 1050 6575 50  0000 C CNN
-F 1 "MDB" H 1050 6666 50  0000 C CNN
-F 2 "Connector_Molex:Molex_Mini-Fit_Jr_5566-06A_2x03_P4.20mm_Vertical" H 1000 6900 50  0001 C CNN
-F 3 "~" H 1000 6900 50  0001 C CNN
-	1    1000 6900
-	1    0    0    1   
-$EndComp
-NoConn ~ 800  6800
-$Comp
-L power:GND #PWR03
-U 1 1 5C81571F
-P 1350 7100
-F 0 "#PWR03" H 1350 6850 50  0001 C CNN
-F 1 "GND" H 1350 6950 50  0000 C CNN
-F 2 "" H 1350 7100 50  0001 C CNN
-F 3 "" H 1350 7100 50  0001 C CNN
-	1    1350 7100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1300 6800 1350 6800
-Wire Wire Line
-	1350 6800 1350 7100
-Wire Wire Line
-	800  6900 750  6900
-Wire Wire Line
-	750  6900 750  7100
-Wire Wire Line
-	800  7000 650  7000
-Wire Wire Line
-	650  7000 650  6600
-Wire Wire Line
-	1300 7000 1900 7000
-Wire Wire Line
-	1300 6900 2050 6900
-$Comp
-L power:GND #PWR02
-U 1 1 5C81572D
-P 750 7100
-F 0 "#PWR02" H 750 6850 50  0001 C CNN
-F 1 "GND" H 750 6950 50  0000 C CNN
-F 2 "" H 750 7100 50  0001 C CNN
-F 3 "" H 750 7100 50  0001 C CNN
-	1    750  7100
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+24V #PWR01
-U 1 1 5C815733
-P 650 6600
-F 0 "#PWR01" H 650 6450 50  0001 C CNN
-F 1 "+24V" H 650 6750 50  0000 C CNN
-F 2 "" H 650 6600 50  0001 C CNN
-F 3 "" H 650 6600 50  0001 C CNN
-	1    650  6600
-	1    0    0    -1  
-$EndComp
-Text Label 1500 7000 0    50   ~ 0
-RX_MDB
-Wire Wire Line
-	2050 6900 2050 6300
-Wire Wire Line
-	2050 6300 3400 6300
-Wire Wire Line
-	3400 6300 3400 6900
-Connection ~ 3400 6900
 $Comp
 L Device:C C9
 U 1 1 5C8650B6
@@ -1821,8 +1538,6 @@ Wire Wire Line
 	6350 7100 6350 7200
 Wire Wire Line
 	6050 6800 6050 6600
-Wire Wire Line
-	6050 6600 7500 6600
 $Comp
 L Device:R R10
 U 1 1 5C9076CE
@@ -1838,7 +1553,6 @@ F 5 "Yageo" V 5750 6600 50  0001 C CNN "Manufacturer"
 $EndComp
 Wire Wire Line
 	6050 6600 5900 6600
-Connection ~ 6050 6600
 Wire Wire Line
 	5600 6600 5000 6600
 $Comp
@@ -2063,8 +1777,6 @@ Wire Wire Line
 Wire Wire Line
 	10000 5600 10700 5600
 Wire Wire Line
-	3400 6900 3700 6900
-Wire Wire Line
 	3700 6900 3700 6500
 Wire Wire Line
 	3700 6500 3800 6500
@@ -2144,98 +1856,8 @@ Wire Wire Line
 Connection ~ 10850 9050
 Wire Wire Line
 	10850 9050 10850 9250
-Text Label 9400 4400 0    50   ~ 0
-BEEPER
 Wire Wire Line
 	9100 4400 9900 4400
-Wire Wire Line
-	6500 7500 7500 7500
-Wire Wire Line
-	6900 4800 7500 4800
-Text Label 6650 7500 0    50   ~ 0
-LCD_CS
-Text Label 7000 4800 0    50   ~ 0
-BTN_ENC
-Wire Wire Line
-	6900 4900 7500 4900
-Text Label 7000 4900 0    50   ~ 0
-LCD_PB
-Text Label 9400 4500 0    50   ~ 0
-RFID_LED
-Text Label 2700 8400 0    50   ~ 0
-SCL
-Text Label 2700 8300 0    50   ~ 0
-SDA
-Wire Wire Line
-	2150 8400 2500 8400
-Wire Wire Line
-	2150 8300 2600 8300
-$Comp
-L Device:R R1
-U 1 1 5C519D4C
-P 3350 8300
-F 0 "R1" V 3400 8500 50  0000 C CNN
-F 1 "0R" V 3400 8100 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3280 8300 50  0001 C CNN
-F 3 "~" H 3350 8300 50  0001 C CNN
-F 4 "RC0603JR-070RL" V 3350 8300 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 3350 8300 50  0001 C CNN "Manufacturer"
-	1    3350 8300
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:R R2
-U 1 1 5C519E2E
-P 3350 8400
-F 0 "R2" V 3400 8600 50  0000 C CNN
-F 1 "0R" V 3400 8200 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3280 8400 50  0001 C CNN
-F 3 "~" H 3350 8400 50  0001 C CNN
-F 4 "RC0603JR-070RL" V 3350 8400 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 3350 8400 50  0001 C CNN "Manufacturer"
-	1    3350 8400
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	2600 8300 2600 8000
-Wire Wire Line
-	2600 8000 2300 8000
-Connection ~ 2600 8300
-Wire Wire Line
-	2600 8300 3200 8300
-Wire Wire Line
-	2500 8400 2500 8100
-Wire Wire Line
-	2500 8100 2300 8100
-Connection ~ 2500 8400
-Wire Wire Line
-	2500 8400 3200 8400
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C5DD1FA
-P 2300 8000
-AR Path="/5BCD883C/5C5DD1FA" Ref="TP?"  Part="1" 
-AR Path="/5C5DD1FA" Ref="TP2"  Part="1" 
-F 0 "TP2" V 2250 7950 50  0000 L CNN
-F 1 "TestPoint" V 2250 8200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 2500 8000 50  0001 C CNN
-F 3 "~" H 2500 8000 50  0001 C CNN
-	1    2300 8000
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C5DD2D6
-P 2300 8100
-AR Path="/5BCD883C/5C5DD2D6" Ref="TP?"  Part="1" 
-AR Path="/5C5DD2D6" Ref="TP3"  Part="1" 
-F 0 "TP3" V 2250 8050 50  0000 L CNN
-F 1 "TestPoint" V 2250 8300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 2500 8100 50  0001 C CNN
-F 3 "~" H 2500 8100 50  0001 C CNN
-	1    2300 8100
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	9100 4500 9900 4500
 $Comp
@@ -2358,171 +1980,6 @@ F 3 "~" H 7500 6800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	7300 6800 7500 6800
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8C002D
-P 7300 6400
-AR Path="/5BCD883C/5C8C002D" Ref="TP?"  Part="1" 
-AR Path="/5C8C002D" Ref="TP19"  Part="1" 
-F 0 "TP19" V 7250 6350 50  0000 L CNN
-F 1 "TestPoint" V 7250 6600 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6400 50  0001 C CNN
-F 3 "~" H 7500 6400 50  0001 C CNN
-	1    7300 6400
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6400 7500 6400
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8DEEDF
-P 7300 6300
-AR Path="/5BCD883C/5C8DEEDF" Ref="TP?"  Part="1" 
-AR Path="/5C8DEEDF" Ref="TP18"  Part="1" 
-F 0 "TP18" V 7250 6250 50  0000 L CNN
-F 1 "TestPoint" V 7250 6500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6300 50  0001 C CNN
-F 3 "~" H 7500 6300 50  0001 C CNN
-	1    7300 6300
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6300 7500 6300
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8FE141
-P 7300 6200
-AR Path="/5BCD883C/5C8FE141" Ref="TP?"  Part="1" 
-AR Path="/5C8FE141" Ref="TP17"  Part="1" 
-F 0 "TP17" V 7250 6150 50  0000 L CNN
-F 1 "TestPoint" V 7250 6400 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6200 50  0001 C CNN
-F 3 "~" H 7500 6200 50  0001 C CNN
-	1    7300 6200
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6200 7500 6200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C91D75B
-P 7300 6100
-AR Path="/5BCD883C/5C91D75B" Ref="TP?"  Part="1" 
-AR Path="/5C91D75B" Ref="TP16"  Part="1" 
-F 0 "TP16" V 7250 6050 50  0000 L CNN
-F 1 "TestPoint" V 7250 6300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6100 50  0001 C CNN
-F 3 "~" H 7500 6100 50  0001 C CNN
-	1    7300 6100
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6100 7500 6100
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C93D12F
-P 7300 6000
-AR Path="/5BCD883C/5C93D12F" Ref="TP?"  Part="1" 
-AR Path="/5C93D12F" Ref="TP15"  Part="1" 
-F 0 "TP15" V 7250 5950 50  0000 L CNN
-F 1 "TestPoint" V 7250 6200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6000 50  0001 C CNN
-F 3 "~" H 7500 6000 50  0001 C CNN
-	1    7300 6000
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6000 7500 6000
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C9BC98F
-P 7300 5500
-AR Path="/5BCD883C/5C9BC98F" Ref="TP?"  Part="1" 
-AR Path="/5C9BC98F" Ref="TP14"  Part="1" 
-F 0 "TP14" V 7250 5450 50  0000 L CNN
-F 1 "TestPoint" V 7250 5700 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 5500 50  0001 C CNN
-F 3 "~" H 7500 5500 50  0001 C CNN
-	1    7300 5500
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 5500 7500 5500
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C9DCB1A
-P 7300 5400
-AR Path="/5BCD883C/5C9DCB1A" Ref="TP?"  Part="1" 
-AR Path="/5C9DCB1A" Ref="TP13"  Part="1" 
-F 0 "TP13" V 7250 5350 50  0000 L CNN
-F 1 "TestPoint" V 7250 5600 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 5400 50  0001 C CNN
-F 3 "~" H 7500 5400 50  0001 C CNN
-	1    7300 5400
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 5400 7500 5400
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C9FD078
-P 7300 5300
-AR Path="/5BCD883C/5C9FD078" Ref="TP?"  Part="1" 
-AR Path="/5C9FD078" Ref="TP12"  Part="1" 
-F 0 "TP12" V 7250 5250 50  0000 L CNN
-F 1 "TestPoint" V 7250 5500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 5300 50  0001 C CNN
-F 3 "~" H 7500 5300 50  0001 C CNN
-	1    7300 5300
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 5300 7500 5300
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CA1D9AD
-P 7300 5200
-AR Path="/5BCD883C/5CA1D9AD" Ref="TP?"  Part="1" 
-AR Path="/5CA1D9AD" Ref="TP11"  Part="1" 
-F 0 "TP11" V 7250 5150 50  0000 L CNN
-F 1 "TestPoint" V 7250 5400 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 5200 50  0001 C CNN
-F 3 "~" H 7500 5200 50  0001 C CNN
-	1    7300 5200
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 5200 7500 5200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CA3E6BF
-P 7300 5100
-AR Path="/5BCD883C/5CA3E6BF" Ref="TP?"  Part="1" 
-AR Path="/5CA3E6BF" Ref="TP10"  Part="1" 
-F 0 "TP10" V 7250 5050 50  0000 L CNN
-F 1 "TestPoint" V 7250 5300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 5100 50  0001 C CNN
-F 3 "~" H 7500 5100 50  0001 C CNN
-	1    7300 5100
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 5100 7500 5100
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CA5F7B4
-P 7300 5000
-AR Path="/5BCD883C/5CA5F7B4" Ref="TP?"  Part="1" 
-AR Path="/5CA5F7B4" Ref="TP9"  Part="1" 
-F 0 "TP9" V 7250 4950 50  0000 L CNN
-F 1 "TestPoint" V 7250 5200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 5000 50  0001 C CNN
-F 3 "~" H 7500 5000 50  0001 C CNN
-	1    7300 5000
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 5000 7500 5000
 $Comp
 L Connector:TestPoint TP?
 U 1 1 5CAC56C5
@@ -3317,10 +2774,6 @@ Wire Wire Line
 Connection ~ 1200 5500
 Wire Wire Line
 	1200 5500 900  5500
-Wire Wire Line
-	9100 3900 9900 3900
-Text Label 9400 3900 0    50   ~ 0
-CS
 $Comp
 L Device:D_Schottky D7
 U 1 1 5C1DBF6A
@@ -3672,261 +3125,6 @@ Wire Wire Line
 	13400 8150 14100 8150
 Wire Wire Line
 	13400 8600 13400 8700
-$Comp
-L Snack_Machine:Huzzah32 U7
-U 1 1 5C49F347
-P 14050 1650
-F 0 "U7" H 14050 2575 50  0000 C CNN
-F 1 "Huzzah32" H 14050 2484 50  0000 C CNN
-F 2 "Snack Machine:HUZZAH32" H 13600 800 50  0001 C CNN
-F 3 "" H 13600 800 50  0001 C CNN
-	1    14050 1650
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+5V #PWR?
-U 1 1 5C4ADEDC
-P 13300 850
-AR Path="/5BCD883C/5C4ADEDC" Ref="#PWR?"  Part="1" 
-AR Path="/5C4ADEDC" Ref="#PWR022"  Part="1" 
-F 0 "#PWR022" H 13300 700 50  0001 C CNN
-F 1 "+5V" H 13315 1023 50  0000 C CNN
-F 2 "" H 13300 850 50  0001 C CNN
-F 3 "" H 13300 850 50  0001 C CNN
-	1    13300 850 
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR035
-U 1 1 5C4B1A93
-P 14900 1350
-F 0 "#PWR035" H 14900 1100 50  0001 C CNN
-F 1 "GND" H 14900 1200 50  0000 C CNN
-F 2 "" H 14900 1350 50  0001 C CNN
-F 3 "" H 14900 1350 50  0001 C CNN
-	1    14900 1350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	14700 2250 15300 2250
-Wire Wire Line
-	14700 2350 15300 2350
-Text Label 14750 2250 0    50   ~ 0
-HUZZAH_RX
-Text Label 14750 2350 0    50   ~ 0
-HUZZAH_TX
-$Comp
-L power:+5V #PWR021
-U 1 1 5C4CE514
-P 5800 5600
-F 0 "#PWR021" H 5800 5450 50  0001 C CNN
-F 1 "+5V" H 5815 5773 50  0000 C CNN
-F 2 "" H 5800 5600 50  0001 C CNN
-F 3 "" H 5800 5600 50  0001 C CNN
-	1    5800 5600
-	1    0    0    -1  
-$EndComp
-$Comp
-L Transistor_FET:BSS138 Q28
-U 1 1 5C4CE902
-P 5500 6000
-F 0 "Q28" V 5750 5950 50  0000 C CNN
-F 1 "BSS138" V 5841 6000 50  0000 C CNN
-F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5700 5925 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 5500 6000 50  0001 L CNN
-	1    5500 6000
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R92
-U 1 1 5C4FF1BF
-P 5200 5850
-F 0 "R92" H 5270 5896 50  0000 L CNN
-F 1 "10k" H 5270 5805 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5130 5850 50  0001 C CNN
-F 3 "~" H 5200 5850 50  0001 C CNN
-F 4 "RC0603FR-0710KL" H 5200 5850 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 5200 5850 50  0001 C CNN "Manufacturer"
-	1    5200 5850
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R93
-U 1 1 5C4FF70E
-P 5800 5850
-F 0 "R93" H 5870 5896 50  0000 L CNN
-F 1 "10k" H 5870 5805 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5730 5850 50  0001 C CNN
-F 3 "~" H 5800 5850 50  0001 C CNN
-F 4 "RC0603FR-0710KL" H 5800 5850 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 5800 5850 50  0001 C CNN "Manufacturer"
-	1    5800 5850
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR033
-U 1 1 5C5D30F7
-P 14800 850
-F 0 "#PWR033" H 14800 700 50  0001 C CNN
-F 1 "+3.3V" H 14815 1023 50  0000 C CNN
-F 2 "" H 14800 850 50  0001 C CNN
-F 3 "" H 14800 850 50  0001 C CNN
-	1    14800 850 
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR014
-U 1 1 5C5D3615
-P 5200 5600
-F 0 "#PWR014" H 5200 5450 50  0001 C CNN
-F 1 "+3.3V" H 5215 5773 50  0000 C CNN
-F 2 "" H 5200 5600 50  0001 C CNN
-F 3 "" H 5200 5600 50  0001 C CNN
-	1    5200 5600
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5200 5700 5200 5650
-Wire Wire Line
-	5200 5650 5500 5650
-Wire Wire Line
-	5500 5650 5500 5800
-Connection ~ 5200 5650
-Wire Wire Line
-	5200 5650 5200 5600
-Wire Wire Line
-	5800 5600 5800 5700
-Wire Wire Line
-	5700 6100 5800 6100
-Wire Wire Line
-	5800 6100 5800 6000
-Wire Wire Line
-	5300 6100 5200 6100
-Wire Wire Line
-	5200 6100 5200 6000
-$Comp
-L power:+5V #PWR016
-U 1 1 5C72BA55
-P 5800 4550
-F 0 "#PWR016" H 5800 4400 50  0001 C CNN
-F 1 "+5V" H 5815 4723 50  0000 C CNN
-F 2 "" H 5800 4550 50  0001 C CNN
-F 3 "" H 5800 4550 50  0001 C CNN
-	1    5800 4550
-	1    0    0    -1  
-$EndComp
-$Comp
-L Transistor_FET:BSS138 Q27
-U 1 1 5C72BA5B
-P 5500 4950
-F 0 "Q27" V 5750 4900 50  0000 C CNN
-F 1 "BSS138" V 5841 4950 50  0000 C CNN
-F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 5700 4875 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 5500 4950 50  0001 L CNN
-F 4 "BSS138" V 5500 4950 50  0001 C CNN "Part Number"
-F 5 "ON Semiconductor" V 5500 4950 50  0001 C CNN "Manufacturer"
-	1    5500 4950
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R90
-U 1 1 5C72BA62
-P 5200 4800
-F 0 "R90" H 5270 4846 50  0000 L CNN
-F 1 "10k" H 5270 4755 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5130 4800 50  0001 C CNN
-F 3 "~" H 5200 4800 50  0001 C CNN
-F 4 "RC0603FR-0710KL" H 5200 4800 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 5200 4800 50  0001 C CNN "Manufacturer"
-	1    5200 4800
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R91
-U 1 1 5C72BA69
-P 5800 4800
-F 0 "R91" H 5870 4846 50  0000 L CNN
-F 1 "10k" H 5870 4755 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5730 4800 50  0001 C CNN
-F 3 "~" H 5800 4800 50  0001 C CNN
-F 4 "RC0603FR-0710KL" H 5800 4800 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 5800 4800 50  0001 C CNN "Manufacturer"
-	1    5800 4800
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR013
-U 1 1 5C72BA70
-P 5200 4550
-F 0 "#PWR013" H 5200 4400 50  0001 C CNN
-F 1 "+3.3V" H 5215 4723 50  0000 C CNN
-F 2 "" H 5200 4550 50  0001 C CNN
-F 3 "" H 5200 4550 50  0001 C CNN
-	1    5200 4550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5200 4650 5200 4600
-Wire Wire Line
-	5200 4600 5500 4600
-Wire Wire Line
-	5500 4600 5500 4750
-Connection ~ 5200 4600
-Wire Wire Line
-	5200 4600 5200 4550
-Wire Wire Line
-	5800 4550 5800 4650
-Wire Wire Line
-	5700 5050 5800 5050
-Wire Wire Line
-	5800 5050 5800 4950
-Wire Wire Line
-	5300 5050 5200 5050
-Wire Wire Line
-	5200 5050 5200 4950
-Wire Wire Line
-	4600 6100 5200 6100
-Wire Wire Line
-	4600 5050 5200 5050
-Text Label 4650 5050 0    50   ~ 0
-HUZZAH_TX
-Text Label 4650 6100 0    50   ~ 0
-HUZZAH_RX
-Connection ~ 5200 5050
-Connection ~ 5200 6100
-Wire Wire Line
-	13400 1150 13300 1150
-Wire Wire Line
-	13300 1150 13300 850 
-Wire Wire Line
-	14700 1050 14800 1050
-Wire Wire Line
-	14800 1050 14800 850 
-Wire Wire Line
-	14900 1250 14900 1350
-NoConn ~ 14700 1150
-NoConn ~ 13400 950 
-NoConn ~ 13400 1050
-NoConn ~ 13400 1250
-NoConn ~ 13400 1350
-NoConn ~ 13400 1450
-NoConn ~ 13400 1550
-NoConn ~ 13400 1650
-NoConn ~ 13400 1750
-NoConn ~ 13400 1850
-NoConn ~ 13400 1950
-NoConn ~ 13400 2050
-NoConn ~ 14700 2450
-NoConn ~ 14700 2150
-NoConn ~ 14700 2050
-NoConn ~ 14700 1950
-NoConn ~ 14700 1850
-NoConn ~ 14700 1750
-NoConn ~ 14700 1650
-NoConn ~ 14700 1550
-NoConn ~ 14700 1450
-NoConn ~ 14700 1350
-NoConn ~ 14700 950 
 Wire Wire Line
 	10700 5600 10700 5300
 Wire Wire Line
@@ -3942,32 +3140,230 @@ Connection ~ 10400 5700
 Wire Wire Line
 	10400 5700 10100 5700
 Wire Wire Line
-	6400 5700 6400 5050
+	3200 6900 3700 6900
+$Comp
+L power:+5V #PWR0107
+U 1 1 5D9E1CE4
+P 2050 6600
+F 0 "#PWR0107" H 2050 6450 50  0001 C CNN
+F 1 "+5V" H 2050 6750 50  0000 C CNN
+F 2 "" H 2050 6600 50  0001 C CNN
+F 3 "" H 2050 6600 50  0001 C CNN
+	1    2050 6600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5D9E237C
+P 2050 6750
+F 0 "R1" H 1900 6700 50  0000 C CNN
+F 1 "1k" H 1900 6800 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1980 6750 50  0001 C CNN
+F 3 "~" H 2050 6750 50  0001 C CNN
+F 4 "RC0603FR-0710KL" H 2050 6750 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 2050 6750 50  0001 C CNN "Manufacturer"
+	1    2050 6750
+	-1   0    0    1   
+$EndComp
+Text Label 2050 7000 0    50   ~ 0
+RX_MDB
 Wire Wire Line
-	6400 5050 5800 5050
+	2050 7000 2050 6900
 Wire Wire Line
-	6400 5700 7500 5700
-Connection ~ 5800 5050
+	4250 8300 3650 8300
+Text Label 3650 8300 0    50   ~ 0
+LCD_EN
 Wire Wire Line
-	6400 5800 6400 6100
+	4250 8400 3650 8400
+Text Label 3650 8400 0    50   ~ 0
+LCD_4
 Wire Wire Line
-	6400 6100 5800 6100
+	4750 8400 5200 8400
+Text Label 5200 8400 2    50   ~ 0
+LCD_5
 Wire Wire Line
-	6400 5800 7500 5800
-Connection ~ 5800 6100
+	4250 8500 3650 8500
+Text Label 3650 8500 0    50   ~ 0
+LCD_6
 Wire Wire Line
-	14700 1250 14900 1250
+	4750 8500 5200 8500
+Text Label 5200 8500 2    50   ~ 0
+LCD_7
+Wire Wire Line
+	3650 9350 4250 9350
+Wire Wire Line
+	3650 9450 4250 9450
+Wire Wire Line
+	4250 9250 3650 9250
+Text Label 3650 9250 0    50   ~ 0
+MISO
+Wire Wire Line
+	4750 9250 5200 9250
+Text Label 5200 9250 2    50   ~ 0
+SCK
+Wire Wire Line
+	4750 9550 5200 9550
+Wire Wire Line
+	4750 9350 5200 9350
+Text Label 5200 9350 2    50   ~ 0
+SD_CS
+Wire Wire Line
+	4750 9450 5200 9450
+Text Label 5200 9450 2    50   ~ 0
+MOSI
+Wire Wire Line
+	4250 9550 3650 9550
+Text Label 3650 9550 0    50   ~ 0
+SD_DET
+NoConn ~ 4250 9650
+Wire Wire Line
+	9100 4300 9900 4300
+Text Label 9900 4300 2    50   ~ 0
+BTN_ENC
+NoConn ~ 9100 3900
+Text Notes 9150 3900 0    50   ~ 0
+Slave CS
+Text Label 9900 4400 2    50   ~ 0
+SD_DET
+Wire Wire Line
+	7500 4800 7100 4800
+Text Label 7100 4800 0    50   ~ 0
+LCD_BEEP
+Wire Wire Line
+	7500 4900 7100 4900
+Text Label 7100 4900 0    50   ~ 0
+LCD_CS
+Wire Wire Line
+	7500 5000 7100 5000
+Text Label 7100 5000 0    50   ~ 0
+LCD_EN
+Wire Wire Line
+	7500 5100 7100 5100
+Text Label 7100 5100 0    50   ~ 0
+LCD_4
+Wire Wire Line
+	7500 5200 7100 5200
+Text Label 7100 5200 0    50   ~ 0
+LCD_5
+Wire Wire Line
+	7500 5300 7100 5300
+Text Label 7100 5300 0    50   ~ 0
+LCD_6
+Wire Wire Line
+	7500 5400 7100 5400
+Text Label 7100 5400 0    50   ~ 0
+LCD_7
+Text Label 9900 4500 2    50   ~ 0
+DOOR_SW
+Connection ~ 6050 6600
+Wire Wire Line
+	6050 6600 7500 6600
+Wire Wire Line
+	7300 6000 7500 6000
 $Comp
 L Connector:TestPoint TP?
-U 1 1 5C5AD102
-P 9900 3900
-AR Path="/5BCD883C/5C5AD102" Ref="TP?"  Part="1" 
-AR Path="/5C5AD102" Ref="TP94"  Part="1" 
-F 0 "TP94" V 9850 3850 50  0000 L CNN
-F 1 "TestPoint" V 9850 4100 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 10100 3900 50  0001 C CNN
-F 3 "~" H 10100 3900 50  0001 C CNN
-	1    9900 3900
-	0    1    1    0   
+U 1 1 5C93D12F
+P 7300 6000
+AR Path="/5BCD883C/5C93D12F" Ref="TP?"  Part="1" 
+AR Path="/5C93D12F" Ref="TP15"  Part="1" 
+F 0 "TP15" V 7250 5950 50  0000 L CNN
+F 1 "TestPoint" V 7250 6200 50  0000 L CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6000 50  0001 C CNN
+F 3 "~" H 7500 6000 50  0001 C CNN
+	1    7300 6000
+	0    -1   1    0   
 $EndComp
+Wire Wire Line
+	7300 6100 7500 6100
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C91D75B
+P 7300 6100
+AR Path="/5BCD883C/5C91D75B" Ref="TP?"  Part="1" 
+AR Path="/5C91D75B" Ref="TP16"  Part="1" 
+F 0 "TP16" V 7250 6050 50  0000 L CNN
+F 1 "TestPoint" V 7250 6300 50  0000 L CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6100 50  0001 C CNN
+F 3 "~" H 7500 6100 50  0001 C CNN
+	1    7300 6100
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	7300 6200 7500 6200
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C8FE141
+P 7300 6200
+AR Path="/5BCD883C/5C8FE141" Ref="TP?"  Part="1" 
+AR Path="/5C8FE141" Ref="TP17"  Part="1" 
+F 0 "TP17" V 7250 6150 50  0000 L CNN
+F 1 "TestPoint" V 7250 6400 50  0000 L CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6200 50  0001 C CNN
+F 3 "~" H 7500 6200 50  0001 C CNN
+	1    7300 6200
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	7300 6300 7500 6300
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C8DEEDF
+P 7300 6300
+AR Path="/5BCD883C/5C8DEEDF" Ref="TP?"  Part="1" 
+AR Path="/5C8DEEDF" Ref="TP18"  Part="1" 
+F 0 "TP18" V 7250 6250 50  0000 L CNN
+F 1 "TestPoint" V 7250 6500 50  0000 L CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6300 50  0001 C CNN
+F 3 "~" H 7500 6300 50  0001 C CNN
+	1    7300 6300
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	7300 6400 7500 6400
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5C8C002D
+P 7300 6400
+AR Path="/5BCD883C/5C8C002D" Ref="TP?"  Part="1" 
+AR Path="/5C8C002D" Ref="TP19"  Part="1" 
+F 0 "TP19" V 7250 6350 50  0000 L CNN
+F 1 "TestPoint" V 7250 6600 50  0000 L CNN
+F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6400 50  0001 C CNN
+F 3 "~" H 7500 6400 50  0001 C CNN
+	1    7300 6400
+	0    -1   1    0   
+$EndComp
+Text Label 6650 7500 0    50   ~ 0
+SD_CS
+Wire Wire Line
+	6650 7500 7500 7500
+Text Notes 7000 5500 0    50   ~ 0
+LCD_RESET?
+Text Notes 14650 3300 0    50   ~ 0
+TODO: Consider removing
+Wire Wire Line
+	9100 3000 10100 3000
+Text Label 9300 3000 0    50   ~ 0
+MOTOR_CURRENT
+Wire Wire Line
+	12400 4800 13200 4800
+Wire Wire Line
+	12400 4900 13200 4900
+Text Label 13200 4800 2    50   ~ 0
+MOTOR_FAULT
+$Sheet
+S 5550 5650 900  350 
+U 5DE1B8F8
+F0 "Huzzah32" 50
+F1 "Huzzah32.sch" 50
+F2 "HUZZAH_RX" I R 6450 5800 50 
+F3 "HUZZAH_TX" I R 6450 5700 50 
+F4 "RESET" I R 6450 5900 50 
+$EndSheet
+Wire Wire Line
+	6450 5700 7500 5700
+Wire Wire Line
+	7500 5800 6450 5800
+Wire Wire Line
+	6450 5900 7500 5900
 $EndSCHEMATC
