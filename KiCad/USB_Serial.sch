@@ -78,19 +78,6 @@ F 3 "" H 6750 1000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C C28
-U 1 1 5BC6BAD9
-P 6750 1150
-F 0 "C28" H 6865 1196 50  0000 L CNN
-F 1 "100nF" H 6865 1105 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6788 1000 50  0001 C CNN
-F 3 "~" H 6750 1150 50  0001 C CNN
-F 4 "CC0603KRX7R9BB104" H 6750 1150 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 6750 1150 50  0001 C CNN "Manufacturer"
-	1    6750 1150
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR0103
 U 1 1 5BC6BB5F
 P 6750 1300
@@ -302,22 +289,16 @@ $EndComp
 $Comp
 L Device:C C29
 U 1 1 5BE8C422
-P 7200 1150
-F 0 "C29" H 7315 1196 50  0000 L CNN
-F 1 "1uF" H 7315 1105 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 7238 1000 50  0001 C CNN
-F 3 "~" H 7200 1150 50  0001 C CNN
-F 4 "C1608X7R1A105K080AC" H 7200 1150 50  0001 C CNN "Part Number"
-F 5 "TDK" H 7200 1150 50  0001 C CNN "Manufacturer"
-	1    7200 1150
+P 6750 1150
+F 0 "C29" H 6865 1196 50  0000 L CNN
+F 1 "1uF" H 6865 1105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6788 1000 50  0001 C CNN
+F 3 "~" H 6750 1150 50  0001 C CNN
+F 4 "C1608X7R1A105K080AC" H 6750 1150 50  0001 C CNN "Part Number"
+F 5 "TDK" H 6750 1150 50  0001 C CNN "Manufacturer"
+	1    6750 1150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7200 1000 6750 1000
-Connection ~ 6750 1000
-Wire Wire Line
-	7200 1300 6750 1300
-Connection ~ 6750 1300
 Wire Wire Line
 	5350 1450 5800 1450
 Wire Wire Line
@@ -684,68 +665,8 @@ NoConn ~ 7450 4450
 NoConn ~ 7450 4950
 Text Notes 9900 5300 2    50   ~ 0
 NOTE: This is the RESET\nline for the ATMEGA2560
-Wire Wire Line
-	7450 3550 7850 3550
-Wire Wire Line
-	7450 3450 7850 3450
-Wire Wire Line
-	7450 3350 7850 3350
-Wire Wire Line
-	7450 3250 7850 3250
-Text Label 7550 3250 0    50   ~ 0
-8PB4
-Text Label 7550 3350 0    50   ~ 0
-8PB5
-Text Label 7550 3450 0    50   ~ 0
-8PB6
-Text Label 7550 3550 0    50   ~ 0
-8PB7
-Wire Wire Line
-	8950 1200 9350 1200
-Wire Wire Line
-	8950 1100 9350 1100
-Wire Wire Line
-	8050 1200 8450 1200
-Wire Wire Line
-	8050 1100 8450 1100
-Text Label 8150 1100 0    50   ~ 0
-8PB4
-Text Label 8150 1200 0    50   ~ 0
-8PB5
-Text Label 9050 1100 0    50   ~ 0
-8PB6
-Text Label 9050 1200 0    50   ~ 0
-8PB7
-$Comp
-L Connector_Generic:Conn_02x02_Odd_Even J18
-U 1 1 5C0260BF
-P 8650 1100
-F 0 "J18" H 8700 1317 50  0000 C CNN
-F 1 "Conn_02x02_Odd_Even" H 8700 1226 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical" H 8650 1100 50  0001 C CNN
-F 3 "~" H 8650 1100 50  0001 C CNN
-	1    8650 1100
-	1    0    0    -1  
-$EndComp
 Text Label 7700 5050 0    50   ~ 0
 DTR
-Text Label 1650 1750 2    50   ~ 0
-USBVCC
-Wire Wire Line
-	1750 1750 1300 1750
-$Comp
-L power:+5V #PWR093
-U 1 1 5C4A9D62
-P 2200 1650
-F 0 "#PWR093" H 2200 1500 50  0001 C CNN
-F 1 "+5V" H 2215 1823 50  0000 C CNN
-F 2 "" H 2200 1650 50  0001 C CNN
-F 3 "" H 2200 1650 50  0001 C CNN
-	1    2200 1650
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2200 1750 2200 1650
 Wire Wire Line
 	6750 2400 6750 2450
 Text HLabel 9250 5050 2    50   Input ~ 0
@@ -798,21 +719,6 @@ Wire Wire Line
 Connection ~ 4450 2650
 Wire Wire Line
 	4450 2650 4900 2650
-Wire Wire Line
-	2050 1750 2200 1750
-$Comp
-L Device:D_Schottky D8
-U 1 1 5C21EC9A
-P 1900 1750
-F 0 "D8" H 1900 1534 50  0000 C CNN
-F 1 "D_Schottky" H 1900 1625 50  0000 C CNN
-F 2 "Diode_SMD:D_SOD-323" H 1900 1750 50  0001 C CNN
-F 3 "~" H 1900 1750 50  0001 C CNN
-F 4 "Toshiba Semiconductor and Storage" H 1900 1750 50  0001 C CNN "Manufacturer"
-F 5 "CUS08F30,H3F" H 1900 1750 50  0001 C CNN "Part Number"
-	1    1900 1750
-	-1   0    0    1   
-$EndComp
 Text Label 5550 3450 0    50   ~ 0
 MICRO_D+
 Text Label 5550 3550 0    50   ~ 0
@@ -821,54 +727,6 @@ Text Label 7450 4550 0    50   ~ 0
 MICRO_TX
 Text Label 7450 4650 0    50   ~ 0
 MICRO_RX
-Text Label 2650 1400 0    50   ~ 0
-USBVCC
-Wire Wire Line
-	2600 1400 3050 1400
-$Comp
-L Connector:TestPoint TP93
-U 1 1 5C3B0CCE
-P 3150 1500
-AR Path="/5BCD883C/5C3B0CCE" Ref="TP93"  Part="1" 
-AR Path="/5C3B0CCE" Ref="TP?"  Part="1" 
-F 0 "TP93" V 3100 1450 50  0000 L CNN
-F 1 "TestPoint" V 3100 1700 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 3350 1500 50  0001 C CNN
-F 3 "~" H 3350 1500 50  0001 C CNN
-	1    3150 1500
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP92
-U 1 1 5C3B7E84
-P 3150 1400
-AR Path="/5BCD883C/5C3B7E84" Ref="TP92"  Part="1" 
-AR Path="/5C3B7E84" Ref="TP?"  Part="1" 
-F 0 "TP92" V 3100 1350 50  0000 L CNN
-F 1 "TestPoint" V 3100 1600 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 3350 1400 50  0001 C CNN
-F 3 "~" H 3350 1400 50  0001 C CNN
-	1    3150 1400
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	3050 1400 3050 1500
-Wire Wire Line
-	3050 1500 3150 1500
-Connection ~ 3050 1400
-Wire Wire Line
-	3050 1400 3150 1400
-$Comp
-L Connector:USB_C_Receptacle_USB2.0 J3
-U 1 1 5DCD228D
-P 1050 3000
-F 0 "J3" H 1157 3867 50  0000 C CNN
-F 1 "USB_C_Receptacle_USB2.0" H 1157 3776 50  0000 C CNN
-F 2 "" H 1200 3000 50  0001 C CNN
-F 3 "https://www.usb.org/sites/default/files/documents/usb_type-c.zip" H 1200 3000 50  0001 C CNN
-	1    1050 3000
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1650 2400 2050 2400
 Wire Wire Line
@@ -879,7 +737,7 @@ U 1 1 5DD148A8
 P 3150 2750
 F 0 "R26" H 3220 2796 50  0000 L CNN
 F 1 "5.1 k" H 3220 2705 50  0000 L CNN
-F 2 "" V 3080 2750 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3080 2750 50  0001 C CNN
 F 3 "~" H 3150 2750 50  0001 C CNN
 	1    3150 2750
 	1    0    0    -1  
@@ -903,7 +761,7 @@ U 1 1 5DD1F62A
 P 2800 2850
 F 0 "R25" H 2870 2896 50  0000 L CNN
 F 1 "5.1 k" H 2870 2805 50  0000 L CNN
-F 2 "" V 2730 2850 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2730 2850 50  0001 C CNN
 F 3 "~" H 2800 2850 50  0001 C CNN
 	1    2800 2850
 	1    0    0    -1  
@@ -923,7 +781,6 @@ Wire Wire Line
 	1650 2700 2800 2700
 Wire Wire Line
 	1650 3200 1650 3100
-Connection ~ 1650 3200
 Wire Wire Line
 	1650 3000 1650 2900
 Wire Wire Line
@@ -932,7 +789,6 @@ Wire Wire Line
 	2600 2900 2600 4500
 Wire Wire Line
 	2600 4500 4650 4500
-Connection ~ 1650 2900
 Wire Wire Line
 	2500 4400 2500 3200
 Wire Wire Line
@@ -998,17 +854,6 @@ NoConn ~ 1650 3600
 NoConn ~ 1650 3500
 Wire Wire Line
 	6350 2150 6650 2150
-$Comp
-L power:PWR_FLAG #FLG0104
-U 1 1 5DD1AB73
-P 1300 1750
-F 0 "#FLG0104" H 1300 1825 50  0001 C CNN
-F 1 "PWR_FLAG" V 1300 1877 50  0000 L CNN
-F 2 "" H 1300 1750 50  0001 C CNN
-F 3 "~" H 1300 1750 50  0001 C CNN
-	1    1300 1750
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	6650 5550 6750 5550
 Connection ~ 6750 5550
@@ -1026,4 +871,21 @@ $EndComp
 Connection ~ 2050 2400
 Wire Wire Line
 	2050 2400 3550 2400
+$Comp
+L Snack_Machine:USB_C_Receptacle_USB2.0 J3
+U 1 1 5DBD034E
+P 1050 3000
+F 0 "J3" H 1157 3867 50  0000 C CNN
+F 1 "USB_C_Receptacle_USB2.0" H 1157 3776 50  0000 C CNN
+F 2 "Snack Machine:USB_C_Receptacle_HRO_TYPE-C-31-M-12" H 1200 3000 50  0001 C CNN
+F 3 "https://www.usb.org/sites/default/files/documents/usb_type-c.zip" H 1200 3000 50  0001 C CNN
+	1    1050 3000
+	1    0    0    -1  
+$EndComp
+Connection ~ 1650 2900
+Connection ~ 1650 3200
+NoConn ~ 7450 3250
+NoConn ~ 7450 3350
+NoConn ~ 7450 3450
+NoConn ~ 7450 3550
 $EndSCHEMATC

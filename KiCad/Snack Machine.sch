@@ -637,12 +637,8 @@ Wire Wire Line
 Wire Wire Line
 	3800 1250 3950 1250
 Wire Wire Line
-	4100 1200 4100 1250
-Wire Wire Line
 	3950 1250 3950 1300
 Connection ~ 3950 1250
-Wire Wire Line
-	3950 1250 4100 1250
 Wire Wire Line
 	3950 1600 3950 1650
 $Comp
@@ -886,18 +882,16 @@ $EndComp
 $Comp
 L Device:R R5
 U 1 1 5C42A4FB
-P 4600 7000
-F 0 "R5" V 4500 7000 50  0000 C CNN
-F 1 "1k" V 4400 7000 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4530 7000 50  0001 C CNN
-F 3 "~" H 4600 7000 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 4600 7000 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 4600 7000 50  0001 C CNN "Manufacturer"
-	1    4600 7000
+P 5750 6700
+F 0 "R5" V 5650 6700 50  0000 C CNN
+F 1 "1k" V 5550 6700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5680 6700 50  0001 C CNN
+F 3 "~" H 5750 6700 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 5750 6700 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 5750 6700 50  0001 C CNN "Manufacturer"
+	1    5750 6700
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	4450 7000 4300 7000
 Wire Wire Line
 	4300 7000 4300 6850
 Wire Wire Line
@@ -980,37 +974,21 @@ Wire Wire Line
 	9100 5400 9500 5400
 Wire Wire Line
 	9100 5500 9500 5500
-Wire Wire Line
-	4550 1250 4100 1250
 $Comp
 L power:+5V #PWR?
 U 1 1 5BF2239D
-P 5000 1200
+P 4700 1200
 AR Path="/5BCD883C/5BF2239D" Ref="#PWR?"  Part="1" 
 AR Path="/5BF2239D" Ref="#PWR028"  Part="1" 
-F 0 "#PWR028" H 5000 1050 50  0001 C CNN
-F 1 "+5V" H 5015 1373 50  0000 C CNN
-F 2 "" H 5000 1200 50  0001 C CNN
-F 3 "" H 5000 1200 50  0001 C CNN
-	1    5000 1200
+F 0 "#PWR028" H 4700 1050 50  0001 C CNN
+F 1 "+5V" H 4715 1373 50  0000 C CNN
+F 2 "" H 4700 1200 50  0001 C CNN
+F 3 "" H 4700 1200 50  0001 C CNN
+	1    4700 1200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4850 1250 5000 1250
-Wire Wire Line
-	5000 1250 5000 1200
-$Comp
-L power:VCC #PWR023
-U 1 1 5BF2B843
-P 4100 1200
-F 0 "#PWR023" H 4100 1050 50  0001 C CNN
-F 1 "VCC" H 4117 1373 50  0000 C CNN
-F 2 "" H 4100 1200 50  0001 C CNN
-F 3 "" H 4100 1200 50  0001 C CNN
-	1    4100 1200
-	1    0    0    -1  
-$EndComp
-Connection ~ 4100 1250
+	4700 1250 4700 1200
 $Comp
 L power:GND #PWR019
 U 1 1 5BF432C1
@@ -1030,15 +1008,13 @@ Wire Wire Line
 	3500 5450 3600 5450
 Text Label 3750 5450 0    50   ~ 0
 DOOR_SW
-Wire Wire Line
-	5000 7000 4750 7000
 $Comp
 L Connector_Generic:Conn_02x05_Odd_Even J7
 U 1 1 5C13BDF0
 P 4450 8400
 F 0 "J7" H 4500 8817 50  0000 C CNN
 F 1 "LCD EXP1" H 4500 8726 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 4450 8400 50  0001 C CNN
+F 2 "Snack Machine:PinHeader_2x05_P2.54mm_Vertical" H 4450 8400 50  0001 C CNN
 F 3 "~" H 4450 8400 50  0001 C CNN
 	1    4450 8400
 	1    0    0    -1  
@@ -1049,7 +1025,7 @@ U 1 1 5C13BE7E
 P 4450 9450
 F 0 "J8" H 4500 9867 50  0000 C CNN
 F 1 "LCD EXP2" H 4500 9776 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 4450 9450 50  0001 C CNN
+F 2 "Snack Machine:PinHeader_2x05_P2.54mm_Vertical" H 4450 9450 50  0001 C CNN
 F 3 "~" H 4450 9450 50  0001 C CNN
 	1    4450 9450
 	1    0    0    -1  
@@ -1297,56 +1273,6 @@ F 3 "" H 2550 6600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C C9
-U 1 1 5C8650B6
-P 6350 6950
-F 0 "C9" H 6465 6996 50  0000 L CNN
-F 1 "OPEN" H 6465 6905 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6388 6800 50  0001 C CNN
-F 3 "~" H 6350 6950 50  0001 C CNN
-	1    6350 6950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C7
-U 1 1 5C865168
-P 6050 6950
-F 0 "C7" H 5800 7000 50  0000 L CNN
-F 1 "OPEN" H 5700 6900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6088 6800 50  0001 C CNN
-F 3 "~" H 6050 6950 50  0001 C CNN
-	1    6050 6950
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR036
-U 1 1 5C8651F2
-P 6350 7200
-F 0 "#PWR036" H 6350 6950 50  0001 C CNN
-F 1 "GND" H 6350 7050 50  0000 C CNN
-F 2 "" H 6350 7200 50  0001 C CNN
-F 3 "" H 6350 7200 50  0001 C CNN
-	1    6350 7200
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR034
-U 1 1 5C865269
-P 6050 7200
-F 0 "#PWR034" H 6050 6950 50  0001 C CNN
-F 1 "GND" H 6050 7050 50  0000 C CNN
-F 2 "" H 6050 7200 50  0001 C CNN
-F 3 "" H 6050 7200 50  0001 C CNN
-	1    6050 7200
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6050 7100 6050 7200
-Wire Wire Line
-	6350 7100 6350 7200
-Wire Wire Line
-	6050 6800 6050 6600
-$Comp
 L Device:R R10
 U 1 1 5C9076CE
 P 5750 6600
@@ -1360,31 +1286,9 @@ F 5 "Yageo" V 5750 6600 50  0001 C CNN "Manufacturer"
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	6050 6600 5900 6600
-Wire Wire Line
 	5600 6600 5000 6600
-$Comp
-L Device:R R11
-U 1 1 5C930967
-P 5750 6700
-F 0 "R11" V 5800 6900 50  0000 C CNN
-F 1 "0R" V 5800 6500 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5680 6700 50  0001 C CNN
-F 3 "~" H 5750 6700 50  0001 C CNN
-F 4 "RC0603JR-070RL" V 5750 6700 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 5750 6700 50  0001 C CNN "Manufacturer"
-	1    5750 6700
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	5600 6700 5000 6700
-Wire Wire Line
-	5900 6700 6350 6700
-Wire Wire Line
-	6350 6800 6350 6700
-Connection ~ 6350 6700
-Wire Wire Line
-	6350 6700 7500 6700
 $Comp
 L MCU_Microchip_ATmega:ATmega2560-16AU U3
 U 1 1 5BFE17CA
@@ -1396,56 +1300,6 @@ F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microc
 	1    8300 5600
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:C C18
-U 1 1 5C0D14F4
-P 10500 6950
-F 0 "C18" H 10615 6996 50  0000 L CNN
-F 1 "OPEN" H 10615 6905 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 10538 6800 50  0001 C CNN
-F 3 "~" H 10500 6950 50  0001 C CNN
-	1    10500 6950
-	-1   0    0    -1  
-$EndComp
-$Comp
-L Device:C C20
-U 1 1 5C0D14FB
-P 10800 6950
-F 0 "C20" H 10500 7000 50  0000 L CNN
-F 1 "OPEN" H 10450 6900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 10838 6800 50  0001 C CNN
-F 3 "~" H 10800 6950 50  0001 C CNN
-	1    10800 6950
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR053
-U 1 1 5C0D1502
-P 10500 7200
-F 0 "#PWR053" H 10500 6950 50  0001 C CNN
-F 1 "GND" H 10500 7050 50  0000 C CNN
-F 2 "" H 10500 7200 50  0001 C CNN
-F 3 "" H 10500 7200 50  0001 C CNN
-	1    10500 7200
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR055
-U 1 1 5C0D1508
-P 10800 7200
-F 0 "#PWR055" H 10800 6950 50  0001 C CNN
-F 1 "GND" H 10800 7050 50  0000 C CNN
-F 2 "" H 10800 7200 50  0001 C CNN
-F 3 "" H 10800 7200 50  0001 C CNN
-	1    10800 7200
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	10800 7100 10800 7200
-Wire Wire Line
-	10500 7100 10500 7200
-Wire Wire Line
-	10800 6800 10800 6600
 $Comp
 L Device:R R15
 U 1 1 5C0D1512
@@ -1459,9 +1313,6 @@ F 5 "Yageo" V 11100 6600 50  0001 C CNN "Manufacturer"
 	1    11100 6600
 	0    1    -1   0   
 $EndComp
-Wire Wire Line
-	10800 6600 10950 6600
-Connection ~ 10800 6600
 $Comp
 L Device:R R16
 U 1 1 5C0D151B
@@ -1476,68 +1327,9 @@ F 5 "Yageo" V 11100 6700 50  0001 C CNN "Manufacturer"
 	0    1    -1   0   
 $EndComp
 Wire Wire Line
-	10950 6700 10500 6700
-Wire Wire Line
-	10500 6800 10500 6700
-Connection ~ 10500 6700
-Wire Wire Line
-	9100 6600 10800 6600
-Wire Wire Line
-	9100 6700 10500 6700
-Wire Wire Line
 	11250 6600 11550 6600
 Wire Wire Line
 	11550 6700 11250 6700
-$Comp
-L Device:C C17
-U 1 1 5C1B71EF
-P 10500 5950
-F 0 "C17" H 10615 5996 50  0000 L CNN
-F 1 "OPEN" H 10615 5905 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 10538 5800 50  0001 C CNN
-F 3 "~" H 10500 5950 50  0001 C CNN
-	1    10500 5950
-	-1   0    0    -1  
-$EndComp
-$Comp
-L Device:C C19
-U 1 1 5C1B71F6
-P 10800 5950
-F 0 "C19" H 10500 6000 50  0000 L CNN
-F 1 "OPEN" H 10450 5900 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 10838 5800 50  0001 C CNN
-F 3 "~" H 10800 5950 50  0001 C CNN
-	1    10800 5950
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR052
-U 1 1 5C1B71FD
-P 10500 6200
-F 0 "#PWR052" H 10500 5950 50  0001 C CNN
-F 1 "GND" H 10500 6050 50  0000 C CNN
-F 2 "" H 10500 6200 50  0001 C CNN
-F 3 "" H 10500 6200 50  0001 C CNN
-	1    10500 6200
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR054
-U 1 1 5C1B7203
-P 10800 6200
-F 0 "#PWR054" H 10800 5950 50  0001 C CNN
-F 1 "GND" H 10800 6050 50  0000 C CNN
-F 2 "" H 10800 6200 50  0001 C CNN
-F 3 "" H 10800 6200 50  0001 C CNN
-	1    10800 6200
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	10800 6100 10800 6200
-Wire Wire Line
-	10500 6100 10500 6200
-Wire Wire Line
-	10800 5800 10800 5600
 $Comp
 L Device:R R13
 U 1 1 5C1B720D
@@ -1551,9 +1343,6 @@ F 5 "Yageo" V 11100 5600 50  0001 C CNN "Manufacturer"
 	1    11100 5600
 	0    1    -1   0   
 $EndComp
-Wire Wire Line
-	10800 5600 10950 5600
-Connection ~ 10800 5600
 $Comp
 L Device:R R14
 U 1 1 5C1B7216
@@ -1568,11 +1357,6 @@ F 5 "Yageo" V 11100 5700 50  0001 C CNN "Manufacturer"
 	0    1    -1   0   
 $EndComp
 Wire Wire Line
-	10950 5700 10500 5700
-Wire Wire Line
-	10500 5800 10500 5700
-Connection ~ 10500 5700
-Wire Wire Line
 	9100 6000 10100 6000
 Wire Wire Line
 	10100 6000 10100 5700
@@ -1586,664 +1370,17 @@ Wire Wire Line
 	3700 6500 3800 6500
 Wire Wire Line
 	5000 7000 5000 6700
-$Comp
-L Mechanical:MountingHole_Pad H1
-U 1 1 5C33F464
-P 11050 8850
-F 0 "H1" V 11004 9000 50  0000 L CNN
-F 1 "MountingHole_Pad" V 11095 9000 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 8850 50  0001 C CNN
-F 3 "~" H 11050 8850 50  0001 C CNN
-	1    11050 8850
-	0    1    1    0   
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H2
-U 1 1 5C358362
-P 11050 9050
-F 0 "H2" V 11004 9200 50  0000 L CNN
-F 1 "MountingHole_Pad" V 11095 9200 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 9050 50  0001 C CNN
-F 3 "~" H 11050 9050 50  0001 C CNN
-	1    11050 9050
-	0    1    1    0   
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H3
-U 1 1 5C358406
-P 11050 9250
-F 0 "H3" V 11004 9400 50  0000 L CNN
-F 1 "MountingHole_Pad" V 11095 9400 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 9250 50  0001 C CNN
-F 3 "~" H 11050 9250 50  0001 C CNN
-	1    11050 9250
-	0    1    1    0   
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H4
-U 1 1 5C3584A8
-P 11050 9450
-F 0 "H4" V 11004 9600 50  0000 L CNN
-F 1 "MountingHole_Pad" V 11095 9600 50  0000 L CNN
-F 2 "MountingHole:MountingHole_3.5mm_Pad" H 11050 9450 50  0001 C CNN
-F 3 "~" H 11050 9450 50  0001 C CNN
-	1    11050 9450
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR056
-U 1 1 5C37132F
-P 10850 9550
-F 0 "#PWR056" H 10850 9300 50  0001 C CNN
-F 1 "GND" H 10900 9400 50  0000 R CNN
-F 2 "" H 10850 9550 50  0001 C CNN
-F 3 "" H 10850 9550 50  0001 C CNN
-	1    10850 9550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	10950 8850 10850 8850
-Wire Wire Line
-	10850 8850 10850 9050
-Wire Wire Line
-	10950 9450 10850 9450
-Connection ~ 10850 9450
-Wire Wire Line
-	10850 9450 10850 9550
-Wire Wire Line
-	10950 9250 10850 9250
-Connection ~ 10850 9250
-Wire Wire Line
-	10850 9250 10850 9450
-Wire Wire Line
-	10950 9050 10850 9050
-Connection ~ 10850 9050
-Wire Wire Line
-	10850 9050 10850 9250
 Wire Wire Line
 	9100 4400 9900 4400
 Wire Wire Line
 	9100 4500 9900 4500
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C795483
-P 7300 8000
-AR Path="/5BCD883C/5C795483" Ref="TP?"  Part="1" 
-AR Path="/5C795483" Ref="TP27"  Part="1" 
-F 0 "TP27" V 7250 7950 50  0000 L CNN
-F 1 "TestPoint" V 7250 8200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 8000 50  0001 C CNN
-F 3 "~" H 7500 8000 50  0001 C CNN
-	1    7300 8000
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 8000 7500 8000
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C7D0641
-P 7300 7300
-AR Path="/5BCD883C/5C7D0641" Ref="TP?"  Part="1" 
-AR Path="/5C7D0641" Ref="TP25"  Part="1" 
-F 0 "TP25" V 7250 7250 50  0000 L CNN
-F 1 "TestPoint" V 7250 7500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 7300 50  0001 C CNN
-F 3 "~" H 7500 7300 50  0001 C CNN
-	1    7300 7300
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 7300 7500 7300
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C7ED84B
-P 7300 7200
-AR Path="/5BCD883C/5C7ED84B" Ref="TP?"  Part="1" 
-AR Path="/5C7ED84B" Ref="TP24"  Part="1" 
-F 0 "TP24" V 7250 7150 50  0000 L CNN
-F 1 "TestPoint" V 7250 7400 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 7200 50  0001 C CNN
-F 3 "~" H 7500 7200 50  0001 C CNN
-	1    7300 7200
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 7200 7500 7200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C80ADD5
-P 7300 7100
-AR Path="/5BCD883C/5C80ADD5" Ref="TP?"  Part="1" 
-AR Path="/5C80ADD5" Ref="TP23"  Part="1" 
-F 0 "TP23" V 7250 7050 50  0000 L CNN
-F 1 "TestPoint" V 7250 7300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 7100 50  0001 C CNN
-F 3 "~" H 7500 7100 50  0001 C CNN
-	1    7300 7100
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 7100 7500 7100
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8286E3
-P 7300 7000
-AR Path="/5BCD883C/5C8286E3" Ref="TP?"  Part="1" 
-AR Path="/5C8286E3" Ref="TP22"  Part="1" 
-F 0 "TP22" V 7250 6950 50  0000 L CNN
-F 1 "TestPoint" V 7250 7200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 7000 50  0001 C CNN
-F 3 "~" H 7500 7000 50  0001 C CNN
-	1    7300 7000
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 7000 7500 7000
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C846782
-P 7300 6900
-AR Path="/5BCD883C/5C846782" Ref="TP?"  Part="1" 
-AR Path="/5C846782" Ref="TP21"  Part="1" 
-F 0 "TP21" V 7250 6850 50  0000 L CNN
-F 1 "TestPoint" V 7250 7100 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6900 50  0001 C CNN
-F 3 "~" H 7500 6900 50  0001 C CNN
-	1    7300 6900
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6900 7500 6900
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8647B2
-P 7300 6800
-AR Path="/5BCD883C/5C8647B2" Ref="TP?"  Part="1" 
-AR Path="/5C8647B2" Ref="TP20"  Part="1" 
-F 0 "TP20" V 7250 6750 50  0000 L CNN
-F 1 "TestPoint" V 7250 7000 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6800 50  0001 C CNN
-F 3 "~" H 7500 6800 50  0001 C CNN
-	1    7300 6800
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6800 7500 6800
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CAC56C5
-P 9300 8200
-AR Path="/5BCD883C/5CAC56C5" Ref="TP?"  Part="1" 
-AR Path="/5CAC56C5" Ref="TP49"  Part="1" 
-F 0 "TP49" V 9250 8150 50  0000 L CNN
-F 1 "TestPoint" V 9250 8400 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 8200 50  0001 C CNN
-F 3 "~" H 9500 8200 50  0001 C CNN
-	1    9300 8200
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 8200 9100 8200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CAE726A
-P 9300 8100
-AR Path="/5BCD883C/5CAE726A" Ref="TP?"  Part="1" 
-AR Path="/5CAE726A" Ref="TP48"  Part="1" 
-F 0 "TP48" V 9250 8050 50  0000 L CNN
-F 1 "TestPoint" V 9250 8300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 8100 50  0001 C CNN
-F 3 "~" H 9500 8100 50  0001 C CNN
-	1    9300 8100
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 8100 9100 8100
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CB0918B
-P 9300 8000
-AR Path="/5BCD883C/5CB0918B" Ref="TP?"  Part="1" 
-AR Path="/5CB0918B" Ref="TP47"  Part="1" 
-F 0 "TP47" V 9250 7950 50  0000 L CNN
-F 1 "TestPoint" V 9250 8200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 8000 50  0001 C CNN
-F 3 "~" H 9500 8000 50  0001 C CNN
-	1    9300 8000
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 8000 9100 8000
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CB2B42C
-P 9300 7900
-AR Path="/5BCD883C/5CB2B42C" Ref="TP?"  Part="1" 
-AR Path="/5CB2B42C" Ref="TP46"  Part="1" 
-F 0 "TP46" V 9250 7850 50  0000 L CNN
-F 1 "TestPoint" V 9250 8100 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 7900 50  0001 C CNN
-F 3 "~" H 9500 7900 50  0001 C CNN
-	1    9300 7900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 7900 9100 7900
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CB4DA53
-P 9300 7800
-AR Path="/5BCD883C/5CB4DA53" Ref="TP?"  Part="1" 
-AR Path="/5CB4DA53" Ref="TP45"  Part="1" 
-F 0 "TP45" V 9250 7750 50  0000 L CNN
-F 1 "TestPoint" V 9250 8000 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 7800 50  0001 C CNN
-F 3 "~" H 9500 7800 50  0001 C CNN
-	1    9300 7800
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 7800 9100 7800
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CB70406
-P 9300 7700
-AR Path="/5BCD883C/5CB70406" Ref="TP?"  Part="1" 
-AR Path="/5CB70406" Ref="TP44"  Part="1" 
-F 0 "TP44" V 9250 7650 50  0000 L CNN
-F 1 "TestPoint" V 9250 7900 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 7700 50  0001 C CNN
-F 3 "~" H 9500 7700 50  0001 C CNN
-	1    9300 7700
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 7700 9100 7700
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CB9314F
-P 9300 7600
-AR Path="/5BCD883C/5CB9314F" Ref="TP?"  Part="1" 
-AR Path="/5CB9314F" Ref="TP43"  Part="1" 
-F 0 "TP43" V 9250 7550 50  0000 L CNN
-F 1 "TestPoint" V 9250 7800 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 7600 50  0001 C CNN
-F 3 "~" H 9500 7600 50  0001 C CNN
-	1    9300 7600
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 7600 9100 7600
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CBB622C
-P 9300 7500
-AR Path="/5BCD883C/5CBB622C" Ref="TP?"  Part="1" 
-AR Path="/5CBB622C" Ref="TP42"  Part="1" 
-F 0 "TP42" V 9250 7450 50  0000 L CNN
-F 1 "TestPoint" V 9250 7700 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 7500 50  0001 C CNN
-F 3 "~" H 9500 7500 50  0001 C CNN
-	1    9300 7500
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 7500 9100 7500
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CC1FAF8
-P 9300 6900
-AR Path="/5BCD883C/5CC1FAF8" Ref="TP?"  Part="1" 
-AR Path="/5CC1FAF8" Ref="TP41"  Part="1" 
-F 0 "TP41" V 9250 6850 50  0000 L CNN
-F 1 "TestPoint" V 9250 7100 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 6900 50  0001 C CNN
-F 3 "~" H 9500 6900 50  0001 C CNN
-	1    9300 6900
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 6900 9100 6900
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CC42F91
-P 9300 6800
-AR Path="/5BCD883C/5CC42F91" Ref="TP?"  Part="1" 
-AR Path="/5CC42F91" Ref="TP40"  Part="1" 
-F 0 "TP40" V 9250 6750 50  0000 L CNN
-F 1 "TestPoint" V 9250 7000 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 6800 50  0001 C CNN
-F 3 "~" H 9500 6800 50  0001 C CNN
-	1    9300 6800
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 6800 9100 6800
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CC667DE
-P 9300 6400
-AR Path="/5BCD883C/5CC667DE" Ref="TP?"  Part="1" 
-AR Path="/5CC667DE" Ref="TP39"  Part="1" 
-F 0 "TP39" V 9250 6350 50  0000 L CNN
-F 1 "TestPoint" V 9250 6600 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 6400 50  0001 C CNN
-F 3 "~" H 9500 6400 50  0001 C CNN
-	1    9300 6400
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 6400 9100 6400
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CC8A3DB
-P 9300 6300
-AR Path="/5BCD883C/5CC8A3DB" Ref="TP?"  Part="1" 
-AR Path="/5CC8A3DB" Ref="TP38"  Part="1" 
-F 0 "TP38" V 9250 6250 50  0000 L CNN
-F 1 "TestPoint" V 9250 6500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 6300 50  0001 C CNN
-F 3 "~" H 9500 6300 50  0001 C CNN
-	1    9300 6300
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 6300 9100 6300
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CCAE394
-P 9300 6200
-AR Path="/5BCD883C/5CCAE394" Ref="TP?"  Part="1" 
-AR Path="/5CCAE394" Ref="TP37"  Part="1" 
-F 0 "TP37" V 9250 6150 50  0000 L CNN
-F 1 "TestPoint" V 9250 6400 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 6200 50  0001 C CNN
-F 3 "~" H 9500 6200 50  0001 C CNN
-	1    9300 6200
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 6200 9100 6200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CCD270F
-P 9300 6100
-AR Path="/5BCD883C/5CCD270F" Ref="TP?"  Part="1" 
-AR Path="/5CCD270F" Ref="TP36"  Part="1" 
-F 0 "TP36" V 9250 6050 50  0000 L CNN
-F 1 "TestPoint" V 9250 6300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 6100 50  0001 C CNN
-F 3 "~" H 9500 6100 50  0001 C CNN
-	1    9300 6100
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 6100 9100 6100
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CCF79AF
-P 9300 3700
-AR Path="/5BCD883C/5CCF79AF" Ref="TP?"  Part="1" 
-AR Path="/5CCF79AF" Ref="TP35"  Part="1" 
-F 0 "TP35" V 9250 3650 50  0000 L CNN
-F 1 "TestPoint" V 9250 3900 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 3700 50  0001 C CNN
-F 3 "~" H 9500 3700 50  0001 C CNN
-	1    9300 3700
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 3700 9100 3700
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CD1C4E8
-P 9300 3600
-AR Path="/5BCD883C/5CD1C4E8" Ref="TP?"  Part="1" 
-AR Path="/5CD1C4E8" Ref="TP34"  Part="1" 
-F 0 "TP34" V 9250 3550 50  0000 L CNN
-F 1 "TestPoint" V 9250 3800 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 3600 50  0001 C CNN
-F 3 "~" H 9500 3600 50  0001 C CNN
-	1    9300 3600
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 3600 9100 3600
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CD41423
-P 9300 3500
-AR Path="/5BCD883C/5CD41423" Ref="TP?"  Part="1" 
-AR Path="/5CD41423" Ref="TP33"  Part="1" 
-F 0 "TP33" V 9250 3450 50  0000 L CNN
-F 1 "TestPoint" V 9250 3700 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 3500 50  0001 C CNN
-F 3 "~" H 9500 3500 50  0001 C CNN
-	1    9300 3500
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 3500 9100 3500
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CD66766
-P 9300 3400
-AR Path="/5BCD883C/5CD66766" Ref="TP?"  Part="1" 
-AR Path="/5CD66766" Ref="TP32"  Part="1" 
-F 0 "TP32" V 9250 3350 50  0000 L CNN
-F 1 "TestPoint" V 9250 3600 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 3400 50  0001 C CNN
-F 3 "~" H 9500 3400 50  0001 C CNN
-	1    9300 3400
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 3400 9100 3400
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CD8BEB5
-P 9300 3300
-AR Path="/5BCD883C/5CD8BEB5" Ref="TP?"  Part="1" 
-AR Path="/5CD8BEB5" Ref="TP31"  Part="1" 
-F 0 "TP31" V 9250 3250 50  0000 L CNN
-F 1 "TestPoint" V 9250 3500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 3300 50  0001 C CNN
-F 3 "~" H 9500 3300 50  0001 C CNN
-	1    9300 3300
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 3300 9100 3300
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CDB1A14
-P 9300 3200
-AR Path="/5BCD883C/5CDB1A14" Ref="TP?"  Part="1" 
-AR Path="/5CDB1A14" Ref="TP30"  Part="1" 
-F 0 "TP30" V 9250 3150 50  0000 L CNN
-F 1 "TestPoint" V 9250 3400 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 3200 50  0001 C CNN
-F 3 "~" H 9500 3200 50  0001 C CNN
-	1    9300 3200
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 3200 9100 3200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5CDD798D
-P 9300 3100
-AR Path="/5BCD883C/5CDD798D" Ref="TP?"  Part="1" 
-AR Path="/5CDD798D" Ref="TP29"  Part="1" 
-F 0 "TP29" V 9250 3050 50  0000 L CNN
-F 1 "TestPoint" V 9250 3300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 9500 3100 50  0001 C CNN
-F 3 "~" H 9500 3100 50  0001 C CNN
-	1    9300 3100
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9300 3100 9100 3100
-$Comp
-L Device:D_Schottky D7
-U 1 1 5C1DBF6A
-P 4700 1250
-F 0 "D7" H 4700 1034 50  0000 C CNN
-F 1 "D_Schottky" H 4700 1125 50  0000 C CNN
-F 2 "Diode_SMD:D_SOD-323" H 4700 1250 50  0001 C CNN
-F 3 "~" H 4700 1250 50  0001 C CNN
-F 4 "Toshiba Semiconductor and Storage" H 4700 1250 50  0001 C CNN "Manufacturer"
-F 5 "CUS10S40,H3F" H 4700 1250 50  0001 C CNN "Part Number"
-	1    4700 1250
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:+24V #PWR070
-U 1 1 5C219549
-P 1300 2200
-F 0 "#PWR070" H 1300 2050 50  0001 C CNN
-F 1 "+24V" H 1300 2350 50  0000 C CNN
-F 2 "" H 1300 2200 50  0001 C CNN
-F 3 "" H 1300 2200 50  0001 C CNN
-	1    1300 2200
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C219FCE
-P 1400 2300
-AR Path="/5BCD883C/5C219FCE" Ref="TP?"  Part="1" 
-AR Path="/5C219FCE" Ref="TP88"  Part="1" 
-F 0 "TP88" V 1350 2250 50  0000 L CNN
-F 1 "TestPoint" V 1350 2500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 1600 2300 50  0001 C CNN
-F 3 "~" H 1600 2300 50  0001 C CNN
-	1    1400 2300
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C21AB48
-P 1400 2400
-AR Path="/5BCD883C/5C21AB48" Ref="TP?"  Part="1" 
-AR Path="/5C21AB48" Ref="TP89"  Part="1" 
-F 0 "TP89" V 1350 2350 50  0000 L CNN
-F 1 "TestPoint" V 1350 2600 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 1600 2400 50  0001 C CNN
-F 3 "~" H 1600 2400 50  0001 C CNN
-	1    1400 2400
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1300 2200 1300 2300
-Wire Wire Line
-	1300 2400 1400 2400
-Wire Wire Line
-	1400 2300 1300 2300
-Connection ~ 1300 2300
-Wire Wire Line
-	1300 2300 1300 2400
-$Comp
-L power:GND #PWR076
-U 1 1 5C27B4BD
-P 1300 2800
-F 0 "#PWR076" H 1300 2550 50  0001 C CNN
-F 1 "GND" H 1300 2650 50  0000 C CNN
-F 2 "" H 1300 2800 50  0001 C CNN
-F 3 "" H 1300 2800 50  0001 C CNN
-	1    1300 2800
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C27B5F6
-P 1400 2600
-AR Path="/5BCD883C/5C27B5F6" Ref="TP?"  Part="1" 
-AR Path="/5C27B5F6" Ref="TP90"  Part="1" 
-F 0 "TP90" V 1350 2550 50  0000 L CNN
-F 1 "TestPoint" V 1350 2800 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 1600 2600 50  0001 C CNN
-F 3 "~" H 1600 2600 50  0001 C CNN
-	1    1400 2600
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C27B912
-P 1400 2700
-AR Path="/5BCD883C/5C27B912" Ref="TP?"  Part="1" 
-AR Path="/5C27B912" Ref="TP91"  Part="1" 
-F 0 "TP91" V 1350 2650 50  0000 L CNN
-F 1 "TestPoint" V 1350 2900 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 1600 2700 50  0001 C CNN
-F 3 "~" H 1600 2700 50  0001 C CNN
-	1    1400 2700
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1300 2800 1300 2700
-Wire Wire Line
-	1300 2600 1400 2600
-Wire Wire Line
-	1400 2700 1300 2700
-Connection ~ 1300 2700
-Wire Wire Line
-	1300 2700 1300 2600
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C30E40B
-P 6050 1000
-AR Path="/5BCD883C/5C30E40B" Ref="TP?"  Part="1" 
-AR Path="/5C30E40B" Ref="TP85"  Part="1" 
-F 0 "TP85" V 6000 950 50  0000 L CNN
-F 1 "TestPoint" V 6000 1200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 6250 1000 50  0001 C CNN
-F 3 "~" H 6250 1000 50  0001 C CNN
-	1    6050 1000
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C30E595
-P 6050 1100
-AR Path="/5BCD883C/5C30E595" Ref="TP?"  Part="1" 
-AR Path="/5C30E595" Ref="TP87"  Part="1" 
-F 0 "TP87" V 6000 1050 50  0000 L CNN
-F 1 "TestPoint" V 6000 1300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 6250 1100 50  0001 C CNN
-F 3 "~" H 6250 1100 50  0001 C CNN
-	1    6050 1100
-	0    1    1    0   
-$EndComp
-$Comp
-L power:+5V #PWR?
-U 1 1 5C30EA88
-P 5950 900
-AR Path="/5BCD883C/5C30EA88" Ref="#PWR?"  Part="1" 
-AR Path="/5C30EA88" Ref="#PWR068"  Part="1" 
-F 0 "#PWR068" H 5950 750 50  0001 C CNN
-F 1 "+5V" H 5965 1073 50  0000 C CNN
-F 2 "" H 5950 900 50  0001 C CNN
-F 3 "" H 5950 900 50  0001 C CNN
-	1    5950 900 
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5950 900  5950 1000
-Wire Wire Line
-	5950 1100 6050 1100
-Wire Wire Line
-	6050 1000 5950 1000
-Connection ~ 5950 1000
-Wire Wire Line
-	5950 1000 5950 1100
 $Comp
 L Connector_Generic:Conn_01x02 J6
 U 1 1 5C7C3A6B
 P 3300 5450
 F 0 "J6" H 3350 5700 50  0000 C CNN
 F 1 "Conn_01x02" H 3350 5600 50  0000 C CNN
-F 2 "Connector_JST:JST_XH_B02B-XH-A_1x02_P2.50mm_Vertical" H 3300 5450 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 3300 5450 50  0001 C CNN
 F 3 "~" H 3300 5450 50  0001 C CNN
 	1    3300 5450
 	-1   0    0    -1  
@@ -2364,84 +1501,6 @@ Text Label 7100 5400 0    50   ~ 0
 LCD_7
 Text Label 9900 4500 2    50   ~ 0
 DOOR_SW
-Connection ~ 6050 6600
-Wire Wire Line
-	6050 6600 7500 6600
-Wire Wire Line
-	7300 6000 7500 6000
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C93D12F
-P 7300 6000
-AR Path="/5BCD883C/5C93D12F" Ref="TP?"  Part="1" 
-AR Path="/5C93D12F" Ref="TP15"  Part="1" 
-F 0 "TP15" V 7250 5950 50  0000 L CNN
-F 1 "TestPoint" V 7250 6200 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6000 50  0001 C CNN
-F 3 "~" H 7500 6000 50  0001 C CNN
-	1    7300 6000
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6100 7500 6100
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C91D75B
-P 7300 6100
-AR Path="/5BCD883C/5C91D75B" Ref="TP?"  Part="1" 
-AR Path="/5C91D75B" Ref="TP16"  Part="1" 
-F 0 "TP16" V 7250 6050 50  0000 L CNN
-F 1 "TestPoint" V 7250 6300 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6100 50  0001 C CNN
-F 3 "~" H 7500 6100 50  0001 C CNN
-	1    7300 6100
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6200 7500 6200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8FE141
-P 7300 6200
-AR Path="/5BCD883C/5C8FE141" Ref="TP?"  Part="1" 
-AR Path="/5C8FE141" Ref="TP17"  Part="1" 
-F 0 "TP17" V 7250 6150 50  0000 L CNN
-F 1 "TestPoint" V 7250 6400 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6200 50  0001 C CNN
-F 3 "~" H 7500 6200 50  0001 C CNN
-	1    7300 6200
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6300 7500 6300
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8DEEDF
-P 7300 6300
-AR Path="/5BCD883C/5C8DEEDF" Ref="TP?"  Part="1" 
-AR Path="/5C8DEEDF" Ref="TP18"  Part="1" 
-F 0 "TP18" V 7250 6250 50  0000 L CNN
-F 1 "TestPoint" V 7250 6500 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6300 50  0001 C CNN
-F 3 "~" H 7500 6300 50  0001 C CNN
-	1    7300 6300
-	0    -1   1    0   
-$EndComp
-Wire Wire Line
-	7300 6400 7500 6400
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5C8C002D
-P 7300 6400
-AR Path="/5BCD883C/5C8C002D" Ref="TP?"  Part="1" 
-AR Path="/5C8C002D" Ref="TP19"  Part="1" 
-F 0 "TP19" V 7250 6350 50  0000 L CNN
-F 1 "TestPoint" V 7250 6600 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 7500 6400 50  0001 C CNN
-F 3 "~" H 7500 6400 50  0001 C CNN
-	1    7300 6400
-	0    -1   1    0   
-$EndComp
 Text Label 6650 7500 0    50   ~ 0
 SD_CS
 Wire Wire Line
@@ -2471,18 +1530,15 @@ Wire Wire Line
 	7500 5800 6450 5800
 Wire Wire Line
 	6450 5900 7500 5900
-Wire Wire Line
-	10000 5600 10800 5600
-Wire Wire Line
-	10100 5700 10500 5700
 $Comp
 L Connector:Conn_01x10_Male J1
 U 1 1 5DB7B643
 P 15350 5950
 F 0 "J1" H 15322 5832 50  0000 R CNN
 F 1 "RFID_CONNECTOR" H 15322 5923 50  0000 R CNN
-F 2 "" H 15350 5950 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical" H 15350 5950 50  0001 C CNN
 F 3 "~" H 15350 5950 50  0001 C CNN
+F 4 "0705430009" H 15350 5950 50  0001 C CNN "Part Number"
 	1    15350 5950
 	-1   0    0    1   
 $EndComp
@@ -2631,4 +1687,97 @@ Text Label 10450 4800 0    50   ~ 0
 MOTORS_ENABLE
 Wire Wire Line
 	10450 4800 11100 4800
+NoConn ~ 9100 3100
+NoConn ~ 9100 3200
+NoConn ~ 9100 3300
+NoConn ~ 9100 3400
+NoConn ~ 9100 3500
+NoConn ~ 9100 3600
+NoConn ~ 9100 3700
+NoConn ~ 9100 6100
+NoConn ~ 9100 6200
+NoConn ~ 9100 6300
+NoConn ~ 9100 6400
+NoConn ~ 7500 6000
+NoConn ~ 7500 6100
+NoConn ~ 7500 6200
+NoConn ~ 7500 6300
+NoConn ~ 7500 6400
+NoConn ~ 7500 6800
+NoConn ~ 7500 6900
+NoConn ~ 7500 7000
+NoConn ~ 7500 7100
+NoConn ~ 7500 7200
+NoConn ~ 7500 7300
+NoConn ~ 7500 8000
+NoConn ~ 9100 7500
+NoConn ~ 9100 7600
+NoConn ~ 9100 7700
+NoConn ~ 9100 7800
+NoConn ~ 9100 7900
+NoConn ~ 9100 8000
+NoConn ~ 9100 8100
+NoConn ~ 9100 8200
+NoConn ~ 9100 6800
+NoConn ~ 9100 6900
+$Comp
+L Snack_Machine:tooling_hole TH1
+U 1 1 5DFC1437
+P 10650 9200
+F 0 "TH1" H 10728 9200 50  0000 L CNN
+F 1 "tooling_hole" H 10800 9200 50  0001 L CNN
+F 2 "Snack Machine:tooling_hole_2.55" H 10800 9300 50  0001 L CNN
+F 3 "" V 10850 9400 50  0001 C CNN
+	1    10650 9200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Snack_Machine:tooling_hole TH3
+U 1 1 5DFC17F0
+P 10950 9200
+F 0 "TH3" H 11028 9200 50  0000 L CNN
+F 1 "tooling_hole" H 11100 9200 50  0001 L CNN
+F 2 "Snack Machine:tooling_hole_2.55" H 11100 9300 50  0001 L CNN
+F 3 "" V 11150 9400 50  0001 C CNN
+	1    10950 9200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Snack_Machine:tooling_hole TH2
+U 1 1 5DFC1D02
+P 10650 9350
+F 0 "TH2" H 10728 9350 50  0000 L CNN
+F 1 "tooling_hole" H 10800 9350 50  0001 L CNN
+F 2 "Snack Machine:tooling_hole_2.55" H 10800 9450 50  0001 L CNN
+F 3 "" V 10850 9550 50  0001 C CNN
+	1    10650 9350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Snack_Machine:tooling_hole TH4
+U 1 1 5DFC1FB0
+P 10950 9350
+F 0 "TH4" H 11028 9350 50  0000 L CNN
+F 1 "tooling_hole" H 11100 9350 50  0001 L CNN
+F 2 "Snack Machine:tooling_hole_2.55" H 11100 9450 50  0001 L CNN
+F 3 "" V 11150 9550 50  0001 C CNN
+	1    10950 9350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 1250 4700 1250
+Wire Wire Line
+	10100 5700 10950 5700
+Wire Wire Line
+	10000 5600 10950 5600
+Wire Wire Line
+	9100 6600 10950 6600
+Wire Wire Line
+	9100 6700 10950 6700
+Wire Wire Line
+	5900 6600 7500 6600
+Wire Wire Line
+	5900 6700 7500 6700
+Wire Wire Line
+	4300 7000 5000 7000
 $EndSCHEMATC

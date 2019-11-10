@@ -18,97 +18,6 @@ Wire Wire Line
 	5150 5500 5100 5500
 Wire Wire Line
 	5100 5500 5100 5350
-$Comp
-L power:VCC #PWR0151
-U 1 1 5DD6C26E
-P 5100 5350
-F 0 "#PWR0151" H 5100 5200 50  0001 C CNN
-F 1 "VCC" H 5117 5523 50  0000 C CNN
-F 2 "" H 5100 5350 50  0001 C CNN
-F 3 "" H 5100 5350 50  0001 C CNN
-	1    5100 5350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5850 5500 5650 5500
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5DD6C276
-P 5850 5500
-AR Path="/5BCD883C/5DD6C276" Ref="TP?"  Part="1" 
-AR Path="/5DD6C276" Ref="TP?"  Part="1" 
-AR Path="/5DD3CEE8/5DD6C276" Ref="TP1"  Part="1" 
-F 0 "TP1" V 5800 5450 50  0000 L CNN
-F 1 "TestPoint" V 5800 5700 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 6050 5500 50  0001 C CNN
-F 3 "~" H 6050 5500 50  0001 C CNN
-	1    5850 5500
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	5850 5600 5650 5600
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5DD6C27D
-P 5850 5600
-AR Path="/5BCD883C/5DD6C27D" Ref="TP?"  Part="1" 
-AR Path="/5DD6C27D" Ref="TP?"  Part="1" 
-AR Path="/5DD3CEE8/5DD6C27D" Ref="TP2"  Part="1" 
-F 0 "TP2" V 5800 5550 50  0000 L CNN
-F 1 "TestPoint" V 5800 5800 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 6050 5600 50  0001 C CNN
-F 3 "~" H 6050 5600 50  0001 C CNN
-	1    5850 5600
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	5850 5700 5650 5700
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5DD6C284
-P 5850 5700
-AR Path="/5BCD883C/5DD6C284" Ref="TP?"  Part="1" 
-AR Path="/5DD6C284" Ref="TP?"  Part="1" 
-AR Path="/5DD3CEE8/5DD6C284" Ref="TP3"  Part="1" 
-F 0 "TP3" V 5800 5650 50  0000 L CNN
-F 1 "TestPoint" V 5800 5900 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 6050 5700 50  0001 C CNN
-F 3 "~" H 6050 5700 50  0001 C CNN
-	1    5850 5700
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	5850 5800 5650 5800
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5DD6C28B
-P 5850 5800
-AR Path="/5BCD883C/5DD6C28B" Ref="TP?"  Part="1" 
-AR Path="/5DD6C28B" Ref="TP?"  Part="1" 
-AR Path="/5DD3CEE8/5DD6C28B" Ref="TP4"  Part="1" 
-F 0 "TP4" V 5800 5750 50  0000 L CNN
-F 1 "TestPoint" V 5800 6000 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 6050 5800 50  0001 C CNN
-F 3 "~" H 6050 5800 50  0001 C CNN
-	1    5850 5800
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	5850 5900 5650 5900
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5DD6C292
-P 5850 5900
-AR Path="/5BCD883C/5DD6C292" Ref="TP?"  Part="1" 
-AR Path="/5DD6C292" Ref="TP?"  Part="1" 
-AR Path="/5DD3CEE8/5DD6C292" Ref="TP5"  Part="1" 
-F 0 "TP5" V 5800 5850 50  0000 L CNN
-F 1 "TestPoint" V 5800 6100 50  0000 L CNN
-F 2 "Snack Machine:TestPoint_THTPad_D0.8mm_Drill0.4mm" H 6050 5900 50  0001 C CNN
-F 3 "~" H 6050 5900 50  0001 C CNN
-	1    5850 5900
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	5150 5800 5100 5800
 $Comp
@@ -130,7 +39,7 @@ U 1 1 5DD6C2A3
 P 5350 5700
 F 0 "J12" H 5400 6117 50  0000 C CNN
 F 1 "Display Serial Header" H 5600 6050 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical" H 5350 5700 50  0001 C CNN
+F 2 "Snack Machine:PinHeader_2x05_P2.54mm_Vertical" H 5350 5700 50  0001 C CNN
 F 3 "~" H 5350 5700 50  0001 C CNN
 	1    5350 5700
 	1    0    0    -1  
@@ -225,8 +134,8 @@ L Connector_Generic_MountingPin:Conn_01x30_MountingPin J4
 U 1 1 5DB44749
 P 4600 3000
 F 0 "J4" H 4688 2914 50  0000 L CNN
-F 1 "Conn_01x30_MountingPin" H 4688 2823 50  0000 L CNN
-F 2 "" H 4600 3000 50  0001 C CNN
+F 1 "V2 Display Ribbon Cable" H 4688 2823 50  0000 L CNN
+F 2 "Snack Machine:FPC30" H 4600 3000 50  0001 C CNN
 F 3 "~" H 4600 3000 50  0001 C CNN
 	1    4600 3000
 	1    0    0    -1  
@@ -271,17 +180,6 @@ Wire Wire Line
 Wire Wire Line
 	4400 4100 4150 4100
 Connection ~ 4400 4100
-$Comp
-L power:+5V #PWR0156
-U 1 1 5DB4A1E4
-P 4150 4100
-F 0 "#PWR0156" H 4150 3950 50  0001 C CNN
-F 1 "+5V" V 4165 4228 50  0000 L CNN
-F 2 "" H 4150 4100 50  0001 C CNN
-F 3 "" H 4150 4100 50  0001 C CNN
-	1    4150 4100
-	0    -1   -1   0   
-$EndComp
 NoConn ~ 4400 3300
 NoConn ~ 4400 3200
 NoConn ~ 4400 3100
@@ -321,4 +219,31 @@ Text HLabel 4250 3800 0    50   Input ~ 0
 RX_DISPLAY
 Wire Wire Line
 	4250 3800 4400 3800
+NoConn ~ 5650 5500
+NoConn ~ 5650 5600
+NoConn ~ 5650 5700
+NoConn ~ 5650 5800
+NoConn ~ 5650 5900
+$Comp
+L power:+5V #PWR0151
+U 1 1 5E060D8D
+P 5100 5350
+F 0 "#PWR0151" H 5100 5200 50  0001 C CNN
+F 1 "+5V" H 5115 5523 50  0000 C CNN
+F 2 "" H 5100 5350 50  0001 C CNN
+F 3 "" H 5100 5350 50  0001 C CNN
+	1    5100 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0156
+U 1 1 5E0610F1
+P 4150 4100
+F 0 "#PWR0156" H 4150 3950 50  0001 C CNN
+F 1 "+5V" V 4165 4228 50  0000 L CNN
+F 2 "" H 4150 4100 50  0001 C CNN
+F 3 "" H 4150 4100 50  0001 C CNN
+	1    4150 4100
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC

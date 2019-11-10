@@ -58,8 +58,6 @@ Wire Wire Line
 	5700 3500 6300 3500
 Wire Wire Line
 	5700 3600 6300 3600
-Text Label 5750 3600 0    50   ~ 0
-HUZZAH_TX
 $Comp
 L power:+3.3V #PWR?
 U 1 1 5DE46DCA
