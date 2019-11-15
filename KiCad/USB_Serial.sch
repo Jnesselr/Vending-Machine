@@ -573,7 +573,7 @@ Wire Wire Line
 Wire Wire Line
 	4050 3550 4550 3550
 Connection ~ 4050 3550
-Text Label 4700 3550 0    50   ~ 0
+Text Label 5050 3550 2    50   ~ 0
 USBVCC
 $Comp
 L Device:C C26
@@ -888,4 +888,15 @@ NoConn ~ 7450 3250
 NoConn ~ 7450 3350
 NoConn ~ 7450 3450
 NoConn ~ 7450 3550
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 5DF705E2
+P 6350 2150
+F 0 "#FLG0102" H 6350 2225 50  0001 C CNN
+F 1 "PWR_FLAG" V 6350 2277 50  0000 L CNN
+F 2 "" H 6350 2150 50  0001 C CNN
+F 3 "~" H 6350 2150 50  0001 C CNN
+	1    6350 2150
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC
