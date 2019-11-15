@@ -1175,10 +1175,6 @@ BTN_EN1
 Text Label 5200 9550 2    50   ~ 0
 LCD_RESET
 NoConn ~ 4750 9650
-Text Label 6650 7800 0    50   ~ 0
-RESET_DISPLAY
-Wire Wire Line
-	7500 7800 6500 7800
 Text Label 12550 6750 2    50   ~ 0
 ~RESET
 Text Label 13200 4900 2    50   ~ 0
@@ -1196,17 +1192,9 @@ Wire Wire Line
 Wire Wire Line
 	9100 7300 10100 7300
 Text Label 9300 7200 0    50   ~ 0
-BTN_EN1
-Text Label 9300 7300 0    50   ~ 0
 BTN_EN2
-Text Label 6650 7700 0    50   ~ 0
-RFID_GREEN_LED
-Text Label 6650 7600 0    50   ~ 0
-RFID_RED_LED
-Wire Wire Line
-	6500 7600 7500 7600
-Wire Wire Line
-	6500 7700 7500 7700
+Text Label 9300 7300 0    50   ~ 0
+BTN_EN1
 $Comp
 L Connector_Generic:Conn_02x03_Top_Bottom J5
 U 1 1 5C8156F4
@@ -1284,17 +1272,6 @@ Wire Wire Line
 Wire Wire Line
 	4250 7050 3650 7050
 $Comp
-L MCU_Microchip_ATmega:ATmega2560-16AU U3
-U 1 1 5BFE17CA
-P 8300 5600
-F 0 "U3" H 8800 2800 50  0000 C CNN
-F 1 "ATmega2560-16AU" H 8950 2700 50  0000 C CNN
-F 2 "Package_QFP:TQFP-100_14x14mm_P0.5mm" H 8300 5600 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf" H 8300 5600 50  0001 C CNN
-	1    8300 5600
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R R15
 U 1 1 5C0D1512
 P 11100 6600
@@ -1356,10 +1333,6 @@ Wire Wire Line
 	2350 6850 2450 6850
 Wire Wire Line
 	3650 7350 3650 7050
-Wire Wire Line
-	9100 4400 9900 4400
-Wire Wire Line
-	9100 4500 9900 4500
 $Comp
 L Connector_Generic:Conn_01x02 J6
 U 1 1 5C7C3A6B
@@ -1446,49 +1419,13 @@ Wire Wire Line
 Text Label 3650 9550 0    50   ~ 0
 SD_DET
 NoConn ~ 4250 9650
-Wire Wire Line
-	9100 4300 9900 4300
-Text Label 9900 4300 2    50   ~ 0
-BTN_ENC
 NoConn ~ 9100 3900
 Text Notes 9150 3900 0    50   ~ 0
 Slave CS
-Text Label 9900 4400 2    50   ~ 0
-SD_DET
 Wire Wire Line
 	7500 4800 7100 4800
 Text Label 7100 4800 0    50   ~ 0
 LCD_BEEP
-Wire Wire Line
-	7500 4900 7100 4900
-Text Label 7100 4900 0    50   ~ 0
-LCD_CS
-Wire Wire Line
-	7500 5000 7100 5000
-Text Label 7100 5000 0    50   ~ 0
-LCD_EN
-Wire Wire Line
-	7500 5100 7100 5100
-Text Label 7100 5100 0    50   ~ 0
-LCD_4
-Wire Wire Line
-	7500 5200 7100 5200
-Text Label 7100 5200 0    50   ~ 0
-LCD_5
-Wire Wire Line
-	7500 5300 7100 5300
-Text Label 7100 5300 0    50   ~ 0
-LCD_6
-Wire Wire Line
-	7500 5400 7100 5400
-Text Label 7100 5400 0    50   ~ 0
-LCD_7
-Text Label 9900 4500 2    50   ~ 0
-DOOR_SW
-Text Label 6650 7500 0    50   ~ 0
-SD_CS
-Wire Wire Line
-	6650 7500 7500 7500
 Wire Wire Line
 	9100 3000 10100 3000
 Text Label 9300 3000 0    50   ~ 0
@@ -1619,18 +1556,10 @@ F 3 "~" H 3500 1650 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Connection ~ 3500 1650
-Text Label 7100 5500 0    50   ~ 0
-LCD_RESET
-Wire Wire Line
-	7100 5500 7500 5500
 NoConn ~ 9100 4600
 Text Label 9750 5700 2    50   ~ 0
 MOTOR_FAULT
 NoConn ~ 14350 5750
-Text Label 6650 7900 0    50   ~ 0
-RFID_BEEP_CTRL
-Wire Wire Line
-	6650 7900 7500 7900
 Text Label 9750 5800 2    50   ~ 0
 MOTORS_ENABLE
 Wire Wire Line
@@ -1653,25 +1582,12 @@ NoConn ~ 9100 6200
 NoConn ~ 9100 6300
 NoConn ~ 9100 6400
 NoConn ~ 7500 6000
-NoConn ~ 7500 6100
-NoConn ~ 7500 6200
-NoConn ~ 7500 6300
 NoConn ~ 7500 6400
-NoConn ~ 7500 6800
 NoConn ~ 7500 6900
 NoConn ~ 7500 7000
 NoConn ~ 7500 7100
-NoConn ~ 7500 7200
 NoConn ~ 7500 7300
 NoConn ~ 7500 8000
-NoConn ~ 9100 7500
-NoConn ~ 9100 7600
-NoConn ~ 9100 7700
-NoConn ~ 9100 7800
-NoConn ~ 9100 7900
-NoConn ~ 9100 8000
-NoConn ~ 9100 8100
-NoConn ~ 9100 8200
 NoConn ~ 9100 6800
 NoConn ~ 9100 6900
 $Comp
@@ -1789,10 +1705,6 @@ Text Label 2850 3850 2    50   ~ 0
 RESET_HUZZAH
 Wire Wire Line
 	2850 3850 2150 3850
-Text Label 6900 5900 0    50   ~ 0
-RESET_HUZZAH
-Wire Wire Line
-	6900 5900 7500 5900
 Text Label 9800 5900 2    50   ~ 0
 TX_HUZZAH_MEGA
 Wire Wire Line
@@ -1801,4 +1713,81 @@ Text Label 9800 6000 2    50   ~ 0
 RX_HUZZAH_MEGA
 Wire Wire Line
 	9800 6000 9100 6000
+Text Notes 9350 2900 0    50   ~ 0
+This may not be an ADC pin we can use
+Text Label 9550 7500 2    50   ~ 0
+LCD_RESET
+Wire Wire Line
+	9550 7500 9100 7500
+Text Label 9550 7600 2    50   ~ 0
+SD_CS
+Wire Wire Line
+	9550 7600 9100 7600
+Text Label 9550 7900 2    50   ~ 0
+LCD_6
+Wire Wire Line
+	9550 7700 9100 7700
+Text Label 9550 7700 2    50   ~ 0
+LCD_EN
+Text Label 9550 7800 2    50   ~ 0
+LCD_4
+Wire Wire Line
+	9550 7800 9100 7800
+Wire Wire Line
+	9550 7900 9100 7900
+Text Label 9550 8000 2    50   ~ 0
+LCD_7
+Wire Wire Line
+	9550 8000 9100 8000
+Text Label 9550 8100 2    50   ~ 0
+LCD_5
+Wire Wire Line
+	9100 8100 9550 8100
+Text Label 9550 8200 2    50   ~ 0
+LCD_CS
+Wire Wire Line
+	9550 8200 9100 8200
+Text Label 6850 4900 0    50   ~ 0
+RFID_GREEN_LED
+$Comp
+L MCU_Microchip_ATmega:ATmega2560-16AU U3
+U 1 1 5BFE17CA
+P 8300 5600
+F 0 "U3" H 8800 2800 50  0000 C CNN
+F 1 "ATmega2560-16AU" H 8950 2700 50  0000 C CNN
+F 2 "Package_QFP:TQFP-100_14x14mm_P0.5mm" H 8300 5600 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf" H 8300 5600 50  0001 C CNN
+	1    8300 5600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7500 4900 6850 4900
+Text Label 6850 5000 0    50   ~ 0
+RFID_RED_LED
+Text Label 6850 5100 0    50   ~ 0
+RFID_BEEP_CTRL
+Wire Wire Line
+	6850 5100 7500 5100
+Wire Wire Line
+	7500 5000 6850 5000
+Text Label 6750 6800 0    50   ~ 0
+RESET_DISPLAY
+Wire Wire Line
+	6750 6800 7500 6800
+Text Label 6900 6200 0    50   ~ 0
+SD_DET
+Wire Wire Line
+	6900 6200 7500 6200
+Text Label 6900 6300 0    50   ~ 0
+BTN_ENC
+Wire Wire Line
+	6900 6300 7500 6300
+Text Label 6900 6100 0    50   ~ 0
+DOOR_SW
+Wire Wire Line
+	7500 6100 6900 6100
+Text Label 6750 7200 0    50   ~ 0
+RESET_HUZZAH
+Wire Wire Line
+	6750 7200 7500 7200
 $EndSCHEMATC
