@@ -103,13 +103,13 @@ F 3 "" H 7750 1900 50  0001 C CNN
 $EndComp
 Text Label 5450 4200 0    50   ~ 0
 XTAL2
-Text Label 7400 3000 2    50   ~ 0
+Text Label 7100 3000 0    50   ~ 0
 ~RESET
-Text Label 7400 3200 2    50   ~ 0
+Text Label 7100 3200 0    50   ~ 0
 XTAL1
 Wire Wire Line
 	7100 3200 7500 3200
-Text Label 7400 3400 2    50   ~ 0
+Text Label 7100 3400 0    50   ~ 0
 XTAL2
 Wire Wire Line
 	7100 3400 7500 3400
@@ -285,18 +285,12 @@ F 3 "" H 5800 2800 50  0001 C CNN
 	1    5800 2800
 	1    0    0    -1  
 $EndComp
-Text Label 9400 4100 0    50   ~ 0
+Text Label 9550 4100 2    50   ~ 0
 MOSI
-Text Label 9400 4200 0    50   ~ 0
+Text Label 9550 4200 2    50   ~ 0
 MISO
-Text Label 9400 4000 0    50   ~ 0
+Text Label 9550 4000 2    50   ~ 0
 SCK
-Wire Wire Line
-	9900 4000 9100 4000
-Wire Wire Line
-	9100 4100 9900 4100
-Wire Wire Line
-	9900 4200 9100 4200
 Wire Wire Line
 	11100 3000 10850 3000
 Text Label 10900 3000 0    50   ~ 0
@@ -345,21 +339,21 @@ Wire Wire Line
 	7200 4500 7500 4500
 Wire Wire Line
 	7200 4600 7500 4600
-Text Label 7350 3900 2    50   ~ 0
+Text Label 7200 3900 0    50   ~ 0
 r1
-Text Label 7350 4000 2    50   ~ 0
+Text Label 7200 4000 0    50   ~ 0
 r2
-Text Label 7350 4100 2    50   ~ 0
+Text Label 7200 4100 0    50   ~ 0
 r3
-Text Label 7350 4200 2    50   ~ 0
+Text Label 7200 4200 0    50   ~ 0
 r4
-Text Label 7350 4300 2    50   ~ 0
+Text Label 7200 4300 0    50   ~ 0
 r5
-Text Label 7350 4400 2    50   ~ 0
+Text Label 7200 4400 0    50   ~ 0
 r6
-Text Label 7350 4500 2    50   ~ 0
+Text Label 7200 4500 0    50   ~ 0
 r7
-Text Label 7350 4600 2    50   ~ 0
+Text Label 7200 4600 0    50   ~ 0
 r8
 Text Label 9350 4900 2    50   ~ 0
 c2
@@ -555,13 +549,13 @@ $EndComp
 Wire Wire Line
 	8300 8600 8300 8500
 $Sheet
-S 11550 6500 700  350 
+S 10600 6500 700  350 
 U 5BCD883C
 F0 "USB_Serial" 50
 F1 "USB_Serial.sch" 50
-F2 "RX_USB" I L 11550 6600 50 
-F3 "TX_USB" I L 11550 6700 50 
-F4 "~RESET" I R 12250 6750 50 
+F2 "RX_USB" I L 10600 6700 50 
+F3 "TX_USB" I L 10600 6600 50 
+F4 "~RESET" I R 11300 6750 50 
 $EndSheet
 $Comp
 L Device:R R6
@@ -952,22 +946,6 @@ Wire Wire Line
 Wire Wire Line
 	2200 1250 2350 1250
 Connection ~ 2350 1250
-Wire Wire Line
-	9100 4800 9500 4800
-Wire Wire Line
-	9100 4900 9500 4900
-Wire Wire Line
-	9100 5000 9500 5000
-Wire Wire Line
-	9100 5100 9500 5100
-Wire Wire Line
-	9100 5200 9500 5200
-Wire Wire Line
-	9100 5300 9500 5300
-Wire Wire Line
-	9100 5400 9500 5400
-Wire Wire Line
-	9100 5500 9500 5500
 $Comp
 L power:+5V #PWR?
 U 1 1 5BF2239D
@@ -1173,25 +1151,17 @@ BTN_EN1
 Text Label 5200 9550 2    50   ~ 0
 LCD_RESET
 NoConn ~ 4750 9650
-Text Label 12550 6750 2    50   ~ 0
+Text Label 11600 6750 2    50   ~ 0
 ~RESET
 Text Label 13200 4900 2    50   ~ 0
 MOTOR_CURRENT
-Text Label 9300 7000 0    50   ~ 0
+Text Label 9750 7000 2    50   ~ 0
 RFID_DATA_0
-Text Label 9300 7100 0    50   ~ 0
+Text Label 9750 7100 2    50   ~ 0
 RFID_DATA_1
-Wire Wire Line
-	9100 7000 10100 7000
-Wire Wire Line
-	9100 7100 10100 7100
-Wire Wire Line
-	9100 7200 10100 7200
-Wire Wire Line
-	9100 7300 10100 7300
-Text Label 9300 7200 0    50   ~ 0
+Text Label 9750 7200 2    50   ~ 0
 BTN_EN2
-Text Label 9300 7300 0    50   ~ 0
+Text Label 9750 7300 2    50   ~ 0
 BTN_EN1
 $Comp
 L Connector_Generic:Conn_02x03_Top_Bottom J5
@@ -1272,33 +1242,33 @@ Wire Wire Line
 $Comp
 L Device:R R15
 U 1 1 5C0D1512
-P 11100 6600
-F 0 "R15" V 11150 6800 50  0000 C CNN
-F 1 "0R" V 11150 6400 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 11030 6600 50  0001 C CNN
-F 3 "~" H 11100 6600 50  0001 C CNN
-F 4 "RC0603JR-070RL" V 11100 6600 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 11100 6600 50  0001 C CNN "Manufacturer"
-	1    11100 6600
+P 10150 6600
+F 0 "R15" V 10200 6800 50  0000 C CNN
+F 1 "0R" V 10200 6400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10080 6600 50  0001 C CNN
+F 3 "~" H 10150 6600 50  0001 C CNN
+F 4 "RC0603JR-070RL" V 10150 6600 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10150 6600 50  0001 C CNN "Manufacturer"
+	1    10150 6600
 	0    1    -1   0   
 $EndComp
 $Comp
 L Device:R R16
 U 1 1 5C0D151B
-P 11100 6700
-F 0 "R16" V 11150 6900 50  0000 C CNN
-F 1 "0R" V 11150 6500 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 11030 6700 50  0001 C CNN
-F 3 "~" H 11100 6700 50  0001 C CNN
-F 4 "RC0603JR-070RL" V 11100 6700 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 11100 6700 50  0001 C CNN "Manufacturer"
-	1    11100 6700
+P 10150 6700
+F 0 "R16" V 10200 6900 50  0000 C CNN
+F 1 "0R" V 10200 6500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 10080 6700 50  0001 C CNN
+F 3 "~" H 10150 6700 50  0001 C CNN
+F 4 "RC0603JR-070RL" V 10150 6700 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 10150 6700 50  0001 C CNN "Manufacturer"
+	1    10150 6700
 	0    1    -1   0   
 $EndComp
 Wire Wire Line
-	11250 6600 11550 6600
+	10300 6600 10600 6600
 Wire Wire Line
-	11550 6700 11250 6700
+	10600 6700 10300 6700
 $Comp
 L Device:R R13
 U 1 1 5C1B720D
@@ -1424,9 +1394,7 @@ Wire Wire Line
 	7500 4800 7100 4800
 Text Label 7100 4800 0    50   ~ 0
 LCD_BEEP
-Wire Wire Line
-	9100 3000 10100 3000
-Text Label 9300 3000 0    50   ~ 0
+Text Label 6850 5200 0    50   ~ 0
 MOTOR_CURRENT
 Wire Wire Line
 	12400 4800 13200 4800
@@ -1530,7 +1498,7 @@ F 3 "" H 14350 6150 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	12550 6750 12250 6750
+	11600 6750 11300 6750
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 5DB55FD9
@@ -1555,15 +1523,11 @@ F 3 "~" H 3500 1650 50  0001 C CNN
 $EndComp
 Connection ~ 3500 1650
 NoConn ~ 9100 4600
-Text Label 9750 5700 2    50   ~ 0
+Text Label 9800 5700 2    50   ~ 0
 MOTOR_FAULT
 NoConn ~ 14350 5750
-Text Label 9750 5800 2    50   ~ 0
+Text Label 9800 5800 2    50   ~ 0
 MOTORS_ENABLE
-Wire Wire Line
-	9100 5700 9750 5700
-Wire Wire Line
-	9100 5800 9750 5800
 Text Label 10450 4800 0    50   ~ 0
 MOTORS_ENABLE
 Wire Wire Line
@@ -1679,10 +1643,6 @@ Text Label 6750 6600 0    50   ~ 0
 TX_DISPLAY_MEGA
 Wire Wire Line
 	6750 6600 7500 6600
-Wire Wire Line
-	9100 6700 10950 6700
-Wire Wire Line
-	9100 6600 10950 6600
 Text Label 6900 5700 0    50   ~ 0
 TX_MDB_MEGA
 Wire Wire Line
@@ -1711,8 +1671,6 @@ Text Label 9800 6000 2    50   ~ 0
 RX_HUZZAH_MEGA
 Wire Wire Line
 	9800 6000 9100 6000
-Text Notes 9350 2900 0    50   ~ 0
-This may not be an ADC pin we can use
 Text Label 9550 7500 2    50   ~ 0
 LCD_RESET
 Wire Wire Line
@@ -1790,4 +1748,57 @@ Wire Wire Line
 	6750 7200 7500 7200
 Text Label 9350 4800 2    50   ~ 0
 c1
+Wire Wire Line
+	9750 7300 9100 7300
+Wire Wire Line
+	9750 7200 9100 7200
+Wire Wire Line
+	9750 7000 9100 7000
+Wire Wire Line
+	9750 7100 9100 7100
+Wire Wire Line
+	10000 6600 9100 6600
+Wire Wire Line
+	10000 6700 9100 6700
+Wire Wire Line
+	9100 5700 9800 5700
+Wire Wire Line
+	9800 5800 9100 5800
+Wire Wire Line
+	9350 4800 9100 4800
+Wire Wire Line
+	9350 4900 9100 4900
+Wire Wire Line
+	9350 5000 9100 5000
+Wire Wire Line
+	9350 5100 9100 5100
+Wire Wire Line
+	9350 5200 9100 5200
+Wire Wire Line
+	9350 5300 9100 5300
+Wire Wire Line
+	9350 5400 9100 5400
+Wire Wire Line
+	9350 5500 9100 5500
+NoConn ~ 7500 5900
+Wire Wire Line
+	6850 5200 7500 5200
+NoConn ~ 7500 5300
+NoConn ~ 7500 5400
+NoConn ~ 7500 5500
+NoConn ~ 7500 7500
+NoConn ~ 7500 7600
+NoConn ~ 7500 7700
+NoConn ~ 7500 7800
+NoConn ~ 7500 7900
+Wire Wire Line
+	9550 4000 9100 4000
+Wire Wire Line
+	9550 4100 9100 4100
+Wire Wire Line
+	9550 4200 9100 4200
+NoConn ~ 9100 4300
+NoConn ~ 9100 4400
+NoConn ~ 9100 4500
+NoConn ~ 9100 3000
 $EndSCHEMATC

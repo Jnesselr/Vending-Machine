@@ -14,10 +14,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text HLabel 8500 4650 2    50   Input ~ 0
-RX_USB
-Text HLabel 8500 4550 2    50   Input ~ 0
-TX_USB
 $Comp
 L Device:R R32
 U 1 1 5BC6B75C
@@ -723,10 +719,6 @@ Text Label 5550 3450 0    50   ~ 0
 MICRO_D+
 Text Label 5550 3550 0    50   ~ 0
 MICRO_D-
-Text Label 7450 4550 0    50   ~ 0
-MICRO_TX
-Text Label 7450 4650 0    50   ~ 0
-MICRO_RX
 Wire Wire Line
 	1650 2400 2050 2400
 Wire Wire Line
@@ -901,4 +893,8 @@ F 3 "~" H 6350 2150 50  0001 C CNN
 	1    6350 2150
 	0    -1   -1   0   
 $EndComp
+Text HLabel 8500 4650 2    50   Input ~ 0
+TX_USB
+Text HLabel 8500 4550 2    50   Input ~ 0
+RX_USB
 $EndSCHEMATC
