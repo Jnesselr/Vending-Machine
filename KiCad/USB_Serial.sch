@@ -24,6 +24,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4930 4400 50  0
 F 3 "~" H 5000 4400 50  0001 C CNN
 F 4 "RC0603FR-0722RL" V 5000 4400 50  0001 C CNN "Part Number"
 F 5 "Yageo" V 5000 4400 50  0001 C CNN "Manufacturer"
+F 6 "22" V 5000 4400 50  0001 C CNN "Bin"
 	1    5000 4400
 	0    1    1    0   
 $EndComp
@@ -37,6 +38,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4930 4500 50  0
 F 3 "~" H 5000 4500 50  0001 C CNN
 F 4 "RC0603FR-0722RL" V 5000 4500 50  0001 C CNN "Part Number"
 F 5 "Yageo" V 5000 4500 50  0001 C CNN "Manufacturer"
+F 6 "22" V 5000 4500 50  0001 C CNN "Bin"
 	1    5000 4500
 	0    1    1    0   
 $EndComp
@@ -94,6 +96,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8080 4550 50  0
 F 3 "~" H 8150 4550 50  0001 C CNN
 F 4 "RC0603FR-071KL" V 8150 4550 50  0001 C CNN "Part Number"
 F 5 "Yageo" V 8150 4550 50  0001 C CNN "Manufacturer"
+F 6 "1" V 8150 4550 50  0001 C CNN "Bin"
 	1    8150 4550
 	0    1    1    0   
 $EndComp
@@ -107,6 +110,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8080 4650 50  0
 F 3 "~" H 8150 4650 50  0001 C CNN
 F 4 "RC0603FR-071KL" V 8150 4650 50  0001 C CNN "Part Number"
 F 5 "Yageo" V 8150 4650 50  0001 C CNN "Manufacturer"
+F 6 "1" V 8150 4650 50  0001 C CNN "Bin"
 	1    8150 4650
 	0    1    1    0   
 $EndComp
@@ -127,6 +131,7 @@ F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9200 4500 50  0001
 F 3 "~" H 9200 4500 50  0001 C CNN
 F 4 "150060YS75000" V 9200 4500 50  0001 C CNN "Part Number"
 F 5 "Würth Elektronik" V 9200 4500 50  0001 C CNN "Manufacturer"
+F 6 "3" V 9200 4500 50  0001 C CNN "Bin"
 	1    9200 4500
 	0    -1   -1   0   
 $EndComp
@@ -140,6 +145,7 @@ F 2 "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9550 4500 50  0001
 F 3 "~" H 9550 4500 50  0001 C CNN
 F 4 "150060YS75000" V 9550 4500 50  0001 C CNN "Part Number"
 F 5 "Würth Elektronik" V 9550 4500 50  0001 C CNN "Manufacturer"
+F 6 "3" V 9550 4500 50  0001 C CNN "Bin"
 	1    9550 4500
 	0    -1   -1   0   
 $EndComp
@@ -153,6 +159,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 9130 4100 50  0
 F 3 "~" H 9200 4100 50  0001 C CNN
 F 4 "RC0603FR-071KL" H 9200 4100 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 9200 4100 50  0001 C CNN "Manufacturer"
+F 6 "1" H 9200 4100 50  0001 C CNN "Bin"
 	1    9200 4100
 	-1   0    0    1   
 $EndComp
@@ -166,6 +173,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 9480 4100 50  0
 F 3 "~" H 9550 4100 50  0001 C CNN
 F 4 "RC0603FR-071KL" H 9550 4100 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 9550 4100 50  0001 C CNN "Manufacturer"
+F 6 "1" H 9550 4100 50  0001 C CNN "Bin"
 	1    9550 4100
 	-1   0    0    1   
 $EndComp
@@ -223,6 +231,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5730 1150 50  0
 F 3 "~" H 5800 1150 50  0001 C CNN
 F 4 "RC0603FR-0710KL" H 5800 1150 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 5800 1150 50  0001 C CNN "Manufacturer"
+F 6 "10" H 5800 1150 50  0001 C CNN "Bin"
 	1    5800 1150
 	1    0    0    -1  
 $EndComp
@@ -253,6 +262,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4380 2500 50  0
 F 3 "~" H 4450 2500 50  0001 C CNN
 F 4 "RC0603FR-071ML" H 4450 2500 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 4450 2500 50  0001 C CNN "Manufacturer"
+F 6 "17" H 4450 2500 50  0001 C CNN "Bin"
 	1    4450 2500
 	1    0    0    -1  
 $EndComp
@@ -266,6 +276,7 @@ F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3988 2750 50  
 F 3 "~" H 3950 2900 50  0001 C CNN
 F 4 "C0603C220J1GACTU" H 3950 2900 50  0001 C CNN "Part Number"
 F 5 "KEMET" H 3950 2900 50  0001 C CNN "Manufacturer"
+F 6 "18" H 3950 2900 50  0001 C CNN "Bin"
 	1    3950 2900
 	-1   0    0    1   
 $EndComp
@@ -279,6 +290,7 @@ F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4388 2750 50  
 F 3 "~" H 4350 2900 50  0001 C CNN
 F 4 "C0603C220J1GACTU" H 4350 2900 50  0001 C CNN "Part Number"
 F 5 "KEMET" H 4350 2900 50  0001 C CNN "Manufacturer"
+F 6 "18" H 4350 2900 50  0001 C CNN "Bin"
 	1    4350 2900
 	-1   0    0    1   
 $EndComp
@@ -292,6 +304,7 @@ F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6788 1000 50  
 F 3 "~" H 6750 1150 50  0001 C CNN
 F 4 "C1608X7R1A105K080AC" H 6750 1150 50  0001 C CNN "Part Number"
 F 5 "TDK" H 6750 1150 50  0001 C CNN "Manufacturer"
+F 6 "7" H 6750 1150 50  0001 C CNN "Bin"
 	1    6750 1150
 	1    0    0    -1  
 $EndComp
@@ -414,6 +427,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8080 5300 50  0
 F 3 "~" H 8150 5300 50  0001 C CNN
 F 4 "RC0603FR-071KL" H 8150 5300 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 8150 5300 50  0001 C CNN "Manufacturer"
+F 6 "1" H 8150 5300 50  0001 C CNN "Bin"
 	1    8150 5300
 	-1   0    0    1   
 $EndComp
@@ -440,6 +454,7 @@ F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 8538 4900 50  
 F 3 "~" H 8500 5050 50  0001 C CNN
 F 4 "CC0603KRX7R9BB104" V 8500 5050 50  0001 C CNN "Part Number"
 F 5 "Yageo" V 8500 5050 50  0001 C CNN "Manufacturer"
+F 6 "2" V 8500 5050 50  0001 C CNN "Bin"
 	1    8500 5050
 	0    1    1    0   
 $EndComp
@@ -482,8 +497,9 @@ F 0 "RV2" H 4753 4796 50  0000 L CNN
 F 1 "CG0603MLC" H 4753 4705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4580 4750 50  0001 C CNN
 F 3 "~" H 4650 4750 50  0001 C CNN
-F 4 "Bourns" H 4650 4750 50  0001 C CNN "Manufacturer"
-F 5 "CG0603MLC-05E" H 4650 4750 50  0001 C CNN "Part Number"
+F 4 "CG0603MLC-05E" H 4650 4750 50  0001 C CNN "Part Number"
+F 5 "Bourns" H 4650 4750 50  0001 C CNN "Manufacturer"
+F 6 "26" H 4650 4750 50  0001 C CNN "Bin"
 	1    4650 4750
 	1    0    0    -1  
 $EndComp
@@ -495,8 +511,9 @@ F 0 "RV1" H 4053 4796 50  0000 L CNN
 F 1 "CG0603MLC" H 4053 4705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3880 4750 50  0001 C CNN
 F 3 "~" H 3950 4750 50  0001 C CNN
-F 4 "Bourns" H 3950 4750 50  0001 C CNN "Manufacturer"
-F 5 "CG0603MLC-05E" H 3950 4750 50  0001 C CNN "Part Number"
+F 4 "CG0603MLC-05E" H 3950 4750 50  0001 C CNN "Part Number"
+F 5 "Bourns" H 3950 4750 50  0001 C CNN "Manufacturer"
+F 6 "26" H 3950 4750 50  0001 C CNN "Bin"
 	1    3950 4750
 	1    0    0    -1  
 $EndComp
@@ -525,8 +542,9 @@ F 0 "F2" V 3600 3500 50  0000 C CNN
 F 1 "500mA" V 3700 3500 50  0000 C CNN
 F 2 "Snack Machine:MF-MSMF050-2" H 3850 3350 50  0001 L CNN
 F 3 "~" H 3800 3550 50  0001 C CNN
-F 4 "Bourns" V 3800 3550 50  0001 C CNN "Manufacturer"
-F 5 "MF-MSMF050-2" V 3800 3550 50  0001 C CNN "Part Number"
+F 4 "MF-MSMF050-2" V 3800 3550 50  0001 C CNN "Part Number"
+F 5 "Bourns" V 3800 3550 50  0001 C CNN "Manufacturer"
+F 6 "13" V 3800 3550 50  0001 C CNN "Bin"
 	1    3800 3550
 	0    1    1    0   
 $EndComp
@@ -546,6 +564,7 @@ F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4088 3650 50  
 F 3 "~" H 4050 3800 50  0001 C CNN
 F 4 "CC0603KRX7R9BB104" H 4050 3800 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 4050 3800 50  0001 C CNN "Manufacturer"
+F 6 "2" H 4050 3800 50  0001 C CNN "Bin"
 	1    4050 3800
 	1    0    0    -1  
 $EndComp
@@ -580,7 +599,8 @@ F 1 "1uF" H 4665 3755 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4588 3650 50  0001 C CNN
 F 3 "~" H 4550 3800 50  0001 C CNN
 F 4 "C1608X7R1A105K080AC" H 4550 3800 50  0001 C CNN "Part Number"
-F 5 "TDk" H 4550 3800 50  0001 C CNN "Manufacturer"
+F 5 "TDK" H 4550 3800 50  0001 C CNN "Manufacturer"
+F 6 "7" H 4550 3800 50  0001 C CNN "Bin"
 	1    4550 3800
 	1    0    0    -1  
 $EndComp
@@ -612,6 +632,7 @@ F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5788 3850 50  
 F 3 "~" H 5750 4000 50  0001 C CNN
 F 4 "C1608X7R1A105K080AC" H 5750 4000 50  0001 C CNN "Part Number"
 F 5 "TDK" H 5750 4000 50  0001 C CNN "Manufacturer"
+F 6 "7" H 5750 4000 50  0001 C CNN "Bin"
 	1    5750 4000
 	1    0    0    -1  
 $EndComp
@@ -619,8 +640,6 @@ Wire Wire Line
 	5750 3850 5750 3750
 Wire Wire Line
 	5750 3750 6050 3750
-Text Notes 6200 5950 0    50   ~ 0
-NOTE: Connect PAD to GND
 $Comp
 L Device:D D4
 U 1 1 5BFAB456
@@ -631,6 +650,7 @@ F 2 "Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 6100 1150 50  0001
 F 3 "~" H 6100 1150 50  0001 C CNN
 F 4 "Bourns" V 6100 1150 50  0001 C CNN "Manufacturer"
 F 5 "CD1206-S01575" V 6100 1150 50  0001 C CNN "Part Number"
+F 6 "14" V 6100 1150 50  0001 C CNN "Bin"
 	1    6100 1150
 	0    1    1    0   
 $EndComp
@@ -679,6 +699,7 @@ F 2 "Snack Machine:Resonator_SMD_ECS-CR2-16.00-B-TR" H 5100 2500 50  0001 C CNN
 F 3 "~" H 5100 2500 50  0001 C CNN
 F 4 "ECS" H 5100 2500 50  0001 C CNN "Manufacturer"
 F 5 "ECS-CR2-16.00-B-TR" H 5100 2500 50  0001 C CNN "Part Number"
+F 6 "28" V 5100 2500 50  0001 C CNN "Bin"
 	1    5100 2500
 	0    1    -1   0   
 $EndComp
@@ -732,6 +753,8 @@ F 1 "5k1" H 3220 2705 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3080 2750 50  0001 C CNN
 F 3 "~" H 3150 2750 50  0001 C CNN
 F 4 "RC0603FR-075K1L" H 3150 2750 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 3150 2750 50  0001 C CNN "Manufacturer"
+F 6 "24" H 3150 2750 50  0001 C CNN "Bin"
 	1    3150 2750
 	1    0    0    -1  
 $EndComp
@@ -757,6 +780,8 @@ F 1 "5k1" H 2870 2805 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2730 2850 50  0001 C CNN
 F 3 "~" H 2800 2850 50  0001 C CNN
 F 4 "RC0603FR-075K1L" H 2800 2850 50  0001 C CNN "Part Number"
+F 5 "Yageo" H 2800 2850 50  0001 C CNN "Manufacturer"
+F 6 "24" H 2800 2850 50  0001 C CNN "Bin"
 	1    2800 2850
 	1    0    0    -1  
 $EndComp

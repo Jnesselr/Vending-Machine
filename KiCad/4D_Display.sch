@@ -41,6 +41,8 @@ F 0 "J12" H 5400 6117 50  0000 C CNN
 F 1 "Display Serial Header" H 5600 6050 50  0000 C CNN
 F 2 "Snack Machine:PinHeader_2x05_P2.54mm_Vertical" H 5350 5700 50  0001 C CNN
 F 3 "~" H 5350 5700 50  0001 C CNN
+F 4 "5103308-1" H 5350 5700 50  0001 C CNN "Part Number"
+F 5 "TE Connectivity AMP Connectors" H 5350 5700 50  0001 C CNN "Manufacturer"
 	1    5350 5700
 	1    0    0    -1  
 $EndComp
@@ -55,8 +57,9 @@ F 0 "Q3" H 3641 6296 50  0000 L CNN
 F 1 "MMBT3904" H 3641 6205 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 3650 6175 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 3450 6250 50  0001 L CNN
-F 4 "MMBT3904-TP" H 3450 6250 50  0001 C CNN "Part Number"
-F 5 "MCC" H 3450 6250 50  0001 C CNN "Manufacturer"
+F 4 "MCC" H 3450 6250 50  0001 C CNN "Manufacturer"
+F 5 "MMBT3904-TP" H 3450 6250 50  0001 C CNN "Part Number"
+F 6 "12" H 3450 6250 50  0001 C CNN "Bin"
 	1    3450 6250
 	1    0    0    -1  
 $EndComp
@@ -70,6 +73,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2680 6500 50  0
 F 3 "~" H 2750 6500 50  0001 C CNN
 F 4 "RC0603FR-074K7L" H 2750 6500 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 2750 6500 50  0001 C CNN "Manufacturer"
+F 6 "5" H 2750 6500 50  0001 C CNN "Bin"
 	1    2750 6500
 	1    0    0    -1  
 $EndComp
@@ -83,6 +87,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2930 6250 50  0
 F 3 "~" H 3000 6250 50  0001 C CNN
 F 4 "RC0603FR-074K7L" V 3000 6250 50  0001 C CNN "Part Number"
 F 5 "Yageo" V 3000 6250 50  0001 C CNN "Manufacturer"
+F 6 "5" V 3000 6250 50  0001 C CNN "Bin"
 	1    3000 6250
 	0    1    1    0   
 $EndComp
@@ -137,6 +142,8 @@ F 0 "J4" H 4688 2914 50  0000 L CNN
 F 1 "V2 Display Ribbon Cable" H 4688 2823 50  0000 L CNN
 F 2 "Snack Machine:FPC30" H 4600 3000 50  0001 C CNN
 F 3 "~" H 4600 3000 50  0001 C CNN
+F 4 "3-1734839-0" H 4600 3000 50  0001 C CNN "Part Number"
+F 5 "TE Connectivity AMP Connectors" H 4600 3000 50  0001 C CNN "Manufacturer"
 	1    4600 3000
 	1    0    0    -1  
 $EndComp

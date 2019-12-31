@@ -113,6 +113,9 @@ F 0 "U7" H 8150 2650 50  0000 L CNN
 F 1 "SN74LVC1T45DBV" H 8150 2550 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-6" H 7800 2350 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/sn74lvc1t45.pdf" H 6900 2150 50  0001 C CNN
+F 4 "SN74LVC1T45DBV" H 7800 2800 50  0001 C CNN "Part Number"
+F 5 "Texas Instruments" H 7800 2800 50  0001 C CNN "Manufacturer"
+F 6 "31" H 7800 2800 50  0001 C CNN "Bin"
 	1    7800 2800
 	1    0    0    -1  
 $EndComp
@@ -224,6 +227,9 @@ F 0 "U8" H 8150 3900 50  0000 L CNN
 F 1 "SN74LVC1T45DBV" H 8150 3800 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-6" H 7800 3600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/sn74lvc1t45.pdf" H 6900 3400 50  0001 C CNN
+F 4 "SN74LVC1T45DBV" H 7800 4050 50  0001 C CNN "Part Number"
+F 5 "Texas Instruments" H 7800 4050 50  0001 C CNN "Manufacturer"
+F 6 "31" H 7800 4050 50  0001 C CNN "Bin"
 	1    7800 4050
 	-1   0    0    -1  
 $EndComp
@@ -240,8 +246,9 @@ F 0 "Q2" H 7041 1346 50  0000 L CNN
 F 1 "MMBT3904" H 7041 1255 50  0000 L CNN
 F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 7050 1225 50  0001 L CIN
 F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 6850 1300 50  0001 L CNN
-F 4 "MMBT3904-TP" H 6850 1300 50  0001 C CNN "Part Number"
-F 5 "MCC" H 6850 1300 50  0001 C CNN "Manufacturer"
+F 4 "MCC" H 6850 1300 50  0001 C CNN "Manufacturer"
+F 5 "MMBT3904-TP" H 6850 1300 50  0001 C CNN "Part Number"
+F 6 "12" H 6850 1300 50  0001 C CNN "Bin"
 	1    6850 1300
 	-1   0    0    -1  
 $EndComp
@@ -255,6 +262,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7480 1550 50  0
 F 3 "~" H 7550 1550 50  0001 C CNN
 F 4 "RC0603FR-074K7L" H 7550 1550 50  0001 C CNN "Part Number"
 F 5 "Yageo" H 7550 1550 50  0001 C CNN "Manufacturer"
+F 6 "5" H 7550 1550 50  0001 C CNN "Bin"
 	1    7550 1550
 	-1   0    0    -1  
 $EndComp
@@ -268,6 +276,7 @@ F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7230 1300 50  0
 F 3 "~" H 7300 1300 50  0001 C CNN
 F 4 "RC0603FR-074K7L" V 7300 1300 50  0001 C CNN "Part Number"
 F 5 "Yageo" V 7300 1300 50  0001 C CNN "Manufacturer"
+F 6 "5" V 7300 1300 50  0001 C CNN "Bin"
 	1    7300 1300
 	0    -1   1    0   
 $EndComp
