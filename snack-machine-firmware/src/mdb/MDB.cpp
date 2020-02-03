@@ -7,25 +7,25 @@ static RingBuffer<uint16_t> transmitBuffer(-1);
 void enableSend()
 {
   // Enable the UDRI to begin transmit
-  UCSR2B |= (1 << UDRIE2);
+  UCSR3B |= (1 << UDRIE3);
 }
 
 void disableSend()
 {
   // Disable UDRI to end transmit
-  UCSR2B &= ~(1 << UDRIE2);
+  UCSR3B &= ~(1 << UDRIE3);
 }
 
-ISR(USART2_RX_vect)
+ISR(USART3_RX_vect)
 {
   // Wait for data
-  while (!(UCSR2A & (1 << RXC2)))
+  while (!(UCSR3A & (1 << RXC3)))
     ;
-  uint8_t state = UCSR2A;
-  uint8_t recH = UCSR2B;
-  uint8_t recL = UDR2;
+  uint8_t state = UCSR3A;
+  uint8_t recH = UCSR3B;
+  uint8_t recL = UDR3;
 
-  if (state & (1 << UPE2))
+  if (state & (1 << UPE3))
     return;
 
   recH = 0x01 & (recH >> 1);
@@ -34,7 +34,7 @@ ISR(USART2_RX_vect)
   receiveBuffer.push(data);
 }
 
-ISR(USART2_UDRE_vect)
+ISR(USART3_UDRE_vect)
 {
   if (!transmitBuffer.isEmpty())
   {
@@ -42,7 +42,7 @@ ISR(USART2_UDRE_vect)
     * Wait for empty transmit buffer
     * When UDREn flag is 1 -- buffer is empty and ready to be written
     */
-    while (!(UCSR2A & (1 << UDRE2)))
+    while (!(UCSR3A & (1 << UDRE3)))
       ;
 
     uint16_t transmitVal = transmitBuffer.pop();
@@ -51,11 +51,11 @@ ISR(USART2_UDRE_vect)
     *  Clear this bit manually to prevent
     *  If data does not exceed 0x0100, don't do anything
     */
-    UCSR2B &= ~(1 << TXB82);
+    UCSR3B &= ~(1 << TXB83);
     if (transmitVal & 0x0100)
-      UCSR2B |= (1 << TXB82);
+      UCSR3B |= (1 << TXB83);
     /* Write the rest to UDRn register */
-    UDR2 = (uint8_t)transmitVal;
+    UDR3 = (uint8_t)transmitVal;
 
     return;
   }
@@ -65,20 +65,20 @@ ISR(USART2_UDRE_vect)
 
 void MDB::setup()
 {
-  UCSR2A |= (1 << U2X2); // try double speed
+  UCSR3A |= (1 << U2X3); // try double speed
 
   uint16_t baud_setting = (F_CPU / 4 / BAUD_RATE - 1) / 2;
 
   /* Set Baud Rate */
-  UBRR2H = (uint8_t)(baud_setting >> 8);
-  UBRR2L = (uint8_t)(baud_setting & 0x00FF);
+  UBRR3H = (uint8_t)(baud_setting >> 8);
+  UBRR3L = (uint8_t)(baud_setting & 0x00FF);
   /* Enable Receiver and Transmitter */
-  UCSR2B |= (1 << RXEN2) | (1 << TXEN2);
+  UCSR3B |= (1 << RXEN3) | (1 << TXEN3);
   /* Enable Interrupt on Recieve Complete */
-  UCSR2B |= (1 << RXCIE2);
+  UCSR3B |= (1 << RXCIE3);
   /* Set Frame Format, 9-bit word, no parity, 1 stop-bit */
-  UCSR2B |= (1 << UCSZ22);
-  UCSR2C |= (1 << UCSZ21) | (1 << UCSZ20);
+  UCSR3B |= (1 << UCSZ32);
+  UCSR3C |= (1 << UCSZ31) | (1 << UCSZ30);
 
   sei();
 }
@@ -165,8 +165,6 @@ MDBCommand::~MDBCommand()
 void MDBCommand::run()
 {
   static MDBResult mdbResult;
-
-  uint8_t i = 0;
 
   MDB::writeForResult(this->data, this->length, &mdbResult);
 

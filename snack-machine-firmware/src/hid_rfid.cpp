@@ -39,6 +39,7 @@ void RFID::loop()
 
   bitsRead = 0;
   lastBitReadAtMillis = 0;
+  memset(cardBits, 0, sizeof(cardBits));
 }
 
 unsigned long RFID::getCardCode(uint8_t start, uint8_t end)

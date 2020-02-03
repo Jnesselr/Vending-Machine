@@ -70,7 +70,7 @@ void BillValidator::sendPoll()
     return;
   }
 
-  // mdbResult.print("CASH");
+  mdbResult.print("CASH");
 
   uint8_t i = 0;
 
@@ -215,14 +215,14 @@ void BillValidator::sendReset()
 
 void BillValidator::sendSetup()
 {
-  // DEBUG("Sending Cash Setup")
+  DEBUG("Sending Cash Setup")
   static MDBResult mdbResult;
 
   MDB::writeForResult(CMD_SETUP, LENGTH(CMD_SETUP), &mdbResult);
   
   if (mdbResult.timeout)
   {
-    // DEBUG("Cash Setup timed out")
+    DEBUG("Cash Setup timed out")
     state = BillValidatorState::UNKNOWN;
     return;
   }

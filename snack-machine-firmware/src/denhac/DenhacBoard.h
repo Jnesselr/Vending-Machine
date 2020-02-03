@@ -18,8 +18,8 @@ class DenhacBoard: public VendingMachine {
   private:
     static EvtManager eventManager;
 
-    static OutputPort<PORT_G, 3, 1> displayResetPin;
-    static HardwareSerial displaySerial;
+    static OutputPort<PORT_H, 2, 1> displayResetPin;
+    static HardwareSerial* displaySerial;
     static Diablo_Serial_4DLib display;
 
     static EvtTimeListener billValidatorLoop;
