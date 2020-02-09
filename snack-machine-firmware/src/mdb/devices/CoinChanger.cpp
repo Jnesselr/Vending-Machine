@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "mdb/devices/CoinChanger.h"
 #include "utils.h"
 
@@ -333,3 +335,5 @@ void CoinChanger::onTimeout(MDBResult mdbResult)
   pollFailures++;
   devicePolled = false;
 }
+
+#endif

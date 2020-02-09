@@ -1,10 +1,4 @@
-#ifndef _HID_RFID_H_
-#define _HID_RFID_H_
-
-// TODO Some sort of "on card scanned code"
-// More than likely, we'll have to figure out the various
-// different formats that can happen, but we'll just give them the
-// "card code" as bytes.k
+#pragma once
 
 typedef void (*CardScannedCallback)(unsigned long cardCode);
 
@@ -28,5 +22,3 @@ private:
   static unsigned long lastBitReadAtMillis;
   static bool isSetup;
 };
-
-#endif

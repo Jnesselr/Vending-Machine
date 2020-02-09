@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "MDB.h"
 #include "utils.h"
 
@@ -262,3 +264,5 @@ void MDB::copyAtMost16(const MDBResult &mdbResult, uint8_t start, uint8_t destin
     }
   }
 }
+
+#endif

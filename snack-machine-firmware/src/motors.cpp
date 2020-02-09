@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "Arduino.h"
 #include "motors.h"
 
@@ -41,3 +43,5 @@ void Motors::rotate(int row, int col) {
   delay(1000);
   digitalWrite(COLS[col], LOW);
 }
+
+#endif

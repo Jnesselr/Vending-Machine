@@ -1,5 +1,4 @@
-#ifndef _BILL_VALIDATOR_H_
-#define _BILL_VALIDATOR_H_
+#pragma once
 
 #include "mdb/MDB.h"
 
@@ -52,5 +51,3 @@ class BillValidator {
     static bool canEscrow;
     static uint8_t billTypeCredit[16];
 };
-
-#endif

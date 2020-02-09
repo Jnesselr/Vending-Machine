@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "mdb/devices/BillValidator.h"
 #include "utils.h"
 
@@ -265,3 +267,5 @@ void BillValidator::sendBillSetup()
 
   return;
 }
+
+#endif

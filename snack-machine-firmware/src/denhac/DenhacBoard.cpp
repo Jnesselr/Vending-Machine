@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "denhac/DenhacBoard.h"
 #include "utils.h"
 
@@ -116,3 +118,5 @@ void DenhacBoard::printMessage() {
   display.println(" to get a Pi Zero!");
   display.println("Please use $1 bills, I can't make change yet!");
 }
+
+#endif

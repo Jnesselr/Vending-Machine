@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include <Arduino.h>
 #include "hid_rfid.h"
 
@@ -94,3 +96,5 @@ bool RFID::cardScanned()
   }
   return false;
 }
+
+#endif

@@ -1,5 +1,4 @@
-#ifndef _RING_BUFFER_H_
-#define _RING_BUFFER_H_
+#pragma once
 
 #include "Arduino.h"
 
@@ -90,5 +89,3 @@ void RingBuffer<T>::clear()
   head = 0;
   tail = 0;
 }
-
-#endif

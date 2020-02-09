@@ -1,5 +1,4 @@
-#ifndef _COIN_CHANGER_H_
-#define _COIN_CHANGER_H_
+#pragma once
 
 #include "mdb/MDB.h"
 #include "utils.h"
@@ -70,5 +69,3 @@ class CoinChanger {
     static uint16_t tubeFullStatus;
     static uint8_t tubeStatus[16];
 };
-
-#endif

@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "Arduino.h"
 
 #include "gizmodojo/GizmoDojoBoard.h"
@@ -9,3 +11,5 @@ void GizmoDojoBoard::setup() {
 void GizmoDojoBoard::loop() {
   Serial.println("Hello World from the Gizmo Dojo!");
 }
+
+#endif

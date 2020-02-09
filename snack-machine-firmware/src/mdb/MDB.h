@@ -1,5 +1,4 @@
-#ifndef _MDB_H_
-#define _MDB_H_
+#pragma once
 
 #include "mdb/RingBuffer.h"
 
@@ -54,5 +53,3 @@ class MDB {
     static void write(const uint16_t data[], size_t length);
     static const int BAUD_RATE = 9600;
 };
-
-#endif

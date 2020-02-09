@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Diablo_Serial_4DLib.h>
 #include <Eventually.h>
 #include <DirectIO.h>
