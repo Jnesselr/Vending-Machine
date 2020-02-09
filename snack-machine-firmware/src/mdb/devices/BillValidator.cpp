@@ -21,6 +21,8 @@ uint16_t BillValidator::billSecurityLevels;
 bool BillValidator::canEscrow;
 uint8_t BillValidator::billTypeCredit[16];
 
+BillAcceptedCallback BillValidator::onBillAccepted = NULL;
+
 void BillValidator::loop()
 {
   sendPoll();
@@ -85,8 +87,12 @@ void BillValidator::sendPoll()
     else if (data & 0x80)
     {
       // Bill inserted
-      if(data & 0x10) {
-        acceptBill();
+      uint8_t billRoutingCode = (data & 0x70) >> 4;
+      uint8_t billType = (data & 0xF);
+      BillRouting billRouting = BillRouting(billRoutingCode);
+
+      if(onBillAccepted != NULL) {
+        onBillAccepted(billRouting, billType);
       }
     }
     else if (data == 0x01)

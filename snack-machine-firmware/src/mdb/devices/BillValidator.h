@@ -10,9 +10,27 @@ enum class BillValidatorState {
   IDLE
 };
 
+enum class BillRouting {
+  BILL_STACKED,
+  ESCROW_POSITION,
+  BILL_RETURNED,
+  BILL_TO_RECYCLER,
+  DISABLED_BILL_REJECTED,
+  BILL_TO_RECYCLER_MANUAL,
+  MANUAL_DISPENSE,
+  TRANSFERRED_FROM_RECYCLER_TO_CASHBOX
+};
+
+typedef void (*BillAcceptedCallback)(BillRouting, uint8_t billType);
+
 class BillValidator {
   public:
     static void loop();
+
+    // Callbacks
+    static BillAcceptedCallback onBillAccepted;
+
+    static void acceptBill();
 
   private:
     static uint8_t pollFailures;
@@ -23,8 +41,6 @@ class BillValidator {
     static void sendReset();
     static void sendSetup();
     static void sendBillSetup();
-
-    static void acceptBill();
 
     // Setup
     static uint8_t featureLevel;

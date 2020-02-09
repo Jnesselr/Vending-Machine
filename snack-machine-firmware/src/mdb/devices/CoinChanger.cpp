@@ -112,7 +112,7 @@ void CoinChanger::sendPoll()
 
 void CoinChanger::handlePollData(MDBResult mdbResult)
 {
-  // mdbResult.print("COIN POLL");
+  mdbResult.print("COIN POLL");
   uint8_t i = 0;
 
   while (i < mdbResult.length)

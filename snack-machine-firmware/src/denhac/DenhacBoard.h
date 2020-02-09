@@ -8,6 +8,8 @@
 
 #include "hid_rfid.h"
 
+#include "motors.h"
+
 #include "vendingMachine.h"
 
 
@@ -25,4 +27,8 @@ class DenhacBoard: public VendingMachine {
     static EvtTimeListener billValidatorLoop;
     static EvtTimeListener coinChangerLoop;
     static EvtTimeListener rfidLoop;
+
+    static void billAccepted(BillRouting billRouting, uint8_t billType);
+    static int dollarsGiven;
+    static void printMessage();
 };
