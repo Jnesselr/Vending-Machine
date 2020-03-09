@@ -17,380 +17,91 @@ $EndDescr
 $Comp
 L Transistor_Array:TBD62783A U4
 U 1 1 5DBB3D66
-P 6450 1450
-F 0 "U4" H 6550 2000 50  0000 C CNN
-F 1 "TBD62783A" H 6700 1900 50  0000 C CNN
-F 2 "Package_SO:SSOP-18_4.4x6.5mm_P0.65mm" H 6450 900 50  0001 C CNN
-F 3 "http://toshiba.semicon-storage.com/info/docget.jsp?did=30523&prodName=TBD62783APG" H 6150 1850 50  0001 C CNN
-F 4 "TBD62783AFNG,EL" H 6450 1450 50  0001 C CNN "Part Number"
-F 5 "Toshiba Semiconductor and Storage" H 6450 1450 50  0001 C CNN "Manufacturer"
-F 6 "34" H 6450 1450 50  0001 C CNN "Bin"
-	1    6450 1450
+P 5150 1750
+F 0 "U4" H 5250 2300 50  0000 C CNN
+F 1 "TBD62783A" H 5400 2200 50  0000 C CNN
+F 2 "Package_SO:SSOP-18_4.4x6.5mm_P0.65mm" H 5150 1200 50  0001 C CNN
+F 3 "http://toshiba.semicon-storage.com/info/docget.jsp?did=30523&prodName=TBD62783APG" H 4850 2150 50  0001 C CNN
+F 4 "TBD62783AFNG,EL" H 5150 1750 50  0001 C CNN "Part Number"
+F 5 "Toshiba Semiconductor and Storage" H 5150 1750 50  0001 C CNN "Manufacturer"
+F 6 "34" H 5150 1750 50  0001 C CNN "Bin"
+	1    5150 1750
 	1    0    0    -1  
 $EndComp
-Text HLabel 6050 1150 0    50   Input ~ 0
+Text HLabel 4750 1450 0    50   Input ~ 0
 row_a_ctrl
-Text HLabel 6050 1250 0    50   Input ~ 0
+Text HLabel 4750 1550 0    50   Input ~ 0
 row_b_ctrl
-Text HLabel 6050 1350 0    50   Input ~ 0
+Text HLabel 4750 1650 0    50   Input ~ 0
 row_c_ctrl
-Text HLabel 6050 1450 0    50   Input ~ 0
+Text HLabel 4750 1750 0    50   Input ~ 0
 row_d_ctrl
-Text HLabel 6050 1550 0    50   Input ~ 0
+Text HLabel 4750 1850 0    50   Input ~ 0
 row_e_ctrl
-Text HLabel 6050 1650 0    50   Input ~ 0
+Text HLabel 4750 1950 0    50   Input ~ 0
 row_f_ctrl
-Text HLabel 6050 1750 0    50   Input ~ 0
+Text HLabel 4750 2050 0    50   Input ~ 0
 row_g_ctrl
-Text HLabel 6050 1850 0    50   Input ~ 0
+Text HLabel 4750 2150 0    50   Input ~ 0
 row_h_ctrl
-Text HLabel 6850 1150 2    50   Output ~ 0
+Text HLabel 5550 1450 2    50   Output ~ 0
 row_a_motor
-Text HLabel 6850 1250 2    50   Output ~ 0
+Text HLabel 5550 1550 2    50   Output ~ 0
 row_b_motor
-Text HLabel 6850 1350 2    50   Output ~ 0
+Text HLabel 5550 1650 2    50   Output ~ 0
 row_c_motor
-Text HLabel 6850 1450 2    50   Output ~ 0
+Text HLabel 5550 1750 2    50   Output ~ 0
 row_d_motor
-Text HLabel 6850 1550 2    50   Output ~ 0
+Text HLabel 5550 1850 2    50   Output ~ 0
 row_e_motor
-Text HLabel 6850 1650 2    50   Output ~ 0
+Text HLabel 5550 1950 2    50   Output ~ 0
 row_f_motor
-Text HLabel 6850 1750 2    50   Output ~ 0
+Text HLabel 5550 2050 2    50   Output ~ 0
 row_g_motor
-Text HLabel 6850 1850 2    50   Output ~ 0
+Text HLabel 5550 2150 2    50   Output ~ 0
 row_h_motor
 $Comp
 L power:GND #PWR0111
 U 1 1 5DBB77A2
-P 6450 2050
-F 0 "#PWR0111" H 6450 1800 50  0001 C CNN
-F 1 "GND" H 6455 1877 50  0000 C CNN
-F 2 "" H 6450 2050 50  0001 C CNN
-F 3 "" H 6450 2050 50  0001 C CNN
-	1    6450 2050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Snack_Machine:DPS1133FIA-13 U1
-U 1 1 5DBBF2A8
-P 2450 1150
-F 0 "U1" H 2775 1315 50  0000 C CNN
-F 1 "DPS1133FIA-13" H 2775 1224 50  0000 C CNN
-F 2 "Snack Machine:DPS1133FIA-13" H 2450 1200 50  0001 L CNN
-F 3 "" V 2700 1150 50  0001 C CNN
-F 4 "DPS1133FIA-13" H 2450 1150 50  0001 C CNN "Part Number"
-F 5 "Diodes Incorporated" H 2450 1150 50  0001 C CNN "Manufacturer"
-F 6 "33" H 2450 1150 50  0001 C CNN "Bin"
-	1    2450 1150
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+24V #PWR0112
-U 1 1 5DBC2919
-P 850 850
-F 0 "#PWR0112" H 850 700 50  0001 C CNN
-F 1 "+24V" H 865 1023 50  0000 C CNN
-F 2 "" H 850 850 50  0001 C CNN
-F 3 "" H 850 850 50  0001 C CNN
-	1    850  850 
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C4
-U 1 1 5DBC434E
-P 1550 1000
-F 0 "C4" H 1665 1046 50  0000 L CNN
-F 1 "2.2uF" H 1665 955 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 1588 850 50  0001 C CNN
-F 3 "~" H 1550 1000 50  0001 C CNN
-F 4 "C1608JB1V225K080AC" H 1550 1000 50  0001 C CNN "Part Number"
-F 5 "TDK" H 1550 1000 50  0001 C CNN "Manufacturer"
-F 6 "25" H 1550 1000 50  0001 C CNN "Bin"
-	1    1550 1000
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0113
-U 1 1 5DBC4F97
-P 850 1150
-F 0 "#PWR0113" H 850 900 50  0001 C CNN
-F 1 "GND" H 855 977 50  0000 C CNN
-F 2 "" H 850 1150 50  0001 C CNN
-F 3 "" H 850 1150 50  0001 C CNN
-	1    850  1150
+P 5150 2350
+F 0 "#PWR0111" H 5150 2100 50  0001 C CNN
+F 1 "GND" H 5155 2177 50  0000 C CNN
+F 2 "" H 5150 2350 50  0001 C CNN
+F 3 "" H 5150 2350 50  0001 C CNN
+	1    5150 2350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1550 850  2200 850 
-Wire Wire Line
-	2200 850  2200 1250
-Wire Wire Line
-	2200 1250 2350 1250
-Connection ~ 1550 850 
-Wire Wire Line
-	2350 1450 2300 1450
-Wire Wire Line
-	2300 1450 2300 1550
-Wire Wire Line
-	2350 1850 2300 1850
-Connection ~ 2300 1850
-Wire Wire Line
-	2300 1850 2300 1900
-Wire Wire Line
-	2350 1650 2300 1650
-Connection ~ 2300 1650
-Wire Wire Line
-	2350 1550 2300 1550
-Connection ~ 2300 1550
-Wire Wire Line
-	2300 1550 2300 1650
-$Comp
-L power:GND #PWR0114
-U 1 1 5DBC71ED
-P 2300 1900
-F 0 "#PWR0114" H 2300 1650 50  0001 C CNN
-F 1 "GND" H 2305 1727 50  0000 C CNN
-F 2 "" H 2300 1900 50  0001 C CNN
-F 3 "" H 2300 1900 50  0001 C CNN
-	1    2300 1900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2300 1650 2300 1850
-Wire Wire Line
-	2350 1750 2000 1750
-$Comp
-L Device:C C6
-U 1 1 5DBC7B72
-P 2000 2250
-F 0 "C6" H 2115 2296 50  0000 L CNN
-F 1 "100nF" H 2115 2205 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 2038 2100 50  0001 C CNN
-F 3 "~" H 2000 2250 50  0001 C CNN
-F 4 "CC0603KRX7R9BB104" H 2000 2250 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 2000 2250 50  0001 C CNN "Manufacturer"
-F 6 "2" H 2000 2250 50  0001 C CNN "Bin"
-	1    2000 2250
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2000 2100 2000 1750
-$Comp
-L power:GND #PWR0115
-U 1 1 5DBC8EA8
-P 2000 2400
-F 0 "#PWR0115" H 2000 2150 50  0001 C CNN
-F 1 "GND" H 2005 2227 50  0000 C CNN
-F 2 "" H 2000 2400 50  0001 C CNN
-F 3 "" H 2000 2400 50  0001 C CNN
-	1    2000 2400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C8
-U 1 1 5DBC9344
-P 3250 2100
-F 0 "C8" H 3365 2146 50  0000 L CNN
-F 1 "1nF" H 3365 2055 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3288 1950 50  0001 C CNN
-F 3 "~" H 3250 2100 50  0001 C CNN
-F 4 "C1608C0G1H102J080AA" H 3250 2100 50  0001 C CNN "Part Number"
-F 5 "TDK" H 3250 2100 50  0001 C CNN "Manufacturer"
-F 6 "35" H 3250 2100 50  0001 C CNN "Bin"
-	1    3250 2100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3250 1950 3250 1850
-Wire Wire Line
-	3250 1850 3200 1850
-$Comp
-L power:GND #PWR0116
-U 1 1 5DBC9FCA
-P 3250 2250
-F 0 "#PWR0116" H 3250 2000 50  0001 C CNN
-F 1 "GND" H 3255 2077 50  0000 C CNN
-F 2 "" H 3250 2250 50  0001 C CNN
-F 3 "" H 3250 2250 50  0001 C CNN
-	1    3250 2250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R18
-U 1 1 5DBCADD5
-P 3700 1900
-F 0 "R18" H 3770 1946 50  0000 L CNN
-F 1 "330k" H 3770 1855 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3630 1900 50  0001 C CNN
-F 3 "~" H 3700 1900 50  0001 C CNN
-F 4 "RC0603FR-07330KL" H 3700 1900 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 3700 1900 50  0001 C CNN "Manufacturer"
-F 6 "20" H 3700 1900 50  0001 C CNN "Bin"
-	1    3700 1900
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0117
-U 1 1 5DBCB9DA
-P 3700 2050
-F 0 "#PWR0117" H 3700 1800 50  0001 C CNN
-F 1 "GND" H 3705 1877 50  0000 C CNN
-F 2 "" H 3700 2050 50  0001 C CNN
-F 3 "" H 3700 2050 50  0001 C CNN
-	1    3700 2050
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3700 1750 3200 1750
-$Comp
-L Device:R R23
-U 1 1 5DBCC131
-P 4100 1800
-F 0 "R23" H 4170 1846 50  0000 L CNN
-F 1 "270k" H 4170 1755 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4030 1800 50  0001 C CNN
-F 3 "~" H 4100 1800 50  0001 C CNN
-F 4 "RC0603FR-07270KL" H 4100 1800 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 4100 1800 50  0001 C CNN "Manufacturer"
-F 6 "21" H 4100 1800 50  0001 C CNN "Bin"
-	1    4100 1800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3200 1650 4100 1650
-$Comp
-L power:GND #PWR0118
-U 1 1 5DBCCDD6
-P 4100 1950
-F 0 "#PWR0118" H 4100 1700 50  0001 C CNN
-F 1 "GND" H 4105 1777 50  0000 C CNN
-F 2 "" H 4100 1950 50  0001 C CNN
-F 3 "" H 4100 1950 50  0001 C CNN
-	1    4100 1950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3200 1450 4500 1450
-Wire Wire Line
-	4500 1450 4500 2300
-$Comp
-L Device:R R24
-U 1 1 5DBCD7A6
-P 4500 2450
-F 0 "R24" H 4570 2496 50  0000 L CNN
-F 1 "100k" H 4570 2405 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4430 2450 50  0001 C CNN
-F 3 "~" H 4500 2450 50  0001 C CNN
-F 4 "RC0603FR-07100KL" H 4500 2450 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 4500 2450 50  0001 C CNN "Manufacturer"
-F 6 "16" H 4500 2450 50  0001 C CNN "Bin"
-	1    4500 2450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C21
-U 1 1 5DBCDD32
-P 4050 2450
-F 0 "C21" H 4165 2496 50  0000 L CNN
-F 1 "100nF" H 4165 2405 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4088 2300 50  0001 C CNN
-F 3 "~" H 4050 2450 50  0001 C CNN
-F 4 "CC0603KRX7R9BB104" H 4050 2450 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 4050 2450 50  0001 C CNN "Manufacturer"
-F 6 "2" H 4050 2450 50  0001 C CNN "Bin"
-	1    4050 2450
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4050 2300 4500 2300
-Connection ~ 4500 2300
-$Comp
-L power:GND #PWR0119
-U 1 1 5DBCF155
-P 4050 2600
-F 0 "#PWR0119" H 4050 2350 50  0001 C CNN
-F 1 "GND" H 4055 2427 50  0000 C CNN
-F 2 "" H 4050 2600 50  0001 C CNN
-F 3 "" H 4050 2600 50  0001 C CNN
-	1    4050 2600
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0120
-U 1 1 5DBCF407
-P 4500 2600
-F 0 "#PWR0120" H 4500 2350 50  0001 C CNN
-F 1 "GND" H 4505 2427 50  0000 C CNN
-F 2 "" H 4500 2600 50  0001 C CNN
-F 3 "" H 4500 2600 50  0001 C CNN
-	1    4500 2600
-	1    0    0    -1  
-$EndComp
-Text Notes 3850 1450 0    50   ~ 0
-10 uA / A\n1 V/A with 100k
-Wire Wire Line
-	3200 1250 5000 1250
-Wire Wire Line
-	5000 1250 5000 950 
-Wire Wire Line
-	5000 950  6450 950 
+	3700 1250 5150 1250
 $Comp
 L Device:D D15
 U 1 1 5DBD46CB
-P 4850 950
-F 0 "D15" H 4850 1166 50  0000 C CNN
-F 1 "S1GTR" H 4850 1075 50  0000 C CNN
-F 2 "Diode_SMD:D_SMA_Handsoldering" H 4850 950 50  0001 C CNN
-F 3 "~" H 4850 950 50  0001 C CNN
-F 4 "S1GTR" H 4850 950 50  0001 C CNN "Part Number"
-F 5 "SMC Diode Solutions" H 4850 950 50  0001 C CNN "Manufacturer"
-F 6 "29" H 4850 950 50  0001 C CNN "Bin"
-	1    4850 950 
-	1    0    0    -1  
+P 3700 1100
+F 0 "D15" H 3700 1316 50  0000 C CNN
+F 1 "S1GTR" H 3700 1225 50  0000 C CNN
+F 2 "Diode_SMD:D_SMA_Handsoldering" H 3700 1100 50  0001 C CNN
+F 3 "~" H 3700 1100 50  0001 C CNN
+F 4 "S1GTR" H 3700 1100 50  0001 C CNN "Part Number"
+F 5 "SMC Diode Solutions" H 3700 1100 50  0001 C CNN "Manufacturer"
+F 6 "29" H 3700 1100 50  0001 C CNN "Bin"
+	1    3700 1100
+	0    1    1    0   
 $EndComp
-Connection ~ 5000 950 
 $Comp
 L power:+24V #PWR0121
 U 1 1 5DBD523E
-P 4700 950
-F 0 "#PWR0121" H 4700 800 50  0001 C CNN
-F 1 "+24V" V 4715 1078 50  0000 L CNN
-F 2 "" H 4700 950 50  0001 C CNN
-F 3 "" H 4700 950 50  0001 C CNN
-	1    4700 950 
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:C C22
-U 1 1 5DBD5801
-P 5000 1400
-F 0 "C22" H 5115 1446 50  0000 L CNN
-F 1 "2.2uF" H 5115 1355 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5038 1250 50  0001 C CNN
-F 3 "~" H 5000 1400 50  0001 C CNN
-F 4 "C1608JB1V225K080AC" H 5000 1400 50  0001 C CNN "Part Number"
-F 5 "TDK" H 5000 1400 50  0001 C CNN "Manufacturer"
-F 6 "25" H 5000 1400 50  0001 C CNN "Bin"
-	1    5000 1400
-	1    0    0    -1  
-$EndComp
-Connection ~ 5000 1250
-$Comp
-L power:GND #PWR0122
-U 1 1 5DBD5EEA
-P 5000 1550
-F 0 "#PWR0122" H 5000 1300 50  0001 C CNN
-F 1 "GND" H 5005 1377 50  0000 C CNN
-F 2 "" H 5000 1550 50  0001 C CNN
-F 3 "" H 5000 1550 50  0001 C CNN
-	1    5000 1550
+P 3700 950
+F 0 "#PWR0121" H 3700 800 50  0001 C CNN
+F 1 "+24V" V 3715 1078 50  0000 L CNN
+F 2 "" H 3700 950 50  0001 C CNN
+F 3 "" H 3700 950 50  0001 C CNN
+	1    3700 950 
 	1    0    0    -1  
 $EndComp
 Wire Notes Line
-	7500 450  7500 2850
+	6150 450  6150 2850
 Wire Notes Line
-	7500 2850 450  2850
+	6150 2850 450  2850
 $Comp
 L Device:Q_TRIAC_A1A2G D1
 U 1 1 5DBD7FE7
@@ -779,68 +490,189 @@ Wire Notes Line
 	450  4800 5650 4800
 Wire Notes Line
 	450  5450 5650 5450
-Text HLabel 4500 2050 2    50   Output ~ 0
-MOTOR_CURRENT
-Text HLabel 3600 1000 2    50   Output ~ 0
-MOTOR_FAULT
+Text HLabel 1250 1950 0    50   Input ~ 0
+MOTORS_ENABLE
+$Comp
+L Device:R R18
+U 1 1 5E6B2322
+P 1500 1950
+F 0 "R18" V 1293 1950 50  0000 C CNN
+F 1 "1k" V 1384 1950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1430 1950 50  0001 C CNN
+F 3 "~" H 1500 1950 50  0001 C CNN
+	1    1500 1950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1350 1950 1250 1950
+$Comp
+L Transistor_BJT:MMBT3904 Q4
+U 1 1 5E6B6DA9
+P 1950 1950
+AR Path="/5BA75957/5E6B6DA9" Ref="Q4"  Part="1" 
+AR Path="/5E6B6DA9" Ref="Q?"  Part="1" 
+AR Path="/5DD3CEE8/5E6B6DA9" Ref="Q?"  Part="1" 
+F 0 "Q4" H 2141 1996 50  0000 L CNN
+F 1 "MMBT3904" H 2141 1905 50  0000 L CNN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 2150 1875 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 1950 1950 50  0001 L CNN
+F 4 "MCC" H 1950 1950 50  0001 C CNN "Manufacturer"
+F 5 "MMBT3904-TP" H 1950 1950 50  0001 C CNN "Part Number"
+F 6 "12" H 1950 1950 50  0001 C CNN "Bin"
+	1    1950 1950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2050 2150 2050 2250
+Wire Wire Line
+	1750 1950 1650 1950
 $Comp
 L Device:R R31
-U 1 1 5DC1004E
-P 3400 850
-F 0 "R31" H 3470 896 50  0000 L CNN
-F 1 "1k" H 3470 805 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3330 850 50  0001 C CNN
-F 3 "~" H 3400 850 50  0001 C CNN
-F 4 "RC0603FR-071KL" H 3400 850 50  0001 C CNN "Part Number"
-F 5 "Yageo" H 3400 850 50  0001 C CNN "Manufacturer"
-F 6 "1" H 3400 850 50  0001 C CNN "Bin"
-	1    3400 850 
+U 1 1 5E6B78A6
+P 2050 2400
+F 0 "R31" H 2120 2446 50  0000 L CNN
+F 1 "4.7k" H 2120 2355 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1980 2400 50  0001 C CNN
+F 3 "~" H 2050 2400 50  0001 C CNN
+	1    2050 2400
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+5V #PWR0157
-U 1 1 5DC11D44
-P 3400 700
-F 0 "#PWR0157" H 3400 550 50  0001 C CNN
-F 1 "+5V" H 3415 873 50  0000 C CNN
-F 2 "" H 3400 700 50  0001 C CNN
-F 3 "" H 3400 700 50  0001 C CNN
-	1    3400 700 
+L power:GND #PWR0112
+U 1 1 5E6B89F7
+P 2050 2550
+F 0 "#PWR0112" H 2050 2300 50  0001 C CNN
+F 1 "GND" H 2055 2377 50  0000 C CNN
+F 2 "" H 2050 2550 50  0001 C CNN
+F 3 "" H 2050 2550 50  0001 C CNN
+	1    2050 2550
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3400 1000 3600 1000
-Wire Wire Line
-	3400 1350 3200 1350
-Wire Wire Line
-	3400 1350 3400 1000
-Connection ~ 3400 1000
-Text HLabel 2000 1350 0    50   Input ~ 0
-MOTORS_ENABLE
-Wire Wire Line
-	2000 1350 2350 1350
-Wire Wire Line
-	1000 1150 1550 1150
-Wire Wire Line
-	850  1150 1000 1150
-Connection ~ 1000 1150
-Wire Wire Line
-	1000 850  1550 850 
-Wire Wire Line
-	850  850  1000 850 
-Connection ~ 1000 850 
 $Comp
-L Device:C C2
-U 1 1 5DCB7FDD
-P 1000 1000
-F 0 "C2" H 1115 1046 50  0000 L CNN
-F 1 "22uF" H 1115 955 50  0000 L CNN
-F 2 "Capacitor_SMD:C_1210_3225Metric_Pad1.42x2.65mm_HandSolder" H 1038 850 50  0001 C CNN
-F 3 "~" H 1000 1000 50  0001 C CNN
-F 4 "GMK325BJ226MM-P" H 1000 1000 50  0001 C CNN "Part Number"
-F 5 "Taiyo Yuden" H 1000 1000 50  0001 C CNN "Manufacturer"
-F 6 "32" H 1000 1000 50  0001 C CNN "Bin"
-	1    1000 1000
+L power:+24V #PWR0113
+U 1 1 5E6B9A97
+P 1350 1200
+F 0 "#PWR0113" H 1350 1050 50  0001 C CNN
+F 1 "+24V" H 1365 1373 50  0000 C CNN
+F 2 "" H 1350 1200 50  0001 C CNN
+F 3 "" H 1350 1200 50  0001 C CNN
+	1    1350 1200
 	1    0    0    -1  
 $EndComp
+$Comp
+L Device:R R23
+U 1 1 5E6BA1DB
+P 1600 1450
+F 0 "R23" H 1670 1496 50  0000 L CNN
+F 1 "10k" H 1670 1405 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1530 1450 50  0001 C CNN
+F 3 "~" H 1600 1450 50  0001 C CNN
+	1    1600 1450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 1200 1350 1300
+Wire Wire Line
+	1350 1300 1600 1300
+$Comp
+L Device:Q_PMOS_GSD Q?
+U 1 1 5E6BCDA7
+P 2050 1400
+AR Path="/5E6BCDA7" Ref="Q?"  Part="1" 
+AR Path="/5BA75957/5E6BCDA7" Ref="Q5"  Part="1" 
+F 0 "Q5" V 2393 1400 50  0000 C CNN
+F 1 "P-CH 30V 3.8A" V 2302 1400 50  0000 C CNN
+F 2 "Snack Machine:SOT-23_Handsoldering_Lite" H 2250 1325 50  0001 L CIN
+F 3 "~" H 2050 1400 50  0001 L CNN
+F 4 "DMP3099L-7" H 2050 1400 50  0001 C CNN "Part Number"
+F 5 "Diodes Incorporated" H 2050 1400 50  0001 C CNN "Manufacturer"
+F 6 "23" V 2050 1400 50  0001 C CNN "Bin"
+	1    2050 1400
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	1850 1300 1700 1300
+Connection ~ 1600 1300
+Wire Wire Line
+	1600 1600 2050 1600
+$Comp
+L Device:R R24
+U 1 1 5E6BFB97
+P 2050 850
+F 0 "R24" V 1843 850 50  0000 C CNN
+F 1 "10k" V 1934 850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1980 850 50  0001 C CNN
+F 3 "~" H 2050 850 50  0001 C CNN
+	1    2050 850 
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2050 1600 2050 1750
+Connection ~ 2050 1600
+Wire Wire Line
+	1900 850  1700 850 
+Wire Wire Line
+	1700 850  1700 1300
+Connection ~ 1700 1300
+Wire Wire Line
+	1700 1300 1600 1300
+Wire Wire Line
+	2200 850  2500 850 
+Wire Wire Line
+	2500 850  2500 1300
+Wire Wire Line
+	2500 1300 2250 1300
+$Comp
+L Device:R R40
+U 1 1 5E6CD29D
+P 2900 1000
+F 0 "R40" H 2970 1046 50  0000 L CNN
+F 1 "47k" H 2970 955 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2830 1000 50  0001 C CNN
+F 3 "~" H 2900 1000 50  0001 C CNN
+	1    2900 1000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R41
+U 1 1 5E6CDD83
+P 2900 1500
+F 0 "R41" H 2970 1546 50  0000 L CNN
+F 1 "10k" H 2970 1455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 2830 1500 50  0001 C CNN
+F 3 "~" H 2900 1500 50  0001 C CNN
+	1    2900 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0114
+U 1 1 5E6CE603
+P 2900 1650
+F 0 "#PWR0114" H 2900 1400 50  0001 C CNN
+F 1 "GND" H 2905 1477 50  0000 C CNN
+F 2 "" H 2900 1650 50  0001 C CNN
+F 3 "" H 2900 1650 50  0001 C CNN
+	1    2900 1650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 850  2500 850 
+Connection ~ 2500 850 
+Wire Wire Line
+	2900 1150 2900 1250
+Wire Wire Line
+	3600 850  3600 1250
+Wire Wire Line
+	2900 850  3600 850 
+Connection ~ 2900 850 
+Connection ~ 3700 1250
+Text HLabel 2950 1250 2    50   Output ~ 0
+MOTOR_SENSE
+Wire Wire Line
+	2950 1250 2900 1250
+Connection ~ 2900 1250
+Wire Wire Line
+	2900 1250 2900 1350
+Wire Wire Line
+	3600 1250 3700 1250
 $EndSCHEMATC
