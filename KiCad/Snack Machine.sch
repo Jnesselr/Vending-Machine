@@ -243,9 +243,9 @@ $EndComp
 Wire Wire Line
 	9100 1900 9100 1850
 Text Label 4000 6950 2    50   ~ 0
-RX_MDB
+MDB_TX
 Text Label 4000 7050 2    50   ~ 0
-TX_MDB
+MDB_RX
 Text Label 5450 3800 0    50   ~ 0
 XTAL1
 Text Label 5050 2400 2    50   ~ 0
@@ -998,58 +998,6 @@ Wire Wire Line
 Text Label 3750 5450 0    50   ~ 0
 DOOR_SW
 $Comp
-L Connector_Generic:Conn_02x05_Odd_Even J7
-U 1 1 5C13BDF0
-P 4450 8400
-F 0 "J7" H 4500 8817 50  0000 C CNN
-F 1 "LCD EXP1" H 4500 8726 50  0000 C CNN
-F 2 "Snack Machine:PinHeader_2x05_P2.54mm_Vertical" H 4450 8400 50  0001 C CNN
-F 3 "~" H 4450 8400 50  0001 C CNN
-F 4 "5103308-1" H 4450 8400 50  0001 C CNN "Part Number"
-F 5 "TE Connectivity AMP Connectors" H 4450 8400 50  0001 C CNN "Manufacturer"
-	1    4450 8400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_02x05_Odd_Even J8
-U 1 1 5C13BE7E
-P 4450 9450
-F 0 "J8" H 4500 9867 50  0000 C CNN
-F 1 "LCD EXP2" H 4500 9776 50  0000 C CNN
-F 2 "Snack Machine:PinHeader_2x05_P2.54mm_Vertical" H 4450 9450 50  0001 C CNN
-F 3 "~" H 4450 9450 50  0001 C CNN
-F 4 "5103308-1" H 4450 9450 50  0001 C CNN "Part Number"
-F 5 "TE Connectivity AMP Connectors" H 4450 9450 50  0001 C CNN "Manufacturer"
-	1    4450 9450
-	1    0    0    -1  
-$EndComp
-Text Notes 4700 9050 0    50   ~ 0
-SD CARD (EXP2)
-Text Notes 4700 8000 0    50   ~ 0
-LCD (EXP1)
-$Comp
-L power:+5V #PWR030
-U 1 1 5C1AC8E1
-P 5300 8100
-F 0 "#PWR030" H 5300 7950 50  0001 C CNN
-F 1 "+5V" H 5300 8250 50  0000 C CNN
-F 2 "" H 5300 8100 50  0001 C CNN
-F 3 "" H 5300 8100 50  0001 C CNN
-	1    5300 8100
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR024
-U 1 1 5C1B91B4
-P 4150 8700
-F 0 "#PWR024" H 4150 8450 50  0001 C CNN
-F 1 "GND" H 4150 8550 50  0000 C CNN
-F 2 "" H 4150 8700 50  0001 C CNN
-F 3 "" H 4150 8700 50  0001 C CNN
-	1    4150 8700
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C C11
 U 1 1 5B86B191
 P 7750 1700
@@ -1149,33 +1097,6 @@ Wire Wire Line
 	5200 2850 5200 2900
 Wire Wire Line
 	5200 3200 5200 3250
-Wire Wire Line
-	5300 8600 4750 8600
-Wire Wire Line
-	5300 8100 5300 8600
-Wire Wire Line
-	4250 8600 4150 8600
-Wire Wire Line
-	4150 8600 4150 8700
-Wire Wire Line
-	4750 8300 5200 8300
-Wire Wire Line
-	4750 8200 5200 8200
-Wire Wire Line
-	4250 8200 3650 8200
-Text Label 5200 8300 2    50   ~ 0
-LCD_CS
-Text Label 5200 8200 2    50   ~ 0
-BTN_ENC
-Text Label 3650 8200 0    50   ~ 0
-LCD_BEEP
-Text Label 3650 9350 0    50   ~ 0
-BTN_EN2
-Text Label 3650 9450 0    50   ~ 0
-BTN_EN1
-Text Label 5200 9550 2    50   ~ 0
-LCD_RESET
-NoConn ~ 4750 9650
 Text Label 11600 6750 2    50   ~ 0
 ~RESET
 Text Label 13200 4900 2    50   ~ 0
@@ -1184,10 +1105,6 @@ Text Label 9750 7000 2    50   ~ 0
 RFID_DATA_0
 Text Label 9750 7100 2    50   ~ 0
 RFID_DATA_1
-Text Label 9750 7200 2    50   ~ 0
-BTN_EN2
-Text Label 9750 7300 2    50   ~ 0
-BTN_EN1
 $Comp
 L Connector_Generic:Conn_02x03_Top_Bottom J5
 U 1 1 5C8156F4
@@ -1203,7 +1120,7 @@ F 5 "Molex" H 1550 7250 50  0001 C CNN "Manufacturer"
 $EndComp
 NoConn ~ 1350 7150
 Text Label 2350 7350 2    50   ~ 0
-RX_MDB
+MDB_TX
 $Comp
 L power:GND #PWR015
 U 1 1 5C8156FD
@@ -1375,60 +1292,9 @@ F 6 "1" H 3650 6700 50  0001 C CNN "Bin"
 $EndComp
 Wire Wire Line
 	3650 6950 3650 6850
-Wire Wire Line
-	4250 8300 3650 8300
-Text Label 3650 8300 0    50   ~ 0
-LCD_EN
-Wire Wire Line
-	4250 8400 3650 8400
-Text Label 3650 8400 0    50   ~ 0
-LCD_4
-Wire Wire Line
-	4750 8400 5200 8400
-Text Label 5200 8400 2    50   ~ 0
-LCD_5
-Wire Wire Line
-	4250 8500 3650 8500
-Text Label 3650 8500 0    50   ~ 0
-LCD_6
-Wire Wire Line
-	4750 8500 5200 8500
-Text Label 5200 8500 2    50   ~ 0
-LCD_7
-Wire Wire Line
-	3650 9350 4250 9350
-Wire Wire Line
-	3650 9450 4250 9450
-Wire Wire Line
-	4250 9250 3650 9250
-Text Label 3650 9250 0    50   ~ 0
-MISO
-Wire Wire Line
-	4750 9250 5200 9250
-Text Label 5200 9250 2    50   ~ 0
-SCK
-Wire Wire Line
-	4750 9550 5200 9550
-Wire Wire Line
-	4750 9350 5200 9350
-Text Label 5200 9350 2    50   ~ 0
-SD_CS
-Wire Wire Line
-	4750 9450 5200 9450
-Text Label 5200 9450 2    50   ~ 0
-MOSI
-Wire Wire Line
-	4250 9550 3650 9550
-Text Label 3650 9550 0    50   ~ 0
-SD_DET
-NoConn ~ 4250 9650
 NoConn ~ 9100 3900
 Text Notes 9150 3900 0    50   ~ 0
 Slave CS
-Wire Wire Line
-	7500 4800 7100 4800
-Text Label 7100 4800 0    50   ~ 0
-LCD_BEEP
 Text Label 6850 5200 0    50   ~ 0
 MOTOR_SENSE
 Wire Wire Line
@@ -1439,8 +1305,8 @@ U 5DE1B8F8
 F0 "Huzzah32" 50
 F1 "Huzzah32.sch" 50
 F2 "RESET" I R 2150 3850 50 
-F3 "RX_HUZZAH" I R 2150 3750 50 
-F4 "TX_HUZZAH" O R 2150 3650 50 
+F3 "HUZZAH_RX" I R 2150 3750 50 
+F4 "HUZZAH_TX" O R 2150 3650 50 
 $EndSheet
 $Comp
 L Connector:Conn_01x10_Male J1
@@ -1632,14 +1498,10 @@ Wire Wire Line
 	2950 7350 3650 7350
 Wire Wire Line
 	2350 7350 1850 7350
-Text Label 5200 6950 2    50   ~ 0
-RX_MDB_MEGA
-Text Label 5200 7050 2    50   ~ 0
-TX_MDB_MEGA
-Wire Wire Line
-	4550 7050 5200 7050
-Wire Wire Line
-	5200 6950 4550 6950
+Text Label 5350 6950 2    50   ~ 0
+MDB_TX_MEGA_RX
+Text Label 5350 7050 2    50   ~ 0
+MDB_RX_MEGA_TX
 Wire Wire Line
 	13250 7850 13100 7850
 Wire Wire Line
@@ -1650,89 +1512,29 @@ U 5DD3CEE8
 F0 "4D_Display" 50
 F1 "4D_Display.sch" 50
 F2 "RESET_DISPLAY" I R 13100 7750 50 
-F3 "RX_DISPLAY" I R 13100 7850 50 
-F4 "TX_DISPLAY" O R 13100 7950 50 
+F3 "DISPLAY_RX" I R 13100 7850 50 
+F4 "DISPLAY_TX" O R 13100 7950 50 
 $EndSheet
-Text Label 14400 7850 2    50   ~ 0
-RX_DISPLAY_MEGA
-Text Label 14400 7950 2    50   ~ 0
-TX_DISPLAY_MEGA
-Wire Wire Line
-	13550 7950 14400 7950
-Wire Wire Line
-	14400 7850 13550 7850
+Text Label 14550 7850 2    50   ~ 0
+DISPLAY_RX_MEGA_TX
+Text Label 14550 7950 2    50   ~ 0
+DISPLAY_TX_MEGA_RX
 Text Label 14400 7750 2    50   ~ 0
 RESET_DISPLAY
 Wire Wire Line
 	14400 7750 13100 7750
-Text Label 6750 6700 0    50   ~ 0
-TX_DISPLAY_MEGA
-Wire Wire Line
-	6750 6700 7500 6700
-Text Label 6750 6600 0    50   ~ 0
-RX_DISPLAY_MEGA
-Wire Wire Line
-	6750 6600 7500 6600
-Text Label 6900 5700 0    50   ~ 0
-RX_MDB_MEGA
-Wire Wire Line
-	6900 5700 7500 5700
-Text Label 6900 5800 0    50   ~ 0
-TX_MDB_MEGA
-Wire Wire Line
-	6900 5800 7500 5800
-Text Label 2850 3650 2    50   ~ 0
-TX_HUZZAH_MEGA
-Wire Wire Line
-	2850 3650 2150 3650
-Text Label 2850 3750 2    50   ~ 0
-RX_HUZZAH_MEGA
-Wire Wire Line
-	2850 3750 2150 3750
+Text Label 3000 3650 2    50   ~ 0
+HUZZAH_TX_MEGA_RX
+Text Label 3000 3750 2    50   ~ 0
+HUZZAH_RX_MEGA_TX
 Text Label 2850 3850 2    50   ~ 0
 RESET_HUZZAH
 Wire Wire Line
 	2850 3850 2150 3850
-Text Label 9800 5900 2    50   ~ 0
-TX_HUZZAH_MEGA
-Wire Wire Line
-	9800 5900 9100 5900
-Text Label 9800 6000 2    50   ~ 0
-RX_HUZZAH_MEGA
-Wire Wire Line
-	9800 6000 9100 6000
-Text Label 9550 7500 2    50   ~ 0
-LCD_RESET
-Wire Wire Line
-	9550 7500 9100 7500
-Text Label 9550 7600 2    50   ~ 0
-SD_CS
-Wire Wire Line
-	9550 7600 9100 7600
-Text Label 9550 7900 2    50   ~ 0
-LCD_6
-Wire Wire Line
-	9550 7700 9100 7700
-Text Label 9550 7700 2    50   ~ 0
-LCD_EN
-Text Label 9550 7800 2    50   ~ 0
-LCD_4
-Wire Wire Line
-	9550 7800 9100 7800
-Wire Wire Line
-	9550 7900 9100 7900
-Text Label 9550 8000 2    50   ~ 0
-LCD_7
-Wire Wire Line
-	9550 8000 9100 8000
-Text Label 9550 8100 2    50   ~ 0
-LCD_5
-Wire Wire Line
-	9100 8100 9550 8100
-Text Label 9550 8200 2    50   ~ 0
-LCD_CS
-Wire Wire Line
-	9550 8200 9100 8200
+Text Label 9950 5900 2    50   ~ 0
+HUZZAH_TX_MEGA_RX
+Text Label 9950 6000 2    50   ~ 0
+HUZZAH_RX_MEGA_TX
 Text Label 6850 4900 0    50   ~ 0
 RFID_GREEN_LED
 $Comp
@@ -1760,14 +1562,6 @@ Text Label 6750 6800 0    50   ~ 0
 RESET_DISPLAY
 Wire Wire Line
 	6750 6800 7500 6800
-Text Label 6900 6200 0    50   ~ 0
-SD_DET
-Wire Wire Line
-	6900 6200 7500 6200
-Text Label 6900 6300 0    50   ~ 0
-BTN_ENC
-Wire Wire Line
-	6900 6300 7500 6300
 Text Label 6900 6100 0    50   ~ 0
 DOOR_SW
 Wire Wire Line
@@ -1778,10 +1572,6 @@ Wire Wire Line
 	6750 7200 7500 7200
 Text Label 9350 4800 2    50   ~ 0
 c1
-Wire Wire Line
-	9750 7300 9100 7300
-Wire Wire Line
-	9750 7200 9100 7200
 Wire Wire Line
 	9750 7000 9100 7000
 Wire Wire Line
@@ -1829,5 +1619,49 @@ NoConn ~ 9100 4300
 NoConn ~ 9100 4400
 NoConn ~ 9100 4500
 NoConn ~ 9100 3000
+Wire Wire Line
+	13550 7850 14550 7850
+Wire Wire Line
+	13550 7950 14550 7950
+Text Label 6550 6700 0    50   ~ 0
+DISPLAY_RX_MEGA_TX
+Text Label 6550 6600 0    50   ~ 0
+DISPLAY_TX_MEGA_RX
+Wire Wire Line
+	6550 6600 7500 6600
+Wire Wire Line
+	6550 6700 7500 6700
+Wire Wire Line
+	4550 7050 5350 7050
+Wire Wire Line
+	4550 6950 5350 6950
+Text Label 6600 5800 0    50   ~ 0
+MDB_RX_MEGA_TX
+Wire Wire Line
+	6600 5800 7500 5800
+Wire Wire Line
+	6600 5700 7500 5700
+Text Label 6600 5700 0    50   ~ 0
+MDB_TX_MEGA_RX
+Wire Wire Line
+	2150 3650 3000 3650
+Wire Wire Line
+	2150 3750 3000 3750
+Wire Wire Line
+	9100 5900 9950 5900
+Wire Wire Line
+	9100 6000 9950 6000
 NoConn ~ 9100 5700
+NoConn ~ 7500 6300
+NoConn ~ 7500 6200
+NoConn ~ 9100 7200
+NoConn ~ 9100 7300
+NoConn ~ 9100 7500
+NoConn ~ 9100 7600
+NoConn ~ 9100 7700
+NoConn ~ 9100 7800
+NoConn ~ 9100 7900
+NoConn ~ 9100 8000
+NoConn ~ 9100 8100
+NoConn ~ 9100 8200
 $EndSCHEMATC

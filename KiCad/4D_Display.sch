@@ -125,10 +125,6 @@ Wire Wire Line
 	3550 6050 3550 6000
 Wire Wire Line
 	3550 6450 3550 6550
-Text HLabel 5150 5600 0    50   Input ~ 0
-RX_DISPLAY
-Text HLabel 5150 5700 0    50   Output ~ 0
-TX_DISPLAY
 Text HLabel 2350 6250 0    50   Input ~ 0
 RESET_DISPLAY
 Wire Wire Line
@@ -249,8 +245,12 @@ F 3 "" H 4150 4100 50  0001 C CNN
 	1    4150 4100
 	0    -1   -1   0   
 $EndComp
-Text HLabel 4250 3900 0    50   Input ~ 0
-RX_DISPLAY
-Text HLabel 4250 3800 0    50   Output ~ 0
-TX_DISPLAY
+Text HLabel 4250 3800 0    50   Input ~ 0
+DISPLAY_RX
+Text HLabel 4250 3900 0    50   Output ~ 0
+DISPLAY_TX
+Text HLabel 5150 5700 0    50   Input ~ 0
+DISPLAY_RX
+Text HLabel 5150 5600 0    50   Output ~ 0
+DISPLAY_TX
 $EndSCHEMATC

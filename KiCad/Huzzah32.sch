@@ -146,7 +146,7 @@ F 3 "" H 7900 2400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text HLabel 8200 2800 2    50   Input ~ 0
-RX_HUZZAH
+HUZZAH_RX
 $Comp
 L power:GND #PWR0143
 U 1 1 5DE4C602
@@ -196,7 +196,7 @@ Wire Wire Line
 Wire Wire Line
 	6300 4050 7400 4050
 Text HLabel 8200 4050 2    50   Output ~ 0
-TX_HUZZAH
+HUZZAH_TX
 $Comp
 L power:GND #PWR0147
 U 1 1 5DE4FCE2
