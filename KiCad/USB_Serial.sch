@@ -119,8 +119,6 @@ Wire Wire Line
 Wire Wire Line
 	8500 4650 8300 4650
 NoConn ~ 7450 3850
-NoConn ~ 7450 3750
-NoConn ~ 7450 4350
 $Comp
 L Device:LED D5
 U 1 1 5BC6CB7D
@@ -677,7 +675,6 @@ RXL
 NoConn ~ 7450 3950
 NoConn ~ 7450 4050
 NoConn ~ 7450 4150
-NoConn ~ 7450 4450
 NoConn ~ 7450 4950
 Text Notes 9900 5300 2    50   ~ 0
 NOTE: This is the RESET\nline for the ATMEGA2560
@@ -922,4 +919,43 @@ Text HLabel 8500 4650 2    50   Input ~ 0
 TX_USB
 Text HLabel 8500 4550 2    50   Input ~ 0
 RX_USB
+Wire Wire Line
+	7450 3750 7550 3750
+Wire Wire Line
+	7450 4350 7550 4350
+Wire Wire Line
+	7450 4450 7550 4450
+$Comp
+L power:GND #PWR?
+U 1 1 5E906C18
+P 7550 3750
+F 0 "#PWR?" H 7550 3500 50  0001 C CNN
+F 1 "GND" V 7555 3622 50  0000 R CNN
+F 2 "" H 7550 3750 50  0001 C CNN
+F 3 "" H 7550 3750 50  0001 C CNN
+	1    7550 3750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E90759A
+P 7550 4350
+F 0 "#PWR?" H 7550 4100 50  0001 C CNN
+F 1 "GND" V 7555 4222 50  0000 R CNN
+F 2 "" H 7550 4350 50  0001 C CNN
+F 3 "" H 7550 4350 50  0001 C CNN
+	1    7550 4350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E907ADA
+P 7550 4450
+F 0 "#PWR?" H 7550 4200 50  0001 C CNN
+F 1 "GND" V 7555 4322 50  0000 R CNN
+F 2 "" H 7550 4450 50  0001 C CNN
+F 3 "" H 7550 4450 50  0001 C CNN
+	1    7550 4450
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC
