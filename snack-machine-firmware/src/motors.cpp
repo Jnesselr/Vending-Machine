@@ -37,10 +37,10 @@ void Motors::setup() {
   digitalWrite(MOTORS_ENABLE, HIGH);
 }
 
-void Motors::rotate(int row, int col) {
+void Motors::vend(int row, int col) {
   digitalWrite(ROWS[row], HIGH);
   digitalWrite(COLS[col], HIGH);
-  delay(1000);
+  delay(500);
   digitalWrite(COLS[col], LOW);
 }
 

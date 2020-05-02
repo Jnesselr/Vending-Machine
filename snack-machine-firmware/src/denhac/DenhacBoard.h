@@ -31,6 +31,6 @@ class DenhacBoard: public VendingMachine {
     static EvtTimeListener rfidLoop;
 
     static void billAccepted(BillRouting billRouting, uint8_t billType);
-    static int dollarsGiven;
+    static int moneyInserted;
     static void printMessage();
 };

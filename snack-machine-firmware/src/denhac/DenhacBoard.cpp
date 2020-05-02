@@ -9,9 +9,9 @@ OutputPort<PORT_H, 2, 1> DenhacBoard::displayResetPin;
 HardwareSerial* DenhacBoard::displaySerial = &Serial2;
 Diablo_Serial_4DLib DenhacBoard::display(DenhacBoard::displaySerial);
 
-int DenhacBoard::dollarsGiven = 0;
+int DenhacBoard::moneyInserted = 0;
 
-const int PI_COST = 10;
+const int PI_COST = 10 * 100;
 
 EvtTimeListener DenhacBoard::billValidatorLoop(200, true, LISTENER {
   BillValidator::loop();
@@ -51,7 +51,7 @@ void DenhacBoard::setup()
 
   delay(5000);
 
-  display.gfx_ScreenMode(PORTRAIT);
+  display.gfx_ScreenMode(PORTRAIT_R);
   display.gfx_Cls();
   printMessage();
 
@@ -60,10 +60,18 @@ void DenhacBoard::setup()
   Motors::setup();
 
   BillValidator::onBillAccepted = DenhacBoard::billAccepted;
+  BillValidator::onStateChanged = [](BillValidatorState oldState, BillValidatorState newState) {
+    display.print("State: ");
+    display.print((uint8_t)oldState);
+    display.print(" -> ");
+    display.println((uint8_t)newState);
+  };
 
-  CoinChanger::onCoinDeposited = [](CoinRouting routing, uint8_t coinType) {
-    // display.println((int)routing);
-    // display.println(coinType);
+  BillValidator::onRecyclerStateChanged = [](BillRecyclerState oldState, BillRecyclerState newState) {
+    display.print("Recycler State: ");
+    display.print((uint8_t)oldState);
+    display.print(" -> ");
+    display.println((uint8_t)newState);
   };
 
   // TODO
@@ -82,29 +90,43 @@ void DenhacBoard::loop()
 }
 
 void DenhacBoard::billAccepted(BillRouting billRouting, uint8_t billType) {
-  // display.println((int)billRouting);
-  // display.println(billType);
+  display.println((int)billRouting);
+  display.println(billType);
 
-  if(billRouting == BillRouting::ESCROW_POSITION ||
-    billRouting == BillRouting::BILL_STACKED) {
+  if(billRouting == BillRouting::ESCROW_POSITION) {
     BillValidator::acceptBill();
-    dollarsGiven++;
-    if(dollarsGiven < PI_COST) {
+  }
+  if(billRouting == BillRouting::BILL_STACKED || billRouting == BillRouting::BILL_TO_RECYCLER) {
+    moneyInserted += BillValidator::billValue(billType);
+    if(moneyInserted < PI_COST) {
       display.print("I have been fed ");
-      display.print(dollarsGiven);
-      display.print(" dollar");
-      if(dollarsGiven != 1) {
+      display.print(moneyInserted);
+      display.print(" cent");
+      if(moneyInserted != 1) {
         display.print("s");
       }
       display.println("");
 
       display.print("Give me ");
-      display.print(PI_COST - dollarsGiven);
+      display.print(PI_COST - moneyInserted);
       display.println(" more to get your Pi!");
     } else {
-      display.println("The pi is yours!");
-      Motors::rotate(3, 4);
-      dollarsGiven = 0;
+      display.gfx_Cls();
+      if(moneyInserted >= PI_COST) {
+        display.println("The pi is yours!");
+        Motors::vend(3, 4);
+        moneyInserted -= PI_COST;
+      }
+
+      if(moneyInserted > 0) {
+        display.print("You have ");
+        display.print(moneyInserted);
+        display.print(" cent");
+        if(moneyInserted != 1) {
+          display.print("s");
+        }
+        display.println(" leftover for the next transaction.");
+      }
       display.println("");
       printMessage();
     }
@@ -113,10 +135,10 @@ void DenhacBoard::billAccepted(BillRouting billRouting, uint8_t billType) {
 
 void DenhacBoard::printMessage() {
   display.println("Denhac Vending Machine");
-  display.print("Insert $");
+  display.print("Insert ");
   display.print(PI_COST);
-  display.println(" to get a Pi Zero!");
-  display.println("Please use $1 bills, I can't make change yet!");
+  display.println(" cents to get a Pi Zero!");
+  display.println("I can't make change yet!");
 }
 
 #endif

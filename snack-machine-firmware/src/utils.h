@@ -5,6 +5,12 @@
 
 #define BYTE2WORD(a, b) (uint16_t) (((a & 0xFF) << 8) | (b & 0xFF))
 
+#define BYTE2DWORD(a, b, c, d) \
+  (((uint32_t) a & 0xFF) << 24) | \
+  (((uint32_t) b & 0xFF) << 16) | \
+  (((uint32_t) c & 0xFF) <<  8) | \
+   ((uint32_t) d & 0xFF);
+
 #define LISTENER (EvtAction)[&](EvtListener *, EvtContext *)->bool
 
 #define DEBUG(text) if(true) { Serial.println(text); }

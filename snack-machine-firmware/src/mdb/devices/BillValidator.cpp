@@ -8,11 +8,14 @@ static const uint16_t CMD_POLL[] = {0x133};
 static const uint16_t CMD_SETUP[] = {0x131};
 static const uint16_t CMD_BILL_SETUP[] = {0x134, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_BILL_STACKER[] = {0x136};
-static const uint16_t CMD_ACCEPT_BILL[] = {0x135, 0x1};
+static const uint16_t CMD_ACCEPT_BILL[] = {0x135, 0x01};
+static const uint16_t CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION[] = {0x137, 0x02};
+static const uint16_t CMD_RECYCLER_FEATURE_ENABLE[] = {0x137, 0x01, 0x00, 0x00, 0x00, 0x02};
 
 uint8_t BillValidator::pollFailures = 0;
 bool BillValidator::devicePolled = false;
 BillValidatorState BillValidator::state = BillValidatorState::UNKNOWN;
+BillRecyclerState BillValidator::recyclerState = BillRecyclerState::UNKNOWN;
 
 uint8_t BillValidator::featureLevel;
 uint16_t BillValidator::currencyCode;
@@ -22,7 +25,10 @@ uint16_t BillValidator::stackerCapacity;
 uint16_t BillValidator::billSecurityLevels;
 bool BillValidator::canEscrow;
 uint8_t BillValidator::billTypeCredit[16];
+uint32_t BillValidator::levelTwoOptionalFeatures;
 
+BillValidatorStateCallback BillValidator::onStateChanged = NULL;
+BillRecyclerStateCallback BillValidator::onRecyclerStateChanged = NULL;
 BillAcceptedCallback BillValidator::onBillAccepted = NULL;
 
 void BillValidator::loop()
@@ -45,6 +51,23 @@ void BillValidator::loop()
     sendBillSetup();
     return;
   }
+
+  if(state == BillValidatorState::IDLE) {
+    if(featureLevel == 2 && recyclerState == BillRecyclerState::UNKNOWN) {
+      updateRecyclerState(BillRecyclerState::MAYBE_CAPABLE);
+      return;
+    }
+
+    if (recyclerState == BillRecyclerState::MAYBE_CAPABLE) {
+      sendLevelTwoOptionIdentification();
+      return;
+    }
+
+    if(recyclerState == BillRecyclerState::READY_TO_ENABLE) {
+      sendRecyclerFeatureEnable();
+      return;
+    }
+  }
 }
 
 void BillValidator::sendPoll()
@@ -64,7 +87,8 @@ void BillValidator::sendPoll()
 
   if(pollFailures > 0) {
     pollFailures = 0;
-    state = BillValidatorState::UNKNOWN;
+    updateState(BillValidatorState::UNKNOWN);
+    updateRecyclerState(BillRecyclerState::UNKNOWN);
     return;
   }
   devicePolled = true;
@@ -74,7 +98,7 @@ void BillValidator::sendPoll()
     return;
   }
 
-  mdbResult.print("CASH");
+  mdbResult.print("CASH POLL");
 
   uint8_t i = 0;
 
@@ -120,7 +144,8 @@ void BillValidator::sendPoll()
     else if (data == 0x06)
     {
       // Validator was Reset
-      state = BillValidatorState::RESET;
+      updateState(BillValidatorState::RESET);
+      updateRecyclerState(BillRecyclerState::UNKNOWN);
     }
     else if (data == 0x07)
     {
@@ -195,13 +220,6 @@ void BillValidator::sendPoll()
   }
 }
 
-void BillValidator::acceptBill()
-{
-  static MDBResult mdbResult;
-
-  MDB::writeForResult(CMD_ACCEPT_BILL, LENGTH(CMD_ACCEPT_BILL), &mdbResult);
-}
-
 void BillValidator::sendReset()
 {
   // DEBUG("Sending cash reset")
@@ -231,7 +249,8 @@ void BillValidator::sendSetup()
   if (mdbResult.timeout)
   {
     DEBUG("Cash Setup timed out")
-    state = BillValidatorState::UNKNOWN;
+    updateState(BillValidatorState::UNKNOWN);
+    updateRecyclerState(BillRecyclerState::UNKNOWN);
     return;
   }
 
@@ -248,7 +267,7 @@ void BillValidator::sendSetup()
   canEscrow = mdbResult.data[10] == 0xFF;
   MDB::copyAtMost16(mdbResult, 11, billTypeCredit);
 
-  state = BillValidatorState::SETUP;
+  updateState(BillValidatorState::SETUP);
 }
 
 void BillValidator::sendBillSetup()
@@ -259,13 +278,98 @@ void BillValidator::sendBillSetup()
   
   if (mdbResult.timeout)
   {
-    state = BillValidatorState::UNKNOWN;
+    updateState(BillValidatorState::UNKNOWN);
+    updateRecyclerState(BillRecyclerState::UNKNOWN);
     return;
   }
 
-  state = BillValidatorState::IDLE;
+  updateState(BillValidatorState::IDLE);
 
   return;
+}
+
+void BillValidator::sendLevelTwoOptionIdentification() {
+  static MDBResult mdbResult;
+
+  MDB::writeForResult(
+    CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION,
+    LENGTH(CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION),
+    &mdbResult
+  );
+
+  mdbResult.print("CASH OPTIONS");
+
+  if(mdbResult.timeout) {
+    return;
+  }
+
+  MDB::ack();
+
+  levelTwoOptionalFeatures = BYTE2DWORD(
+    mdbResult.data[29],
+    mdbResult.data[30],
+    mdbResult.data[31],
+    mdbResult.data[32]
+  );
+
+  // Bill Recycling supported
+  if(levelTwoOptionalFeatures & 0x2) {
+    updateRecyclerState(BillRecyclerState::READY_TO_ENABLE);
+  } else {
+    updateRecyclerState(BillRecyclerState::NOT_CAPABLE);
+  }
+}
+
+void BillValidator::sendRecyclerFeatureEnable() {
+  static MDBResult mdbResult;
+
+
+  MDB::writeForResult(
+    CMD_RECYCLER_FEATURE_ENABLE,
+    LENGTH(CMD_RECYCLER_FEATURE_ENABLE),
+    &mdbResult
+  );
+
+  if (mdbResult.data[0] == mdbResult.ACK)
+  {
+    updateRecyclerState(BillRecyclerState::IDLE);
+    return;
+  }
+}
+
+void BillValidator::updateState(BillValidatorState newState) {
+  BillValidatorState oldState = BillValidator::state;
+  BillValidator::state = newState;
+
+  if(onStateChanged != NULL) {
+    onStateChanged(oldState, newState);
+  }
+}
+
+void BillValidator::updateRecyclerState(BillRecyclerState newState) {
+  BillRecyclerState oldState = BillValidator::recyclerState;
+  BillValidator::recyclerState = newState;
+
+  if(onRecyclerStateChanged != NULL) {
+    onRecyclerStateChanged(oldState, newState);
+  }
+}
+
+void BillValidator::acceptBill() {
+  static MDBResult mdbResult;
+
+  MDB::writeForResult(CMD_ACCEPT_BILL, LENGTH(CMD_ACCEPT_BILL), &mdbResult);
+}
+
+uint16_t BillValidator::billValue(uint8_t billType) {
+  if(billType < 0 || billType > 15) {
+    return -1;
+  }
+  
+  uint16_t result = billScalingFactor;
+  result *= billTypeCredit[billType];
+
+  return result;
 }
 
 #endif
