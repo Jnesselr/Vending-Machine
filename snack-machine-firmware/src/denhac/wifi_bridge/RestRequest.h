@@ -3,20 +3,37 @@
 #include <HTTPClient.h>
 
 typedef struct {
-  uint8_t status;
-  uint8_t validJSON;
+  bool connected;
+  uint16_t status;
+  bool validJSON;
   DynamicJsonDocument* json;
+
+  void reset() {
+    connected = false;
+    status = 0;
+    validJSON = false;
+    if(json != nullptr) {
+      json->clear();
+    }
+    json = nullptr;
+  }
 } RestResponse;
 
 class RestRequest {
   public:
-    RestRequest(WiFiClientSecure &client, DynamicJsonDocument &jsonDoc);
-    RestResponse* GET(char * url);
-    RestResponse* POST(char * url);
-    RestResponse* DELETE(char * url);
+    RestRequest(
+      WiFiClientSecure &client,
+      DynamicJsonDocument &jsonDoc,
+      const char * server);
+    RestResponse* GET(const char * url);
+    RestResponse* POST(const char * url);
+    RestResponse* DELETE(const char * url);
 
   private:
-    RestResponse response;
+    RestResponse* makeRequest(const char * method, const char * url);
+
+    RestResponse* response;
     WiFiClientSecure* client;
     DynamicJsonDocument *jsonDoc;
+    const char * server;
 };
