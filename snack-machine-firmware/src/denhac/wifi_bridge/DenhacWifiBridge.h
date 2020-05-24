@@ -5,6 +5,7 @@
 #include "vendingMachine.h"
 #include "msgpck.h"
 #include "denhac/Product.h"
+#include "denhac/wifi_bridge/RestRequest.h"
 
 #include <ArduinoJson.h>
 #include <WiFi.h>
@@ -15,6 +16,7 @@ typedef enum {
   WIFI_TRYING_TO_CONNECT = 0x02,
   WIFI_CONNECTED = 0x03,
   FETCHING_PRODUCTS = 0x07,
+  FETCHING_ORDERS = 0x08,
   CONNECTION_FAILED = 0x09,
   JSON_DECODE_FAILED = 0x0A,
 } Status;
@@ -27,14 +29,21 @@ class DenhacWifiBridge: public VendingMachine {
   private:
     static void setupComm();
     static void sendStatus(uint8_t status);
+    static void sendOrder(JsonObject &order);
+    static void sendItem(JsonObject &item);
+
+    static void handleIncomingRequest();
+    static void handleCardResponse();
+
     static void fetchProducts();
+    static void fetchOrdersByCard(uint32_t cardNumber);
 
     static WiFiClientSecure client;
     static HardwareSerial* serial;
     static DynamicJsonDocument jsonDoc;
     static uint32_t hashes[];
     static bool has_product[];
+    static RestRequest request;
 
     static unsigned long lastProductUpdateMillis;
-    // static unsigned long lastOrderUpdateMillis;
 };

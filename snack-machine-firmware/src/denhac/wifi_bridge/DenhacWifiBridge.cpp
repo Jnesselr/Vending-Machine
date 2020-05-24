@@ -45,6 +45,22 @@ void DenhacWifiBridge::loop() {
     fetchProducts();
     lastProductUpdateMillis = currentMillis;
   }
+
+  if(serial->available()) {
+    handleIncomingRequest();
+  }
+}
+
+void DenhacWifiBridge::handleIncomingRequest() {
+  uint8_t requestType;
+  msgpck_read_integer(serial, &requestType, sizeof(requestType));
+
+  if(requestType == 0x03) {
+    uint32_t cardNumber;
+    msgpck_read_integer(serial, (byte*) &cardNumber, sizeof(cardNumber));
+
+    fetchOrdersByCard(cardNumber);
+  }
 }
 
 void DenhacWifiBridge::fetchProducts() {
@@ -64,8 +80,7 @@ void DenhacWifiBridge::fetchProducts() {
         break;
       }
     }
-    // if there are incoming bytes available
-    // from the server, read them and print them:
+    
     DeserializationError err = deserializeJson(jsonDoc, client);
 
     if(err) {
@@ -131,6 +146,69 @@ void DenhacWifiBridge::fetchProducts() {
 
     client.stop();
   }
+}
+
+void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
+  sendStatus(Status::FETCHING_ORDERS);
+  if (!client.connect(server, 443)) {
+    sendStatus(Status::CONNECTION_FAILED);
+  } else {
+    // Make a HTTP request:
+    client.print("GET /wp-json/wc-vending/v1/orders/by_card/");
+    client.print(cardNumber);
+    client.println(" HTTP/1.0");
+    client.println("Host: www.denhac.org");
+    client.println("Connection: close");
+    client.println();
+
+    while (client.connected()) {
+      String line = client.readStringUntil('\n');
+      if (line == "\r") {
+        break;
+      }
+    }
+    
+    DeserializationError err = deserializeJson(jsonDoc, client);
+
+    if(err) {
+      sendStatus(Status::JSON_DECODE_FAILED);
+    } else {
+      msgpck_write_integer(serial, 3);
+      msgpck_write_integer(serial, cardNumber);
+      handleCardResponse();
+    }
+
+    client.stop();
+  }
+}
+
+void DenhacWifiBridge::handleCardResponse() {
+  JsonArray orders = jsonDoc.as<JsonArray>();
+
+  msgpck_write_integer(serial, orders.size());
+  for(JsonObject order : orders) {
+    sendOrder(order);
+  }
+}
+
+void DenhacWifiBridge::sendOrder(JsonObject &order) {
+  msgpck_write_integer(serial, (uint32_t) order["id"]);
+  msgpck_write_integer(serial, 0); // TODO Make match actual order status
+  msgpck_write_integer(serial, (uint32_t) order["paid"]);
+  msgpck_write_integer(serial, (uint32_t) order["total"]);
+
+  JsonArray items = order["items"];
+  msgpck_write_integer(serial, items.size());
+  for(JsonObject item : items) {
+    sendItem(item);
+  }
+}
+
+void DenhacWifiBridge::sendItem(JsonObject &item) {
+  msgpck_write_integer(serial, (uint32_t) item["item_id"]);
+  msgpck_write_integer(serial, (uint32_t) item["product_id"]);
+  msgpck_write_integer(serial, (uint8_t) item["quantity"]);
+  msgpck_write_integer(serial, (uint8_t) item["vended"]);
 }
 
 void DenhacWifiBridge::setupComm() {

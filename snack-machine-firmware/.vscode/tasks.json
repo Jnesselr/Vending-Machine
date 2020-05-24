@@ -9,6 +9,15 @@
       "problemMatcher": [
         "$platformio"
       ]
+    },
+    {
+      "type": "PlatformIO",
+      "task": "Build (featheresp32)",
+      "problemMatcher": [
+        "$platformio"
+      ],
+      "group": "build",
+      "label": "PlatformIO: Build (featheresp32)"
     }
   ]
 }
