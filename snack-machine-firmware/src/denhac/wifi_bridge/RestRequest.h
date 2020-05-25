@@ -6,18 +6,15 @@ typedef struct {
   bool connected;
   uint16_t status;
   bool validJSON;
-  DynamicJsonDocument* json;
 
   void reset() {
     connected = false;
     status = 0;
     validJSON = false;
-    if(json != nullptr) {
-      json->clear();
-    }
-    json = nullptr;
   }
 } RestResponse;
+
+typedef void (*DebugCallback)(String msg);
 
 class RestRequest {
   public:
@@ -29,6 +26,8 @@ class RestRequest {
     RestResponse* POST(const char * url);
     RestResponse* DELETE(const char * url);
 
+    static DebugCallback debug;
+
   private:
     RestResponse* makeRequest(const char * method, const char * url);
 
@@ -36,4 +35,5 @@ class RestRequest {
     WiFiClientSecure* client;
     DynamicJsonDocument *jsonDoc;
     const char * server;
+    char jsonBuffer[500];
 };

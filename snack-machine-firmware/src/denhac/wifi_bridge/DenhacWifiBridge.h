@@ -22,18 +22,22 @@ typedef enum {
   REST_UNKNOWN_FAILURE = 0x0B,
   REST_NOT_FOUND = 0x0C,
   PRODUCTS_FETCHED = 0x0D,
+  UPDATING_ORDER = 0x0E,
 } Status;
 
 class DenhacWifiBridge: public VendingMachine {
   public:
     static void setup();
     static void loop();
+    static void sendDebug(String msg);
 
   private:
     static void setupComm();
     static void sendStatus(uint8_t status);
     static void sendOrder(JsonObject &order);
     static void sendItem(JsonObject &item);
+
+    static void sendDebug(uint32_t value);
 
     static bool handleCommonRestIssues(RestResponse * response); // return true if REST response is valid
     static void handleIncomingRequest();
@@ -42,6 +46,7 @@ class DenhacWifiBridge: public VendingMachine {
     static void fetchProducts();
     static void fetchOrdersByCard(uint32_t cardNumber);
     static void fetchOrderById(uint32_t orderId);
+    static void updateOrder();
 
     static WiFiClientSecure client;
     static HardwareSerial* serial;

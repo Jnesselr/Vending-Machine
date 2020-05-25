@@ -17,6 +17,7 @@ WiFiClientSecure DenhacWifiBridge::client;
 // We might want to implement paging to reduce the amount of memory needed here.
 DynamicJsonDocument DenhacWifiBridge::jsonDoc(JSON_ARRAY_SIZE(NUM_PRODUCTS) + NUM_PRODUCTS*JSON_OBJECT_SIZE(8));
 RestRequest DenhacWifiBridge::request(client, jsonDoc, server);
+DebugCallback RestRequest::debug = &DenhacWifiBridge::sendDebug;
 char DenhacWifiBridge::urlBuffer[100];
 
 uint32_t DenhacWifiBridge::hashes[NUM_PRODUCTS];
@@ -56,19 +57,21 @@ void DenhacWifiBridge::loop() {
 }
 
 void DenhacWifiBridge::handleIncomingRequest() {
-  uint8_t requestType;
+  uint8_t requestType = 0;
   msgpck_read_integer(serial, &requestType, sizeof(requestType));
 
   if(requestType == 0x03) {
-    uint32_t cardNumber;
+    uint32_t cardNumber = 0;
     msgpck_read_integer(serial, (byte*) &cardNumber, sizeof(cardNumber));
 
     fetchOrdersByCard(cardNumber);
   } else if(requestType == 0x04) {
-    uint32_t orderId;
+    uint32_t orderId = 0;
     msgpck_read_integer(serial, (byte*) &orderId, sizeof(orderId));
 
     fetchOrderById(orderId);
+  } else if(requestType == 0x05) {
+    updateOrder();
   }
 }
 
@@ -86,7 +89,7 @@ void DenhacWifiBridge::fetchProducts() {
   bool anythingSent = false;
   memset(has_product, false, sizeof(has_product));
 
-  JsonArray array = response->json->as<JsonArray>();
+  JsonArray array = jsonDoc.as<JsonArray>();
   for(JsonObject obj : array) {
     uint32_t id = obj["id"];
     const char * name_ref = obj["name"];
@@ -183,6 +186,70 @@ void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
   sendOrder(order);
 }
 
+void DenhacWifiBridge::updateOrder() {
+  sendStatus(Status::UPDATING_ORDER);
+  jsonDoc.clear();
+
+  uint32_t orderId = 0;
+  msgpck_read_integer(serial, (byte*) &orderId, sizeof(orderId));
+  uint32_t cardId = 0;
+  msgpck_read_integer(serial, (byte*) &cardId, sizeof(cardId));
+  uint8_t numItems = 0;
+  msgpck_read_integer(serial, (byte*) &numItems, sizeof(numItems));
+  sendDebug("Got order id: ");
+  sendDebug(orderId);
+  sendDebug("Got card id: ");
+  sendDebug(cardId);
+  sendDebug("Got num items: ");
+  sendDebug(numItems);
+
+  if(orderId != 0) {
+    jsonDoc["order_id"] = orderId;
+  }
+  if(cardId != 0) {
+    jsonDoc["card"] = cardId;
+  }
+  JsonArray items = jsonDoc.createNestedArray("items");
+  for(uint8_t t = 0; t < numItems; t++) {
+
+    sendDebug("Value of t is: ");
+    sendDebug(t);
+    sendDebug(numItems);
+    uint32_t productId = 0;
+    msgpck_read_integer(serial, (byte*) &productId, sizeof(productId));
+    uint32_t wanted = 0;
+    msgpck_read_integer(serial, (byte*) &wanted, sizeof(wanted));
+    uint32_t vended = 0;
+    msgpck_read_integer(serial, (byte*) &vended, sizeof(vended));
+
+    JsonObject item = items.createNestedObject();
+    item["product_id"] = productId;
+    item["wanted"] = wanted;
+    item["vended"] = vended;
+
+    sendDebug("Product ID is: ");
+    sendDebug(productId);
+    sendDebug("Wanted is: ");
+    sendDebug(wanted);
+    sendDebug("Vended is: ");
+    sendDebug(vended);
+  }
+
+  sendDebug("Out of loop!");
+
+  RestResponse* response = request.POST("/wp-json/wc-vending/v1/orders");
+
+  bool isValidRest = handleCommonRestIssues(response);
+
+  if(!isValidRest) {
+    return;
+  }
+
+  JsonObject order = jsonDoc.as<JsonObject>();
+  msgpck_write_integer(serial, 5);
+  sendOrder(order);
+}
+
 bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
   if(!response->connected) {
     sendStatus(Status::CONNECTION_FAILED);
@@ -193,7 +260,7 @@ bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
     if(response->status == 404) {
       sendStatus(Status::REST_NOT_FOUND);
     } else {
-      sendStatus(Status::REST_NOT_FOUND);
+      sendStatus(Status::REST_UNKNOWN_FAILURE);
     }
     return false;
   }
@@ -254,6 +321,16 @@ void DenhacWifiBridge::setupComm() {
 void DenhacWifiBridge::sendStatus(uint8_t status) {
   msgpck_write_integer(serial, 0x01);
   msgpck_write_integer(serial, status);
+}
+
+void DenhacWifiBridge::sendDebug(String msg) {
+  msgpck_write_integer(serial, 0x07);
+  msgpck_write_string(serial, msg);
+}
+
+void DenhacWifiBridge::sendDebug(uint32_t value) {
+  msgpck_write_integer(serial, 0x07);
+  msgpck_write_integer(serial, value);
 }
 
 #endif
