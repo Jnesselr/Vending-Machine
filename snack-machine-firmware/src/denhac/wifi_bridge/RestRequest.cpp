@@ -1,3 +1,5 @@
+#ifdef VENDING_WIFI_BRIDGE_BOARD
+
 #include "denhac/wifi_bridge/RestRequest.h"
 
 RestRequest::RestRequest(
@@ -103,3 +105,4 @@ RestResponse* RestRequest::makeRequest(const char * method, const char * url) {
   return response;
 }
 
+#endif
