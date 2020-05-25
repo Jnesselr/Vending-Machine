@@ -72,6 +72,11 @@ void DenhacWifiBridge::handleIncomingRequest() {
     fetchOrderById(orderId);
   } else if(requestType == 0x05) {
     updateOrder();
+  } else if(requestType == 0x08) {
+    uint32_t orderId = 0;
+    msgpck_read_integer(serial, (byte*) &orderId, sizeof(orderId));
+
+    cancelOrderById(orderId);
   }
 }
 
@@ -248,6 +253,21 @@ void DenhacWifiBridge::updateOrder() {
   JsonObject order = jsonDoc.as<JsonObject>();
   msgpck_write_integer(serial, 5);
   sendOrder(order);
+}
+
+void DenhacWifiBridge::cancelOrderById(uint32_t orderId) {
+  sendStatus(Status::CANCELLING_ORDER);
+
+  sprintf(urlBuffer, "/wp-json/wc-vending/v1/orders/%u", orderId);
+  RestResponse* response = request.DELETE(urlBuffer);
+
+  bool isValidRest = handleCommonRestIssues(response);
+
+  if(!isValidRest) {
+    return;
+  }
+
+  sendStatus(Status::ORDER_CANCELLED);
 }
 
 bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {

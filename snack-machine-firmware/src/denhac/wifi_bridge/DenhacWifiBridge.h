@@ -23,6 +23,8 @@ typedef enum {
   REST_NOT_FOUND = 0x0C,
   PRODUCTS_FETCHED = 0x0D,
   UPDATING_ORDER = 0x0E,
+  CANCELLING_ORDER = 0x0F,
+  ORDER_CANCELLED = 0x10,
 } Status;
 
 class DenhacWifiBridge: public VendingMachine {
@@ -47,6 +49,7 @@ class DenhacWifiBridge: public VendingMachine {
     static void fetchOrdersByCard(uint32_t cardNumber);
     static void fetchOrderById(uint32_t orderId);
     static void updateOrder();
+    static void cancelOrderById(uint32_t orderId);
 
     static WiFiClientSecure client;
     static HardwareSerial* serial;
