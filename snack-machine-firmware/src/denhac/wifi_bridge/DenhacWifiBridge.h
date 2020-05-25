@@ -25,6 +25,8 @@ typedef enum {
   UPDATING_ORDER = 0x0E,
   CANCELLING_ORDER = 0x0F,
   ORDER_CANCELLED = 0x10,
+  FETCHING_CREDIT = 0x11,
+  UPDATING_CREDIT = 0x12,
 } Status;
 
 class DenhacWifiBridge: public VendingMachine {
@@ -50,6 +52,8 @@ class DenhacWifiBridge: public VendingMachine {
     static void fetchOrderById(uint32_t orderId);
     static void updateOrder();
     static void cancelOrderById(uint32_t orderId);
+    static void fetchCreditByCard(uint32_t cardNumber);
+    static void updateCreditByCard(uint32_t cardNumber, int32_t difference);
 
     static WiFiClientSecure client;
     static HardwareSerial* serial;

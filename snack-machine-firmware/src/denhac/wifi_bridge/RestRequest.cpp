@@ -11,6 +11,7 @@ RestRequest::RestRequest(
 }
 
 //DebugCallback RestRequest::debug = nullptr;
+String RestRequest::auth = base64::encode(CONSUMER_KEY + ":" + CONSUMER_SECRET);
 
 RestResponse* RestRequest::GET(const char * url) {
   jsonDoc->clear();
@@ -49,6 +50,8 @@ RestResponse* RestRequest::makeRequest(const char * method, const char * url) {
   client->println(" HTTP/1.0");
   client->print("Host: ");
   client->println(server);
+  client->print("Authorization: Basic ");
+  client->println(auth);
   client->println("Connection: close");
   if(hasBody) {
     size_t contentLength = serializeJson(*jsonDoc, jsonBuffer, 500);

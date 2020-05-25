@@ -1,6 +1,9 @@
 #include <ArduinoJson.h>
+#include "base64.h"
 #include <WiFi.h>
 #include <HTTPClient.h>
+
+#include "config.h"
 
 typedef struct {
   bool connected;
@@ -36,4 +39,5 @@ class RestRequest {
     DynamicJsonDocument *jsonDoc;
     const char * server;
     char jsonBuffer[500];
+    static String auth;
 };

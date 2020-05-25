@@ -77,6 +77,19 @@ void DenhacWifiBridge::handleIncomingRequest() {
     msgpck_read_integer(serial, (byte*) &orderId, sizeof(orderId));
 
     cancelOrderById(orderId);
+  } else if(requestType == 0x09) {
+    uint32_t cardNumber = 0;
+    msgpck_read_integer(serial, (byte*) &cardNumber, sizeof(cardNumber));
+
+    fetchCreditByCard(cardNumber);
+  } else if(requestType == 0x0A) {
+    uint32_t cardNumber = 0;
+    msgpck_read_integer(serial, (byte*) &cardNumber, sizeof(cardNumber));
+
+    int32_t difference = 0;
+    msgpck_read_integer(serial, (byte*) &difference, sizeof(difference));
+
+    updateCreditByCard(cardNumber, difference);
   }
 }
 
@@ -270,6 +283,47 @@ void DenhacWifiBridge::cancelOrderById(uint32_t orderId) {
   sendStatus(Status::ORDER_CANCELLED);
 }
 
+void DenhacWifiBridge::fetchCreditByCard(uint32_t cardNumber) {
+  sendStatus(Status::FETCHING_CREDIT);
+
+  sprintf(urlBuffer, "/wp-json/wc-vending/v1/credit/%u", cardNumber);
+  RestResponse* response = request.GET(urlBuffer);
+
+  bool isValidRest = handleCommonRestIssues(response);
+
+  if(!isValidRest) {
+    return;
+  }
+
+  JsonObject order = jsonDoc.as<JsonObject>();
+  uint32_t credit = order["credit"];
+  msgpck_write_integer(serial, 9);
+  msgpck_write_integer(serial, credit);
+}
+
+void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t difference) {
+  sendStatus(Status::FETCHING_CREDIT);
+
+  jsonDoc.clear();
+  jsonDoc["credit"] = difference;
+
+  sprintf(urlBuffer, "/wp-json/wc-vending/v1/credit/%u", cardNumber);
+  RestResponse* response = request.POST(urlBuffer);
+
+  bool isValidRest = handleCommonRestIssues(response);
+
+  if(!isValidRest) {
+    return;
+  }
+
+  JsonObject order = jsonDoc.as<JsonObject>();
+  uint32_t credit = order["credit"];
+  int32_t diff = order["diff"];
+  msgpck_write_integer(serial, 0x0A);
+  msgpck_write_integer(serial, credit);
+  msgpck_write_integer(serial, diff);
+}
+
 bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
   if(!response->connected) {
     sendStatus(Status::CONNECTION_FAILED);
@@ -344,13 +398,17 @@ void DenhacWifiBridge::sendStatus(uint8_t status) {
 }
 
 void DenhacWifiBridge::sendDebug(String msg) {
+  #ifdef DEBUG_MODE
   msgpck_write_integer(serial, 0x07);
   msgpck_write_string(serial, msg);
+  #endif
 }
 
 void DenhacWifiBridge::sendDebug(uint32_t value) {
+  #ifdef DEBUG_MODE
   msgpck_write_integer(serial, 0x07);
   msgpck_write_integer(serial, value);
+  #endif
 }
 
 #endif
