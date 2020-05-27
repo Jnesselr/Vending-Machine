@@ -52,7 +52,7 @@ class CoinChanger {
     static void handlePollData(MDBResult);
     static void sendCoinTypeSetup();
 
-    static void onTimeout(MDBResult mdbResult);
+    static void onTimeout(const MDBResult &mdbResult);
 
     static uint8_t pollFailures;
     static bool devicePolled;

@@ -18,7 +18,7 @@ class MDBResult {
     static const uint16_t ACK = 0x100;
 };
 
-typedef void (*MDBCallback)(MDBResult);
+typedef void (*MDBCallback)(const MDBResult&);
 
 class MDBCommand {
   public:

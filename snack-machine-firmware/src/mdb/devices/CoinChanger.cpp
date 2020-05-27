@@ -8,6 +8,7 @@ static const uint16_t CMD_RESET[] = {0x108};
 static const uint16_t CMD_SETUP[] = {0x109};
 static const uint16_t CMD_COIN_TYPE_SETUP[] = {0x10C, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_TUBE_STATUS[] = {0x10A};
+static uint16_t CMD_DISPENSE[] = {0x10D, 0};
 
 RingBuffer<MDBCommand *> CoinChanger::commandBuffer(NULL);
 
@@ -70,14 +71,12 @@ void CoinChanger::loop()
 
 void CoinChanger::dispense(uint8_t coinType, uint8_t coinCount) {
   uint8_t coinData = (coinCount & 0xF) << 4 | (coinType & 0xF);
-  uint16_t* dispenseBuffer = new uint16_t[2] { 0x10D, coinData };
+  CMD_DISPENSE[1] = coinData;
 
   MDBCommand* dispenseCommand = new MDBCommand(
-    dispenseBuffer, 2,
+    CMD_DISPENSE, 2,
     onTimeout
   );
-
-  delete dispenseBuffer;
 
   commandBuffer.push(dispenseCommand);
 }
@@ -273,7 +272,7 @@ void CoinChanger::sendReset()
   MDBCommand resetCommand(
       CMD_RESET, LENGTH(CMD_RESET),
       onTimeout,
-      [](MDBResult mdbResult) {
+      [](const MDBResult &mdbResult) {
         MDB::ack();
       });
 
@@ -286,7 +285,7 @@ void CoinChanger::sendSetup()
   MDBCommand *setupCommand = new MDBCommand(
       CMD_SETUP, LENGTH(CMD_SETUP),
       onTimeout,
-      [](MDBResult mdbResult) {
+      [](const MDBResult &mdbResult) {
         MDB::ack();
 
         featureLevel = mdbResult.data[0];
@@ -306,7 +305,7 @@ void CoinChanger::sendCoinTypeSetup()
   MDBCommand *coinSetupCommand = new MDBCommand(
       CMD_COIN_TYPE_SETUP, LENGTH(CMD_COIN_TYPE_SETUP),
       onTimeout,
-      [](MDBResult mdbResult) {
+      [](const MDBResult &mdbResult) {
         state = CoinChangerState::IDLE;
       });
 
@@ -329,7 +328,7 @@ void CoinChanger::sendTubeStatus()
   commandBuffer.push(tubeStatusCommand);
 }
 
-void CoinChanger::onTimeout(MDBResult mdbResult)
+void CoinChanger::onTimeout(const MDBResult &mdbResult)
 {
   // DEBUG("Coin On timeout");
   pollFailures++;

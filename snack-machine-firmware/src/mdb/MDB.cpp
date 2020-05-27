@@ -92,7 +92,7 @@ MDBResult::MDBResult()
 
 void MDBResult::reset()
 {
-  memset(data, 0, sizeof(data) / sizeof(data[0]));
+  memset(data, 0, sizeof(data) * sizeof(uint16_t));
   length = 0;
   timeout = false;
   checksumValid = false;
@@ -125,7 +125,7 @@ void MDBResult::print(const char type[])
 
 MDBCommand::MDBCommand() : MDBCommand(NULL, 0)
 {
-  this->data = NULL;
+  this->data = nullptr;
   this->length = 0;
   this->timeout = NULL;
   this->success = NULL;
@@ -153,7 +153,7 @@ MDBCommand::MDBCommand(
 MDBCommand::MDBCommand(const MDBCommand &command)
 {
   this->data = new uint16_t[length];
-  COPY(data, this->data, length);
+  COPY(command.data, this->data, length);
   this->length = command.length;
   this->timeout = command.timeout;
   this->success = command.success;
@@ -161,7 +161,9 @@ MDBCommand::MDBCommand(const MDBCommand &command)
 
 MDBCommand::~MDBCommand()
 {
-  delete this->data;
+  if(this->data != nullptr) {
+    delete this->data;
+  }
 }
 
 void MDBCommand::run()
