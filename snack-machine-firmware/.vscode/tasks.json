@@ -18,6 +18,18 @@
       ],
       "group": "build",
       "label": "PlatformIO: Build (featheresp32)"
+    },
+    {
+      "type": "PlatformIO",
+      "task": "Build (megaatmega2560)",
+      "problemMatcher": [
+        "$platformio"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "PlatformIO: Build (megaatmega2560)"
     }
   ]
 }
