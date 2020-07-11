@@ -50,6 +50,10 @@ void Motors::setup() {
   pinMode(MOTORS_SENSE, INPUT);
 }
 
+/**
+ * row - Row 1-8
+ * col - Col 1-8
+ */
 bool Motors::exists(int row, int col) {
   if(!valid(row, col)) {
     return false;
@@ -58,8 +62,8 @@ bool Motors::exists(int row, int col) {
   bool result = false;
 
   digitalWrite(MOTORS_ENABLE, LOW);
-  digitalWrite(ROWS[row], HIGH);
-  digitalWrite(COLS[col], HIGH);
+  digitalWrite(ROWS[row-1], HIGH);
+  digitalWrite(COLS[col-1], HIGH);
   delay(1000);
   int value = analogRead(MOTORS_SENSE);
   if(value < 100) {
@@ -70,16 +74,20 @@ bool Motors::exists(int row, int col) {
   return result;
 }
 
+/**
+ * row - Row 1-8
+ * col - Col 1-8
+ */
 void Motors::vend(int row, int col) {
   if(!Motors::valid(row, col)) {
     return;
   }
   
   digitalWrite(MOTORS_ENABLE, HIGH);
-  digitalWrite(ROWS[row], HIGH);
-  digitalWrite(COLS[col], HIGH);
+  digitalWrite(ROWS[row-1], HIGH);
+  digitalWrite(COLS[col-1], HIGH);
   delay(400);
-  digitalWrite(COLS[col], LOW);
+  digitalWrite(COLS[col-1], LOW);
   delay(3000);
   off();
 }

@@ -2,6 +2,7 @@ class Motors {
   public:
     static void setup();
 
+    static bool exists(int row, int col);
     static void vend(int row, int col);
     static void off();
   private:
@@ -26,6 +27,6 @@ class Motors {
     static const int COL_7 = 31;
     static const int COL_8 = 30;
 
-    static const int ROWS[9];
-    static const int COLS[9];
+    static const int ROWS[8];
+    static const int COLS[8];
 };
