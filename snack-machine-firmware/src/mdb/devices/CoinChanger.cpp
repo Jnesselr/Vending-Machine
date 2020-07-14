@@ -12,7 +12,7 @@ static uint16_t CMD_DISPENSE[] = {0x10D, 0};
 
 RingBuffer<MDBCommand *> CoinChanger::commandBuffer(NULL);
 
-uint8_t CoinChanger::pollFailures = 0;
+uint8_t CoinChanger::pollFailures;
 CoinChangerState CoinChanger::state = CoinChangerState::UNKNOWN;
 bool CoinChanger::devicePolled = false;
 
@@ -44,28 +44,33 @@ VoidCallback CoinChanger::onPossibleCreditedCoinRemoval = NULL;
 
 void CoinChanger::loop()
 {
-  sendPoll();
-
-  if (!commandBuffer.isEmpty())
-  {
-    MDBCommand *command = commandBuffer.pop();
-    command->run();
-    delete command;
-  }
-
   if (state == CoinChangerState::UNKNOWN)
   {
+    DEBUG("Unknown state")
     commandBuffer.clear();
     sendReset();
     return;
   }
 
-  if (state == CoinChangerState::RESET && commandBuffer.isEmpty())
+  if (state == CoinChangerState::RESET)
   {
+    DEBUG("State is reset")
     commandBuffer.clear();
     sendSetup();
     sendCoinTypeSetup();
+    state = CoinChangerState::SETUP_SENT;
     return;
+  }
+
+  sendPoll();
+
+  if (!commandBuffer.isEmpty())
+  {
+    DEBUG("Running command")
+    MDBCommand *command = commandBuffer.pop();
+    command->run();
+    DEBUG("Command run")
+    delete command;
   }
 }
 
@@ -83,21 +88,14 @@ void CoinChanger::dispense(uint8_t coinType, uint8_t coinCount) {
 
 void CoinChanger::sendPoll()
 {
+  // DEBUG("Sending Coin POLL")
   MDBCommand pollCommand(
       CMD_POLL, LENGTH(CMD_POLL),
       onTimeout,
-      [](MDBResult mdbResult) {
+      [](const MDBResult& mdbResult) {
+        DEBUG("Poll on success");
         MDB::ack();
         devicePolled = true;
-
-        if (pollFailures > 25)
-        {
-          pollFailures = 0; // Give it a chance to recover
-          DEBUG("Coin Poll failures > 25");
-          state = CoinChangerState::UNKNOWN;
-          return;
-        }
-        
         pollFailures = 0;
 
         if (mdbResult.data[0] == mdbResult.ACK)
@@ -109,9 +107,11 @@ void CoinChanger::sendPoll()
       });
 
   pollCommand.run();
+  // DEBUG("Failure Count")
+  // DEBUG(pollFailures)
 }
 
-void CoinChanger::handlePollData(MDBResult mdbResult)
+void CoinChanger::handlePollData(const MDBResult& mdbResult)
 {
   mdbResult.print("COIN POLL");
   uint8_t i = 0;
@@ -238,6 +238,7 @@ void CoinChanger::handlePollData(MDBResult mdbResult)
     }
     else if (data == 0x0B)
     {
+      DEBUG("Just Reset!")
       // Changer was Reset
       state = CoinChangerState::RESET;
 
@@ -268,15 +269,18 @@ void CoinChanger::handlePollData(MDBResult mdbResult)
 
 void CoinChanger::sendReset()
 {
-  // DEBUG("Calling Coin reset");
+  DEBUG("Calling Coin reset");
   MDBCommand resetCommand(
       CMD_RESET, LENGTH(CMD_RESET),
       onTimeout,
       [](const MDBResult &mdbResult) {
+        DEBUG("On success for coin reset");
         MDB::ack();
       });
 
   resetCommand.run();
+  DEBUG("Reset called")
+  state = CoinChangerState::RESET;
 }
 
 void CoinChanger::sendSetup()
@@ -318,7 +322,7 @@ void CoinChanger::sendTubeStatus()
   MDBCommand *tubeStatusCommand = new MDBCommand(
       CMD_TUBE_STATUS, LENGTH(CMD_TUBE_STATUS),
       onTimeout,
-      [](MDBResult mdbResult) {
+      [](const MDBResult& mdbResult) {
         tubeFullStatus = BYTE2WORD(mdbResult.data[0], mdbResult.data[1]);
         MDB::copyAtMost16(mdbResult, 2, tubeStatus);
 
@@ -330,9 +334,20 @@ void CoinChanger::sendTubeStatus()
 
 void CoinChanger::onTimeout(const MDBResult &mdbResult)
 {
-  // DEBUG("Coin On timeout");
+  DEBUG("Coin On timeout");
+  DEBUG(pollFailures);
   pollFailures++;
   devicePolled = false;
+  DEBUG(pollFailures);
+
+
+  if (pollFailures > 10)
+  {
+    pollFailures = 0; // Give it a chance to recover
+    DEBUG("Coin Poll failures > 10");
+    state = CoinChangerState::UNKNOWN;
+    return;
+  }
 }
 
 #endif

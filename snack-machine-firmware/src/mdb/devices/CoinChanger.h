@@ -6,6 +6,7 @@
 enum class CoinChangerState {
   UNKNOWN,
   RESET,
+  SETUP_SENT,
   IDLE
 };
 
@@ -49,7 +50,7 @@ class CoinChanger {
     static void sendSetup();
     static void sendTubeStatus();
     static void sendPoll();
-    static void handlePollData(MDBResult);
+    static void handlePollData(const MDBResult&);
     static void sendCoinTypeSetup();
 
     static void onTimeout(const MDBResult &mdbResult);

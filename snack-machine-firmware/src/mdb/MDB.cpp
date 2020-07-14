@@ -98,7 +98,7 @@ void MDBResult::reset()
   checksumValid = false;
 }
 
-void MDBResult::print(const char type[])
+void MDBResult::print(const char type[]) const
 {
   if(this->data[0] == MDBResult::ACK) {
     return;
@@ -106,7 +106,10 @@ void MDBResult::print(const char type[])
 
   uint8_t i = 0;
   Serial.print(type);
-  Serial.print(" recv: ");
+  Serial.print(" recv ");
+  Serial.print("(");
+  Serial.print(this->length);
+  Serial.print(") ");
 
   if (this->timeout)
   {
@@ -121,6 +124,7 @@ void MDBResult::print(const char type[])
     i++;
   }
   Serial.println();
+  Serial.flush();
 }
 
 MDBCommand::MDBCommand() : MDBCommand(NULL, 0)

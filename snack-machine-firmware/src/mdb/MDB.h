@@ -8,7 +8,7 @@ class MDBResult {
 
     void reset();
 
-    void print(const char type[]);
+    void print(const char type[]) const;
 
     uint16_t data[64];
     uint8_t length;
