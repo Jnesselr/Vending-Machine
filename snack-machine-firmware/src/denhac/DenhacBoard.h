@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Eventually.h>
-
 #include "mdb/MDB.h"
 #include "mdb/devices/BillValidator.h"
 #include "mdb/devices/CoinChanger.h"
@@ -14,16 +12,16 @@
 
 #include "vendingMachine.h"
 
+#include "Looper.h"
+
 
 class DenhacBoard: public VendingMachine {
   public:
     static void setup();
     static void loop();
   private:
-    static EvtManager eventManager;
-
-    static EvtTimeListener billValidatorLoop;
-    static EvtTimeListener coinChangerLoop;
-    static EvtTimeListener rfidLoop;
-    static EvtTimeListener uiLoop;
+    static Task billValidatorLoop;
+    static Task coinChangerLoop;
+    static Task rfidLoop;
+    static Task uiLoop;
 };
