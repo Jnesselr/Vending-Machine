@@ -3,8 +3,8 @@
 #include "MDB.h"
 #include "utils.h"
 
-static RingBuffer<uint16_t> receiveBuffer(-1);
-static RingBuffer<uint16_t> transmitBuffer(-1);
+static RingBuffer<64, uint16_t> receiveBuffer(-1);
+static RingBuffer<64, uint16_t> transmitBuffer(-1);
 
 void enableSend()
 {
@@ -92,7 +92,7 @@ MDBResult::MDBResult()
 
 void MDBResult::reset()
 {
-  memset(data, 0, sizeof(data) * sizeof(uint16_t));
+  memset(data, 0, sizeof(data));
   length = 0;
   timeout = false;
   checksumValid = false;
@@ -127,13 +127,7 @@ void MDBResult::print(const char type[]) const
   Serial.flush();
 }
 
-MDBCommand::MDBCommand() : MDBCommand(NULL, 0)
-{
-  this->data = nullptr;
-  this->length = 0;
-  this->timeout = NULL;
-  this->success = NULL;
-}
+MDBCommand::MDBCommand() : MDBCommand(NULL, 0) {}
 
 MDBCommand::MDBCommand(const uint16_t *data, size_t length)
     : MDBCommand(data, length, NULL) {}
@@ -147,7 +141,7 @@ MDBCommand::MDBCommand(
     MDBCallback timeout,
     MDBCallback success)
 {
-  this->data = new uint16_t[length];
+  memset(this->data, 0, sizeof(uint16_t) * DATA_SIZE);
   COPY(data, this->data, length);
   this->length = length;
   this->timeout = timeout;
@@ -156,18 +150,21 @@ MDBCommand::MDBCommand(
 
 MDBCommand::MDBCommand(const MDBCommand &command)
 {
-  this->data = new uint16_t[length];
-  COPY(command.data, this->data, length);
+  memset(this->data, 0, sizeof(uint16_t) * DATA_SIZE);
+  COPY(command.data, this->data, command.length);
   this->length = command.length;
   this->timeout = command.timeout;
   this->success = command.success;
 }
 
-MDBCommand::~MDBCommand()
-{
-  if(this->data != nullptr) {
-    delete this->data;
-  }
+void MDBCommand::operator=(const MDBCommand &command) {
+  memset(this->data, 0, sizeof(uint16_t) * DATA_SIZE);
+  DEBUG("DATA LENGTH")
+  DEBUG(command.length);
+  COPY(command.data, this->data, command.length);
+  this->length = command.length;
+  this->timeout = command.timeout;
+  this->success = command.success;
 }
 
 void MDBCommand::run()
@@ -190,6 +187,29 @@ void MDBCommand::run()
   {
     this->success(mdbResult);
   }
+}
+
+void MDBCommand::print(const char type[]) const
+{
+    if(this->data[0] == MDBResult::ACK) {
+    return;
+  }
+
+  uint8_t i = 0;
+  Serial.print(type);
+  Serial.print(" send ");
+  Serial.print("(");
+  Serial.print(this->length);
+  Serial.print(") ");
+
+  while (i < this->length)
+  {
+    Serial.print(F(" 0x"));
+    Serial.print(this->data[i], HEX);
+    i++;
+  }
+  Serial.println();
+  Serial.flush();
 }
 
 void MDB::ack()

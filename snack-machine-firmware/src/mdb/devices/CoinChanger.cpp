@@ -10,7 +10,8 @@ static const uint16_t CMD_COIN_TYPE_SETUP[] = {0x10C, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_TUBE_STATUS[] = {0x10A};
 static uint16_t CMD_DISPENSE[] = {0x10D, 0};
 
-RingBuffer<MDBCommand *> CoinChanger::commandBuffer(NULL);
+MDBCommand emptyCommand;
+RingBuffer<8, MDBCommand> CoinChanger::commandBuffer(emptyCommand);
 
 uint8_t CoinChanger::pollFailures;
 CoinChangerState CoinChanger::state = CoinChangerState::UNKNOWN;
@@ -44,6 +45,7 @@ VoidCallback CoinChanger::onPossibleCreditedCoinRemoval = NULL;
 
 void CoinChanger::loop()
 {
+  DEBUG("In Loop");
   if (state == CoinChangerState::UNKNOWN)
   {
     DEBUG("Unknown state")
@@ -67,10 +69,10 @@ void CoinChanger::loop()
   if (!commandBuffer.isEmpty())
   {
     DEBUG("Running command")
-    MDBCommand *command = commandBuffer.pop();
-    command->run();
+    MDBCommand command = commandBuffer.pop();
+    command.print("COIN CMD");
+    command.run();
     DEBUG("Command run")
-    delete command;
   }
 }
 
@@ -78,7 +80,7 @@ void CoinChanger::dispense(uint8_t coinType, uint8_t coinCount) {
   uint8_t coinData = (coinCount & 0xF) << 4 | (coinType & 0xF);
   CMD_DISPENSE[1] = coinData;
 
-  MDBCommand* dispenseCommand = new MDBCommand(
+  MDBCommand dispenseCommand(
     CMD_DISPENSE, 2,
     onTimeout
   );
@@ -286,7 +288,7 @@ void CoinChanger::sendReset()
 void CoinChanger::sendSetup()
 {
   DEBUG("Calling Coin setup");
-  MDBCommand *setupCommand = new MDBCommand(
+  MDBCommand setupCommand(
       CMD_SETUP, LENGTH(CMD_SETUP),
       onTimeout,
       [](const MDBResult &mdbResult) {
@@ -306,7 +308,7 @@ void CoinChanger::sendSetup()
 void CoinChanger::sendCoinTypeSetup()
 {
   DEBUG("Calling Coin type setup");
-  MDBCommand *coinSetupCommand = new MDBCommand(
+  MDBCommand coinSetupCommand(
       CMD_COIN_TYPE_SETUP, LENGTH(CMD_COIN_TYPE_SETUP),
       onTimeout,
       [](const MDBResult &mdbResult) {
@@ -319,7 +321,7 @@ void CoinChanger::sendCoinTypeSetup()
 void CoinChanger::sendTubeStatus()
 {
   DEBUG("Calling Coin tube status");
-  MDBCommand *tubeStatusCommand = new MDBCommand(
+  MDBCommand tubeStatusCommand(
       CMD_TUBE_STATUS, LENGTH(CMD_TUBE_STATUS),
       onTimeout,
       [](const MDBResult& mdbResult) {

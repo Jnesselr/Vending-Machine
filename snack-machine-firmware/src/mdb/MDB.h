@@ -28,12 +28,14 @@ class MDBCommand {
     MDBCommand(const uint16_t* data, size_t length, MDBCallback timeout, MDBCallback success);
     MDBCommand(const MDBCommand&);
 
-    ~MDBCommand();
+    void operator = (const MDBCommand&);
 
     void run();
+    void print(const char type[]) const;
 
   private:
-    uint16_t* data;
+    static const uint8_t DATA_SIZE = 40;
+    uint16_t data[DATA_SIZE];
     size_t length;
     MDBCallback timeout = NULL;
     MDBCallback success = NULL;

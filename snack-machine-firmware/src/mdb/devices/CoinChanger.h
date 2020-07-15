@@ -44,7 +44,7 @@ class CoinChanger {
 
     static CoinChangerState state;
   private:
-    static RingBuffer<MDBCommand*> commandBuffer;
+    static RingBuffer<8, MDBCommand> commandBuffer;
 
     static void sendReset();
     static void sendSetup();

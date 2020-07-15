@@ -8,8 +8,8 @@ class Task {
     Task(unsigned long everyMillis, TaskFunction func);
     void run();
     unsigned long nextRunMillis = 0;
-  private:
     unsigned long runEveryMillis;
+  private:
     TaskFunction function;
 };
 

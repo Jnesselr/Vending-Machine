@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Arduino.h"
+#include "utils.h"
 
-template <typename T>
+template <uint8_t bufferSize, typename T>
 class RingBuffer
 {
 public:
@@ -17,57 +18,56 @@ public:
   void clear();
 
 private:
-  static const int RING_BUFFER_SIZE = 64;
-  T ringBuffer[RING_BUFFER_SIZE];
+  T ringBuffer[bufferSize];
   const T notFoundValue;
 
   uint8_t head;
   uint8_t tail;
 };
 
-template <typename T>
-RingBuffer<T>::RingBuffer(const T& notFoundValue) : notFoundValue(notFoundValue)
+template <uint8_t bufferSize, typename T>
+RingBuffer<bufferSize, T>::RingBuffer(const T& notFoundValue) : notFoundValue(notFoundValue)
 {
-  memset(ringBuffer, 0, sizeof(T) * RING_BUFFER_SIZE);
+  memset(ringBuffer, 0, sizeof(T) * bufferSize);
 
   head = 0;
   tail = 0;
 }
 
-template <typename T>
-boolean RingBuffer<T>::isEmpty()
+template <uint8_t bufferSize, typename T>
+boolean RingBuffer<bufferSize, T>::isEmpty()
 {
   return head == tail;
 }
 
-template <typename T>
-boolean RingBuffer<T>::isFull()
+template <uint8_t bufferSize, typename T>
+boolean RingBuffer<bufferSize, T>::isFull()
 {
-  return ((head + 1) % RING_BUFFER_SIZE) == tail;
+  return ((head + 1) % bufferSize) == tail;
 }
 
-template <typename T>
-uint8_t RingBuffer<T>::count()
+template <uint8_t bufferSize, typename T>
+uint8_t RingBuffer<bufferSize, T>::count()
 {
-  return (head + RING_BUFFER_SIZE - tail) % RING_BUFFER_SIZE;
+  return (head + bufferSize - tail) % bufferSize;
 }
 
-template <typename T>
-void RingBuffer<T>::push(T data)
+template <uint8_t bufferSize, typename T>
+void RingBuffer<bufferSize, T>::push(T data)
 {
   if (isFull())
   {
     return;
   }
 
-  uint8_t next = (head + 1) % RING_BUFFER_SIZE;
+  uint8_t next = (head + 1) % bufferSize;
 
   ringBuffer[head] = data;
   head = next;
 }
 
-template <typename T>
-T RingBuffer<T>::pop()
+template <uint8_t bufferSize, typename T>
+T RingBuffer<bufferSize, T>::pop()
 {
   if (isEmpty())
   {
@@ -76,15 +76,15 @@ T RingBuffer<T>::pop()
 
   T result = ringBuffer[tail];
 
-  ringBuffer[tail] = 0;
+  ringBuffer[tail] = notFoundValue;
 
-  tail = (tail + 1) % RING_BUFFER_SIZE;
-
+  tail = (tail + 1) % bufferSize;
+  
   return result;
 }
 
-template <typename T>
-void RingBuffer<T>::clear()
+template <uint8_t bufferSize, typename T>
+void RingBuffer<bufferSize, T>::clear()
 {
   head = 0;
   tail = 0;

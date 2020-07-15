@@ -1,6 +1,7 @@
 #include "Looper.h"
 
 #include "Arduino.h"
+#include "utils.h"
 
 Task Looper::tasks[16] = {};
 volatile int Looper::numTasks = 0;
@@ -20,9 +21,11 @@ void Looper::loop() {
   {
     task = &tasks[i];
 
-    if(task->nextRunMillis < currentMillis) {
-      if(nextTask == nullptr
-      || task->nextRunMillis < nextTask->nextRunMillis) {
+    // DEBUG("Task!")
+    // DEBUG(task->nextRunMillis)
+    // DEBUG(currentMillis)
+    if(task->nextRunMillis < currentMillis && nextTask == nullptr) {
+      if(task->nextRunMillis < nextTask->nextRunMillis) {
         nextTask = task;
       }
     }
@@ -30,7 +33,9 @@ void Looper::loop() {
 
   // TODO Handle task starvation
   if(nextTask != nullptr) {
+    DEBUG("Running task!")
     nextTask->run();
+    nextTask->nextRunMillis = currentMillis + nextTask->runEveryMillis;
   }
 }
 
@@ -45,6 +50,5 @@ Task::Task(unsigned long everyMillis, TaskFunction func) {
 }
 
 void Task::run() {
-  nextRunMillis = millis() + runEveryMillis;
   function();
 }
