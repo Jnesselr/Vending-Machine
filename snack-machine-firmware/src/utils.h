@@ -13,12 +13,14 @@
 
 #define LISTENER (EvtAction)[&](EvtListener *, EvtContext *)->bool
 
-#define DEBUG(text) if(true) { Serial.println(text); Serial.flush(); }
+#define DEBUG(text) if(false) { Serial.println(text); Serial.flush(); }
 
 #define COPY(a, b, length) \
   for(uint8_t i = 0; i < length; i++) { \
     b[i] = a[i]; \
   }
+
+#define CALLBACK(func, ...) if(func != NULL) { func(__VA_ARGS__); }
 
 typedef void (*VoidCallback)();
 

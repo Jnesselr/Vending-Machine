@@ -131,10 +131,7 @@ void CoinChanger::handlePollData(const MDBResult& mdbResult)
       uint8_t coinType = (data & 0xF);
       for (uint8_t i = 0; i < numberDispensed; i++)
       {
-        if (onCoinDispensed != NULL)
-        {
-          onCoinDispensed(coinType);
-        }
+        CALLBACK(onCoinDispensed, coinType)
       }
 
       i++; // Two byte code
@@ -152,9 +149,7 @@ void CoinChanger::handlePollData(const MDBResult& mdbResult)
                     ? CoinRouting::TUBES
                     : CoinRouting::REJECT;
 
-      if(onCoinDeposited != NULL) {
-        onCoinDeposited(coinRouting, coinType);
-      }
+      CALLBACK(onCoinDeposited, coinRouting, coinType)
 
       i++; // Two byte code
       // Second byte is the number of coins in the tube
@@ -169,72 +164,52 @@ void CoinChanger::handlePollData(const MDBResult& mdbResult)
     if (data == 0x01)
     {
       // Escrow request
-      if(onEscrowRequest != NULL) {
-        onEscrowRequest();
-      }
+      CALLBACK(onEscrowRequest)
     }
     else if (data == 0x02)
     {
       // Changer Payout Busy
-      if(onChangerPayoutBusy != NULL) {
-        onChangerPayoutBusy();
-      }
+      CALLBACK(onChangerPayoutBusy)
     }
     else if (data == 0x03)
     {
       // No Credit
-      if(onNoCredit != NULL) {
-        onNoCredit();
-      }
+      CALLBACK(onNoCredit)
     }
     else if (data == 0x04)
     {
       // Defective Tube Sensor
-      if(onDefectiveTubeSensor != NULL) {
-        onDefectiveTubeSensor();
-      }
+      CALLBACK(onDefectiveTubeSensor)
     }
     else if (data == 0x05)
     {
       // Double Arrival
-      if(onDoubleArrival != NULL) {
-        onDoubleArrival();
-      }
+      CALLBACK(onDoubleArrival)
     }
     else if (data == 0x06)
     {
       // Acceptor Unplugged
-      if(onAcceptorUnplugged != NULL) {
-        onAcceptorUnplugged();
-      }
+      CALLBACK(onAcceptorUnplugged)
     }
     else if (data == 0x07)
     {
       // Tube Jam
-      if(onTubeJam != NULL) {
-        onTubeJam();
-      }
+      CALLBACK(onTubeJam)
     }
     else if (data == 0x08)
     {
       // ROM checksum error
-      if(onROMChecksumError != NULL) {
-        onROMChecksumError();
-      }
+      CALLBACK(onROMChecksumError)
     }
     else if (data == 0x09)
     {
       // Coin Routing error
-      if(onCoinRoutingError != NULL) {
-        onCoinRoutingError();
-      }
+      CALLBACK(onCoinRoutingError)
     }
     else if (data == 0x0A)
     {
       // Changer Busy
-      if(onChangerBusy != NULL) {
-        onChangerBusy();
-      }
+      CALLBACK(onChangerBusy)
     }
     else if (data == 0x0B)
     {
@@ -242,26 +217,19 @@ void CoinChanger::handlePollData(const MDBResult& mdbResult)
       // Changer was Reset
       state = CoinChangerState::RESET;
 
-      if (onJustReset != NULL)
-      {
-        onJustReset();
-      }
+      CALLBACK(onJustReset)
 
       return;
     }
     else if (data == 0x0C)
     {
       // Coin Jam
-      if(onCoinJam != NULL) {
-        onCoinJam();
-      }
+      CALLBACK(onCoinJam)
     }
     else if (data == 0x0D)
     {
       // Possible Credited Coin Removal
-      if(onPossibleCreditedCoinRemoval != NULL) {
-        onPossibleCreditedCoinRemoval();
-      }
+      CALLBACK(onPossibleCreditedCoinRemoval)
     }
     i++;
   }
