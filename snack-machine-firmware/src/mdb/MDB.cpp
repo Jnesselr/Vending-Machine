@@ -159,8 +159,6 @@ MDBCommand::MDBCommand(const MDBCommand &command)
 
 void MDBCommand::operator=(const MDBCommand &command) {
   memset(this->data, 0, sizeof(uint16_t) * DATA_SIZE);
-  DEBUG("DATA LENGTH")
-  DEBUG(command.length);
   COPY(command.data, this->data, command.length);
   this->length = command.length;
   this->timeout = command.timeout;

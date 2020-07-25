@@ -21,9 +21,6 @@ void Looper::loop() {
   {
     task = &tasks[i];
 
-    // DEBUG("Task!")
-    // DEBUG(task->nextRunMillis)
-    // DEBUG(currentMillis)
     if(task->nextRunMillis < currentMillis && nextTask == nullptr) {
       if(task->nextRunMillis < nextTask->nextRunMillis) {
         nextTask = task;
@@ -33,7 +30,6 @@ void Looper::loop() {
 
   // TODO Handle task starvation
   if(nextTask != nullptr) {
-    DEBUG("Running task!")
     nextTask->run();
     nextTask->nextRunMillis = currentMillis + nextTask->runEveryMillis;
   }

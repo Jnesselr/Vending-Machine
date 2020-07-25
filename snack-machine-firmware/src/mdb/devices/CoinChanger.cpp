@@ -45,7 +45,6 @@ VoidCallback CoinChanger::onPossibleCreditedCoinRemoval = NULL;
 
 void CoinChanger::loop()
 {
-  DEBUG("In Loop");
   if (state == CoinChangerState::UNKNOWN)
   {
     DEBUG("Unknown state")
@@ -95,7 +94,6 @@ void CoinChanger::sendPoll()
       CMD_POLL, LENGTH(CMD_POLL),
       onTimeout,
       [](const MDBResult& mdbResult) {
-        DEBUG("Poll on success");
         MDB::ack();
         devicePolled = true;
         pollFailures = 0;

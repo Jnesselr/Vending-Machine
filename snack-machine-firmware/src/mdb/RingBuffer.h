@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Arduino.h"
-#include "utils.h"
 
 template <uint8_t bufferSize, typename T>
 class RingBuffer
@@ -79,7 +78,7 @@ T RingBuffer<bufferSize, T>::pop()
   ringBuffer[tail] = notFoundValue;
 
   tail = (tail + 1) % bufferSize;
-  
+
   return result;
 }
 
