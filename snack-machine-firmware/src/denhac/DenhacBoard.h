@@ -14,6 +14,7 @@ class DenhacBoard: public VendingMachine {
     static Task coinChangerLoop;
     static Task rfidLoop;
     static Task uiLoop;
+    static Task motorLoop;
 
     static void onCardScanned(unsigned long cardCode);
 };

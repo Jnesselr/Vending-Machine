@@ -3,6 +3,14 @@
 #include "Arduino.h"
 #include "motors.h"
 
+MotorSystemState Motors::systemState = MotorSystemState::UNKNOWN;
+MotorState Motors::motorState = MotorState::NONE_SELECTED;
+
+unsigned long Motors::lastStateChangeTime = 0;
+uint64_t Motors::motorsScanResult = 0;
+uint8_t Motors::selectedRow = 0;
+uint8_t Motors::selectedCol = 0;
+
 const int Motors::ROWS[] = {
   Motors::ROW_1,
   Motors::ROW_2,
@@ -50,46 +58,129 @@ void Motors::setup() {
   pinMode(MOTORS_SENSE, INPUT);
 }
 
+void Motors::loop() {
+  if(systemState == MotorSystemState::UNKNOWN) {
+    // It's fine to immediately go to the scanning state
+    systemState = MotorSystemState::SCANNING;
+  }
+
+  if(systemState == MotorSystemState::SCANNING) {
+    handleInitialScan();
+    return;
+  }
+
+  unsigned long currentMillis = millis();
+  if(motorState == MotorState::VEND_START) {
+    if(currentMillis < lastStateChangeTime + 400) {
+      return;
+    }
+
+    digitalWrite(COLS[selectedCol], LOW);
+    motorState = MotorState::VEND_WAIT;
+    lastStateChangeTime = currentMillis;
+  } else if (motorState == MotorState::VEND_WAIT) {
+    if(currentMillis < lastStateChangeTime + 3000) {
+      return;
+    }
+
+    off();
+    selectedRow = 0;
+    selectedCol = 0;
+    lastStateChangeTime = currentMillis;
+  }
+}
+
+void Motors::handleInitialScan() {
+  unsigned long currentMillis = millis();
+
+  if(motorState == MotorState::NONE_SELECTED) {
+    digitalWrite(MOTORS_ENABLE, LOW);
+    digitalWrite(ROWS[selectedRow], HIGH);
+    digitalWrite(COLS[selectedCol], HIGH);
+    lastStateChangeTime = currentMillis;
+    motorState = MotorState::SCAN_SELECTED;
+    return;
+  } else if(motorState == MotorState::SCAN_SELECTED) {
+    // Wait at least 20ms
+    if(currentMillis < lastStateChangeTime + 20) {
+      return;
+    }
+
+    // Serial.print("Motor (");
+    // Serial.print(selectedRow);
+    // Serial.print(", ");
+    // Serial.print(selectedCol);
+    // Serial.print(") ");
+
+    int value = analogRead(MOTORS_SENSE);
+    if(value < 100) {
+      uint64_t mask = 1 << (8 * selectedRow + selectedCol);
+      motorsScanResult |= mask;
+      // Serial.println("EXISTS");
+    } else {
+      // Serial.println("does NOT exist");
+    }
+    // Serial.flush();
+
+    off();
+
+    selectedCol++;
+    if(selectedCol == 9) {
+      selectedRow++;
+      selectedCol = 0;
+    }
+
+    // Are we done!
+    if(selectedRow == 9) {
+      // Sane values
+      selectedRow = 0;
+      selectedCol = 0;
+      systemState = MotorSystemState::IDLE;
+    }
+  }
+}
+
 /**
- * row - Row 1-8
- * col - Col 1-8
+ * row - Row 0-7
+ * col - Col 0-7
  */
 bool Motors::exists(int row, int col) {
   if(!valid(row, col)) {
     return false;
   }
 
-  bool result = false;
-
-  digitalWrite(MOTORS_ENABLE, LOW);
-  digitalWrite(ROWS[row-1], HIGH);
-  digitalWrite(COLS[col-1], HIGH);
-  delay(1000);
-  int value = analogRead(MOTORS_SENSE);
-  if(value < 100) {
-    result = true;
-  }
-  off();
-
-  return result;
+  uint64_t mask = 1 << (8 * row + col);
+  return motorsScanResult & mask;
 }
 
 /**
- * row - Row 1-8
- * col - Col 1-8
+ * row - Row 0-7
+ * col - Col 0-7
  */
 void Motors::vend(int row, int col) {
   if(!Motors::valid(row, col)) {
     return;
   }
-  
+
+  if(systemState != MotorSystemState::IDLE) {
+    return;
+  }
+
+  if(motorState == MotorState::SCAN_SELECTED) {
+    // Sorry if you were scanning, vending takes priority
+    off();
+  } else if(motorState != MotorState::NONE_SELECTED) {
+    // Something is already vending, so you can't vend
+    return;
+  }
+
   digitalWrite(MOTORS_ENABLE, HIGH);
-  digitalWrite(ROWS[row-1], HIGH);
-  digitalWrite(COLS[col-1], HIGH);
-  delay(400);
-  digitalWrite(COLS[col-1], LOW);
-  delay(3000);
-  off();
+  digitalWrite(ROWS[row], HIGH);
+  digitalWrite(COLS[col], HIGH);
+  selectedRow = row;
+  selectedCol = col;
+  motorState = MotorState::VEND_START;
+  lastStateChangeTime = millis();
 }
 
 void Motors::off() {
@@ -110,13 +201,14 @@ void Motors::off() {
   digitalWrite(COLS[5], LOW);
   digitalWrite(COLS[6], LOW);
   digitalWrite(COLS[7], LOW);
+  motorState = MotorState::NONE_SELECTED;
 }
 
 bool Motors::valid(int row, int col) {
-  if(row < 1) return false;
-  if(row > 8) return false;
-  if(col < 1) return false;
-  if(col > 8) return false;
+  if(row < 0) return false;
+  if(row > 7) return false;
+  if(col < 0) return false;
+  if(col > 7) return false;
   return true;
 }
 

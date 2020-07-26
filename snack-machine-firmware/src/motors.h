@@ -1,12 +1,37 @@
+
+enum class MotorSystemState {
+  UNKNOWN,  // Unknown, just powered up
+  SCANNING, // Scanning on startup
+  IDLE      // Ready to vend!
+};
+
+enum class MotorState {
+  NONE_SELECTED,  // No motor selected
+  SCAN_SELECTED,  // Motor selected for scanning
+  VEND_START,     // Starting vend
+  VEND_WAIT       // Waiting for vend to finish
+};
+
 class Motors {
   public:
     static void setup();
+    static void loop();
 
     static bool exists(int row, int col);
     static void vend(int row, int col);
     static void off();
   private:
     static bool valid(int row, int col);
+
+    static void handleInitialScan();
+
+    static MotorSystemState systemState;
+    static MotorState motorState;
+
+    static unsigned long lastStateChangeTime;
+    static uint64_t motorsScanResult;;
+    static uint8_t selectedRow;
+    static uint8_t selectedCol;
 
     static const int MOTORS_ENABLE = 20;
     static const int MOTORS_SENSE = PIN_A12;

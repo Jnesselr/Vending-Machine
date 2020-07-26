@@ -29,6 +29,10 @@ Task DenhacBoard::uiLoop(50, []{
   WindowManager::loop();
 });
 
+Task DenhacBoard::motorLoop(50, []{
+  Motors::loop();
+});
+
 void DenhacBoard::setup()
 {
   Serial.begin(9600);
@@ -42,6 +46,7 @@ void DenhacBoard::setup()
   Looper::add(billValidatorLoop);
   Looper::add(coinChangerLoop);
   Looper::add(rfidLoop);
+  Looper::add(motorLoop);
 
   RFID::onCardScanned = DenhacBoard::onCardScanned;
 }
@@ -55,7 +60,8 @@ void DenhacBoard::onCardScanned(unsigned long cardCode) {
   Serial.print("Card scan! ");
   Serial.println(cardCode);
 
-  CoinChanger::dispense(2, 4);
+  // CoinChanger::dispense(2, 4);
+  Motors::vend(0, 0);
 }
 
 #endif
