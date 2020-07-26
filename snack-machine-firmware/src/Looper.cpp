@@ -21,8 +21,10 @@ void Looper::loop() {
   {
     task = &tasks[i];
 
-    if(task->nextRunMillis < currentMillis && nextTask == nullptr) {
-      if(task->nextRunMillis < nextTask->nextRunMillis) {
+    if(task->nextRunMillis < currentMillis) {
+      if(nextTask == nullptr) {
+        nextTask = task;
+      } else if(task->nextRunMillis < nextTask->nextRunMillis) {
         nextTask = task;
       }
     }

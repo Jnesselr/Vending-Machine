@@ -11,6 +11,7 @@ unsigned long WindowManager::lastStateChangeTime = 0;
 
 void WindowManager::setup() {
   displaySerial->begin(9600);
+  display.TimeLimit4D = 200;
 }
 
 void WindowManager::loop() {
@@ -21,34 +22,37 @@ void WindowManager::loop() {
 }
 
 void WindowManager::handleNonIdleStates() {
+  unsigned long currentMillis = millis();
   if(state == WindowManagerState::UNKNOWN) {
     displayResetPin.setup();
     displayResetPin.write(0xFF);
-    lastStateChangeTime = millis();
+    lastStateChangeTime = currentMillis;
     state = WindowManagerState::RESET;
     return;
   }
 
   if(state == WindowManagerState::RESET) {
-    if((millis() - 100) < lastStateChangeTime) {
+    if(currentMillis < lastStateChangeTime + 100) {
       return;
     }
 
     displayResetPin.write(0x0);
-    lastStateChangeTime = millis();
+    lastStateChangeTime = currentMillis;
     state = WindowManagerState::SETUP;
     return;
   }
 
   if(state == WindowManagerState::SETUP) {
-    if((millis() - 5000) < lastStateChangeTime) {
+    if(currentMillis < lastStateChangeTime + 5000) {
       return;
     }
 
-    display.gfx_ScreenMode(PORTRAIT_R);
-    display.gfx_Cls();
-    lastStateChangeTime = millis();
+    lastStateChangeTime = currentMillis;
     state = WindowManagerState::IDLE;
+
+    display.gfx_Cls();
+    display.gfx_ScreenMode(PORTRAIT);
+    display.println("Hello World!");
     return;
   }
 }
