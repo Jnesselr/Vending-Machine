@@ -4,7 +4,13 @@
 #include "denhac/BridgeStatus.h"
 #include "msgpck.h"
 
-SiteLinkStatus SiteLink::status = SiteLinkStatus::UNKNOWN;
+#include "utils.h"
+
+BridgeStatusCallback SiteLink::statusCallback = nullptr;
+ProductUpdatedCallback SiteLink::productUpdatedCallback = nullptr;
+ProductRemovedCallback SiteLink::productRemovedCallback = nullptr;
+
+SiteLinkState SiteLink::state = SiteLinkState::UNKNOWN;
 
 OutputPort<PORT_H, 6, 1> SiteLink::huzzahResetPin;
 HardwareSerial* SiteLink::linkSerial = &Serial1;
@@ -16,24 +22,18 @@ void SiteLink::setup() {
 }
 
 void SiteLink::loop() {
-  if(status == SiteLinkStatus::UNKNOWN) {
+  if(state == SiteLinkState::UNKNOWN) {
     // We might have just powered on or forced a reset
     // Bring the reset pin low to be safe
     huzzahResetPin.write(0x0);
 
-    status = SiteLinkStatus::WAITING;
-  }
-
-  
-
-  if(status == SiteLinkStatus::WAITING) {
+    state = SiteLinkState::WAITING;
+  } else if(state == SiteLinkState::WAITING) {
     handleWaiting();
-    return;
-  }
-  
-  if(status == SiteLinkStatus::HANDSHAKE) {
+  } else if(state == SiteLinkState::HANDSHAKE) {
     handleHandshake();
-    return;
+  } else {
+    handleNormalCommands();
   }
 }
 
@@ -49,7 +49,7 @@ void SiteLink::handleWaiting() {
       // this loop alone
       if(handshakeCount == 5) {
         msgpck_write_nil(linkSerial); // Initiate the handshake
-        status = SiteLinkStatus::HANDSHAKE;
+        state = SiteLinkState::HANDSHAKE;
       }
     } else {
       handshakeCount = 0;
@@ -66,7 +66,7 @@ void SiteLink::handleWaiting() {
 
   if(garbageLoopCount > 10) {
     huzzahResetPin.write(0xFF);
-    status = SiteLinkStatus::UNKNOWN;
+    state = SiteLinkState::UNKNOWN;
     garbageLoopCount = 0;
   }
 }
@@ -75,7 +75,7 @@ void SiteLink::handleHandshake() {
   if(linkSerial->available() == 0) {
     return;
   }
-  
+
   // We might still have some NILs in the buffer to dispose of
   while(msgpck_nil_next(linkSerial)) {
     linkSerial->read();
@@ -88,13 +88,93 @@ void SiteLink::handleHandshake() {
   msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
   if(typeCode == 0x01 && statusCode == BridgeStatus::READY) {
     Serial.println("We did it!");
-    status = SiteLinkStatus::IDLE;
+    state = SiteLinkState::IDLE;
+    CALLBACK(statusCallback, statusCode);
   } else {
     Serial.println("Oh no, something went wrong!");
     Serial.println(typeCode, HEX);
     Serial.println(statusCode, HEX);
   }
   Serial.flush();
+}
+
+void SiteLink::handleNormalCommands() {
+  if(linkSerial->available() == 0) {
+    return;
+  }
+
+  uint8_t typeCode = 0;
+  msgpck_read_integer(linkSerial, (byte*) &typeCode, sizeof(typeCode));
+
+  switch (typeCode)
+  {
+  case 1:
+    handleStatus();
+    break;
+  case 2:
+    handleProductUpdated();
+    break;
+  case 6:
+    handleProductRemoved();
+    break;
+  default:
+    Serial.println("Unknown type code!");
+    Serial.println(typeCode, HEX);
+    while(true) {}
+    break;
+  }
+}
+
+void SiteLink::handleStatus() {
+  Serial.println("Status code!");
+  uint8_t statusCode = 0;
+  msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
+  Serial.print("Code is: ");
+  Serial.println(statusCode, HEX);
+  Serial.flush();
+
+  CALLBACK(statusCallback, statusCode);
+}
+
+void SiteLink::handleProductUpdated() {
+  Serial.println("Product updated!");
+
+  uint32_t id = 0;
+  char name[51];
+  memset(name, 0, sizeof(name));
+  uint32_t price = 0;
+  uint8_t stock = 0;
+  uint8_t row = 0;
+  uint8_t col = 0;
+
+  msgpck_read_integer(linkSerial, (byte*) &id, sizeof(id));
+  msgpck_read_string(linkSerial, name, sizeof(name));
+  msgpck_read_integer(linkSerial, (byte*) &price, sizeof(price));
+  msgpck_read_integer(linkSerial, (byte*) &stock, sizeof(stock));
+  msgpck_read_integer(linkSerial, (byte*) &row, sizeof(row));
+  msgpck_read_integer(linkSerial, (byte*) &col, sizeof(col));
+  Serial.println(id);
+  Serial.println(name);
+  Serial.println(price);
+  Serial.println(stock);
+  Serial.println(row);
+  Serial.println(col);
+
+  CALLBACK(productUpdatedCallback, id, name, price, stock, row, col)
+}
+
+void SiteLink::handleProductRemoved() {
+  Serial.println("Product removed!");
+
+  uint8_t row = 0;
+  uint8_t col = 0;
+
+  msgpck_read_integer(linkSerial, (byte*) &row, sizeof(row));
+  msgpck_read_integer(linkSerial, (byte*) &col, sizeof(col));
+  Serial.println(row);
+  Serial.println(col);
+
+  CALLBACK(productRemovedCallback, row, col)
 }
 
 #endif

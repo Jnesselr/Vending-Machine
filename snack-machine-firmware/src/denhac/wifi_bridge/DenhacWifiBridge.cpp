@@ -104,7 +104,6 @@ void DenhacWifiBridge::fetchProducts() {
     return;
   }
 
-  bool anythingSent = false;
   memset(has_product, false, sizeof(has_product));
 
   JsonArray array = jsonDoc.as<JsonArray>();
@@ -143,7 +142,6 @@ void DenhacWifiBridge::fetchProducts() {
       msgpck_write_integer(serial, col);
 
       hashes[hash_index] = crc_value;
-      anythingSent = true;
     }
 
     has_product[hash_index] = true;
@@ -159,15 +157,11 @@ void DenhacWifiBridge::fetchProducts() {
         msgpck_write_integer(serial, 6);
         msgpck_write_integer(serial, row);
         msgpck_write_integer(serial, col);
-
-        anythingSent = true;
       }
     }
   }
 
-  if(!anythingSent) {
-    sendStatus(BridgeStatus::PRODUCTS_FETCHED);
-  }
+  sendStatus(BridgeStatus::PRODUCTS_FETCHED);
 }
 
 void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
