@@ -15,6 +15,9 @@ class SiteLink {
     static void setup();
     static void loop();
   private:
+    static void handleWaiting();
+    static void handleHandshake();
+
     static SiteLinkStatus status;
 
     static OutputPort<PORT_H, 6, 1> huzzahResetPin;
