@@ -7,27 +7,11 @@
 #include "denhac/Product.h"
 #include "denhac/wifi_bridge/RestRequest.h"
 
+#include "denhac/BridgeStatus.h"
+
 #include <ArduinoJson.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
-
-typedef enum {
-  READY = 0x01,
-  WIFI_TRYING_TO_CONNECT = 0x02,
-  WIFI_CONNECTED = 0x03,
-  FETCHING_PRODUCTS = 0x07,
-  FETCHING_ORDERS = 0x08,
-  CONNECTION_FAILED = 0x09,
-  JSON_DECODE_FAILED = 0x0A,
-  REST_UNKNOWN_FAILURE = 0x0B,
-  REST_NOT_FOUND = 0x0C,
-  PRODUCTS_FETCHED = 0x0D,
-  UPDATING_ORDER = 0x0E,
-  CANCELLING_ORDER = 0x0F,
-  ORDER_CANCELLED = 0x10,
-  FETCHING_CREDIT = 0x11,
-  UPDATING_CREDIT = 0x12,
-} Status;
 
 class DenhacWifiBridge: public VendingMachine {
   public:

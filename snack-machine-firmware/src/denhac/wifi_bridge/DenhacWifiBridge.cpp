@@ -10,7 +10,7 @@ const char* root_ca = ROOT_CA;
 
 const uint8_t NUM_PRODUCTS = 64;
 
-HardwareSerial* DenhacWifiBridge::serial = &Serial;
+HardwareSerial* DenhacWifiBridge::serial = &Serial2;
 
 WiFiClientSecure DenhacWifiBridge::client;
 // This value is enough to handle 64 products and a variable number of orders
@@ -34,11 +34,11 @@ void DenhacWifiBridge::setup() {
   DenhacWifiBridge::setupComm();
   
   WiFi.begin(WIFI_SSID, WIFI_PSK);
-  sendStatus(Status::WIFI_TRYING_TO_CONNECT);
+  sendStatus(BridgeStatus::WIFI_TRYING_TO_CONNECT);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
   }
-  sendStatus(Status::WIFI_CONNECTED);
+  sendStatus(BridgeStatus::WIFI_CONNECTED);
 }
 
 void DenhacWifiBridge::loop() {
@@ -94,7 +94,7 @@ void DenhacWifiBridge::handleIncomingRequest() {
 }
 
 void DenhacWifiBridge::fetchProducts() {
-  sendStatus(Status::FETCHING_PRODUCTS);
+  sendStatus(BridgeStatus::FETCHING_PRODUCTS);
 
   RestResponse* response = request.GET("/wp-json/wc-vending/v1/products");
 
@@ -166,12 +166,12 @@ void DenhacWifiBridge::fetchProducts() {
   }
 
   if(!anythingSent) {
-    sendStatus(Status::PRODUCTS_FETCHED);
+    sendStatus(BridgeStatus::PRODUCTS_FETCHED);
   }
 }
 
 void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
-  sendStatus(Status::FETCHING_ORDERS);
+  sendStatus(BridgeStatus::FETCHING_ORDERS);
 
   sprintf(urlBuffer, "/wp-json/wc-vending/v1/orders/by_card/%u", cardNumber);
   RestResponse* response = request.GET(urlBuffer);
@@ -188,7 +188,7 @@ void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
 }
 
 void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
-  sendStatus(Status::FETCHING_ORDERS);
+  sendStatus(BridgeStatus::FETCHING_ORDERS);
 
   sprintf(urlBuffer, "/wp-json/wc-vending/v1/orders/%u", orderId);
   RestResponse* response = request.GET(urlBuffer);
@@ -205,7 +205,7 @@ void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
 }
 
 void DenhacWifiBridge::updateOrder() {
-  sendStatus(Status::UPDATING_ORDER);
+  sendStatus(BridgeStatus::UPDATING_ORDER);
   jsonDoc.clear();
 
   uint32_t orderId = 0;
@@ -269,7 +269,7 @@ void DenhacWifiBridge::updateOrder() {
 }
 
 void DenhacWifiBridge::cancelOrderById(uint32_t orderId) {
-  sendStatus(Status::CANCELLING_ORDER);
+  sendStatus(BridgeStatus::CANCELLING_ORDER);
 
   sprintf(urlBuffer, "/wp-json/wc-vending/v1/orders/%u", orderId);
   RestResponse* response = request.DELETE(urlBuffer);
@@ -280,11 +280,11 @@ void DenhacWifiBridge::cancelOrderById(uint32_t orderId) {
     return;
   }
 
-  sendStatus(Status::ORDER_CANCELLED);
+  sendStatus(BridgeStatus::ORDER_CANCELLED);
 }
 
 void DenhacWifiBridge::fetchCreditByCard(uint32_t cardNumber) {
-  sendStatus(Status::FETCHING_CREDIT);
+  sendStatus(BridgeStatus::FETCHING_CREDIT);
 
   sprintf(urlBuffer, "/wp-json/wc-vending/v1/credit/%u", cardNumber);
   RestResponse* response = request.GET(urlBuffer);
@@ -302,7 +302,7 @@ void DenhacWifiBridge::fetchCreditByCard(uint32_t cardNumber) {
 }
 
 void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t difference) {
-  sendStatus(Status::FETCHING_CREDIT);
+  sendStatus(BridgeStatus::FETCHING_CREDIT);
 
   jsonDoc.clear();
   jsonDoc["credit"] = difference;
@@ -326,21 +326,21 @@ void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t differenc
 
 bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
   if(!response->connected) {
-    sendStatus(Status::CONNECTION_FAILED);
+    sendStatus(BridgeStatus::CONNECTION_FAILED);
     return false;
   }
 
   if(response->status != 200) {
     if(response->status == 404) {
-      sendStatus(Status::REST_NOT_FOUND);
+      sendStatus(BridgeStatus::REST_NOT_FOUND);
     } else {
-      sendStatus(Status::REST_UNKNOWN_FAILURE);
+      sendStatus(BridgeStatus::REST_UNKNOWN_FAILURE);
     }
     return false;
   }
 
   if(!response->validJSON) {
-    sendStatus(Status::JSON_DECODE_FAILED);
+    sendStatus(BridgeStatus::JSON_DECODE_FAILED);
     return false;
   }
 
@@ -381,10 +381,10 @@ void DenhacWifiBridge::setupComm() {
     msgpck_write_nil(serial);
     delay(100);
     if(msgpck_nil_next(serial)) {
-      sendStatus(Status::READY);
+      sendStatus(BridgeStatus::READY);
       return;
     } else {
-      // If got something that wasn't null, we need to dispose of it
+      // If got something that wasn't nil, we need to dispose of it
       if(serial->available()) {
         serial->read();
       }
