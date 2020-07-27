@@ -3,6 +3,9 @@
 #include "Arduino.h"
 #include "utils.h"
 
+// See utils.h for more info
+unsigned long current_loop_millis = 0;
+
 Task Looper::tasks[16] = {};
 volatile int Looper::numTasks = 0;
 
@@ -12,7 +15,9 @@ void Looper::add(const Task& task) {
 }
 
 void Looper::loop() {
-  unsigned long currentMillis = millis();
+  // Assign it to a global volatile variable so everything
+  // can use it and be on the same time.
+  current_loop_millis = millis();
 
   Task* nextTask = nullptr;
   Task* task = nullptr;
@@ -21,7 +26,7 @@ void Looper::loop() {
   {
     task = &tasks[i];
 
-    if(task->nextRunMillis < currentMillis) {
+    if(task->nextRunMillis < current_loop_millis) {
       if(nextTask == nullptr) {
         nextTask = task;
       } else if(task->nextRunMillis < nextTask->nextRunMillis) {
@@ -33,7 +38,7 @@ void Looper::loop() {
   // TODO Handle task starvation
   if(nextTask != nullptr) {
     nextTask->run();
-    nextTask->nextRunMillis = currentMillis + nextTask->runEveryMillis;
+    nextTask->nextRunMillis = current_loop_millis + nextTask->runEveryMillis;
   }
 }
 

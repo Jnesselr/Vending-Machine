@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include "hid_rfid.h"
 
+#include "utils.h"
+
 uint8_t RFID::cardBits[RFID::MAX_BITS / 8];
 uint8_t RFID::bitsRead = 0;
 unsigned long RFID::lastBitReadAtMillis = 0;
@@ -74,7 +76,7 @@ void RFID::readInBit(bool bitValueIsOne)
   uint8_t bitPosition = bitsRead - (index * 8);
   cardBits[index] |= (bitValueIsOne << bitPosition);
   bitsRead++;
-  lastBitReadAtMillis = millis();
+  lastBitReadAtMillis = current_loop_millis;
 }
 
 /**
@@ -88,7 +90,7 @@ bool RFID::cardScanned()
     return false;
   }
 
-  unsigned long elapsed = millis() - lastBitReadAtMillis;
+  unsigned long elapsed = current_loop_millis - lastBitReadAtMillis;
 
   if (elapsed > 50)
   {

@@ -1,6 +1,7 @@
 #include "denhac/ui/MainWindow.h"
 
 #include "ui/WindowManager.h"
+#include "utils.h"
 
 MainWindow::MainWindow() : Window() {}
 
@@ -15,11 +16,8 @@ void MainWindow::draw() {
 }
 
 void MainWindow::loop() {
-  unsigned long currentMillis = millis();
-  if(currentMillis < lastMillis + 500) {
-    return;
-  }
+  LOOP_WAIT_MS(lastMillis, 500)
 
-  display->println(currentMillis);
-  lastMillis = currentMillis;
+  display->println(current_loop_millis);
+  lastMillis = current_loop_millis;
 }

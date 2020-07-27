@@ -1,6 +1,7 @@
 #ifdef VENDING_MAIN_BOARD
 
 #include "ui/WindowManager.h"
+#include "utils.h"
 
 OutputPort<PORT_H, 2, 1> WindowManager::displayResetPin;
 HardwareSerial* WindowManager::displaySerial = &Serial2;
@@ -31,37 +32,32 @@ void WindowManager::loop() {
 }
 
 void WindowManager::handleNonIdleStates() {
-  unsigned long currentMillis = millis();
   if(state == WindowManagerState::UNKNOWN) {
     displayResetPin.setup();
     displayResetPin.write(0xFF);
-    lastStateChangeTime = currentMillis;
+    lastStateChangeTime = current_loop_millis;
     state = WindowManagerState::RESET;
     return;
   }
 
   if(state == WindowManagerState::RESET) {
-    if(currentMillis < lastStateChangeTime + 100) {
-      return;
-    }
+    LOOP_WAIT_MS(lastStateChangeTime, 100)
 
     displayResetPin.write(0x0);
-    lastStateChangeTime = currentMillis;
+    lastStateChangeTime = current_loop_millis;
     state = WindowManagerState::SETUP;
     return;
   }
 
   if(state == WindowManagerState::SETUP) {
-    if(currentMillis < lastStateChangeTime + 5000) {
-      return;
-    }
+    LOOP_WAIT_MS(lastStateChangeTime, 5000)
 
     display.gfx_ScreenMode(PORTRAIT);
 
     width = display.gfx_Get(X_MAX) + 1;
     height = display.gfx_Get(Y_MAX) + 1;
 
-    lastStateChangeTime = currentMillis;
+    lastStateChangeTime = current_loop_millis;
     state = WindowManagerState::IDLE;
 
     if(currentWindow != nullptr) {

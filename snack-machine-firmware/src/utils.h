@@ -24,4 +24,13 @@
 
 typedef void (*VoidCallback)();
 
+// This is used so any task can see the millis() at the start of the loop
+// without having to call millis() multiple times per loop. We do this
+// because millis() disables interrupts and this helps us keep better time.
+// Defined/Updated in Looper.cpp
+extern unsigned long current_loop_millis;
+
+// Wait for it to be at least MS milliseconds since LAST
+#define LOOP_WAIT_MS(LAST, MS) if(current_loop_millis < LAST + MS) {return;}
+
 #endif

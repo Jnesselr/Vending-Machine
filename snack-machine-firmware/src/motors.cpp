@@ -2,6 +2,7 @@
 
 #include "Arduino.h"
 #include "motors.h"
+#include "utils.h"
 
 MotorSystemState Motors::systemState = MotorSystemState::UNKNOWN;
 MotorState Motors::motorState = MotorState::NONE_SELECTED;
@@ -69,42 +70,33 @@ void Motors::loop() {
     return;
   }
 
-  unsigned long currentMillis = millis();
   if(motorState == MotorState::VEND_START) {
-    if(currentMillis < lastStateChangeTime + 400) {
-      return;
-    }
+    LOOP_WAIT_MS(lastStateChangeTime, 400);
 
     digitalWrite(COLS[selectedCol], LOW);
     motorState = MotorState::VEND_WAIT;
-    lastStateChangeTime = currentMillis;
+    lastStateChangeTime = current_loop_millis;
   } else if (motorState == MotorState::VEND_WAIT) {
-    if(currentMillis < lastStateChangeTime + 3000) {
-      return;
-    }
+    LOOP_WAIT_MS(lastStateChangeTime, 3000);
 
     off();
     selectedRow = 0;
     selectedCol = 0;
-    lastStateChangeTime = currentMillis;
+    lastStateChangeTime = current_loop_millis;
   }
 }
 
 void Motors::handleInitialScan() {
-  unsigned long currentMillis = millis();
-
   if(motorState == MotorState::NONE_SELECTED) {
     digitalWrite(MOTORS_ENABLE, LOW);
     digitalWrite(ROWS[selectedRow], HIGH);
     digitalWrite(COLS[selectedCol], HIGH);
-    lastStateChangeTime = currentMillis;
+    lastStateChangeTime = current_loop_millis;
     motorState = MotorState::SCAN_SELECTED;
     return;
   } else if(motorState == MotorState::SCAN_SELECTED) {
     // Wait at least 20ms
-    if(currentMillis < lastStateChangeTime + 20) {
-      return;
-    }
+    LOOP_WAIT_MS(lastStateChangeTime, 20)
 
     // Serial.print("Motor (");
     // Serial.print(selectedRow);
@@ -180,7 +172,7 @@ void Motors::vend(int row, int col) {
   selectedRow = row;
   selectedCol = col;
   motorState = MotorState::VEND_START;
-  lastStateChangeTime = millis();
+  lastStateChangeTime = current_loop_millis;
 }
 
 void Motors::off() {
