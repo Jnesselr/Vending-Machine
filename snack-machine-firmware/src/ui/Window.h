@@ -7,4 +7,6 @@ class Window {
     Window();
 
     virtual void draw(Diablo_Serial_4DLib& display) = 0;
+
+    bool onScreen = false;
 };

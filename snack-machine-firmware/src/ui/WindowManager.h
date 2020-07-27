@@ -19,6 +19,9 @@ class WindowManager {
 
     static void show(Window&);
 
+    static uint16_t getWidth();
+    static uint16_t getHeight();
+
   private:
     static void handleNonIdleStates();
 
@@ -28,6 +31,8 @@ class WindowManager {
     static OutputPort<PORT_H, 2, 1> displayResetPin;
     static HardwareSerial* displaySerial;
     static Diablo_Serial_4DLib display;
+    static uint16_t width;
+    static uint16_t height;
 
     static Window* currentWindow;
 };

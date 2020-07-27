@@ -6,6 +6,9 @@ OutputPort<PORT_H, 2, 1> WindowManager::displayResetPin;
 HardwareSerial* WindowManager::displaySerial = &Serial2;
 Diablo_Serial_4DLib WindowManager::display(WindowManager::displaySerial);
 
+uint16_t WindowManager::width = 0;
+uint16_t WindowManager::height = 0;
+
 WindowManagerState WindowManager::state = WindowManagerState::UNKNOWN;
 unsigned long WindowManager::lastStateChangeTime = 0;
 
@@ -49,10 +52,14 @@ void WindowManager::handleNonIdleStates() {
       return;
     }
 
+    display.gfx_ScreenMode(PORTRAIT);
+
+    width = display.gfx_Get(X_MAX) + 1;
+    height = display.gfx_Get(Y_MAX) + 1;
+
     lastStateChangeTime = currentMillis;
     state = WindowManagerState::IDLE;
 
-    display.gfx_ScreenMode(PORTRAIT);
     if(currentWindow != nullptr) {
       show(*currentWindow);
     }
@@ -61,11 +68,24 @@ void WindowManager::handleNonIdleStates() {
 }
 
 void WindowManager::show(Window& window) {
+  if(currentWindow != nullptr) {
+    currentWindow->onScreen = false;
+  }
+
   currentWindow = &window;
 
   if(state == WindowManagerState::IDLE) {
     currentWindow->draw(display);
+    currentWindow->onScreen = true;
   }
+}
+
+uint16_t WindowManager::getWidth() {
+  return width;
+}
+
+uint16_t WindowManager::getHeight() {
+  return height;
 }
 
 #endif

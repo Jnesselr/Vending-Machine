@@ -2,6 +2,6 @@
 
 #include "denhac/ui/MainWindow.h"
 
-typedef struct {
+struct DenhacUI {
   static MainWindow mainWindow;
-} DenhacUI;
+};
