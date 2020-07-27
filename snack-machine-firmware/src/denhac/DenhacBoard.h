@@ -4,6 +4,8 @@
 
 #include "Looper.h"
 
+#include "denhac/ui/MainWindow.h"
+
 
 class DenhacBoard: public VendingMachine {
   public:
@@ -16,6 +18,8 @@ class DenhacBoard: public VendingMachine {
     static Task uiLoop;
     static Task motorLoop;
     static Task siteLinkLoop;
+
+    static MainWindow mainWindow;
 
     static void onCardScanned(unsigned long cardCode);
 };

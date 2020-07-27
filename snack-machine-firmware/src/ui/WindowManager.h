@@ -3,6 +3,8 @@
 #include <Diablo_Serial_4DLib.h>
 #include <DirectIO.h>
 
+#include "ui/Window.h"
+
 enum class WindowManagerState {
   UNKNOWN, // No idea what's going on
   RESET,   // Display has been reset
@@ -15,6 +17,8 @@ class WindowManager {
     static void setup();
     static void loop();
 
+    static void show(Window&);
+
   private:
     static void handleNonIdleStates();
 
@@ -24,4 +28,6 @@ class WindowManager {
     static OutputPort<PORT_H, 2, 1> displayResetPin;
     static HardwareSerial* displaySerial;
     static Diablo_Serial_4DLib display;
+
+    static Window* currentWindow;
 };

@@ -9,6 +9,8 @@ Diablo_Serial_4DLib WindowManager::display(WindowManager::displaySerial);
 WindowManagerState WindowManager::state = WindowManagerState::UNKNOWN;
 unsigned long WindowManager::lastStateChangeTime = 0;
 
+Window* WindowManager::currentWindow = nullptr;
+
 void WindowManager::setup() {
   displaySerial->begin(9600);
   display.TimeLimit4D = 200;
@@ -50,10 +52,19 @@ void WindowManager::handleNonIdleStates() {
     lastStateChangeTime = currentMillis;
     state = WindowManagerState::IDLE;
 
-    display.gfx_Cls();
     display.gfx_ScreenMode(PORTRAIT);
-    display.println("Hello World!");
+    if(currentWindow != nullptr) {
+      show(*currentWindow);
+    }
     return;
+  }
+}
+
+void WindowManager::show(Window& window) {
+  currentWindow = &window;
+
+  if(state == WindowManagerState::IDLE) {
+    currentWindow->draw(display);
   }
 }
 

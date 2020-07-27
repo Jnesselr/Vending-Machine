@@ -13,6 +13,8 @@
 
 #include "ui/WindowManager.h"
 
+MainWindow DenhacBoard::mainWindow;
+
 Task DenhacBoard::billValidatorLoop(200, []{
   BillValidator::loop();
 });
@@ -53,6 +55,8 @@ void DenhacBoard::setup()
   Looper::add(rfidLoop);
   Looper::add(motorLoop);
   Looper::add(siteLinkLoop);
+
+  WindowManager::show(mainWindow);
 
   RFID::onCardScanned = DenhacBoard::onCardScanned;
 }
