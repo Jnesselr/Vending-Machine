@@ -24,6 +24,10 @@ void WindowManager::loop() {
     handleNonIdleStates();
     return;
   }
+
+  if(currentWindow != nullptr) {
+    currentWindow->loop();
+  }
 }
 
 void WindowManager::handleNonIdleStates() {
@@ -68,6 +72,8 @@ void WindowManager::handleNonIdleStates() {
 }
 
 void WindowManager::show(Window& window) {
+  window.display = &display;
+
   if(currentWindow != nullptr) {
     currentWindow->onScreen = false;
   }
@@ -75,7 +81,7 @@ void WindowManager::show(Window& window) {
   currentWindow = &window;
 
   if(state == WindowManagerState::IDLE) {
-    currentWindow->draw(display);
+    currentWindow->draw();
     currentWindow->onScreen = true;
   }
 }

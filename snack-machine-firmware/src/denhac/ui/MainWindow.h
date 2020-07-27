@@ -5,5 +5,8 @@
 class MainWindow : public Window {
   public:
     MainWindow();
-    void draw(Diablo_Serial_4DLib& display);
+    void draw();
+    void loop();
+  private:
+    unsigned long lastMillis = 0;
 };
