@@ -14,6 +14,7 @@ public:
 
   void push(T data);
   T pop();
+  T peek();
   void clear();
 
 private:
@@ -81,6 +82,20 @@ T RingBuffer<bufferSize, T>::pop()
 
   return result;
 }
+
+template <uint8_t bufferSize, typename T>
+T RingBuffer<bufferSize, T>::peek()
+{
+  if (isEmpty())
+  {
+    return notFoundValue;
+  }
+
+  T result = ringBuffer[tail];
+
+  return result;
+}
+
 
 template <uint8_t bufferSize, typename T>
 void RingBuffer<bufferSize, T>::clear()

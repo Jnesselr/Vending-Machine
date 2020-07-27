@@ -165,7 +165,7 @@ void DenhacWifiBridge::fetchProducts() {
 }
 
 void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
-  sendStatus(BridgeStatus::FETCHING_ORDERS);
+  sendStatus(BridgeStatus::FETCHING_ORDERS_BY_CARD);
 
   sprintf(urlBuffer, "/wp-json/wc-vending/v1/orders/by_card/%u", cardNumber);
   RestResponse* response = request.GET(urlBuffer);
@@ -182,7 +182,7 @@ void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
 }
 
 void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
-  sendStatus(BridgeStatus::FETCHING_ORDERS);
+  sendStatus(BridgeStatus::FETCHING_ORDER);
 
   sprintf(urlBuffer, "/wp-json/wc-vending/v1/orders/%u", orderId);
   RestResponse* response = request.GET(urlBuffer);
@@ -296,7 +296,7 @@ void DenhacWifiBridge::fetchCreditByCard(uint32_t cardNumber) {
 }
 
 void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t difference) {
-  sendStatus(BridgeStatus::FETCHING_CREDIT);
+  sendStatus(BridgeStatus::UPDATING_CREDIT);
 
   jsonDoc.clear();
   jsonDoc["credit"] = difference;

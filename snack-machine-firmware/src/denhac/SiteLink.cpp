@@ -10,6 +10,9 @@ BridgeStatusCallback SiteLink::statusCallback = nullptr;
 ProductUpdatedCallback SiteLink::productUpdatedCallback = nullptr;
 ProductRemovedCallback SiteLink::productRemovedCallback = nullptr;
 
+SiteLinkCommand emptySiteLinkCommand;
+RingBuffer<8, SiteLinkCommand> SiteLink::commandBuffer(emptySiteLinkCommand);
+
 SiteLinkState SiteLink::state = SiteLinkState::UNKNOWN;
 
 OutputPort<PORT_H, 6, 1> SiteLink::huzzahResetPin;
@@ -114,6 +117,9 @@ void SiteLink::handleNormalCommands() {
   case 2:
     handleProductUpdated();
     break;
+  case 3:
+    handleOrdersByCard();
+    break;
   case 6:
     handleProductRemoved();
     break;
@@ -132,6 +138,26 @@ void SiteLink::handleStatus() {
   Serial.print("Code is: ");
   Serial.println(statusCode, HEX);
   Serial.flush();
+
+  switch (statusCode)
+  {
+  case BridgeStatus::FETCHING_PRODUCTS:
+    state = SiteLinkState::FETCHING_PRODUCT;
+    break;
+  case BridgeStatus::PRODUCTS_FETCHED:
+    state = SiteLinkState::IDLE;
+    break;
+  case BridgeStatus::CONNECTION_FAILED:
+  case BridgeStatus::REST_NOT_FOUND:
+  case BridgeStatus::REST_UNKNOWN_FAILURE:
+  case BridgeStatus::JSON_DECODE_FAILED:
+    if(state != SiteLinkState::FETCHING_PRODUCT) {
+        SiteLinkCommand command = commandBuffer.pop();
+        CALLBACK(command.errorCallback, statusCode)
+    }
+    state = SiteLinkState::IDLE;
+    break;
+  }
 
   CALLBACK(statusCallback, statusCode);
 }
@@ -163,6 +189,90 @@ void SiteLink::handleProductUpdated() {
   CALLBACK(productUpdatedCallback, id, name, price, stock, row, col)
 }
 
+void SiteLink::handleOrdersByCard() {
+  Serial.println("Orders by card!");
+
+  uint32_t cardNumber = 0;
+  msgpck_read_integer(linkSerial, (byte*) &cardNumber, sizeof(cardNumber));
+
+  uint8_t numOrders = 0;
+  msgpck_read_integer(linkSerial, (byte*) &numOrders, sizeof(numOrders));
+
+  Order orders[8];
+  for (uint8_t i = 0; i < numOrders; i++)
+  {
+    orders[i] = readOrder();
+  }
+
+  // TODO Should we assume order is correct here
+  SiteLinkCommand command = commandBuffer.pop();
+  OrdersResponseCallback callback = (OrdersResponseCallback) command.commandCallback;
+
+  CALLBACK(callback, orders, numOrders)
+}
+
+Order SiteLink::readOrder() {
+  uint32_t orderId = 0;
+  uint8_t status = 0;
+  uint32_t paid = 0;
+  uint32_t total = 0;
+
+  msgpck_read_integer(linkSerial, (byte*) &orderId, sizeof(orderId));
+  msgpck_read_integer(linkSerial, (byte*) &status, sizeof(status));
+  msgpck_read_integer(linkSerial, (byte*) &paid, sizeof(paid));
+  msgpck_read_integer(linkSerial, (byte*) &total, sizeof(total));
+
+  Serial.print("Order ID: ");
+  Serial.println(orderId);
+  Serial.print("Status: ");
+  Serial.println(status);
+  Serial.print("Paid: ");
+  Serial.println(paid);
+  Serial.print("Total: ");
+  Serial.println(total);
+
+  Order order(orderId, status, paid, total);
+
+  uint8_t numItems = 0;
+  msgpck_read_integer(linkSerial, (byte*) &numItems, sizeof(numItems));
+
+  Serial.print("Num Items: ");
+  Serial.println(numItems);
+
+  for (uint8_t i = 0; i < numItems; i++)
+  {
+    Item item = readItem();
+    order.add(item);
+  }
+
+  return order;
+}
+
+Item SiteLink::readItem() {
+  uint32_t itemId = 0;
+  uint32_t productId = 0;
+  uint8_t quantity = 0;
+  uint8_t vended = 0;
+
+  msgpck_read_integer(linkSerial, (byte*) &itemId, sizeof(itemId));
+  msgpck_read_integer(linkSerial, (byte*) &productId, sizeof(productId));
+  msgpck_read_integer(linkSerial, (byte*) &quantity, sizeof(quantity));
+  msgpck_read_integer(linkSerial, (byte*) &vended, sizeof(vended));
+
+  Serial.print("Item ID: ");
+  Serial.println(itemId);
+  Serial.print("Product ID: ");
+  Serial.println(productId);
+  Serial.print("Quantity: ");
+  Serial.println(quantity);
+  Serial.print("Vended: ");
+  Serial.println(vended);
+
+  Item item(itemId, productId, quantity, vended);
+
+  return item;
+}
+
 void SiteLink::handleProductRemoved() {
   Serial.println("Product removed!");
 
@@ -175,6 +285,32 @@ void SiteLink::handleProductRemoved() {
   Serial.println(col);
 
   CALLBACK(productRemovedCallback, row, col)
+}
+
+void SiteLink::getOrdersByCard(
+      uint32_t cardNumber,
+      BridgeStatusCallback onStatus,
+      OrdersResponseCallback onOrders) {
+        msgpck_write_integer(linkSerial, 0x03);
+        msgpck_write_integer(linkSerial, cardNumber);
+
+        SiteLinkCommand command(onStatus, onOrders);
+        commandBuffer.push(command);
+      }
+
+SiteLinkCommand::SiteLinkCommand() {
+  this->errorCallback = nullptr;
+  this->commandCallback = nullptr;
+}
+
+SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError) {
+  this->errorCallback = onError;
+  this->commandCallback = nullptr;
+}
+
+SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError, OrdersResponseCallback onOrders) {
+  this->errorCallback = onError;
+  this->commandCallback = (VoidCallback) onOrders;
 }
 
 #endif

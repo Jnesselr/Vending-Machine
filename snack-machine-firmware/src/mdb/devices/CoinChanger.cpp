@@ -10,8 +10,8 @@ static const uint16_t CMD_COIN_TYPE_SETUP[] = {0x10C, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_TUBE_STATUS[] = {0x10A};
 static uint16_t CMD_DISPENSE[] = {0x10D, 0};
 
-MDBCommand emptyCommand;
-RingBuffer<8, MDBCommand> CoinChanger::commandBuffer(emptyCommand);
+MDBCommand emptyMDBCommand;
+RingBuffer<8, MDBCommand> CoinChanger::commandBuffer(emptyMDBCommand);
 
 uint8_t CoinChanger::pollFailures;
 CoinChangerState CoinChanger::state = CoinChangerState::UNKNOWN;
