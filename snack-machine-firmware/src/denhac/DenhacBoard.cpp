@@ -12,8 +12,8 @@
 #include "motors.h"
 
 #include "ui/WindowManager.h"
-
-MainWindow DenhacBoard::mainWindow;
+#include "denhac/ui/DenhacUI.h"
+#include "denhac/DenhacBindings.h"
 
 Task DenhacBoard::billValidatorLoop(200, []{
   BillValidator::loop();
@@ -48,6 +48,7 @@ void DenhacBoard::setup()
   RFID::setup();
   Motors::setup();
   SiteLink::setup();
+  DenhacBindings::setup();
 
   Looper::add(uiLoop);
   Looper::add(billValidatorLoop);
@@ -56,30 +57,12 @@ void DenhacBoard::setup()
   Looper::add(motorLoop);
   Looper::add(siteLinkLoop);
 
-  WindowManager::show(mainWindow);
-
-  RFID::onCardScanned = DenhacBoard::onCardScanned;
+  WindowManager::show(DenhacUI::mainWindow);
 }
 
 void DenhacBoard::loop()
 {
   Looper::loop();
-}
-
-void DenhacBoard::onCardScanned(unsigned long cardCode) {
-  Serial.print("Card scan! ");
-  Serial.println(cardCode);
-
-  //CoinChanger::dispense(2, 4);
-  //Motors::vend(0, 0);
-  SiteLink::getOrdersByCard((uint32_t) cardCode,
-  [](uint8_t statusCode){
-    Serial.println("Got a status from orders by card!");
-    Serial.println(statusCode);
-  },
-  [](Order orders[], uint8_t numOrders) {
-    Serial.println("Got the orders!");
-  });
 }
 
 #endif
