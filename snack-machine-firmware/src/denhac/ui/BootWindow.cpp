@@ -21,89 +21,92 @@ void BootWindow::draw() {
   display->gfx_MoveTo((width - 376) / 2, 10);
 
   // Width = 376, Height = 80
-  display->putstr("DENHAC");
+  display->putstr((char*) "DENHAC");
 
   display->txt_Height(6);
   display->txt_Width(6);
   
   display->gfx_MoveTo((width - 330) / 2, 110);
   // Width = 330, Height = 72
-  display->putstr("vending");
+  display->putstr((char*) "vending");
 
   display->gfx_MoveTo((width - 330) / 2, 182);
   // Width = 330, Height = 60
-  display->putstr("machine");
+  display->putstr((char*) "machine");
 
   display->txt_Height(3);
   display->txt_Width(3);
-
-  /**
-   * (height - 242 - 120) / 5 is room between
-   * (height - 242 - 210) / 5 is
-   * 
-   * We want the stuff to be left aligned with adequate spacing
-   * The largest is 333
-   * 
-   */
   
-  uint16_t start_y = 416;
+  // Lowest Y of "machine" text == 242
+  // Height of status text combined == 210
+  billValidatorY = 242 + (WindowManager::getHeight() - 242 - 210) / 2;
+  coinChangerY = billValidatorY + 60;
+  siteLinkY = coinChangerY + 60;
+  motorsY = siteLinkY + 60;
 
-  display->gfx_MoveTo(94, start_y);
+  display->gfx_MoveTo(102, billValidatorY);
   // Width = 333, Height = 30
-  display->putstr("Bill Validator");
+  display->putstr((char*) "Bill Validator");
 
-  display->gfx_MoveTo(94, start_y + 60);
+  display->gfx_MoveTo(102, coinChangerY);
   // Width = 285, Height = 30
-  display->putstr("Coin Changer");
+  display->putstr((char*) "Coin Changer");
 
-  display->gfx_MoveTo(94, start_y + 120);
+  display->gfx_MoveTo(102, siteLinkY);
   // Width = 213 Height = 30
-  display->putstr("Site Link");
+  display->putstr((char*) "Site Link");
 
-  display->gfx_MoveTo(94, start_y + 180);
+  display->gfx_MoveTo(102, motorsY);
   // Width = 141 Height = 30
-  display->putstr("Motors");
+  display->putstr((char*) "Motors");
 }
 
 void BootWindow::loop() {
-  uint16_t start_y = 416;
   uint8_t size = 20;
   word color = GREEN;
 
   if(redrawBillValidator) {
     redrawBillValidator = false;
     color = billValidatorIdle ? GREEN : RED;
-    display->gfx_CircleFilled(
-      80 - size,
-      start_y + 15,
-      size, color);
+    display->gfx_CircleFilled(66, billValidatorY + 15, size, color);
+    if(billValidatorIdle) {
+      drawCheckAt(46, billValidatorY - 5);
+    } else {
+      drawXAt(46, billValidatorY - 5);
+    }
   }
 
   if(redrawCoinChanger) {
     redrawCoinChanger = false;
     color = coinChangerIdle ? GREEN : RED;
-    display->gfx_CircleFilled(
-      80 - size,
-      start_y + 60 + 15,
-      size, color);
+    display->gfx_CircleFilled(66, coinChangerY + 15, size, color);
+    if(coinChangerIdle) {
+      drawCheckAt(46, coinChangerY - 5);
+    } else {
+      drawXAt(46, coinChangerY - 5);
+    }
   }
 
   if(redrawSiteLink) {
     redrawSiteLink = false;
     color = siteLinkIdle ? GREEN : RED;
-    display->gfx_CircleFilled(
-      80 - size,
-      start_y + 120 + 15,
-      size, color);
+    display->gfx_CircleFilled(66, siteLinkY + 15, size, color);
+    if(siteLinkIdle) {
+      drawCheckAt(46, siteLinkY - 5);
+    } else {
+      drawXAt(46, siteLinkY - 5);
+    }
   }
 
   if(redrawMotors) {
     redrawMotors = false;
     color = motorsIdle ? GREEN : RED;
-    display->gfx_CircleFilled(
-      80 - size,
-      start_y + 180 + 15,
-      size, color);
+    display->gfx_CircleFilled(66, motorsY + 15, size, color);
+    if(motorsIdle) {
+      drawCheckAt(46, motorsY - 5);
+    } else {
+      drawXAt(46, motorsY - 5);
+    }
   }
 
   if(billValidatorIdle &&
@@ -145,4 +148,34 @@ void BootWindow::setSiteLinkIdle(bool isIdle) {
     lastChangeMillis = current_loop_millis;
   }
   siteLinkIdle = isIdle;
+}
+
+void BootWindow::drawXAt(uint16_t x, uint16_t y) {
+  word xValues[] = {12, 20, 28, 32, 24, 32, 28, 20, 12,  8, 16,  8};
+  word yValues[] = { 8, 16,  8, 12, 20, 28, 32, 24, 32, 28, 20, 12};
+
+  uint8_t n = sizeof(xValues) / sizeof(word);
+
+  SHIFT_POLY(xValues, x);
+  SHIFT_POLY(yValues, y);
+
+  display->gfx_PolygonFilled(n, xValues, yValues, WHITE);
+
+  SHIFT_POLY(xValues, -x);
+  SHIFT_POLY(yValues, -y);
+}
+
+void BootWindow::drawCheckAt(uint16_t x, uint16_t y) {
+  word xValues[] = { 8, 16, 32, 28, 16, 12};
+  word yValues[] = {24, 32, 16, 12, 24, 20};
+
+  uint8_t n = sizeof(xValues) / sizeof(word);
+
+  SHIFT_POLY(xValues, x);
+  SHIFT_POLY(yValues, y);
+
+  display->gfx_PolygonFilled(n, xValues, yValues, WHITE);
+
+  SHIFT_POLY(xValues, -x);
+  SHIFT_POLY(yValues, -y);
 }

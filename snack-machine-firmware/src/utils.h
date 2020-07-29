@@ -33,6 +33,24 @@ extern unsigned long current_loop_millis;
 // Wait for it to be at least MS milliseconds since LAST
 #define LOOP_WAIT_MS(LAST, MS) if(current_loop_millis < LAST + MS) {return;}
 
+
+#define SHIFT_POLY(ARR, VAL) \
+  for (uint8_t i = 0; i < (sizeof(ARR) / sizeof(word)); i++) { \
+    ARR[i] += VAL; \
+  }
+
+
+#define MEASURE_PIXEL_L2R(Y, CHECK, PAINT) \
+  static uint16_t x = 0; \
+  if(x == WindowManager::getWidth()) return; \
+  if(display->gfx_GetPixel(x, Y) == CHECK) { \
+    Serial.println("Found it!"); \
+    Serial.println(x); \
+    while(true) {} \
+  } \
+  display->gfx_PutPixel(x, Y, PAINT); \
+  x++;
+
 #define MEASURE_PIXEL_R2L(Y, CHECK, PAINT) \
   static uint16_t x = WindowManager::getWidth() - 1; \
   if(x == 0) return; \
