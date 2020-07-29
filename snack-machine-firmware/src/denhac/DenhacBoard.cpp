@@ -58,7 +58,7 @@ void DenhacBoard::setup()
   Looper::add(motorLoop);
   Looper::add(siteLinkLoop);
 
-  WindowManager::show(DenhacUI::mainWindow);
+  WindowManager::show(DenhacUI::bootWindow);
 
   wdt_enable(WDTO_8S);
 }

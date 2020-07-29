@@ -33,4 +33,26 @@ extern unsigned long current_loop_millis;
 // Wait for it to be at least MS milliseconds since LAST
 #define LOOP_WAIT_MS(LAST, MS) if(current_loop_millis < LAST + MS) {return;}
 
+#define MEASURE_PIXEL_R2L(Y, CHECK, PAINT) \
+  static uint16_t x = WindowManager::getWidth() - 1; \
+  if(x == 0) return; \
+  if(display->gfx_GetPixel(x, Y) == CHECK) { \
+    Serial.println("Found it!"); \
+    Serial.println(x); \
+    while(true) {} \
+  } \
+  display->gfx_PutPixel(x, Y, PAINT); \
+  x--;
+
+#define MEASURE_PIXEL_B2T(X, CHECK, PAINT) \
+  static uint16_t y = WindowManager::getHeight() - 1; \
+  if(y == 0) return; \
+  if(display->gfx_GetPixel(X, y) == CHECK) { \
+    Serial.println("Found it!"); \
+    Serial.println(y); \
+    while(true) {} \
+  } \
+  display->gfx_PutPixel(X, y, PAINT); \
+  y--;
+
 #endif
