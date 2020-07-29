@@ -1,5 +1,6 @@
 #ifdef VENDING_MAIN_BOARD
 
+#include <avr/wdt.h>
 #include "denhac/DenhacBoard.h"
 #include "denhac/SiteLink.h"
 #include "utils.h"
@@ -58,10 +59,13 @@ void DenhacBoard::setup()
   Looper::add(siteLinkLoop);
 
   WindowManager::show(DenhacUI::mainWindow);
+
+  wdt_enable(WDTO_8S);
 }
 
 void DenhacBoard::loop()
 {
+  wdt_reset();
   Looper::loop();
 }
 
