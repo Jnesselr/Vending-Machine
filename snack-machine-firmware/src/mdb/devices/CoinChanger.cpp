@@ -27,6 +27,7 @@ uint8_t CoinChanger::coinTypeCredit[16];
 uint16_t CoinChanger::tubeFullStatus = 0;
 uint8_t CoinChanger::tubeStatus[16];
 
+CoinChangerStateCallback CoinChanger::onStateChanged = NULL;
 CoinDispensedCallback CoinChanger::onCoinDispensed = NULL;
 CoinDepositedCallback CoinChanger::onCoinDeposited = NULL;
 VoidCallback CoinChanger::onEscrowRequest = NULL;
@@ -59,7 +60,7 @@ void CoinChanger::loop()
     commandBuffer.clear();
     sendSetup();
     sendCoinTypeSetup();
-    state = CoinChangerState::SETUP_SENT;
+    updateState(CoinChangerState::SETUP_SENT);
     return;
   }
 
@@ -215,7 +216,7 @@ void CoinChanger::handlePollData(const MDBResult& mdbResult)
     {
       DEBUG("Just Reset!")
       // Changer was Reset
-      state = CoinChangerState::RESET;
+      updateState(CoinChangerState::RESET);
 
       CALLBACK(onJustReset)
 
@@ -248,7 +249,7 @@ void CoinChanger::sendReset()
 
   resetCommand.run();
   DEBUG("Reset called")
-  state = CoinChangerState::RESET;
+  updateState(CoinChangerState::RESET);
 }
 
 void CoinChanger::sendSetup()
@@ -278,7 +279,7 @@ void CoinChanger::sendCoinTypeSetup()
       CMD_COIN_TYPE_SETUP, LENGTH(CMD_COIN_TYPE_SETUP),
       onTimeout,
       [](const MDBResult &mdbResult) {
-        state = CoinChangerState::IDLE;
+        updateState(CoinChangerState::IDLE);
       });
 
   commandBuffer.push(coinSetupCommand);
@@ -300,6 +301,13 @@ void CoinChanger::sendTubeStatus()
   commandBuffer.push(tubeStatusCommand);
 }
 
+void CoinChanger::updateState(CoinChangerState newState) {
+  CoinChangerState oldState = CoinChanger::state;
+  CoinChanger::state = newState;
+
+  CALLBACK(onStateChanged, oldState, newState)
+}
+
 void CoinChanger::onTimeout(const MDBResult &mdbResult)
 {
   DEBUG("Coin On timeout");
@@ -313,7 +321,7 @@ void CoinChanger::onTimeout(const MDBResult &mdbResult)
   {
     pollFailures = 0; // Give it a chance to recover
     DEBUG("Coin Poll failures > 10");
-    state = CoinChangerState::UNKNOWN;
+    updateState(CoinChangerState::UNKNOWN);
     return;
   }
 }

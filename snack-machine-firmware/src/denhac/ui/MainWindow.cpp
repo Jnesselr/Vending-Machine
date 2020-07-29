@@ -13,23 +13,26 @@ void MainWindow::draw() {
   display->gfx_BGcolour(BLACK);
   display->gfx_Cls();
 
-  width = WindowManager::getWidth();
+  width = WindowManager::getWidth() - 1;
   height = WindowManager::getHeight();
 
   lastMillis = current_loop_millis;
   display->gfx_Line(0, 0, width-1, 0, BLUE);
 
-  display->gfx_PutPixel(width / 2, 0, WHITE);
-  on[width/2] = true;
+  uint16_t x = 0;
+  display->gfx_PutPixel(x, 0, WHITE);
+  on[x] = true;
+  x = width-1;
+  display->gfx_PutPixel(x, 0, WHITE);
+  on[x] = true;
   y = 1;
-  y_inc = 1;
 }
 
 void MainWindow::loop() {
   uint16_t start_x = 0;
   bool shouldDrawBackground;
-  if(y == height || y == 0) {
-    y_inc = - y_inc;
+  if(y == height) {
+    return;
   }
 
   for (uint16_t x = 0; x < width; x++)
@@ -70,5 +73,5 @@ void MainWindow::loop() {
   {
     on[j] = next[j];
   }
-  y += y_inc;
+  y++;
 }

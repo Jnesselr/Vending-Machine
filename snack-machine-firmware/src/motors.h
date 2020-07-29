@@ -1,3 +1,4 @@
+#pragma once
 
 enum class MotorSystemState {
   UNKNOWN,  // Unknown, just powered up
@@ -12,6 +13,9 @@ enum class MotorState {
   VEND_WAIT       // Waiting for vend to finish
 };
 
+typedef void (*MotorSystemStateCallback)(MotorSystemState oldState, MotorSystemState newState);
+typedef void (*MotorStateCallback)(MotorState oldState, MotorState newState);
+
 class Motors {
   public:
     static void setup();
@@ -20,8 +24,15 @@ class Motors {
     static bool exists(int row, int col);
     static void vend(int row, int col);
     static void off();
+
+    // Callbacks
+    static MotorSystemStateCallback onSystemStateChanged;
+    static MotorStateCallback onMotorStateChanged;
   private:
     static bool valid(int row, int col);
+
+    static void updateSystemState(MotorSystemState motorSystemState);
+    static void updateMotorState(MotorState motorState);
 
     static void handleInitialScan();
 

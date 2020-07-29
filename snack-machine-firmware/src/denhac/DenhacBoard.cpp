@@ -28,7 +28,7 @@ Task DenhacBoard::rfidLoop(100, []{
   RFID::loop();
 });
 
-Task DenhacBoard::uiLoop(50, []{
+Task DenhacBoard::uiLoop(10, []{
   WindowManager::loop();
 });
 

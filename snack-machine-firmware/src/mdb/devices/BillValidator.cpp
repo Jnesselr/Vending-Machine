@@ -341,18 +341,14 @@ void BillValidator::updateState(BillValidatorState newState) {
   BillValidatorState oldState = BillValidator::state;
   BillValidator::state = newState;
 
-  if(onStateChanged != NULL) {
-    onStateChanged(oldState, newState);
-  }
+  CALLBACK(onStateChanged, oldState, newState)
 }
 
 void BillValidator::updateRecyclerState(BillRecyclerState newState) {
   BillRecyclerState oldState = BillValidator::recyclerState;
   BillValidator::recyclerState = newState;
 
-  if(onRecyclerStateChanged != NULL) {
-    onRecyclerStateChanged(oldState, newState);
-  }
+  CALLBACK(onRecyclerStateChanged, oldState, newState)
 }
 
 void BillValidator::acceptBill() {

@@ -6,6 +6,7 @@
 
 #include "utils.h"
 
+SiteLinkStateCallback SiteLink::onStateChanged = nullptr;
 BridgeStatusCallback SiteLink::statusCallback = nullptr;
 ProductUpdatedCallback SiteLink::productUpdatedCallback = nullptr;
 ProductRemovedCallback SiteLink::productRemovedCallback = nullptr;
@@ -19,6 +20,7 @@ OutputPort<PORT_H, 6, 1> SiteLink::huzzahResetPin;
 HardwareSerial* SiteLink::linkSerial = &Serial1;
 uint8_t SiteLink::handshakeCount = 0;
 uint8_t SiteLink::garbageLoopCount = 0;
+bool SiteLink::fetchingProducts = false;
 
 void SiteLink::setup() {
   linkSerial->begin(115200);
@@ -30,7 +32,7 @@ void SiteLink::loop() {
     // Bring the reset pin low to be safe
     huzzahResetPin.write(0x0);
 
-    state = SiteLinkState::WAITING;
+    updateState(SiteLinkState::WAITING);
   } else if(state == SiteLinkState::WAITING) {
     handleWaiting();
   } else if(state == SiteLinkState::HANDSHAKE) {
@@ -52,13 +54,13 @@ void SiteLink::handleWaiting() {
       // this loop alone
       if(handshakeCount == 5) {
         msgpck_write_nil(linkSerial); // Initiate the handshake
-        state = SiteLinkState::HANDSHAKE;
+        updateState(SiteLinkState::HANDSHAKE);
       }
     } else {
       handshakeCount = 0;
     }
 
-    int readValue = linkSerial->read();
+    linkSerial->read();
     bytesToRead--;
   }
 
@@ -69,7 +71,7 @@ void SiteLink::handleWaiting() {
 
   if(garbageLoopCount > 10) {
     huzzahResetPin.write(0xFF);
-    state = SiteLinkState::UNKNOWN;
+    updateState(SiteLinkState::UNKNOWN);
     garbageLoopCount = 0;
   }
 }
@@ -91,7 +93,7 @@ void SiteLink::handleHandshake() {
   msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
   if(typeCode == 0x01 && statusCode == BridgeStatus::READY) {
     Serial.println("We did it!");
-    state = SiteLinkState::IDLE;
+    updateState(SiteLinkState::IDLE);
     CALLBACK(statusCallback, statusCode);
   } else {
     Serial.println("Oh no, something went wrong!");
@@ -142,20 +144,20 @@ void SiteLink::handleStatus() {
   switch (statusCode)
   {
   case BridgeStatus::FETCHING_PRODUCTS:
-    state = SiteLinkState::FETCHING_PRODUCT;
+    fetchingProducts = true;
     break;
   case BridgeStatus::PRODUCTS_FETCHED:
-    state = SiteLinkState::IDLE;
+    fetchingProducts = false;
     break;
   case BridgeStatus::CONNECTION_FAILED:
   case BridgeStatus::REST_NOT_FOUND:
   case BridgeStatus::REST_UNKNOWN_FAILURE:
   case BridgeStatus::JSON_DECODE_FAILED:
-    if(state != SiteLinkState::FETCHING_PRODUCT) {
+    if(!fetchingProducts) {
         SiteLinkCommand command = commandBuffer.pop();
         CALLBACK(command.errorCallback, statusCode)
     }
-    state = SiteLinkState::IDLE;
+
     break;
   }
 
@@ -297,6 +299,13 @@ void SiteLink::getOrdersByCard(
         SiteLinkCommand command(onStatus, onOrders);
         commandBuffer.push(command);
       }
+
+void SiteLink::updateState(SiteLinkState siteLinkState) {
+  SiteLinkState oldState = SiteLink::state;
+  SiteLink::state = siteLinkState;
+
+  CALLBACK(onStateChanged, oldState, siteLinkState);
+}
 
 SiteLinkCommand::SiteLinkCommand() {
   this->errorCallback = nullptr;

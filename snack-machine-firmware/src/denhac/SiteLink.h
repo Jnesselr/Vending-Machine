@@ -13,10 +13,9 @@ enum class SiteLinkState {
   WAITING,
   HANDSHAKE,
   IDLE,
-  FETCHING_PRODUCT,
-  ORDERS_BY_CARD,
 };
 
+typedef void (*SiteLinkStateCallback)(SiteLinkState oldState, SiteLinkState newState);
 typedef void (*BridgeStatusCallback)(uint8_t statusCode);
 typedef void (*ProductUpdatedCallback)(
   uint32_t id,
@@ -50,6 +49,9 @@ class SiteLink {
       BridgeStatusCallback onStatus,
       OrdersResponseCallback onOrders);
 
+
+    // Callbacks
+    static SiteLinkStateCallback onStateChanged;
     // Status refers to the status sent from the
     // bridge not the state of the link itself.
     static BridgeStatusCallback statusCallback;
@@ -70,10 +72,13 @@ class SiteLink {
     static Order readOrder();
     static Item readItem();
 
+    static void updateState(SiteLinkState state);
+
     static SiteLinkState state;
 
     static OutputPort<PORT_H, 6, 1> huzzahResetPin;
     static HardwareSerial* linkSerial;
     static uint8_t handshakeCount;
     static uint8_t garbageLoopCount;
+    static bool fetchingProducts;
 };

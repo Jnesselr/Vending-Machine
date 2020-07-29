@@ -16,6 +16,7 @@ enum class CoinRouting {
   REJECT
 };
 
+typedef void (*CoinChangerStateCallback)(CoinChangerState oldState, CoinChangerState newState);
 typedef void (*CoinDispensedCallback)(uint8_t coinType);
 typedef void (*CoinDepositedCallback)(CoinRouting, uint8_t coinType);
 
@@ -26,6 +27,7 @@ class CoinChanger {
     static void dispense(uint8_t coinType, uint8_t coinCount);
 
     // Callbacks
+    static CoinChangerStateCallback onStateChanged;
     static CoinDispensedCallback onCoinDispensed;
     static CoinDepositedCallback onCoinDeposited;
     static VoidCallback onEscrowRequest;
@@ -52,6 +54,8 @@ class CoinChanger {
     static void sendPoll();
     static void handlePollData(const MDBResult&);
     static void sendCoinTypeSetup();
+
+    static void updateState(CoinChangerState newState);
 
     static void onTimeout(const MDBResult &mdbResult);
 

@@ -7,6 +7,9 @@
 MotorSystemState Motors::systemState = MotorSystemState::UNKNOWN;
 MotorState Motors::motorState = MotorState::NONE_SELECTED;
 
+MotorSystemStateCallback Motors::onSystemStateChanged = NULL;
+MotorStateCallback Motors::onMotorStateChanged = NULL;
+
 unsigned long Motors::lastStateChangeTime = 0;
 uint64_t Motors::motorsScanResult = 0;
 uint8_t Motors::selectedRow = 0;
@@ -74,7 +77,7 @@ void Motors::loop() {
     LOOP_WAIT_MS(lastStateChangeTime, 400);
 
     digitalWrite(COLS[selectedCol], LOW);
-    motorState = MotorState::VEND_WAIT;
+    updateMotorState(MotorState::VEND_WAIT);
     lastStateChangeTime = current_loop_millis;
   } else if (motorState == MotorState::VEND_WAIT) {
     LOOP_WAIT_MS(lastStateChangeTime, 3000);
@@ -92,7 +95,7 @@ void Motors::handleInitialScan() {
     digitalWrite(ROWS[selectedRow], HIGH);
     digitalWrite(COLS[selectedCol], HIGH);
     lastStateChangeTime = current_loop_millis;
-    motorState = MotorState::SCAN_SELECTED;
+    updateMotorState(MotorState::SCAN_SELECTED);
     return;
   } else if(motorState == MotorState::SCAN_SELECTED) {
     // Wait at least 20ms
@@ -127,7 +130,7 @@ void Motors::handleInitialScan() {
       // Sane values
       selectedRow = 0;
       selectedCol = 0;
-      systemState = MotorSystemState::IDLE;
+      updateSystemState(MotorSystemState::IDLE);
     }
   }
 }
@@ -171,7 +174,7 @@ void Motors::vend(int row, int col) {
   digitalWrite(COLS[col], HIGH);
   selectedRow = row;
   selectedCol = col;
-  motorState = MotorState::VEND_START;
+  updateMotorState(MotorState::VEND_START);
   lastStateChangeTime = current_loop_millis;
 }
 
@@ -193,7 +196,7 @@ void Motors::off() {
   digitalWrite(COLS[5], LOW);
   digitalWrite(COLS[6], LOW);
   digitalWrite(COLS[7], LOW);
-  motorState = MotorState::NONE_SELECTED;
+  updateMotorState(MotorState::NONE_SELECTED);
 }
 
 bool Motors::valid(int row, int col) {
@@ -202,6 +205,19 @@ bool Motors::valid(int row, int col) {
   if(col < 0) return false;
   if(col > 7) return false;
   return true;
+}
+
+void Motors::updateSystemState(MotorSystemState motorSystemState) {
+  MotorSystemState oldState = Motors::systemState;
+  Motors::systemState = motorSystemState;
+
+  CALLBACK(onSystemStateChanged, oldState, motorSystemState)
+}
+void Motors::updateMotorState(MotorState motorState) {
+  MotorState oldState = Motors::motorState;
+  Motors::motorState = motorState;
+
+  CALLBACK(onMotorStateChanged, oldState, motorState)
 }
 
 #endif
