@@ -50,7 +50,7 @@ void WindowManager::handleNonIdleStates() {
   }
 
   if(state == WindowManagerState::SETUP) {
-    LOOP_WAIT_MS(lastStateChangeTime, 5000)
+    LOOP_WAIT_MS(lastStateChangeTime, 3500)
 
     display.gfx_ScreenMode(PORTRAIT);
 
