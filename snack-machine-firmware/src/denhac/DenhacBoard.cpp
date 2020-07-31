@@ -32,7 +32,7 @@ Task DenhacBoard::uiLoop(10, []{
   WindowManager::loop();
 });
 
-Task DenhacBoard::motorLoop(50, []{
+Task DenhacBoard::motorLoop(40, []{
   Motors::loop();
 });
 

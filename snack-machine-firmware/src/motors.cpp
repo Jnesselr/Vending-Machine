@@ -98,9 +98,6 @@ void Motors::handleInitialScan() {
     updateMotorState(MotorState::SCAN_SELECTED);
     return;
   } else if(motorState == MotorState::SCAN_SELECTED) {
-    // Wait at least 20ms
-    LOOP_WAIT_MS(lastStateChangeTime, 20)
-
     // Serial.print("Motor (");
     // Serial.print(selectedRow);
     // Serial.print(", ");
@@ -115,18 +112,18 @@ void Motors::handleInitialScan() {
     } else {
       // Serial.println("does NOT exist");
     }
-    // Serial.flush();
+    Serial.flush();
 
     off();
 
     selectedCol++;
-    if(selectedCol == 9) {
+    if(selectedCol == 8) {
       selectedRow++;
       selectedCol = 0;
     }
 
     // Are we done!
-    if(selectedRow == 9) {
+    if(selectedRow == 8) {
       // Sane values
       selectedRow = 0;
       selectedCol = 0;
