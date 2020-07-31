@@ -27,6 +27,14 @@ void WindowManager::loop() {
   }
 
   if(currentWindow != nullptr) {
+    word touchStatus = display.touch_Get(TOUCH_STATUS);
+    if(touchStatus != 0) {
+      currentWindow->touch(
+        touchStatus,
+        display.touch_Get(TOUCH_GETX),
+        display.touch_Get(TOUCH_GETY)
+      );
+    }
     currentWindow->loop();
   }
 }
@@ -56,6 +64,8 @@ void WindowManager::handleNonIdleStates() {
 
     width = display.gfx_Get(X_MAX) + 1;
     height = display.gfx_Get(Y_MAX) + 1;
+    display.touch_Set(TOUCH_ENABLE);
+    display.touch_Set(TOUCH_REGIONDEFAULT);
 
     lastStateChangeTime = current_loop_millis;
     state = WindowManagerState::IDLE;
