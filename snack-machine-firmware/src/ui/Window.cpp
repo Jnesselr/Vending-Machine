@@ -3,3 +3,5 @@
 Window::Window() {}
 
 void Window::loop() {}
+
+void Window::hide() {}

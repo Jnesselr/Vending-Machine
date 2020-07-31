@@ -9,7 +9,7 @@ MainWindow::MainWindow() : Window() {
   memset(on, 0, sizeof(next));
 }
 
-void MainWindow::draw() {
+void MainWindow::show() {
   display->gfx_BGcolour(BLACK);
   display->gfx_Cls();
 

@@ -5,7 +5,7 @@
 
 #include "utils.h"
 
-void BootWindow::draw() {
+void BootWindow::show() {
   display->gfx_BGcolour(WHITESMOKE);
   display->gfx_Cls();
 

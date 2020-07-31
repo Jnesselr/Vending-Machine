@@ -70,14 +70,15 @@ void WindowManager::handleNonIdleStates() {
 void WindowManager::show(Window& window) {
   window.display = &display;
 
-  if(currentWindow != nullptr) {
+  if(currentWindow != nullptr && currentWindow->onScreen) {
+    currentWindow->hide();
     currentWindow->onScreen = false;
   }
 
   currentWindow = &window;
 
   if(state == WindowManagerState::IDLE) {
-    currentWindow->draw();
+    currentWindow->show();
     currentWindow->onScreen = true;
   }
 }

@@ -4,7 +4,7 @@
 
 class BootWindow : public Window {
   public:
-    void draw();
+    void show();
     void loop();
 
     void setBillValidatorIdle(bool);

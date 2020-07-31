@@ -5,7 +5,7 @@
 class MainWindow : public Window {
   public:
     MainWindow();
-    void draw();
+    void show();
     void loop();
   private:
     unsigned long lastMillis = 0;
