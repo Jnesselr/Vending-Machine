@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include <Arduino.h>
 
 #include "denhac/DenhacBindings.h"
@@ -57,3 +59,5 @@ void DenhacBindings::onSiteLinkStateCallback(
       DenhacUI::bootWindow.setSiteLinkIdle(true);
     }
 }
+
+#endif

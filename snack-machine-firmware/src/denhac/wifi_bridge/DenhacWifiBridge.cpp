@@ -115,17 +115,19 @@ void DenhacWifiBridge::fetchProducts() {
       name_length = 51;
     }
     uint32_t price = obj["price"];
-    uint8_t stock = obj["stock_quantity"];
+    uint8_t stock_available = obj["stock_available"];
+    uint8_t stock_in_machine = obj["stock_in_machine"];
     const char * location_ref = obj["location"];
     uint8_t row = location_ref[0] - 'A';
-    uint8_t col =location_ref[1] - '0';
+    uint8_t col = location_ref[1] - '0';
 
     CRC32 crc;
 
     crc.update(id);
     crc.update(name_ref, name_length);
     crc.update(price);
-    crc.update(stock);
+    crc.update(stock_available);
+    crc.update(stock_in_machine);
     crc.update(row);
     crc.update(col);
 
@@ -137,7 +139,8 @@ void DenhacWifiBridge::fetchProducts() {
       msgpck_write_integer(serial, id);
       msgpck_write_string(serial, (char*) name_ref, name_length);
       msgpck_write_integer(serial, price);
-      msgpck_write_integer(serial, stock);
+      msgpck_write_integer(serial, stock_available);
+      msgpck_write_integer(serial, stock_in_machine);
       msgpck_write_integer(serial, row);
       msgpck_write_integer(serial, col);
 

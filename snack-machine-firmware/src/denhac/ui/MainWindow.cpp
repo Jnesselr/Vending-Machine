@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "denhac/ui/MainWindow.h"
 
 #include "ui/WindowManager.h"
@@ -376,3 +378,5 @@ void GenericCallback<type>::tapped() {
       break;
   }
 }
+
+#endif

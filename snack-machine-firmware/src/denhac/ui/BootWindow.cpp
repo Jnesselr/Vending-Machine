@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "denhac/ui/BootWindow.h"
 
 #include "ui/WindowManager.h"
@@ -179,3 +181,5 @@ void BootWindow::drawCheckAt(uint16_t x, uint16_t y) {
   SHIFT_POLY(xValues, -x);
   SHIFT_POLY(yValues, -y);
 }
+
+#endif

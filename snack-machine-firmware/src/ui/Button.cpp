@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "ui/Button.h"
 
 #include <Diablo_Const4D.h>
@@ -33,3 +35,5 @@ void Button::hide() {}
 bool Button::inBounds(uint16_t x, uint16_t y) {
   return false;
 }
+
+#endif

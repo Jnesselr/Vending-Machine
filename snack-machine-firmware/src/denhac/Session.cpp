@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "denhac/Session.h"
 
 #include "denhac/SiteLink.h"
@@ -30,3 +32,5 @@ void Session::onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders) {
 bool Session::isActive() {
   return active;
 }
+
+#endif

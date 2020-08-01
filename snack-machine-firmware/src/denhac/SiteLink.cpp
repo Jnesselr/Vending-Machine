@@ -171,24 +171,27 @@ void SiteLink::handleProductUpdated() {
   char name[51];
   memset(name, 0, sizeof(name));
   uint32_t price = 0;
-  uint8_t stock = 0;
+  uint8_t stockAvailable = 0;
+  uint8_t stockInMachine = 0;
   uint8_t row = 0;
   uint8_t col = 0;
 
   msgpck_read_integer(linkSerial, (byte*) &id, sizeof(id));
   msgpck_read_string(linkSerial, name, sizeof(name));
   msgpck_read_integer(linkSerial, (byte*) &price, sizeof(price));
-  msgpck_read_integer(linkSerial, (byte*) &stock, sizeof(stock));
+  msgpck_read_integer(linkSerial, (byte*) &stockAvailable, sizeof(stockAvailable));
+  msgpck_read_integer(linkSerial, (byte*) &stockInMachine, sizeof(stockInMachine));
   msgpck_read_integer(linkSerial, (byte*) &row, sizeof(row));
   msgpck_read_integer(linkSerial, (byte*) &col, sizeof(col));
   Serial.println(id);
   Serial.println(name);
   Serial.println(price);
-  Serial.println(stock);
+  Serial.println(stockAvailable);
+  Serial.println(stockInMachine);
   Serial.println(row);
   Serial.println(col);
 
-  CALLBACK(productUpdatedCallback, id, name, price, stock, row, col)
+  CALLBACK(productUpdatedCallback, id, name, price, stockAvailable, stockInMachine, row, col)
 }
 
 void SiteLink::handleOrdersByCard() {

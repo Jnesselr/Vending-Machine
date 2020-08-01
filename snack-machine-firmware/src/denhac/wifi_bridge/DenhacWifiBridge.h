@@ -4,7 +4,6 @@
 #include "config.h"
 #include "vendingMachine.h"
 #include "msgpck.h"
-#include "denhac/Product.h"
 #include "denhac/wifi_bridge/RestRequest.h"
 
 #include "denhac/BridgeStatus.h"
