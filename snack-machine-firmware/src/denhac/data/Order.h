@@ -34,6 +34,7 @@ class Order {
     uint32_t total;
   
   private:
+    void recalculateTotal();
     Item items[8];
     uint8_t numItems;
 };

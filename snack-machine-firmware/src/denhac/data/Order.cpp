@@ -1,5 +1,7 @@
 #include "denhac/data/Order.h"
 
+#include "denhac/ProductManager.h"
+
 Item::Item() {
   itemId = 0;
   productId = 0;
@@ -22,6 +24,7 @@ Order::Order() {
   numItems = 0;
 }
 
+// TODO Is there any point in having total here if we recalculate it every time we add an item?
 Order::Order(uint32_t orderId, uint8_t status, uint32_t paid, uint32_t total) {
   this->orderId = orderId;
   this->status = status;
@@ -57,6 +60,7 @@ void Order::operator = (const Order& order) {
 void Order::add(const Item& item) {
   this->items[numItems] = item;
   numItems++;
+  recalculateTotal();
 }
 
 void Order::add(const Product& product) {
@@ -65,6 +69,7 @@ void Order::add(const Product& product) {
     Item* item = &(items[i]);
     if(item->productId == product.id) {
       (item->quantity)++; // TODO Handle increasing past quantity limit
+      recalculateTotal();
       return;
     }
   }
@@ -79,4 +84,16 @@ uint8_t Order::getNumItems() {
 
 Item Order::getItem(uint8_t itemNum) {
   return items[itemNum];
+}
+
+void Order::recalculateTotal() {
+  uint32_t newTotal = 0;
+  for (uint8_t i = 0; i < numItems; i++)
+  {
+    Item* item = &(items[i]);
+    Product product = ProductManager::get(item->productId);
+    newTotal += item->quantity * product.price;
+  }
+
+  this->total = newTotal;
 }
