@@ -73,7 +73,7 @@ void SiteLink::handleWaiting() {
   // It's only used to determine if the HUZZAH needs a reset
   garbageLoopCount++;
 
-  if(garbageLoopCount > 5) {
+  if(garbageLoopCount > 10) {
     huzzahResetPin.write(0xFF);
     updateState(SiteLinkState::UNKNOWN);
     garbageLoopCount = 0;
@@ -99,10 +99,6 @@ void SiteLink::handleHandshake() {
     Serial.println("We did it!");
     updateState(SiteLinkState::IDLE);
     CALLBACK(statusCallback, statusCode);
-  } else {
-    Serial.println("Oh no, something went wrong!");
-    Serial.println(typeCode, HEX);
-    Serial.println(statusCode, HEX);
   }
   Serial.flush();
 }
