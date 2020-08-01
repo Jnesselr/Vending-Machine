@@ -58,3 +58,25 @@ void Order::add(const Item& item) {
   this->items[numItems] = item;
   numItems++;
 }
+
+void Order::add(const Product& product) {
+  for (uint8_t i = 0; i < numItems; i++)
+  {
+    Item* item = &(items[i]);
+    if(item->productId == product.id) {
+      (item->quantity)++; // TODO Handle increasing past quantity limit
+      return;
+    }
+  }
+
+  Item item(0, product.id, 1, 0);
+  this->add(item);
+}
+
+uint8_t Order::getNumItems() {
+  return numItems;
+}
+
+Item Order::getItem(uint8_t itemNum) {
+  return items[itemNum];
+}
