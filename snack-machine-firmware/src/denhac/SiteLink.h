@@ -5,6 +5,7 @@
 
 #include "mdb/RingBuffer.h"
 #include "denhac/Order.h"
+#include "denhac/Product.h"
 
 #include "utils.h"
 
@@ -17,15 +18,7 @@ enum class SiteLinkState {
 
 typedef void (*SiteLinkStateCallback)(SiteLinkState oldState, SiteLinkState newState);
 typedef void (*BridgeStatusCallback)(uint8_t statusCode);
-typedef void (*ProductUpdatedCallback)(
-  uint32_t id,
-  char name[51],
-  uint32_t price,
-  uint8_t stockAvailable,
-  uint8_t stockInMachine,
-  uint8_t row,
-  uint8_t col
-);
+typedef void (*ProductUpdatedCallback)(const Product& product);
 typedef void (*ProductRemovedCallback)(uint8_t row, uint8_t col);
 
 typedef void (*OrdersResponseCallback)(Order orders[], uint8_t numOrders);

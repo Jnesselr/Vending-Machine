@@ -165,33 +165,17 @@ void SiteLink::handleStatus() {
 }
 
 void SiteLink::handleProductUpdated() {
-  Serial.println("Product updated!");
+  Product product;
 
-  uint32_t id = 0;
-  char name[51];
-  memset(name, 0, sizeof(name));
-  uint32_t price = 0;
-  uint8_t stockAvailable = 0;
-  uint8_t stockInMachine = 0;
-  uint8_t row = 0;
-  uint8_t col = 0;
+  msgpck_read_integer(linkSerial, (byte*) &product.id, sizeof(product.id));
+  msgpck_read_string(linkSerial, product.name, sizeof(product.name));
+  msgpck_read_integer(linkSerial, (byte*) &product.price, sizeof(product.price));
+  msgpck_read_integer(linkSerial, (byte*) &product.stockAvailable, sizeof(product.stockAvailable));
+  msgpck_read_integer(linkSerial, (byte*) &product.stockInMachine, sizeof(product.stockInMachine));
+  msgpck_read_integer(linkSerial, (byte*) &product.row, sizeof(product.row));
+  msgpck_read_integer(linkSerial, (byte*) &product.col, sizeof(product.col));
 
-  msgpck_read_integer(linkSerial, (byte*) &id, sizeof(id));
-  msgpck_read_string(linkSerial, name, sizeof(name));
-  msgpck_read_integer(linkSerial, (byte*) &price, sizeof(price));
-  msgpck_read_integer(linkSerial, (byte*) &stockAvailable, sizeof(stockAvailable));
-  msgpck_read_integer(linkSerial, (byte*) &stockInMachine, sizeof(stockInMachine));
-  msgpck_read_integer(linkSerial, (byte*) &row, sizeof(row));
-  msgpck_read_integer(linkSerial, (byte*) &col, sizeof(col));
-  Serial.println(id);
-  Serial.println(name);
-  Serial.println(price);
-  Serial.println(stockAvailable);
-  Serial.println(stockInMachine);
-  Serial.println(row);
-  Serial.println(col);
-
-  CALLBACK(productUpdatedCallback, id, name, price, stockAvailable, stockInMachine, row, col)
+  CALLBACK(productUpdatedCallback, product)
 }
 
 void SiteLink::handleOrdersByCard() {
