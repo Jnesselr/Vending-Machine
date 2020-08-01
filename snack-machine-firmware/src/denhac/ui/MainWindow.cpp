@@ -2,6 +2,7 @@
 
 #include "denhac/ui/MainWindow.h"
 #include "denhac/ProductManager.h"
+#include "denhac/Session.h"
 
 #include "ui/WindowManager.h"
 
@@ -11,6 +12,9 @@
 
 template<uint8_t row>
 MainWindow* RowCallback<row>::mainWindow = nullptr;
+
+template<uint8_t col>
+MainWindow* ColCallback<col>::mainWindow = nullptr;
 
 template<GenericCallbackType type>
 MainWindow* GenericCallback<type>::mainWindow = nullptr;
@@ -124,6 +128,8 @@ void MainWindow::setupMemberVariables() {
   cellButton1.right = cellButton1.left + CELL_WIDTH - 1;
   cellButton1.top = gridTop + 1;
   cellButton1.bottom = cellButton1.top + CELL_HEIGHT - 1;
+  ColCallback<0>::mainWindow = this;
+  cellButton1.tapped = ColCallback<0>::tapped;
 
   cellButton2.display = display;
   cellButton2.character = '2';
@@ -131,6 +137,8 @@ void MainWindow::setupMemberVariables() {
   cellButton2.right = cellButton2.left + CELL_WIDTH - 1;
   cellButton2.top = gridTop + 1;
   cellButton2.bottom = cellButton2.top + CELL_HEIGHT - 1;
+  ColCallback<1>::mainWindow = this;
+  cellButton2.tapped = ColCallback<1>::tapped;
 
   cellButton3.display = display;
   cellButton3.character = '3';
@@ -138,6 +146,8 @@ void MainWindow::setupMemberVariables() {
   cellButton3.right = cellButton3.left + CELL_WIDTH - 1;
   cellButton3.top = gridTop + 1;
   cellButton3.bottom = cellButton3.top + CELL_HEIGHT - 1;
+  ColCallback<2>::mainWindow = this;
+  cellButton3.tapped = ColCallback<2>::tapped;
 
   cellButton4.display = display;
   cellButton4.character = '4';
@@ -145,6 +155,8 @@ void MainWindow::setupMemberVariables() {
   cellButton4.right = cellButton4.left + CELL_WIDTH - 1;
   cellButton4.top = gridTop + CELL_HEIGHT + 2;
   cellButton4.bottom = cellButton4.top + CELL_HEIGHT - 1;
+  ColCallback<3>::mainWindow = this;
+  cellButton4.tapped = ColCallback<3>::tapped;
 
   cellButton5.display = display;
   cellButton5.character = '5';
@@ -152,6 +164,8 @@ void MainWindow::setupMemberVariables() {
   cellButton5.right = cellButton5.left + CELL_WIDTH - 1;
   cellButton5.top = gridTop + CELL_HEIGHT + 2;
   cellButton5.bottom = cellButton5.top + CELL_HEIGHT - 1;
+  ColCallback<4>::mainWindow = this;
+  cellButton5.tapped = ColCallback<4>::tapped;
 
   cellButton6.display = display;
   cellButton6.character = '6';
@@ -159,6 +173,8 @@ void MainWindow::setupMemberVariables() {
   cellButton6.right = cellButton6.left + CELL_WIDTH - 1;
   cellButton6.top = gridTop + CELL_HEIGHT + 2;
   cellButton6.bottom = cellButton6.top + CELL_HEIGHT - 1;
+  ColCallback<5>::mainWindow = this;
+  cellButton6.tapped = ColCallback<5>::tapped;
 
   cellButton7.display = display;
   cellButton7.character = '7';
@@ -166,6 +182,8 @@ void MainWindow::setupMemberVariables() {
   cellButton7.right = cellButton7.left + CELL_WIDTH - 1;
   cellButton7.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButton7.bottom = cellButton7.top + CELL_HEIGHT - 1;
+  ColCallback<6>::mainWindow = this;
+  cellButton7.tapped = ColCallback<6>::tapped;
 
   cellButton8.display = display;
   cellButton8.character = '8';
@@ -173,6 +191,8 @@ void MainWindow::setupMemberVariables() {
   cellButton8.right = cellButton8.left + CELL_WIDTH - 1;
   cellButton8.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButton8.bottom = cellButton8.top + CELL_HEIGHT - 1;
+  ColCallback<7>::mainWindow = this;
+  cellButton8.tapped = ColCallback<7>::tapped;
 
   memberVariablesSet = true;
 }
@@ -197,6 +217,11 @@ void MainWindow::loop() {
       backButton.show();
     }
     gridContentRedrawNeeded = false;
+  }
+
+  if(orderContentRedrawNeeded) {
+    drawOrder();
+    orderContentRedrawNeeded = false;
   }
 }
 
@@ -337,6 +362,24 @@ void MainWindow::verifyGridValidity() {
   }
 }
 
+void MainWindow::drawOrder() {
+  display->txt_Width(2);
+  display->txt_Height(2);
+  display->gfx_RectangleFilled(0, 0, screenWidth - 1, 300, WHITESMOKE);
+
+  Order* order = Session::getCurrentOrder();
+
+  for (uint8_t i = 0; i < order->getNumItems(); i++)
+  {
+    display->txt_MoveCursor(2 * i, 0);
+    Item item = order->getItem(i);
+    Product product = ProductManager::get(item.productId);
+    display->print(product.name);
+    display->print(" => ");
+    display->print(item.quantity);
+  }
+}
+
 void MainWindow::back() {
   if(state == MainWindowState::NUMBERS_VISIBLE) {
     state = MainWindowState::LETTERS_VISIBLE;
@@ -352,6 +395,17 @@ void MainWindow::rowTapped(uint8_t row) {
   }
 }
 
+void MainWindow::colTapped(uint8_t col) {
+  if(state == MainWindowState::NUMBERS_VISIBLE) {
+    Order* order = Session::getCurrentOrder();
+
+    order->add(ProductManager::get(selectedRow, col));
+    orderContentRedrawNeeded = true;
+
+    state = MainWindowState::LETTERS_VISIBLE; // TODO Change this to VEND_SCREEN or whatever
+    gridContentRedrawNeeded = true;
+  }
+}
 
 CellButton::CellButton() {
   display = nullptr;
@@ -422,6 +476,11 @@ bool BackButton::inBounds(uint16_t x, uint16_t y) {
 template<uint8_t row>
 void RowCallback<row>::tapped() {
   mainWindow->rowTapped(row);
+}
+
+template<uint8_t row>
+void ColCallback<row>::tapped() {
+  mainWindow->colTapped(row);
 }
 
 template<GenericCallbackType type>

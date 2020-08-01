@@ -47,6 +47,7 @@ class MainWindow : public Window {
 
     // Public for callbacks
     void rowTapped(uint8_t row);
+    void colTapped(uint8_t col);
     void back();
   private:
     void setupMemberVariables();
@@ -59,10 +60,14 @@ class MainWindow : public Window {
 
     void verifyGridValidity();
 
+    void drawOrder();
+
     bool memberVariablesSet = false;
     bool gridRedrawNeeded = false;
     bool gridContentRedrawNeeded = false;
     unsigned long lastGridValidityScan = 0;
+
+    bool orderContentRedrawNeeded = false;
 
     uint16_t screenWidth;
     uint16_t screenHeight;
@@ -111,6 +116,12 @@ struct GenericCallback {
 
 template<uint8_t row>
 struct RowCallback {
+  static MainWindow* mainWindow;
+  static void tapped();
+};
+
+template<uint8_t row>
+struct ColCallback {
   static MainWindow* mainWindow;
   static void tapped();
 };
