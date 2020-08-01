@@ -54,9 +54,15 @@ class MainWindow : public Window {
     void drawGridLetters();
     void drawGridNumbers();
 
+    CellButton* rowButton(uint8_t row);
+    CellButton* colButton(uint8_t col);
+
+    void verifyGridValidity();
+
     bool memberVariablesSet = false;
     bool gridRedrawNeeded = false;
     bool gridContentRedrawNeeded = false;
+    unsigned long lastGridValidityScan = 0;
 
     uint16_t screenWidth;
     uint16_t screenHeight;

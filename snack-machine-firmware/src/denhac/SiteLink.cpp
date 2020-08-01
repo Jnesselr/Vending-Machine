@@ -112,6 +112,9 @@ void SiteLink::handleNormalCommands() {
     return;
   }
 
+  Serial.print("Available: ");
+  Serial.println(linkSerial->available());
+
   uint8_t typeCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &typeCode, sizeof(typeCode));
 

@@ -9,6 +9,7 @@ typedef union {
 
 class ProductManager {
   public:
+    static bool isValid(uint8_t row);
     static bool isValid(uint8_t row, uint8_t col);
     static Product get(uint8_t row, uint8_t col);
 

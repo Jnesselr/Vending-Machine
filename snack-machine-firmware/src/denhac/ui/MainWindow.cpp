@@ -1,6 +1,7 @@
 #ifdef VENDING_MAIN_BOARD
 
 #include "denhac/ui/MainWindow.h"
+#include "denhac/ProductManager.h"
 
 #include "ui/WindowManager.h"
 
@@ -177,6 +178,10 @@ void MainWindow::setupMemberVariables() {
 }
 
 void MainWindow::loop() {
+  if(current_loop_millis > lastGridValidityScan + 200) {
+    verifyGridValidity();
+  }
+
   if(gridRedrawNeeded) {
     drawGrid();
     gridRedrawNeeded = false;
@@ -244,15 +249,7 @@ void MainWindow::drawGrid() {
 }
 
 void MainWindow::drawGridLetters() {
-  cellButtonA.enabled = Motors::rowExists(0);
-  cellButtonB.enabled = Motors::rowExists(1);
-  cellButtonC.enabled = Motors::rowExists(2);
-  cellButtonD.enabled = Motors::rowExists(3);
-  cellButtonE.enabled = Motors::rowExists(4);
-  cellButtonF.enabled = Motors::rowExists(5);
-  cellButtonG.enabled = Motors::rowExists(6);
-  cellButtonH.enabled = Motors::rowExists(7);
-
+  verifyGridValidity();
   cellButtonA.show();
   cellButtonB.show();
   cellButtonC.show();
@@ -264,15 +261,7 @@ void MainWindow::drawGridLetters() {
 }
 
 void MainWindow::drawGridNumbers() {
-  cellButton1.enabled = Motors::exists(selectedRow, 0);
-  cellButton2.enabled = Motors::exists(selectedRow, 1);
-  cellButton3.enabled = Motors::exists(selectedRow, 2);
-  cellButton4.enabled = Motors::exists(selectedRow, 3);
-  cellButton5.enabled = Motors::exists(selectedRow, 4);
-  cellButton6.enabled = Motors::exists(selectedRow, 5);
-  cellButton7.enabled = Motors::exists(selectedRow, 6);
-  cellButton8.enabled = Motors::exists(selectedRow, 7);
-
+  verifyGridValidity();
   cellButton1.show();
   cellButton2.show();
   cellButton3.show();
@@ -281,6 +270,71 @@ void MainWindow::drawGridNumbers() {
   cellButton6.show();
   cellButton7.show();
   cellButton8.show();
+}
+
+CellButton* MainWindow::rowButton(uint8_t row) {
+  switch(row) {
+    case 0: return &cellButtonA;
+    case 1: return &cellButtonB;
+    case 2: return &cellButtonC;
+    case 3: return &cellButtonD;
+    case 4: return &cellButtonE;
+    case 5: return &cellButtonF;
+    case 6: return &cellButtonG;
+    case 7: return &cellButtonH;
+    default: return nullptr;
+  }
+}
+
+CellButton* MainWindow::colButton(uint8_t col) {
+  switch(col) {
+    case 0: return &cellButton1;
+    case 1: return &cellButton2;
+    case 2: return &cellButton3;
+    case 3: return &cellButton4;
+    case 4: return &cellButton5;
+    case 5: return &cellButton6;
+    case 6: return &cellButton7;
+    case 7: return &cellButton8;
+    default: return nullptr;
+  }
+}
+
+void MainWindow::verifyGridValidity() {
+  lastGridValidityScan = current_loop_millis;
+
+  for (uint8_t i = 0; i < 8; i++)
+  {
+    CellButton* button = rowButton(i);
+    bool isEnabled = button->enabled;
+    bool shouldBeEnabled = Motors::rowExists(i) && ProductManager::isValid(i);
+    if(isEnabled != shouldBeEnabled) {
+      if(state == MainWindowState::NUMBERS_VISIBLE && selectedRow == i) {
+        state = MainWindowState::LETTERS_VISIBLE;
+        gridContentRedrawNeeded = true;
+      } else if(state == MainWindowState::LETTERS_VISIBLE) {
+        gridContentRedrawNeeded = true;
+      }
+    }
+
+    button->enabled = shouldBeEnabled;
+  }
+
+  if(state != MainWindowState::NUMBERS_VISIBLE) {
+    return;
+  }
+
+  for (uint8_t i = 0; i < 8; i++)
+  {
+    CellButton* button = colButton(i);
+    bool isEnabled = button->enabled;
+    bool shouldBeEnabled = Motors::exists(selectedRow, i) && ProductManager::isValid(selectedRow, i);
+    if(isEnabled != shouldBeEnabled) {
+      gridContentRedrawNeeded = true;
+    }
+
+    button->enabled = shouldBeEnabled;
+  }
 }
 
 void MainWindow::back() {

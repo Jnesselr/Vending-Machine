@@ -20,6 +20,17 @@
  * To find a particular product, it's start address is 62 * (8 * row + col)
  */
 
+bool ProductManager::isValid(uint8_t row) {
+  return isValid(row, 0) ||
+        isValid(row, 1) ||
+        isValid(row, 2) ||
+        isValid(row, 3) ||
+        isValid(row, 4) ||
+        isValid(row, 5) ||
+        isValid(row, 6) ||
+        isValid(row, 7);
+}
+
 bool ProductManager::isValid(uint8_t row, uint8_t col) {
   uint16_t address = 62 * (8 * row + col);
 
@@ -51,6 +62,11 @@ void ProductManager::productUpdated(const Product& product) {
   writeLong(startAddress + 56, product.price);
   EEPROM.update(startAddress + 60, product.stockAvailable);
   EEPROM.update(startAddress + 61, product.stockInMachine);
+
+  Serial.print("Product added at ");
+  Serial.print(product.row);
+  Serial.print(" ");
+  Serial.println(product.col);
 }
 
 void ProductManager::productRemoved(uint8_t row, uint8_t col) {
@@ -59,6 +75,10 @@ void ProductManager::productRemoved(uint8_t row, uint8_t col) {
   // Invalidate the flag but don't overwite anything else to save
   // on EEPROM writes
   EEPROM.update(address, 0xFF);
+  Serial.print("Product removed at ");
+  Serial.print(row);
+  Serial.print(" ");
+  Serial.println(col);
 }
 
 void ProductManager::writeLong(uint16_t address, uint32_t value) {
