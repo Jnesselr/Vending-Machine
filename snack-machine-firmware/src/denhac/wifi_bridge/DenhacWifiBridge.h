@@ -6,7 +6,7 @@
 #include "msgpck.h"
 #include "denhac/wifi_bridge/RestRequest.h"
 
-#include "denhac/BridgeStatus.h"
+#include "denhac/data/BridgeStatus.h"
 
 #include <ArduinoJson.h>
 #include <WiFi.h>

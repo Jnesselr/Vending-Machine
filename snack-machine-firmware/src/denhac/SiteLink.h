@@ -4,8 +4,8 @@
 #include <DirectIO.h>
 
 #include "mdb/RingBuffer.h"
-#include "denhac/Order.h"
-#include "denhac/Product.h"
+#include "denhac/data/Order.h"
+#include "denhac/data/Product.h"
 
 #include "utils.h"
 

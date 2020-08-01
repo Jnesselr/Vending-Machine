@@ -1,7 +1,7 @@
 #ifdef VENDING_MAIN_BOARD
 
 #include "denhac/SiteLink.h"
-#include "denhac/BridgeStatus.h"
+#include "denhac/data/BridgeStatus.h"
 #include "msgpck.h"
 
 #include "utils.h"

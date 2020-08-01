@@ -1,6 +1,6 @@
 #ifdef VENDING_MAIN_BOARD
 
-#include "denhac/Product.h"
+#include "denhac/data/Product.h"
 
 Product::Product() {
   id = 0;
