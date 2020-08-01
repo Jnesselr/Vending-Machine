@@ -5,6 +5,7 @@
 
 class Session {
   public:
+    static Order* getCurrentOrder();
     static void cardScanned(uint32_t);
     static bool isActive();
 
@@ -15,4 +16,5 @@ class Session {
     static unsigned long lastChangeMillis;
     static bool active;
     static uint32_t cardNum;
+    static Order currentOrder;
 };

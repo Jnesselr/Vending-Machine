@@ -7,6 +7,11 @@
 unsigned long lastChangeMillis = 0;
 bool Session::active = false;
 uint32_t Session::cardNum = 0;
+Order Session::currentOrder;
+
+Order* Session::getCurrentOrder() {
+  return &currentOrder;
+}
 
 void Session::cardScanned(uint32_t cardNum) {
   // If there's no active session, request orders by card
