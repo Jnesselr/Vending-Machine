@@ -20,7 +20,7 @@
     b[i] = a[i]; \
   }
 
-#define CALLBACK(func, ...) if(func != NULL) { func(__VA_ARGS__); }
+#define CALLBACK(func, ...) if(func != nullptr) { func(__VA_ARGS__); }
 
 typedef void (*VoidCallback)();
 

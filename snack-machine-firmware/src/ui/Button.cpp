@@ -23,6 +23,7 @@ void Button::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
     if(pressed) {
       pressed = false;
       show();
+      CALLBACK(tapped);
     }
   }
 }

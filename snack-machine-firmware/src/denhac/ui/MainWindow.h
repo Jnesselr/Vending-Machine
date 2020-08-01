@@ -6,6 +6,7 @@
 class BackButton : public Button {
   public:
     void show();
+    void hide();
 
     Diablo_Serial_4DLib* display;
     uint16_t left;
@@ -43,12 +44,19 @@ class MainWindow : public Window {
     void show();
     void loop();
     void touch(uint8_t touchMode, uint16_t x, uint16_t y);
+
+    // Public for callbacks
+    void rowTapped(uint8_t row);
+    void back();
   private:
     void setupMemberVariables();
     void drawGrid();
     void drawGridLetters();
+    void drawGridNumbers();
 
     bool memberVariablesSet = false;
+    bool gridRedrawNeeded = false;
+    bool gridContentRedrawNeeded = false;
 
     uint16_t screenWidth;
     uint16_t screenHeight;
@@ -62,6 +70,8 @@ class MainWindow : public Window {
     uint16_t gridRight;
     uint16_t gridBottom;
     uint16_t gridTop;
+
+    uint8_t selectedRow;
 
     BackButton backButton;
 
@@ -81,4 +91,20 @@ class MainWindow : public Window {
     CellButton cellButton6;
     CellButton cellButton7;
     CellButton cellButton8;
+};
+
+enum class GenericCallbackType {
+  BACK
+};
+
+template<GenericCallbackType type>
+struct GenericCallback {
+  static MainWindow* mainWindow;
+  static void tapped();
+};
+
+template<uint8_t row>
+struct RowCallback {
+  static MainWindow* mainWindow;
+  static void tapped();
 };

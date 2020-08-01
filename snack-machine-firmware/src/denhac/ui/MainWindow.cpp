@@ -6,15 +6,19 @@
 #include "utils.h"
 #include <avr/wdt.h>
 
+template<uint8_t row>
+MainWindow* RowCallback<row>::mainWindow = nullptr;
+
+template<GenericCallbackType type>
+MainWindow* GenericCallback<type>::mainWindow = nullptr;
+
 void MainWindow::show() {
   setupMemberVariables();
 
   display->gfx_BGcolour(WHITESMOKE);
   display->gfx_Cls();
 
-  drawGrid();
-  drawGridLetters();
-  backButton.show();
+  gridRedrawNeeded = true;
 }
 
 void MainWindow::setupMemberVariables() {
@@ -35,7 +39,9 @@ void MainWindow::setupMemberVariables() {
   backButton.left = gridLeft + 1;
   backButton.right = backButton.left + CELL_WIDTH - 1;
   backButton.top = gridTop + 2 * CELL_HEIGHT + 3;
-  backButton.bottom  = backButton.top + CELL_HEIGHT - 1;
+  backButton.bottom = backButton.top + CELL_HEIGHT - 1;
+  GenericCallback<GenericCallbackType::BACK>::mainWindow = this;
+  backButton.tapped = GenericCallback<GenericCallbackType::BACK>::tapped;
 
   cellButtonA.display = display;
   cellButtonA.character = 'A';
@@ -43,6 +49,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonA.right = cellButtonA.left + CELL_WIDTH - 1;
   cellButtonA.top = gridTop + 1;
   cellButtonA.bottom = cellButtonA.top + CELL_HEIGHT - 1;
+  RowCallback<0>::mainWindow = this;
+  cellButtonA.tapped = RowCallback<0>::tapped;
 
   cellButtonB.display = display;
   cellButtonB.character = 'B';
@@ -50,6 +58,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonB.right = cellButtonB.left + CELL_WIDTH - 1;
   cellButtonB.top = gridTop + 1;
   cellButtonB.bottom = cellButtonB.top + CELL_HEIGHT - 1;
+  RowCallback<1>::mainWindow = this;
+  cellButtonB.tapped = RowCallback<1>::tapped;
 
   cellButtonC.display = display;
   cellButtonC.character = 'C';
@@ -57,6 +67,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonC.right = cellButtonC.left + CELL_WIDTH - 1;
   cellButtonC.top = gridTop + 1;
   cellButtonC.bottom = cellButtonC.top + CELL_HEIGHT - 1;
+  RowCallback<2>::mainWindow = this;
+  cellButtonC.tapped = RowCallback<2>::tapped;
 
   cellButtonD.display = display;
   cellButtonD.character = 'D';
@@ -64,6 +76,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonD.right = cellButtonD.left + CELL_WIDTH - 1;
   cellButtonD.top = gridTop + CELL_HEIGHT + 2;
   cellButtonD.bottom = cellButtonD.top + CELL_HEIGHT - 1;
+  RowCallback<3>::mainWindow = this;
+  cellButtonD.tapped = RowCallback<3>::tapped;
 
   cellButtonE.display = display;
   cellButtonE.character = 'E';
@@ -71,6 +85,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonE.right = cellButtonE.left + CELL_WIDTH - 1;
   cellButtonE.top = gridTop + CELL_HEIGHT + 2;
   cellButtonE.bottom = cellButtonE.top + CELL_HEIGHT - 1;
+  RowCallback<4>::mainWindow = this;
+  cellButtonE.tapped = RowCallback<4>::tapped;
 
   cellButtonF.display = display;
   cellButtonF.character = 'F';
@@ -78,6 +94,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonF.right = cellButtonF.left + CELL_WIDTH - 1;
   cellButtonF.top = gridTop + CELL_HEIGHT + 2;
   cellButtonF.bottom = cellButtonF.top + CELL_HEIGHT - 1;
+  RowCallback<5>::mainWindow = this;
+  cellButtonF.tapped = RowCallback<5>::tapped;
 
   cellButtonG.display = display;
   cellButtonG.character = 'G';
@@ -85,6 +103,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonG.right = cellButtonG.left + CELL_WIDTH - 1;
   cellButtonG.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButtonG.bottom = cellButtonG.top + CELL_HEIGHT - 1;
+  RowCallback<6>::mainWindow = this;
+  cellButtonG.tapped = RowCallback<6>::tapped;
 
   cellButtonH.display = display;
   cellButtonH.character = 'H';
@@ -92,6 +112,8 @@ void MainWindow::setupMemberVariables() {
   cellButtonH.right = cellButtonH.left + CELL_WIDTH - 1;
   cellButtonH.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButtonH.bottom = cellButtonH.top + CELL_HEIGHT - 1;
+  RowCallback<7>::mainWindow = this;
+  cellButtonH.tapped = RowCallback<7>::tapped;
 
   cellButton1.display = display;
   cellButton1.character = '1';
@@ -153,6 +175,22 @@ void MainWindow::setupMemberVariables() {
 }
 
 void MainWindow::loop() {
+  if(gridRedrawNeeded) {
+    drawGrid();
+    gridRedrawNeeded = false;
+    gridContentRedrawNeeded = true;
+  }
+
+  if(gridContentRedrawNeeded) {
+    if(state == MainWindowState::LETTERS_VISIBLE) {
+      drawGridLetters();
+      backButton.hide(); // TODO Only hide this when there's nothing in the 'cart' yet
+    } else if(state == MainWindowState::NUMBERS_VISIBLE) {
+      drawGridNumbers();
+      backButton.show();
+    }
+    gridContentRedrawNeeded = false;
+  }
 }
 
 void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
@@ -203,7 +241,6 @@ void MainWindow::drawGrid() {
   display->gfx_Line(gridLeft, row, gridRight, row, BLACK);
 }
 
-
 void MainWindow::drawGridLetters() {
   cellButtonA.enabled = Motors::rowExists(0);
   cellButtonB.enabled = Motors::rowExists(1);
@@ -223,6 +260,42 @@ void MainWindow::drawGridLetters() {
   cellButtonG.show();
   cellButtonH.show();
 }
+
+void MainWindow::drawGridNumbers() {
+  cellButton1.enabled = Motors::exists(selectedRow, 0);
+  cellButton2.enabled = Motors::exists(selectedRow, 1);
+  cellButton3.enabled = Motors::exists(selectedRow, 2);
+  cellButton4.enabled = Motors::exists(selectedRow, 3);
+  cellButton5.enabled = Motors::exists(selectedRow, 4);
+  cellButton6.enabled = Motors::exists(selectedRow, 5);
+  cellButton7.enabled = Motors::exists(selectedRow, 6);
+  cellButton8.enabled = Motors::exists(selectedRow, 7);
+
+  cellButton1.show();
+  cellButton2.show();
+  cellButton3.show();
+  cellButton4.show();
+  cellButton5.show();
+  cellButton6.show();
+  cellButton7.show();
+  cellButton8.show();
+}
+
+void MainWindow::back() {
+  if(state == MainWindowState::NUMBERS_VISIBLE) {
+    state = MainWindowState::LETTERS_VISIBLE;
+    gridContentRedrawNeeded = true;
+  }
+}
+
+void MainWindow::rowTapped(uint8_t row) {
+  if(state == MainWindowState::LETTERS_VISIBLE) {
+    selectedRow = row;
+    state = MainWindowState::NUMBERS_VISIBLE;
+    gridContentRedrawNeeded = true;
+  }
+}
+
 
 CellButton::CellButton() {
   display = nullptr;
@@ -248,7 +321,7 @@ void CellButton::show() {
   } else if(enabled) {
     display->txt_FGcolour(BLACK);
   } else {
-    display->txt_FGcolour(GRAY);
+    display->txt_FGcolour(LIGHTGREY);
   }
 
   display->gfx_MoveTo(
@@ -263,10 +336,43 @@ bool CellButton::inBounds(uint16_t x, uint16_t y) {
 }
 
 void BackButton::show() {
-  word color = pressed ? DEEPSKYBLUE : LIGHTSKYBLUE;
+  enabled = true;
+  word color = pressed ? BLUE : LIGHTSKYBLUE;
   display->gfx_RectangleFilled(left, top, right, bottom, color);
+
+  // Cells are 156 x 104 (3 x 2 multiple of 52)
+  word xValues[] = {32, 32, 59, 59, 120, 120, 59, 59};
+  word yValues[] = {52, 51, 24, 45,  45,  58, 58, 79};
+
+  SHIFT_POLY(xValues, left);
+  SHIFT_POLY(yValues, top);
+
+  uint8_t n = sizeof(xValues) / sizeof(word);
+  display->gfx_PolygonFilled(n, xValues, yValues, WHITE);
+
+  SHIFT_POLY(xValues, -left);
+  SHIFT_POLY(yValues, -top);
+}
+
+void BackButton::hide() {
+  enabled = false;
+  display->gfx_RectangleFilled(left, top, right, bottom, WHITESMOKE);
 }
 
 bool BackButton::inBounds(uint16_t x, uint16_t y) {
   return x > left && x < right && y < bottom && y > top;
+}
+
+template<uint8_t row>
+void RowCallback<row>::tapped() {
+  mainWindow->rowTapped(row);
+}
+
+template<GenericCallbackType type>
+void GenericCallback<type>::tapped() {
+  switch(type) {
+    case GenericCallbackType::BACK:
+      mainWindow->back();
+      break;
+  }
 }
