@@ -60,6 +60,7 @@ class SiteLink {
 
     static void handleStatus();
     static void handleProductUpdated();
+    static void handleAfterFirstProductFetched();
     static void handleOrdersByCard();
     static void handleProductRemoved();
 
@@ -75,4 +76,6 @@ class SiteLink {
     static uint8_t handshakeCount;
     static uint8_t garbageLoopCount;
     static bool fetchingProducts;
+    static bool firstProductFetch;
+    static bool hasProduct[64];
 };

@@ -26,10 +26,10 @@ bool DenhacWifiBridge::has_product[NUM_PRODUCTS];
 unsigned long DenhacWifiBridge::lastProductUpdateMillis = 0;
 
 void DenhacWifiBridge::setup() {
-  serial->begin(115200);
+  serial->begin(9600);
 
   lastProductUpdateMillis = 0;
-  memset(hashes, 0, sizeof(hashes));
+  memset(hashes, 0, sizeof(uint32_t) * NUM_PRODUCTS);
 
   DenhacWifiBridge::setupComm();
   
@@ -104,7 +104,7 @@ void DenhacWifiBridge::fetchProducts() {
     return;
   }
 
-  memset(has_product, false, sizeof(has_product));
+  memset(has_product, false, sizeof(bool) * NUM_PRODUCTS);
 
   JsonArray array = jsonDoc.as<JsonArray>();
   for(JsonObject obj : array) {
@@ -119,7 +119,7 @@ void DenhacWifiBridge::fetchProducts() {
     uint8_t stock_in_machine = obj["stock_in_machine"];
     const char * location_ref = obj["location"];
     uint8_t row = location_ref[0] - 'A';
-    uint8_t col = location_ref[1] - '0';
+    uint8_t col = location_ref[1] - '1';
 
     CRC32 crc;
 
@@ -135,6 +135,10 @@ void DenhacWifiBridge::fetchProducts() {
     uint8_t hash_index = row * 8 + col;
 
     if(hashes[hash_index] != crc_value) {
+      // Products take up almost the entire buffer
+      // Give time on either side for the host to read
+      delay(100);
+
       msgpck_write_integer(serial, 2);
       msgpck_write_integer(serial, id);
       msgpck_write_string(serial, (char*) name_ref, name_length);
@@ -143,6 +147,8 @@ void DenhacWifiBridge::fetchProducts() {
       msgpck_write_integer(serial, stock_in_machine);
       msgpck_write_integer(serial, row);
       msgpck_write_integer(serial, col);
+
+      delay(100);
 
       hashes[hash_index] = crc_value;
     }

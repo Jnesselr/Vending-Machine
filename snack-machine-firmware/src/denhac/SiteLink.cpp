@@ -21,9 +21,11 @@ HardwareSerial* SiteLink::linkSerial = &Serial1;
 uint8_t SiteLink::handshakeCount = 0;
 uint8_t SiteLink::garbageLoopCount = 0;
 bool SiteLink::fetchingProducts = false;
+bool SiteLink::firstProductFetch = false;
+bool SiteLink::hasProduct[64];
 
 void SiteLink::setup() {
-  linkSerial->begin(115200);
+  linkSerial->begin(9600);
 }
 
 void SiteLink::loop() {
@@ -37,6 +39,8 @@ void SiteLink::loop() {
     handleWaiting();
   } else if(state == SiteLinkState::HANDSHAKE) {
     handleHandshake();
+    firstProductFetch = true;
+    memset(hasProduct, false, sizeof(bool) * 64);
   } else {
     handleNormalCommands();
   }
@@ -69,7 +73,7 @@ void SiteLink::handleWaiting() {
   // It's only used to determine if the HUZZAH needs a reset
   garbageLoopCount++;
 
-  if(garbageLoopCount > 10) {
+  if(garbageLoopCount > 5) {
     huzzahResetPin.write(0xFF);
     updateState(SiteLinkState::UNKNOWN);
     garbageLoopCount = 0;
@@ -148,6 +152,18 @@ void SiteLink::handleStatus() {
     break;
   case BridgeStatus::PRODUCTS_FETCHED:
     fetchingProducts = false;
+    if(firstProductFetch) {
+      firstProductFetch = false;
+      for (uint8_t row = 0; row < 8; row++)
+      {
+        for (uint8_t col = 0; col < 8; col++)
+        {
+          if(! hasProduct[8 * row + col]) {
+            CALLBACK(productRemovedCallback, row, col)
+          }
+        }
+      }
+    }
     break;
   case BridgeStatus::CONNECTION_FAILED:
   case BridgeStatus::REST_NOT_FOUND:
@@ -174,6 +190,8 @@ void SiteLink::handleProductUpdated() {
   msgpck_read_integer(linkSerial, (byte*) &product.stockInMachine, sizeof(product.stockInMachine));
   msgpck_read_integer(linkSerial, (byte*) &product.row, sizeof(product.row));
   msgpck_read_integer(linkSerial, (byte*) &product.col, sizeof(product.col));
+
+  hasProduct[8 * product.row + product.col] = true;
 
   CALLBACK(productUpdatedCallback, product)
 }
@@ -263,15 +281,11 @@ Item SiteLink::readItem() {
 }
 
 void SiteLink::handleProductRemoved() {
-  Serial.println("Product removed!");
-
   uint8_t row = 0;
   uint8_t col = 0;
 
   msgpck_read_integer(linkSerial, (byte*) &row, sizeof(row));
   msgpck_read_integer(linkSerial, (byte*) &col, sizeof(col));
-  Serial.println(row);
-  Serial.println(col);
 
   CALLBACK(productRemovedCallback, row, col)
 }

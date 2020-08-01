@@ -58,7 +58,7 @@ void ProductManager::productRemoved(uint8_t row, uint8_t col) {
 
   // Invalidate the flag but don't overwite anything else to save
   // on EEPROM writes
-  EEPROM.write(address, 0xFF);
+  EEPROM.update(address, 0xFF);
 }
 
 void ProductManager::writeLong(uint16_t address, uint32_t value) {
