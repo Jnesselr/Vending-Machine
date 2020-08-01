@@ -40,6 +40,7 @@ bool ProductManager::isValid(uint8_t row, uint8_t col) {
 Product ProductManager::get(uint8_t row, uint8_t col) {
   uint16_t startAddress = 62 * (8 * row + col);
 
+  // TODO Handle invalid product
   Product product;
 
   product.id = readLong(startAddress + 1);
@@ -53,6 +54,26 @@ Product ProductManager::get(uint8_t row, uint8_t col) {
   return product;
 }
 
+Product ProductManager::get(uint32_t productId) {
+  Product product;
+
+  for (uint8_t row = 0; row < 8; row++)
+  {
+    for (uint8_t col = 0; col < 8; col++)
+    {
+      if(isValid(row, col)) {
+        product = get(row, col);
+        if(product.id == productId) {
+          return product;
+        }
+      }
+    }
+  }
+
+  // TODO Handle invalid product
+  return Product();
+}
+
 void ProductManager::productUpdated(const Product& product) {
   uint16_t startAddress = 62 * (8 * product.row + product.col);
 
@@ -62,11 +83,6 @@ void ProductManager::productUpdated(const Product& product) {
   writeLong(startAddress + 56, product.price);
   EEPROM.update(startAddress + 60, product.stockAvailable);
   EEPROM.update(startAddress + 61, product.stockInMachine);
-
-  Serial.print("Product added at ");
-  Serial.print(product.row);
-  Serial.print(" ");
-  Serial.println(product.col);
 }
 
 void ProductManager::productRemoved(uint8_t row, uint8_t col) {
@@ -75,10 +91,6 @@ void ProductManager::productRemoved(uint8_t row, uint8_t col) {
   // Invalidate the flag but don't overwite anything else to save
   // on EEPROM writes
   EEPROM.update(address, 0xFF);
-  Serial.print("Product removed at ");
-  Serial.print(row);
-  Serial.print(" ");
-  Serial.println(col);
 }
 
 void ProductManager::writeLong(uint16_t address, uint32_t value) {

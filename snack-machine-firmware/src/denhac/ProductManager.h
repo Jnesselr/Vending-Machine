@@ -12,6 +12,7 @@ class ProductManager {
     static bool isValid(uint8_t row);
     static bool isValid(uint8_t row, uint8_t col);
     static Product get(uint8_t row, uint8_t col);
+    static Product get(uint32_t productId);
 
     static void productUpdated(const Product& product);
     static void productRemoved(uint8_t row, uint8_t col);
