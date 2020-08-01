@@ -3,19 +3,39 @@
 #include "ui/Window.h"
 #include "ui/Button.h"
 
-class CellButton : public Button {
+class BackButton : public Button {
   public:
-    CellButton();
     void show();
-    void hide();
 
     Diablo_Serial_4DLib* display;
-    char character;
-    bool enabled;
     uint16_t left;
     uint16_t right;
     uint16_t top;
     uint16_t bottom;
+
+  protected:
+    bool inBounds(uint16_t x, uint16_t y);
+};
+
+class CellButton : public Button {
+  public:
+    CellButton();
+    void show();
+
+    Diablo_Serial_4DLib* display;
+    char character;
+    uint16_t left;
+    uint16_t right;
+    uint16_t top;
+    uint16_t bottom;
+
+  protected:
+    bool inBounds(uint16_t x, uint16_t y);
+};
+
+enum class MainWindowState {
+  LETTERS_VISIBLE,
+  NUMBERS_VISIBLE
 };
 
 class MainWindow : public Window {
@@ -26,13 +46,14 @@ class MainWindow : public Window {
   private:
     void setupMemberVariables();
     void drawGrid();
-    void drawGridBackArrow(bool pressed);
     void drawGridLetters();
 
     bool memberVariablesSet = false;
 
     uint16_t screenWidth;
     uint16_t screenHeight;
+
+    MainWindowState state;
 
     const uint8_t CELL_WIDTH = 156;
     const uint8_t CELL_HEIGHT = 104;
@@ -42,7 +63,7 @@ class MainWindow : public Window {
     uint16_t gridBottom;
     uint16_t gridTop;
 
-    // BackButton backButton;
+    BackButton backButton;
 
     CellButton cellButtonA;
     CellButton cellButtonB;
