@@ -5,6 +5,7 @@
 #include "denhac/DenhacBindings.h"
 #include "denhac/ui/DenhacUI.h"
 #include "denhac/Session.h"
+#include "denhac/ProductManager.h"
 
 #include "hid_rfid.h"
 
@@ -18,7 +19,8 @@ void DenhacBindings::setup() {
   CoinChanger::onStateChanged = DenhacBindings::onCoinChangerStateCallback;
 
   SiteLink::onStateChanged = DenhacBindings::onSiteLinkStateCallback;
-  SiteLink::productUpdatedCallback = DenhacBindings::onProductUpdatedCallback;
+  SiteLink::productUpdatedCallback = ProductManager::productUpdated;
+  SiteLink::productRemovedCallback = ProductManager::productRemoved;
 }
 
 void DenhacBindings::onCardScanned(unsigned long cardCode) {
@@ -59,24 +61,6 @@ void DenhacBindings::onSiteLinkStateCallback(
       Serial.println("Site Link is idle!");
       DenhacUI::bootWindow.setSiteLinkIdle(true);
     }
-}
-
-void DenhacBindings::onProductUpdatedCallback(const Product& product) {
-  Serial.println("Product updated!");
-  Serial.print("ID: ");
-  Serial.println(product.id);
-  Serial.print("Name: ");
-  Serial.println(product.name);
-  Serial.print("Row: ");
-  Serial.println(product.row);
-  Serial.print("Col: ");
-  Serial.println(product.col);
-  Serial.print("Price: ");
-  Serial.println(product.price);
-  Serial.print("Stock Available: ");
-  Serial.println(product.stockAvailable);
-  Serial.print("Stock In Machine: ");
-  Serial.println(product.stockInMachine);
 }
 
 #endif

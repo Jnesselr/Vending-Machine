@@ -25,5 +25,4 @@ class DenhacBindings {
 
     // SiteLink
     static void onSiteLinkStateCallback(SiteLinkState oldState, SiteLinkState newState);
-    static void onProductUpdatedCallback(const Product& product);
 };
