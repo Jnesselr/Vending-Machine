@@ -73,4 +73,15 @@ extern unsigned long current_loop_millis;
   display->gfx_PutPixel(X, y, PAINT); \
   y--;
 
+#define MEASURE_PIXEL_T2B(X, CHECK, PAINT) \
+  static uint16_t y = 0; \
+  if(y == WindowManager::getHeight()) return; \
+  if(display->gfx_GetPixel(X, y) == CHECK) { \
+    Serial.println("Found it!"); \
+    Serial.println(y); \
+    while(true) {} \
+  } \
+  display->gfx_PutPixel(X, y, PAINT); \
+  y++;
+
 #endif

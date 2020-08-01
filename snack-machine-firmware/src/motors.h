@@ -21,6 +21,7 @@ class Motors {
     static void setup();
     static void loop();
 
+    static bool rowExists(int row);
     static bool exists(int row, int col);
     static void vend(int row, int col);
     static void off();
@@ -40,7 +41,7 @@ class Motors {
     static MotorState motorState;
 
     static unsigned long lastStateChangeTime;
-    static uint64_t motorsScanResult;;
+    static uint8_t motorsScanResult[8];
     static uint8_t selectedRow;
     static uint8_t selectedCol;
 

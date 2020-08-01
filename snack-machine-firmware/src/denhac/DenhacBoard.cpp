@@ -36,7 +36,7 @@ Task DenhacBoard::motorLoop(40, []{
   Motors::loop();
 });
 
-Task DenhacBoard::siteLinkLoop(500, []{
+Task DenhacBoard::siteLinkLoop(300, []{
   SiteLink::loop();
 });
 
