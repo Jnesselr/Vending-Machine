@@ -198,6 +198,14 @@ void MainWindow::setupMemberVariables() {
   StaticCallback<StaticCallbackType::CANCEL_ORDER>::mainWindow = this;
   cancelOrderButton.tapped = StaticCallback<StaticCallbackType::CANCEL_ORDER>::callback;
 
+  addItemButton.display = display;
+  addItemButton.left = gridRight - 105;
+  addItemButton.right = gridRight;
+  addItemButton.bottom = gridBottom - CELL_HEIGHT - 6; // TODO This needs to be 4 spaces betwen vend button and here
+  addItemButton.top = addItemButton.bottom - 74 - 7;
+  StaticCallback<StaticCallbackType::ADD_ITEM>::mainWindow = this;
+  addItemButton.tapped = StaticCallback<StaticCallbackType::ADD_ITEM>::callback;
+
   state = MainWindowState::LETTERS_VISIBLE;
   memberVariablesSet = true;
 }
@@ -238,6 +246,7 @@ void MainWindow::loop() {
 void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
   if(state == MainWindowState::VEND_SCREEN) {
     cancelOrderButton.touch(touchMode, x, y);
+    addItemButton.touch(touchMode, x, y);
   } else if(state == MainWindowState::LETTERS_VISIBLE) {
     backButton.touch(touchMode, x, y);
     cellButtonA.touch(touchMode, x, y);
@@ -315,6 +324,7 @@ void MainWindow::drawVendScreen() {
   display->gfx_RectangleFilled(gridLeft + 4, gridBottom - CELL_HEIGHT - 1 + 4, gridRight - 4, gridBottom - 4, WHITE);
 
   cancelOrderButton.show();
+  addItemButton.show();
 }
 
 CellButton* MainWindow::rowButton(uint8_t row) {
@@ -477,6 +487,11 @@ void MainWindow::moneyAvailable(uint32_t amount) {
     cancelOrderButton.enabled = true;
     cancelOrderButton.show(); // Redraw since it's available now
   }
+}
+
+void MainWindow::addItemScreen() {
+  state = MainWindowState::LETTERS_VISIBLE;
+  gridRedrawNeeded = true;
 }
 
 #endif

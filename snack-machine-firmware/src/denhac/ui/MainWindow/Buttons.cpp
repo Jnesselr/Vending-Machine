@@ -117,25 +117,43 @@ void CancelOrderButton::show() {
 }
 
 bool CancelOrderButton::inBounds(uint16_t x, uint16_t y) {
-  uint16_t mid = (top + bottom) / 2;
-  uint16_t arrowLeftX = left + (mid - top);
-  if(y > bottom || y < top) {
-    return false;
+  return x > left && x < right && y < bottom && y > top;
+}
+
+AddItemButton::AddItemButton() {
+  display = nullptr;
+  enabled = true;
+  left = right = top = bottom = 0;
+}
+
+void AddItemButton::show() {
+  word borderColor = BLACK;
+  word insetColor = WHITE;
+  word textColor = BLACK;
+
+  if(pressed) {
+    insetColor = BLACK;
+    textColor = WHITE;
   }
 
-  if(x < left || x > right) {
-    return false;
+  display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
+
+  if(borderColor != insetColor) {
+    display->gfx_RectangleFilled(left + 4, top + 4, right - 4, bottom - 4, insetColor);
   }
 
-  if(x >= arrowLeftX && x <= right) {
-    return true;
-  }
+  display->txt_BGcolour(insetColor);
+  display->txt_FGcolour(textColor);
+  display->txt_Width(3);
+  display->txt_Height(3);
+  display->gfx_MoveTo(left + 20, top + 5);
+  display->putstr((char*) "Add");
+  display->gfx_MoveTo(left + 4, top + 41);
+  display->putstr((char*) "Item");
+}
 
-  uint16_t diffX = x - left;
-  if(y > (mid - diffX) && y < (mid + diffX)) {
-    return true;
-  }
-  return false;
+bool AddItemButton::inBounds(uint16_t x, uint16_t y) {
+  return x > left && x < right && y < bottom && y > top;
 }
 
 #endif

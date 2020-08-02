@@ -23,6 +23,7 @@ class MainWindow : public Window {
     void back();
     void cancelOrder();
     void moneyAvailable(uint32_t amount);
+    void addItemScreen();
   private:
     void setupMemberVariables();
     void drawGrid();
@@ -80,4 +81,5 @@ class MainWindow : public Window {
     CellButton cellButton8;
 
     CancelOrderButton cancelOrderButton;
+    AddItemButton addItemButton;
 };

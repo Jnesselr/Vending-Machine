@@ -54,4 +54,9 @@ void StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::callback(uin
   mainWindow->moneyAvailable(amount);
 }
 
+template<>
+void StaticCallback<StaticCallbackType::ADD_ITEM>::callback() {
+  mainWindow->addItemScreen();
+}
+
 #endif
