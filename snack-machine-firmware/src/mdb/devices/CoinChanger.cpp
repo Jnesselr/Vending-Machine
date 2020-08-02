@@ -88,6 +88,10 @@ void CoinChanger::dispense(uint8_t coinType, uint8_t coinCount) {
   commandBuffer.push(dispenseCommand);
 }
 
+uint16_t CoinChanger::getValue(uint8_t coinType) {
+  return CoinChanger::coinTypeCredit[coinType] * (uint16_t) coinScalingFactor;
+}
+
 void CoinChanger::sendPoll()
 {
   // DEBUG("Sending Coin POLL")

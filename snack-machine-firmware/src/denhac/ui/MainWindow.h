@@ -54,6 +54,7 @@ class MainWindow : public Window {
     void drawGrid();
     void drawGridLetters();
     void drawGridNumbers();
+    void drawCurrentCredit();
 
     CellButton* rowButton(uint8_t row);
     CellButton* colButton(uint8_t col);

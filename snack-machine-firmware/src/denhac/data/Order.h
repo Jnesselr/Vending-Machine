@@ -32,7 +32,6 @@ class Order {
     uint8_t status;
     uint32_t paid;
     uint32_t total;
-  
   private:
     void recalculateTotal();
     Item items[8];

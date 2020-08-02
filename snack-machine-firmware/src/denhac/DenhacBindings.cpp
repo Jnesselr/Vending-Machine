@@ -17,6 +17,7 @@ void DenhacBindings::setup() {
   BillValidator::onStateChanged = DenhacBindings::onBillValidatorStateCallback;
 
   CoinChanger::onStateChanged = DenhacBindings::onCoinChangerStateCallback;
+  CoinChanger::onCoinDeposited = DenhacBindings::onCoinDepositedCallback;
 
   SiteLink::onStateChanged = DenhacBindings::onSiteLinkStateCallback;
   SiteLink::productUpdatedCallback = ProductManager::productUpdated;
@@ -52,6 +53,16 @@ void DenhacBindings::onCoinChangerStateCallback(
       Serial.println("Coin Changer is idle!");
       DenhacUI::bootWindow.setCoinChangerIdle(true);
     }
+}
+
+void DenhacBindings::onCoinDepositedCallback(
+  CoinRouting routing,
+  uint8_t coinType) {
+    if(routing == CoinRouting::REJECT) {
+      return;
+    }
+
+    Session::moneyInserted(CoinChanger::getValue(coinType));
 }
 
 void DenhacBindings::onSiteLinkStateCallback(

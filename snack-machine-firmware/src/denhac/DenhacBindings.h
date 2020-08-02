@@ -22,6 +22,7 @@ class DenhacBindings {
 
     // Coin Changer
     static void onCoinChangerStateCallback(CoinChangerState oldState, CoinChangerState newState);
+    static void onCoinDepositedCallback(CoinRouting routing, uint8_t coinType);
 
     // SiteLink
     static void onSiteLinkStateCallback(SiteLinkState oldState, SiteLinkState newState);

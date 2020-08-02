@@ -200,6 +200,9 @@ void MainWindow::setupMemberVariables() {
 void MainWindow::loop() {
   if(current_loop_millis > lastGridValidityScan + 200) {
     verifyGridValidity();
+
+    // !WARN! Doesn't go here
+    drawCurrentCredit();
   }
 
   if(gridRedrawNeeded) {
@@ -369,15 +372,45 @@ void MainWindow::drawOrder() {
 
   Order* order = Session::getCurrentOrder();
 
+  uint16_t dollars = order->total / 100;
+  uint8_t cents = order->total % 100;
+  uint8_t dollarsWidth = (uint8_t) log10(dollars) + 1;
+  // Max is 30 wide, 4 of those are $. and cents
+  display->txt_MoveCursor(0, 26 - dollarsWidth);
+  display->print('$');
+  display->print(dollars);
+  display->print('.');
+  if(cents < 10) {
+    display->print('0');
+  }
+  display->print(cents);
+
   for (uint8_t i = 0; i < order->getNumItems(); i++)
   {
-    display->txt_MoveCursor(2 * i, 0);
+    display->txt_MoveCursor(2 * i + 1, 0);
     Item item = order->getItem(i);
     Product product = ProductManager::get(item.productId);
     display->print(product.name);
     display->print(" => ");
     display->print(item.quantity);
   }
+}
+
+void MainWindow::drawCurrentCredit() {
+  display->txt_Width(2);
+  display->txt_Height(2);
+
+  uint32_t credit = Session::getCurrentAvailableMoney();
+  uint16_t dollars = credit / 100;
+  uint8_t cents = credit % 100;
+  display->txt_MoveCursor(0, 0);
+  display->print('$');
+  display->print(dollars);
+  display->print('.');
+  if(cents < 10) {
+    display->print('0');
+  }
+  display->print(cents);
 }
 
 void MainWindow::back() {

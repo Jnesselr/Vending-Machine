@@ -25,6 +25,7 @@ class CoinChanger {
     static void loop();
 
     static void dispense(uint8_t coinType, uint8_t coinCount);
+    static uint16_t getValue(uint8_t coinType);
 
     // Callbacks
     static CoinChangerStateCallback onStateChanged;
