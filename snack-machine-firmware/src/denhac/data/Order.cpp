@@ -16,6 +16,13 @@ Item::Item(uint32_t itemId, uint32_t productId, uint8_t quantity, uint8_t vended
   this->vended = vended;
 }
 
+void Item::reset() {
+  itemId = 0;
+  productId = 0;
+  quantity = 0;
+  vended = 0;
+}
+
 Order::Order() {
   orderId = 0;
   status = 0;
@@ -96,4 +103,17 @@ void Order::recalculateTotal() {
   }
 
   this->total = newTotal;
+}
+
+void Order::reset() {
+  for (uint8_t i = 0; i < numItems; i++)
+  {
+    items[i].reset();
+  }
+  
+  numItems = 0;
+  orderId = 0;
+  status = 0;
+  paid = 0;
+  total = 0;
 }

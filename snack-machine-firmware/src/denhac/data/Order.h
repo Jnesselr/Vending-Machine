@@ -8,6 +8,8 @@ class Item {
     Item();
     Item(uint32_t itemId, uint32_t productId, uint8_t quantity, uint8_t vended);
 
+    void reset();
+
     uint32_t itemId;
     uint32_t productId;
     uint8_t quantity;
@@ -27,6 +29,8 @@ class Order {
 
     uint8_t getNumItems();
     Item getItem(uint8_t itemNum);
+
+    void reset();
 
     uint32_t orderId;
     uint8_t status;

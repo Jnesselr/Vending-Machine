@@ -7,6 +7,8 @@ typedef void (*MoneyCallback)(uint32_t amount);
 
 class Session {
   public:
+    static void reset();
+
     static Order* getCurrentOrder();
     static bool isActive();
     static uint32_t getCurrentAvailableMoney();

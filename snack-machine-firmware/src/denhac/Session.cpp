@@ -13,6 +13,16 @@ uint32_t Session::moneyInsertedInMachine = 0;
 MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
 
+void Session::reset() {
+  active = false;
+  cardNum = 0;
+  currentOrder.reset();
+  moneyInsertedInMachine = 0;
+  onlineCredit = 0;
+
+  CALLBACK(moneyAvailableCallback, 0);
+}
+
 Order* Session::getCurrentOrder() {
   return &currentOrder;
 }

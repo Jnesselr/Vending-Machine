@@ -455,7 +455,8 @@ void MainWindow::back() {
 }
 
 void MainWindow::cancelOrder() {
-  // TODO
+  Session::reset();
+  drawOrder();
 }
 
 void MainWindow::rowTapped(uint8_t row) {
