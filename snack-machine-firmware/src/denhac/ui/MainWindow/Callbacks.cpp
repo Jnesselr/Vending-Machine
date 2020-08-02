@@ -49,4 +49,9 @@ void StaticCallback<StaticCallbackType::CANCEL_ORDER>::callback() {
   mainWindow->cancelOrder();
 }
 
+template<>
+void StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::callback(uint32_t amount) {
+  mainWindow->moneyAvailable(amount);
+}
+
 #endif

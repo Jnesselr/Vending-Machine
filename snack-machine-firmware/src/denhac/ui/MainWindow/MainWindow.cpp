@@ -18,6 +18,9 @@ void MainWindow::show() {
   display->gfx_Cls();
 
   gridRedrawNeeded = true;
+
+  StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::mainWindow = this;
+  Session::moneyAvailableCallback = StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::callback;
 }
 
 void MainWindow::setupMemberVariables() {
@@ -187,7 +190,7 @@ void MainWindow::setupMemberVariables() {
   cellButton8.tapped = ColCallback<7>::tapped;
 
   cancelOrderButton.display = display;
-  cancelOrderButton.enabled = true;
+  cancelOrderButton.enabled = false;
   cancelOrderButton.left = gridLeft;
   cancelOrderButton.right = 191;
   cancelOrderButton.bottom = gridBottom - CELL_HEIGHT - 6; // TODO This needs to be 4 spaces betwen vend button and here
@@ -462,6 +465,16 @@ void MainWindow::colTapped(uint8_t col) {
 
     state = MainWindowState::VEND_SCREEN;
     vendScreenRedrawNeeded = true;
+  }
+}
+
+void MainWindow::moneyAvailable(uint32_t amount) {
+  drawCurrentCredit();
+
+  if(!cancelOrderButton.enabled &&
+    state == MainWindowState::VEND_SCREEN) {
+    cancelOrderButton.enabled = true;
+    cancelOrderButton.show(); // Redraw since it's available now
   }
 }
 

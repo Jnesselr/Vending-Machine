@@ -22,6 +22,7 @@ class MainWindow : public Window {
     void colTapped(uint8_t col);
     void back();
     void cancelOrder();
+    void moneyAvailable(uint32_t amount);
   private:
     void setupMemberVariables();
     void drawGrid();
