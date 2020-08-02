@@ -368,6 +368,8 @@ void MainWindow::verifyGridValidity() {
 void MainWindow::drawOrder() {
   display->txt_Width(2);
   display->txt_Height(2);
+  display->txt_FGcolour(BLACK);
+  display->txt_BGcolour(WHITESMOKE);
   display->gfx_RectangleFilled(0, 0, screenWidth - 1, 300, WHITESMOKE);
 
   Order* order = Session::getCurrentOrder();
@@ -399,6 +401,8 @@ void MainWindow::drawOrder() {
 void MainWindow::drawCurrentCredit() {
   display->txt_Width(2);
   display->txt_Height(2);
+  display->txt_FGcolour(BLACK);
+  display->txt_BGcolour(WHITESMOKE);
 
   uint32_t credit = Session::getCurrentAvailableMoney();
   uint16_t dollars = credit / 100;
