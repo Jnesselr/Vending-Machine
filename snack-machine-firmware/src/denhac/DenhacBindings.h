@@ -19,6 +19,7 @@ class DenhacBindings {
 
     // Bill Validator
     static void onBillValidatorStateCallback(BillValidatorState oldState, BillValidatorState newState);
+    static void onBillRoutedCallback(BillRouting, uint8_t billType);
 
     // Coin Changer
     static void onCoinChangerStateCallback(CoinChangerState oldState, CoinChangerState newState);

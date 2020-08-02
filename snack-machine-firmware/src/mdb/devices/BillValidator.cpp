@@ -9,6 +9,7 @@ static const uint16_t CMD_SETUP[] = {0x131};
 static const uint16_t CMD_BILL_SETUP[] = {0x134, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_BILL_STACKER[] = {0x136};
 static const uint16_t CMD_ACCEPT_BILL[] = {0x135, 0x01};
+static const uint16_t CMD_REJECT_BILL[] = {0x135, 0x00};
 static const uint16_t CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION[] = {0x137, 0x02};
 static const uint16_t CMD_RECYCLER_FEATURE_ENABLE[] = {0x137, 0x01, 0x00, 0x00, 0x00, 0x02};
 
@@ -27,9 +28,22 @@ bool BillValidator::canEscrow;
 uint8_t BillValidator::billTypeCredit[16];
 uint32_t BillValidator::levelTwoOptionalFeatures;
 
-BillValidatorStateCallback BillValidator::onStateChanged = NULL;
-BillRecyclerStateCallback BillValidator::onRecyclerStateChanged = NULL;
-BillAcceptedCallback BillValidator::onBillAccepted = NULL;
+BillValidatorStateCallback BillValidator::onStateChanged = nullptr;
+BillRecyclerStateCallback BillValidator::onRecyclerStateChanged = nullptr;
+BillRoutedCallback BillValidator::onBillRouted = nullptr;
+VoidCallback BillValidator::onDefectiveMotor = nullptr;
+VoidCallback BillValidator::onSensorProblem = nullptr;
+VoidCallback BillValidator::onValidatorBusy = nullptr;
+VoidCallback BillValidator::onROMChecksumError = nullptr;
+VoidCallback BillValidator::onValidatorJammed = nullptr;
+VoidCallback BillValidator::onJustReset = nullptr;
+VoidCallback BillValidator::onBillRemoved = nullptr;
+VoidCallback BillValidator::onCashBoxOutOfPosition = nullptr;
+VoidCallback BillValidator::onValidatorDisabled = nullptr;
+VoidCallback BillValidator::onInvalidEscrowRequest = nullptr;
+VoidCallback BillValidator::onBillRejected = nullptr;
+VoidCallback BillValidator::onPossibleCreditedBillRemoval = nullptr;
+BillInputWhileDisabledCallback BillValidator::onBillInputWhileDisabled = nullptr;
 
 void BillValidator::loop()
 {
@@ -117,104 +131,104 @@ void BillValidator::sendPoll()
       uint8_t billType = (data & 0xF);
       BillRouting billRouting = BillRouting(billRoutingCode);
 
-      if(onBillAccepted != NULL) {
-        onBillAccepted(billRouting, billType);
-      }
+      CALLBACK(onBillRouted, billRouting, billType)
     }
     else if (data == 0x01)
     {
-      // Defective Motor
+      CALLBACK(onDefectiveMotor)
     }
     else if (data == 0x02)
     {
-      // Sensor Problem
+      CALLBACK(onSensorProblem)
     }
     else if (data == 0x03)
     {
-      // Validator Busy
+      CALLBACK(onValidatorBusy)
     }
     else if (data == 0x04)
     {
-      // ROM Checksum Error
+      CALLBACK(onROMChecksumError)
     }
     else if (data == 0x05)
     {
-      // Validator Jammed
+      CALLBACK(onValidatorJammed)
     }
     else if (data == 0x06)
     {
       // Validator was Reset
+      CALLBACK(onJustReset);
       updateState(BillValidatorState::RESET);
       updateRecyclerState(BillRecyclerState::UNKNOWN);
     }
     else if (data == 0x07)
     {
-      // Bill Removed
+      CALLBACK(onBillRemoved)
     }
     else if (data == 0x08)
     {
-      // Cash Box out of Position
+      CALLBACK(onCashBoxOutOfPosition)
     }
     else if (data == 0x09)
     {
-      // Validator Disabled
+      CALLBACK(onValidatorDisabled)
     }
     else if (data == 0x0A)
     {
-      // Invalid Escrow request
+      CALLBACK(onInvalidEscrowRequest)
     }
     else if (data == 0x0B)
     {
-      // Bill Rejected
+      CALLBACK(onBillRejected)
     }
     else if (data == 0x0C)
     {
-      // Possible Credit Bill Removal
+      CALLBACK(onPossibleCreditedBillRemoval)
     }
     else if (data & 0x40)
     {
       // Number of attempts to input a bill while validator is disabled
       // & 0x1F
+      CALLBACK(onBillInputWhileDisabled, data & 0x1F)
     }
     else if (data == 0x21)
     {
-      // Bill Recycler Escrow Request
+      // TODO Bill Recycler Escrow Request
     }
     else if (data == 0x22)
     {
-      // Bill Recycler Dispernser Payout Busy
+      // TODO Bill Recycler Dispernser Payout Busy
     }
     else if (data == 0x23)
     {
-      // Bill Recycler Dispenser Busy
+      // TODO Bill Recycler Dispenser Busy
     }
     else if (data == 0x24)
     {
-      // Bill Recycler Defective Dispenser Sensor
+      // TODO Bill Recycler Defective Dispenser Sensor
     }
     else if (data == 0x26)
     {
-      // Bill Recycler Dispensor did not start / motor problem
+      // TODO Bill Recycler Dispensor did not start / motor problem
     }
     else if (data == 0x27)
     {
-      // Bill Recycler Dispenser Jam
+      // TODO Bill Recycler Dispenser Jam
     }
     else if (data == 0x28)
     {
-      // Bill Recycler ROM checksum
+      // TODO Bill Recycler ROM checksum
     }
     else if (data == 0x29)
     {
-      // Bill Recycler Dispenser disabled
+      // TODO Bill Recycler Dispenser disabled
     }
     else if (data == 0x2A)
     {
-      // Bill Recycler Bill waiting
+      // TODO Bill Recycler Bill waiting
     }
     else if (data == 0x2F)
     {
-      // Bill Recycler Filled key pressed
+      // TODO Bill Recycler Filled key pressed
     }
     i++;
   }
@@ -355,6 +369,12 @@ void BillValidator::acceptBill() {
   static MDBResult mdbResult;
 
   MDB::writeForResult(CMD_ACCEPT_BILL, LENGTH(CMD_ACCEPT_BILL), &mdbResult);
+}
+
+void BillValidator::rejectBill() {
+  static MDBResult mdbResult;
+
+  MDB::writeForResult(CMD_REJECT_BILL, LENGTH(CMD_REJECT_BILL), &mdbResult);
 }
 
 uint16_t BillValidator::billValue(uint8_t billType) {

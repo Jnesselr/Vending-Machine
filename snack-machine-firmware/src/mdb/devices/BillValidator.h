@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mdb/MDB.h"
+#include "utils.h"
 
 enum class BillValidatorState {
   UNKNOWN,
@@ -30,7 +31,8 @@ enum class BillRouting {
 
 typedef void (*BillValidatorStateCallback)(BillValidatorState oldState, BillValidatorState newState);
 typedef void (*BillRecyclerStateCallback)(BillRecyclerState oldState, BillRecyclerState newState);
-typedef void (*BillAcceptedCallback)(BillRouting, uint8_t billType);
+typedef void (*BillRoutedCallback)(BillRouting, uint8_t billType);
+typedef void (*BillInputWhileDisabledCallback)(uint8_t numAttempts);
 
 class BillValidator {
   public:
@@ -39,10 +41,23 @@ class BillValidator {
     // Callbacks
     static BillValidatorStateCallback onStateChanged;
     static BillRecyclerStateCallback onRecyclerStateChanged;
-    static BillAcceptedCallback onBillAccepted;
+    static BillRoutedCallback onBillRouted;
+    static VoidCallback onDefectiveMotor;
+    static VoidCallback onSensorProblem;
+    static VoidCallback onValidatorBusy;
+    static VoidCallback onROMChecksumError;
+    static VoidCallback onValidatorJammed;
+    static VoidCallback onJustReset;
+    static VoidCallback onBillRemoved;
+    static VoidCallback onCashBoxOutOfPosition;
+    static VoidCallback onValidatorDisabled;
+    static VoidCallback onInvalidEscrowRequest;
+    static VoidCallback onBillRejected;
+    static VoidCallback onPossibleCreditedBillRemoval;
+    static BillInputWhileDisabledCallback onBillInputWhileDisabled;
 
     static void acceptBill();
-    // TODO static void rejectBill();
+    static void rejectBill();
 
     static uint16_t billValue(uint8_t billType);
 

@@ -15,6 +15,7 @@ void DenhacBindings::setup() {
   Motors::onSystemStateChanged = DenhacBindings::onMotorSystemStateChanged;
 
   BillValidator::onStateChanged = DenhacBindings::onBillValidatorStateCallback;
+  BillValidator::onBillRouted = DenhacBindings::onBillRoutedCallback;
 
   CoinChanger::onStateChanged = DenhacBindings::onCoinChangerStateCallback;
   CoinChanger::onCoinDeposited = DenhacBindings::onCoinDepositedCallback;
@@ -44,6 +45,21 @@ void DenhacBindings::onBillValidatorStateCallback(
       Serial.println("Bill Validator is idle!");
       DenhacUI::bootWindow.setBillValidatorIdle(true);
     }
+}
+
+void DenhacBindings::onBillRoutedCallback(BillRouting routing, uint8_t billType) {
+  Serial.println("On bill routed!");
+  Serial.println((uint8_t)routing);
+  Serial.println(billType);
+  switch(routing) {
+    case BillRouting::ESCROW_POSITION:
+      BillValidator::acceptBill();
+      break;
+    case BillRouting::BILL_STACKED:
+    case BillRouting::BILL_TO_RECYCLER:
+      Session::moneyInserted(BillValidator::billValue(billType));
+      break;
+  }
 }
 
 void DenhacBindings::onCoinChangerStateCallback(
