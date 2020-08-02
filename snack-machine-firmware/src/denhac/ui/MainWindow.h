@@ -34,7 +34,23 @@ class CellButton : public Button {
     bool inBounds(uint16_t x, uint16_t y);
 };
 
+class CancelOrderButton : public Button {
+  public:
+    CancelOrderButton();
+    void show();
+
+    Diablo_Serial_4DLib* display;
+    uint16_t left;
+    uint16_t right;
+    uint16_t top;
+    uint16_t bottom;
+
+  protected:
+    bool inBounds(uint16_t x, uint16_t y);
+};
+
 enum class MainWindowState {
+  VEND_SCREEN,
   LETTERS_VISIBLE,
   NUMBERS_VISIBLE
 };
@@ -49,12 +65,14 @@ class MainWindow : public Window {
     void rowTapped(uint8_t row);
     void colTapped(uint8_t col);
     void back();
+    void cancelOrder();
   private:
     void setupMemberVariables();
     void drawGrid();
     void drawGridLetters();
     void drawGridNumbers();
     void drawCurrentCredit();
+    void drawVendScreen();
 
     CellButton* rowButton(uint8_t row);
     CellButton* colButton(uint8_t col);
@@ -66,9 +84,9 @@ class MainWindow : public Window {
     bool memberVariablesSet = false;
     bool gridRedrawNeeded = false;
     bool gridContentRedrawNeeded = false;
-    unsigned long lastGridValidityScan = 0;
-
     bool orderContentRedrawNeeded = false;
+    bool vendScreenRedrawNeeded = false;
+    unsigned long lastGridValidityScan = 0;
 
     uint16_t screenWidth;
     uint16_t screenHeight;
@@ -103,10 +121,13 @@ class MainWindow : public Window {
     CellButton cellButton6;
     CellButton cellButton7;
     CellButton cellButton8;
+
+    CancelOrderButton cancelOrderButton;
 };
 
 enum class GenericCallbackType {
-  BACK
+  BACK,
+  CANCEL_ORDER
 };
 
 template<GenericCallbackType type>

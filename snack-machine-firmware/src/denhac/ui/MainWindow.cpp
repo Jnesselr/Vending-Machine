@@ -194,15 +194,20 @@ void MainWindow::setupMemberVariables() {
   ColCallback<7>::mainWindow = this;
   cellButton8.tapped = ColCallback<7>::tapped;
 
+  cancelOrderButton.display = display;
+  cancelOrderButton.enabled = false;
+  cancelOrderButton.left = gridLeft;
+  cancelOrderButton.right = 191;
+  cancelOrderButton.bottom = gridBottom - CELL_HEIGHT - 6; // TODO This needs to be 4 spaces betwen vend button and here
+  cancelOrderButton.top = cancelOrderButton.bottom - 74 - 7;
+
+  state = MainWindowState::LETTERS_VISIBLE;
   memberVariablesSet = true;
 }
 
 void MainWindow::loop() {
   if(current_loop_millis > lastGridValidityScan + 200) {
     verifyGridValidity();
-
-    // !WARN! Doesn't go here
-    drawCurrentCredit();
   }
 
   if(gridRedrawNeeded) {
@@ -214,12 +219,17 @@ void MainWindow::loop() {
   if(gridContentRedrawNeeded) {
     if(state == MainWindowState::LETTERS_VISIBLE) {
       drawGridLetters();
-      backButton.hide(); // TODO Only hide this when there's nothing in the 'cart' yet
+      backButton.show();
     } else if(state == MainWindowState::NUMBERS_VISIBLE) {
       drawGridNumbers();
       backButton.show();
     }
     gridContentRedrawNeeded = false;
+  }
+
+  if(vendScreenRedrawNeeded) {
+    drawVendScreen();
+    vendScreenRedrawNeeded = false;
   }
 
   if(orderContentRedrawNeeded) {
@@ -229,9 +239,10 @@ void MainWindow::loop() {
 }
 
 void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
-  backButton.touch(touchMode, x, y);
-
-  if(state == MainWindowState::LETTERS_VISIBLE) {
+  if(state == MainWindowState::VEND_SCREEN) {
+    cancelOrderButton.touch(touchMode, x, y);
+  } else if(state == MainWindowState::LETTERS_VISIBLE) {
+    backButton.touch(touchMode, x, y);
     cellButtonA.touch(touchMode, x, y);
     cellButtonB.touch(touchMode, x, y);
     cellButtonC.touch(touchMode, x, y);
@@ -241,6 +252,7 @@ void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
     cellButtonG.touch(touchMode, x, y);
     cellButtonH.touch(touchMode, x, y);
   } else if(state == MainWindowState::NUMBERS_VISIBLE) {
+    backButton.touch(touchMode, x, y);
     cellButton1.touch(touchMode, x, y);
     cellButton2.touch(touchMode, x, y);
     cellButton3.touch(touchMode, x, y);
@@ -298,6 +310,14 @@ void MainWindow::drawGridNumbers() {
   cellButton6.show();
   cellButton7.show();
   cellButton8.show();
+}
+
+void MainWindow::drawVendScreen() {
+  display->gfx_RectangleFilled(0, gridTop, screenWidth - 1, gridBottom, WHITESMOKE);
+  display->gfx_RectangleFilled(gridLeft, gridBottom - CELL_HEIGHT - 1, gridRight, gridBottom, LIGHTGREEN);
+  display->gfx_RectangleFilled(gridLeft + 4, gridBottom - CELL_HEIGHT - 1 + 4, gridRight - 4, gridBottom - 4, WHITE);
+
+  cancelOrderButton.show();
 }
 
 CellButton* MainWindow::rowButton(uint8_t row) {
@@ -418,10 +438,17 @@ void MainWindow::drawCurrentCredit() {
 }
 
 void MainWindow::back() {
-  if(state == MainWindowState::NUMBERS_VISIBLE) {
+  if(state == MainWindowState::LETTERS_VISIBLE) {
+    state = MainWindowState::VEND_SCREEN;
+    vendScreenRedrawNeeded = true;
+  } else if(state == MainWindowState::NUMBERS_VISIBLE) {
     state = MainWindowState::LETTERS_VISIBLE;
     gridContentRedrawNeeded = true;
   }
+}
+
+void MainWindow::cancelOrder() {
+  // TODO
 }
 
 void MainWindow::rowTapped(uint8_t row) {
@@ -439,8 +466,8 @@ void MainWindow::colTapped(uint8_t col) {
     order->add(ProductManager::get(selectedRow, col));
     orderContentRedrawNeeded = true;
 
-    state = MainWindowState::LETTERS_VISIBLE; // TODO Change this to VEND_SCREEN or whatever
-    gridContentRedrawNeeded = true;
+    state = MainWindowState::VEND_SCREEN;
+    vendScreenRedrawNeeded = true;
   }
 }
 
@@ -510,6 +537,76 @@ bool BackButton::inBounds(uint16_t x, uint16_t y) {
   return x > left && x < right && y < bottom && y > top;
 }
 
+CancelOrderButton::CancelOrderButton() {
+  display = nullptr;
+  enabled = true;
+  left = right = top = bottom = 0;
+}
+
+void CancelOrderButton::show() {
+  word borderColor = RED;
+  word insetColor = WHITE;
+  word textColor = BLACK;
+
+  if(!enabled) {
+    borderColor = DARKGRAY;
+    textColor = DARKGRAY;
+  } else if(pressed) {
+    insetColor = RED;
+    textColor = WHITE;
+  }
+
+  uint16_t mid = (top + bottom) / 2;
+  uint16_t arrowLeftX = left + (mid - top);
+  word xValuesLarge[] = {left, arrowLeftX, right, right, arrowLeftX};
+  word yValuesLarge[] = { mid, top, top, bottom, bottom};
+
+  uint8_t nLarge = sizeof(xValuesLarge) / sizeof(word);
+
+  display->gfx_PolygonFilled(nLarge, xValuesLarge, yValuesLarge, borderColor);
+
+  word xValuesSmaller[] = {left + 4, arrowLeftX, right - 4, right - 4, arrowLeftX};
+  word yValuesSmaller[] = { mid, top + 4, top + 4, bottom - 4, bottom - 4};
+
+  uint8_t nSmaller = sizeof(xValuesSmaller) / sizeof(word);
+
+  // Save a command if there's not going to be a visual difference
+  if(insetColor != borderColor) {
+    display->gfx_PolygonFilled(nSmaller, xValuesSmaller, yValuesSmaller, insetColor);
+  }
+
+  display->txt_BGcolour(insetColor);
+  display->txt_FGcolour(textColor);
+  display->txt_Width(3);
+  display->txt_Height(3);
+  display->gfx_MoveTo(arrowLeftX, top + 5);
+  display->putstr((char*) "Cancel");
+  display->gfx_MoveTo(arrowLeftX + 12, top + 41);
+  display->putstr((char*) "Order");
+}
+
+bool CancelOrderButton::inBounds(uint16_t x, uint16_t y) {
+  uint16_t mid = (top + bottom) / 2;
+  uint16_t arrowLeftX = left + (mid - top);
+  if(y > bottom || y < top) {
+    return false;
+  }
+
+  if(x < left || x > right) {
+    return false;
+  }
+
+  if(x >= arrowLeftX && x <= right) {
+    return true;
+  }
+
+  uint16_t diffX = x - left;
+  if(y > (mid - diffX) && y < (mid + diffX)) {
+    return true;
+  }
+  return false;
+}
+
 template<uint8_t row>
 void RowCallback<row>::tapped() {
   mainWindow->rowTapped(row);
@@ -525,6 +622,9 @@ void GenericCallback<type>::tapped() {
   switch(type) {
     case GenericCallbackType::BACK:
       mainWindow->back();
+      break;
+    case GenericCallbackType::CANCEL_ORDER:
+      mainWindow->cancelOrder();
       break;
   }
 }
