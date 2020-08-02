@@ -3,51 +3,7 @@
 #include "ui/Window.h"
 #include "ui/Button.h"
 
-class BackButton : public Button {
-  public:
-    void show();
-    void hide();
-
-    Diablo_Serial_4DLib* display;
-    uint16_t left;
-    uint16_t right;
-    uint16_t top;
-    uint16_t bottom;
-
-  protected:
-    bool inBounds(uint16_t x, uint16_t y);
-};
-
-class CellButton : public Button {
-  public:
-    CellButton();
-    void show();
-
-    Diablo_Serial_4DLib* display;
-    char character;
-    uint16_t left;
-    uint16_t right;
-    uint16_t top;
-    uint16_t bottom;
-
-  protected:
-    bool inBounds(uint16_t x, uint16_t y);
-};
-
-class CancelOrderButton : public Button {
-  public:
-    CancelOrderButton();
-    void show();
-
-    Diablo_Serial_4DLib* display;
-    uint16_t left;
-    uint16_t right;
-    uint16_t top;
-    uint16_t bottom;
-
-  protected:
-    bool inBounds(uint16_t x, uint16_t y);
-};
+#include "denhac/ui/MainWindow/Buttons.h"
 
 enum class MainWindowState {
   VEND_SCREEN,
@@ -123,27 +79,4 @@ class MainWindow : public Window {
     CellButton cellButton8;
 
     CancelOrderButton cancelOrderButton;
-};
-
-enum class GenericCallbackType {
-  BACK,
-  CANCEL_ORDER
-};
-
-template<GenericCallbackType type>
-struct GenericCallback {
-  static MainWindow* mainWindow;
-  static void tapped();
-};
-
-template<uint8_t row>
-struct RowCallback {
-  static MainWindow* mainWindow;
-  static void tapped();
-};
-
-template<uint8_t row>
-struct ColCallback {
-  static MainWindow* mainWindow;
-  static void tapped();
 };
