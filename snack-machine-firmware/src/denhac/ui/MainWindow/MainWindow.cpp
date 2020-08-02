@@ -239,6 +239,7 @@ void MainWindow::loop() {
 
   if(orderContentRedrawNeeded) {
     drawOrder();
+    drawCurrentCredit();
     orderContentRedrawNeeded = false;
   }
 }
@@ -397,7 +398,7 @@ void MainWindow::drawOrder() {
   display->txt_Height(2);
   display->txt_FGcolour(BLACK);
   display->txt_BGcolour(WHITESMOKE);
-  display->gfx_RectangleFilled(0, 0, screenWidth - 1, 300, WHITESMOKE);
+  display->gfx_RectangleFilled(0, 24, screenWidth - 1, 300, WHITESMOKE);
 
   Order* order = Session::getCurrentOrder();
 
