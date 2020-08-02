@@ -192,7 +192,7 @@ void MainWindow::setupMemberVariables() {
   cancelOrderButton.display = display;
   cancelOrderButton.enabled = false;
   cancelOrderButton.left = gridLeft;
-  cancelOrderButton.right = 191;
+  cancelOrderButton.right = 193;
   cancelOrderButton.bottom = gridBottom - CELL_HEIGHT - 6; // TODO This needs to be 4 spaces betwen vend button and here
   cancelOrderButton.top = cancelOrderButton.bottom - 74 - 7;
   StaticCallback<StaticCallbackType::CANCEL_ORDER>::mainWindow = this;
@@ -464,6 +464,7 @@ void MainWindow::colTapped(uint8_t col) {
     orderContentRedrawNeeded = true;
 
     state = MainWindowState::VEND_SCREEN;
+    cancelOrderButton.enabled = true;
     vendScreenRedrawNeeded = true;
   }
 }

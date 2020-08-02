@@ -96,7 +96,7 @@ void CancelOrderButton::show() {
 
   display->gfx_PolygonFilled(nLarge, xValuesLarge, yValuesLarge, borderColor);
 
-  word xValuesSmaller[] = {left + 4, arrowLeftX, right - 4, right - 4, arrowLeftX};
+  word xValuesSmaller[] = {left + 6, arrowLeftX + 2, right - 4, right - 4, arrowLeftX + 2};
   word yValuesSmaller[] = { mid, top + 4, top + 4, bottom - 4, bottom - 4};
 
   uint8_t nSmaller = sizeof(xValuesSmaller) / sizeof(word);
@@ -110,9 +110,9 @@ void CancelOrderButton::show() {
   display->txt_FGcolour(textColor);
   display->txt_Width(3);
   display->txt_Height(3);
-  display->gfx_MoveTo(arrowLeftX, top + 5);
+  display->gfx_MoveTo(arrowLeftX + 2, top + 5);
   display->putstr((char*) "Cancel");
-  display->gfx_MoveTo(arrowLeftX + 12, top + 41);
+  display->gfx_MoveTo(arrowLeftX + 14, top + 41);
   display->putstr((char*) "Order");
 }
 
