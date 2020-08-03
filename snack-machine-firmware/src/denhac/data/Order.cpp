@@ -25,14 +25,14 @@ void Item::reset() {
 
 Order::Order() {
   orderId = 0;
-  status = 0;
+  status = OrderStatus::UNKNOWN;
   paid = 0;
   total = 0;
   numItems = 0;
 }
 
 // TODO Is there any point in having total here if we recalculate it every time we add an item?
-Order::Order(uint32_t orderId, uint8_t status, uint32_t paid, uint32_t total) {
+Order::Order(uint32_t orderId, OrderStatus status, uint32_t paid, uint32_t total) {
   this->orderId = orderId;
   this->status = status;
   this->paid = paid;
@@ -113,7 +113,7 @@ void Order::reset() {
   
   numItems = 0;
   orderId = 0;
-  status = 0;
+  status = OrderStatus::UNKNOWN;
   paid = 0;
   total = 0;
 }

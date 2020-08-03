@@ -2,6 +2,7 @@
 
 #include "Arduino.h"
 #include "denhac/data/Product.h"
+#include "denhac/data/OrderStatus.h"
 
 class Item {
   public:
@@ -19,7 +20,7 @@ class Item {
 class Order {
   public:
     Order();
-    Order(uint32_t orderId, uint8_t status, uint32_t paid, uint32_t total);
+    Order(uint32_t orderId, OrderStatus status, uint32_t paid, uint32_t total);
     Order(const Order&);
 
     void operator = (const Order&);
@@ -33,7 +34,7 @@ class Order {
     void reset();
 
     uint32_t orderId;
-    uint8_t status;
+    OrderStatus status;
     uint32_t paid;
     uint32_t total;
   private:

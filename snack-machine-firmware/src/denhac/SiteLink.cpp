@@ -245,7 +245,8 @@ Order SiteLink::readOrder() {
   Serial.print("Total: ");
   Serial.println(total);
 
-  Order order(orderId, status, paid, total);
+  OrderStatus orderStatus = static_cast<OrderStatus>(status);
+  Order order(orderId, orderStatus, paid, total);
 
   uint8_t numItems = 0;
   msgpck_read_integer(linkSerial, (byte*) &numItems, sizeof(numItems));
