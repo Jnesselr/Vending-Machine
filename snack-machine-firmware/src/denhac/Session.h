@@ -28,6 +28,7 @@ class Session {
 
     static VoidCallback onCustomerLookupStarted;
     static VoidCallback onOrdersRetrieved;
+    static VoidCallback onUnknownCard;
 
     static VoidCallback onCurrentOrderUpdated;
   private:

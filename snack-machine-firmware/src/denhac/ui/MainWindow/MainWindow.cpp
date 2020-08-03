@@ -59,6 +59,7 @@ void MainWindow::show() {
   Session::moneyAvailableCallback = callback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>(moneyAvailable);
   Session::onCustomerLookupStarted = callback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>(customerLookupStarted);
   Session::onOrdersRetrieved = callback<StaticCallbackType::ORDERS_RETRIEVED>(ordersRetrieved);
+  Session::onUnknownCard = callback<StaticCallbackType::UNKNOWN_CARD>(unknownCard);
   Session::onReset = callback<StaticCallbackType::SESSION_RESET>(sessionReset);
   Session::onCurrentOrderUpdated = callback<StaticCallbackType::CURRENT_ORDER_UPDATED>(currentOrderUpdated);
 }
@@ -484,13 +485,15 @@ void MainWindow::addItemScreen(MainWindow* mainWindow) {
 void MainWindow::customerLookupStarted(MainWindow* mainWindow) {
   mainWindow->membershipButton.setState(MembershipButtonState::PLEASE_WAIT);
   mainWindow->membershipButton.disable();
+  mainWindow->setState(MainWindowState::VEND_SCREEN);
 }
 
 void MainWindow::ordersRetrieved(MainWindow* mainWindow) {
   mainWindow->membershipButton.setState(MembershipButtonState::NUM_ORDERS);
-  if(mainWindow->state == MainWindowState::VEND_SCREEN) {
-    mainWindow->membershipButton.show();
-  }
+}
+
+void MainWindow::unknownCard(MainWindow* mainWindow) {
+  mainWindow->membershipButton.setState(MembershipButtonState::UNKNOWN_CARD);
 }
 
 void MainWindow::sessionReset(MainWindow* mainWindow) {

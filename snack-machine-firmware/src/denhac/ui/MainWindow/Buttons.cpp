@@ -199,15 +199,16 @@ void VendButton::show() {
   }
   
   word borderColor = GREEN;
-  word insetColor = WHITE;
-  word textColor = BLACK;
+  word insetColor = borderColor;
+  word textColor = WHITE;
 
   if(!enabled) {
     borderColor = DARKGRAY;
     textColor = DARKGRAY;
+    insetColor = WHITE;
   } else if(pressed) {
-    insetColor = borderColor;
-    textColor = WHITE;
+    insetColor = WHITE;
+    textColor = BLACK;
   }
 
   display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
@@ -296,6 +297,13 @@ void MembershipButton::show() {
       display->gfx_MoveTo(left + 4 + 22, top + 42);
       display->putstr((char*) "Order");
     }
+  } else if(state == MembershipButtonState::UNKNOWN_CARD) {
+    display->txt_Width(2);
+    display->txt_Height(2);
+    display->gfx_MoveTo(left + 4 + 25, top + 18);
+    display->putstr((char*) "Unknown");
+    display->gfx_MoveTo(left + 4 + 49, top + 42);
+    display->putstr((char*) "Card");
   }
 
   redrawNeeded = false;

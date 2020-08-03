@@ -3,6 +3,7 @@
 #include "denhac/Session.h"
 #include "denhac/ProductManager.h"
 #include "denhac/SiteLink.h"
+#include "denhac/data/BridgeStatus.h"
 
 unsigned long lastChangeMillis = 0;
 bool Session::active = false;
@@ -17,6 +18,7 @@ MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
 VoidCallback Session::onCustomerLookupStarted = nullptr;
 VoidCallback Session::onOrdersRetrieved = nullptr;
+VoidCallback Session::onUnknownCard = nullptr;
 VoidCallback Session::onCurrentOrderUpdated = nullptr;
 
 void Session::reset() {
@@ -71,6 +73,14 @@ void Session::onGetOrdersByCardError(uint8_t statusCode) {
   // TODO
   Serial.println("Got a status from orders by card!");
   Serial.println(statusCode);
+
+  if(cardNum == 0) {
+    return;
+  }
+
+  if(statusCode == BridgeStatus::REST_NOT_FOUND) {
+    CALLBACK(onUnknownCard);
+  }
 }
 
 void Session::onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders) {

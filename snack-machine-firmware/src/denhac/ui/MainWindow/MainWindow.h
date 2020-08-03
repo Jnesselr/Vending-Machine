@@ -37,6 +37,7 @@ enum class StaticCallbackType {
   SESSION_RESET,
   MEMBERSHIP_BUTTON_TAPPED,
   CURRENT_ORDER_UPDATED,
+  UNKNOWN_CARD,
 };
 
 template<typename... Args>
@@ -60,6 +61,7 @@ class MainWindow : public Window {
     static void sessionReset(MainWindow*);
     static void customerLookupStarted(MainWindow*);
     static void ordersRetrieved(MainWindow*);
+    static void unknownCard(MainWindow*);
     static void currentOrderUpdated(MainWindow*);
     static void cancelOrder(MainWindow*);
     static void addItemScreen(MainWindow*);
