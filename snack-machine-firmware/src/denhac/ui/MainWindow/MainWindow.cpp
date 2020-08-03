@@ -189,11 +189,18 @@ void MainWindow::setupMemberVariables() {
   ColCallback<7>::mainWindow = this;
   cellButton8.tapped = ColCallback<7>::tapped;
 
+  vendButton.display = display;
+  vendButton.enabled = false;
+  vendButton.left = gridLeft;
+  vendButton.right = gridRight;
+  vendButton.bottom = gridBottom;
+  vendButton.top = vendButton.bottom - CELL_HEIGHT - 7;
+
   cancelOrderButton.display = display;
   cancelOrderButton.enabled = false;
   cancelOrderButton.left = gridLeft;
   cancelOrderButton.right = 193;
-  cancelOrderButton.bottom = gridBottom - CELL_HEIGHT - 6; // TODO This needs to be 4 spaces betwen vend button and here
+  cancelOrderButton.bottom = vendButton.top - 5;
   cancelOrderButton.top = cancelOrderButton.bottom - 74 - 7;
   StaticCallback<StaticCallbackType::CANCEL_ORDER>::mainWindow = this;
   cancelOrderButton.tapped = StaticCallback<StaticCallbackType::CANCEL_ORDER>::callback;
@@ -201,7 +208,7 @@ void MainWindow::setupMemberVariables() {
   addItemButton.display = display;
   addItemButton.left = gridRight - 105;
   addItemButton.right = gridRight;
-  addItemButton.bottom = gridBottom - CELL_HEIGHT - 6; // TODO This needs to be 4 spaces betwen vend button and here
+  addItemButton.bottom = vendButton.top - 5;
   addItemButton.top = addItemButton.bottom - 74 - 7;
   StaticCallback<StaticCallbackType::ADD_ITEM>::mainWindow = this;
   addItemButton.tapped = StaticCallback<StaticCallbackType::ADD_ITEM>::callback;
@@ -248,6 +255,7 @@ void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
   if(state == MainWindowState::VEND_SCREEN) {
     cancelOrderButton.touch(touchMode, x, y);
     addItemButton.touch(touchMode, x, y);
+    vendButton.touch(touchMode, x, y);
   } else if(state == MainWindowState::LETTERS_VISIBLE) {
     backButton.touch(touchMode, x, y);
     cellButtonA.touch(touchMode, x, y);
@@ -321,11 +329,9 @@ void MainWindow::drawGridNumbers() {
 
 void MainWindow::drawVendScreen() {
   display->gfx_RectangleFilled(0, gridTop, screenWidth - 1, gridBottom, WHITESMOKE);
-  display->gfx_RectangleFilled(gridLeft, gridBottom - CELL_HEIGHT - 1, gridRight, gridBottom, LIGHTGREEN);
-  display->gfx_RectangleFilled(gridLeft + 4, gridBottom - CELL_HEIGHT - 1 + 4, gridRight - 4, gridBottom - 4, WHITE);
-
   cancelOrderButton.show();
   addItemButton.show();
+  vendButton.show();
 }
 
 CellButton* MainWindow::rowButton(uint8_t row) {

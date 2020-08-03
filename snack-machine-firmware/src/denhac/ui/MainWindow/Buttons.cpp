@@ -156,4 +156,41 @@ bool AddItemButton::inBounds(uint16_t x, uint16_t y) {
   return x > left && x < right && y < bottom && y > top;
 }
 
+VendButton::VendButton() {
+  display = nullptr;
+  enabled = true;
+  left = right = top = bottom = 0;
+}
+
+void VendButton::show() {
+  word borderColor = GREEN;
+  word insetColor = WHITE;
+  word textColor = BLACK;
+
+  if(!enabled) {
+    borderColor = DARKGRAY;
+    textColor = DARKGRAY;
+  } else if(pressed) {
+    insetColor = GREEN;
+    textColor = WHITE;
+  }
+
+  display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
+
+  if(borderColor != insetColor) {
+    display->gfx_RectangleFilled(left + 4, top + 4, right - 4, bottom - 4, insetColor);
+  }
+
+  display->txt_Width(8);
+  display->txt_Height(8);
+  display->txt_FGcolour(textColor);
+  display->txt_BGcolour(insetColor);
+  display->gfx_MoveTo(left + 110, top + 12);
+  display->putstr((char*)"VEND");
+}
+
+bool VendButton::inBounds(uint16_t x, uint16_t y) {
+  return x > left && x < right && y < bottom && y > top;
+}
+
 #endif
