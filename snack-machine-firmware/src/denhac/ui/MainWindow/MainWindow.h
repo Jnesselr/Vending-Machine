@@ -11,7 +11,8 @@ enum class MainWindowState {
   NUMBERS_VISIBLE
 };
 
-enum class MainWindowCallbackType {
+enum class StaticCallbackType {
+  ROW,
   BACK,
   CANCEL_ORDER,
   MONEY_AVAILABLE,
@@ -35,27 +36,26 @@ class MainWindow : public Window {
     // Public for callbacks
     void rowTapped(uint8_t row);
     void colTapped(uint8_t col);
-    void back();
-    void cancelOrder();
-    void moneyAvailable(uint32_t amount);
-    void addItemScreen();
-    void customerLookupStarted();
-    void ordersRetrieved();
-    void sessionReset();
-    void membershipButtonTapped();
-    void currentOrderUpdated();
-
-    static void newSessionReset(MainWindow* mainWindow);
   private:
-    template<MainWindowCallbackType type, typename... Args>
+    template<StaticCallbackType type, typename... Args>
     VariableCallback<Args...> callback(VariableCallback<MainWindow*, Args...> function);
+
+    static void back(MainWindow*);
+    static void moneyAvailable(MainWindow*, uint32_t amount);
+    static void sessionReset(MainWindow*);
+    static void customerLookupStarted(MainWindow*);
+    static void ordersRetrieved(MainWindow*);
+    static void currentOrderUpdated(MainWindow*);
+    static void cancelOrder(MainWindow*);
+    static void addItemScreen(MainWindow*);
+    static void membershipButtonTapped(MainWindow*);
 
     void setupMemberVariables();
     void drawGrid();
     void drawGridLetters();
     void drawGridNumbers();
     void drawCurrentCredit();
-    void drawVendScreen();
+    void drawVendScreen();;
 
     CellButton* rowButton(uint8_t row);
     CellButton* colButton(uint8_t col);
@@ -114,8 +114,8 @@ class MainWindow : public Window {
 template<typename... Args>
 using WindowCallback = void (*)(MainWindow*, Args...);
 
-template<MainWindowCallbackType type, typename... Args>
-struct MainWindowCallback {
+template<StaticCallbackType type, typename... Args>
+struct StaticCallback {
   static MainWindow* mainWindow;
   static WindowCallback<Args...> windowCallback;
   static void callback(Args...);

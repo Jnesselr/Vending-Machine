@@ -11,10 +11,10 @@
 #include "utils.h"
 #include <avr/wdt.h>
 
-template<MainWindowCallbackType type, typename... Args>
-MainWindow* MainWindowCallback<type, Args...>::mainWindow = nullptr;
-template<MainWindowCallbackType type, typename... Args>
-WindowCallback<Args...> MainWindowCallback<type, Args...>::windowCallback = nullptr;
+template<StaticCallbackType type, typename... Args>
+MainWindow* StaticCallback<type, Args...>::mainWindow = nullptr;
+template<StaticCallbackType type, typename... Args>
+WindowCallback<Args...> StaticCallback<type, Args...>::windowCallback = nullptr;
 
 void MainWindow::show() {
   setupMemberVariables();
@@ -24,21 +24,11 @@ void MainWindow::show() {
 
   gridRedrawNeeded = true;
 
-  StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::mainWindow = this;
-  Session::moneyAvailableCallback = StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::callback;
-
-  StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::mainWindow = this;
-  Session::onCustomerLookupStarted = StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::callback;
-
-  StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::mainWindow = this;
-  Session::onOrdersRetrieved = StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::callback;
-
-  // StaticCallback<StaticCallbackType::SESSION_RESET>::mainWindow = this;
-  // Session::onReset = StaticCallback<StaticCallbackType::SESSION_RESET>::callback;
-  Session::onReset = callback<MainWindowCallbackType::SESSION_RESET>(newSessionReset);
-
-  StaticCallback<StaticCallbackType::CURRENT_ORDER_UPDATED>::mainWindow = this;
-  Session::onCurrentOrderUpdated = StaticCallback<StaticCallbackType::CURRENT_ORDER_UPDATED>::callback;
+  Session::moneyAvailableCallback = callback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>(moneyAvailable);
+  Session::onCustomerLookupStarted = callback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>(customerLookupStarted);
+  Session::onOrdersRetrieved = callback<StaticCallbackType::ORDERS_RETRIEVED>(ordersRetrieved);
+  Session::onReset = callback<StaticCallbackType::SESSION_RESET>(sessionReset);
+  Session::onCurrentOrderUpdated = callback<StaticCallbackType::CURRENT_ORDER_UPDATED>(currentOrderUpdated);
 }
 
 void MainWindow::setupMemberVariables() {
@@ -60,8 +50,7 @@ void MainWindow::setupMemberVariables() {
   backButton.right = backButton.left + CELL_WIDTH - 1;
   backButton.top = gridTop + 2 * CELL_HEIGHT + 3;
   backButton.bottom = backButton.top + CELL_HEIGHT - 1;
-  StaticCallback<StaticCallbackType::BACK>::mainWindow = this;
-  backButton.tapped = StaticCallback<StaticCallbackType::BACK>::callback;
+  backButton.tapped = callback<StaticCallbackType::BACK>(back);
 
   cellButtonA.display = display;
   cellButtonA.character = 'A';
@@ -220,16 +209,14 @@ void MainWindow::setupMemberVariables() {
   cancelOrderButton.right = 193;
   cancelOrderButton.bottom = vendButton.top - 5;
   cancelOrderButton.top = cancelOrderButton.bottom - 74 - 7;
-  StaticCallback<StaticCallbackType::CANCEL_ORDER>::mainWindow = this;
-  cancelOrderButton.tapped = StaticCallback<StaticCallbackType::CANCEL_ORDER>::callback;
+  cancelOrderButton.tapped = callback<StaticCallbackType::CANCEL_ORDER>(cancelOrder);
 
   addItemButton.display = display;
   addItemButton.left = gridRight - 105;
   addItemButton.right = gridRight;
   addItemButton.bottom = vendButton.top - 5;
   addItemButton.top = addItemButton.bottom - 74 - 7;
-  StaticCallback<StaticCallbackType::ADD_ITEM>::mainWindow = this;
-  addItemButton.tapped = StaticCallback<StaticCallbackType::ADD_ITEM>::callback;
+  addItemButton.tapped = callback<StaticCallbackType::ADD_ITEM>(addItemScreen);
 
   membershipButton.display = display;
   membershipButton.enabled = false;
@@ -237,8 +224,7 @@ void MainWindow::setupMemberVariables() {
   membershipButton.right = addItemButton.left - 5;
   membershipButton.bottom = vendButton.top - 5;
   membershipButton.top = addItemButton.top;
-  StaticCallback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>::mainWindow = this;
-  membershipButton.tapped = StaticCallback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>::callback;
+  membershipButton.tapped = callback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>(membershipButtonTapped);
 
   state = MainWindowState::LETTERS_VISIBLE;
   memberVariablesSet = true;
@@ -480,31 +466,31 @@ void MainWindow::drawCurrentCredit() {
   display->print(cents);
 }
 
-template<MainWindowCallbackType type, typename... Args>
+template<StaticCallbackType type, typename... Args>
 VariableCallback<Args...> MainWindow::callback(VariableCallback<MainWindow*, Args...> function) {
-  MainWindowCallback<type, Args...>::mainWindow = this;
-  MainWindowCallback<type, Args...>::windowCallback = function;
-  return MainWindowCallback<type, Args...>::callback;
+  StaticCallback<type, Args...>::mainWindow = this;
+  StaticCallback<type, Args...>::windowCallback = function;
+  return StaticCallback<type, Args...>::callback;
 }
 
-template<MainWindowCallbackType type, typename... Args>
-void MainWindowCallback<type, Args...>::callback(Args... args) {
+template<StaticCallbackType type, typename... Args>
+void StaticCallback<type, Args...>::callback(Args... args) {
   windowCallback(mainWindow, args...);
 }
 
-void MainWindow::back() {
-  if(state == MainWindowState::LETTERS_VISIBLE) {
-    state = MainWindowState::VEND_SCREEN;
-    vendScreenRedrawNeeded = true;
-  } else if(state == MainWindowState::NUMBERS_VISIBLE) {
-    state = MainWindowState::LETTERS_VISIBLE;
-    gridContentRedrawNeeded = true;
+void MainWindow::back(MainWindow* mainWindow) {
+  if(mainWindow->state == MainWindowState::LETTERS_VISIBLE) {
+    mainWindow->state = MainWindowState::VEND_SCREEN;
+    mainWindow->vendScreenRedrawNeeded = true;
+  } else if(mainWindow->state == MainWindowState::NUMBERS_VISIBLE) {
+    mainWindow->state = MainWindowState::LETTERS_VISIBLE;
+    mainWindow->gridContentRedrawNeeded = true;
   }
 }
 
-void MainWindow::cancelOrder() {
+void MainWindow::cancelOrder(MainWindow* mainWindow) {
   Session::reset();
-  drawOrder();
+  mainWindow->drawOrder();
 }
 
 void MainWindow::rowTapped(uint8_t row) {
@@ -528,54 +514,51 @@ void MainWindow::colTapped(uint8_t col) {
   }
 }
 
-void MainWindow::moneyAvailable(uint32_t amount) {
-  drawCurrentCredit();
+void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
+  mainWindow->drawCurrentCredit();
 
   if(amount == 0) {
     return;
   }
 
-  if(!cancelOrderButton.enabled &&
-    state == MainWindowState::VEND_SCREEN) {
-    cancelOrderButton.enabled = true;
-    cancelOrderButton.show(); // Redraw since it's available now
+  if(!mainWindow->cancelOrderButton.enabled &&
+    mainWindow->state == MainWindowState::VEND_SCREEN) {
+    mainWindow->cancelOrderButton.enabled = true;
+    mainWindow->cancelOrderButton.show(); // Redraw since it's available now
   }
 }
 
-void MainWindow::addItemScreen() {
-  state = MainWindowState::LETTERS_VISIBLE;
-  gridRedrawNeeded = true;
+void MainWindow::addItemScreen(MainWindow* mainWindow) {
+  mainWindow->state = MainWindowState::LETTERS_VISIBLE;
+  mainWindow->gridRedrawNeeded = true;
 }
 
-void MainWindow::customerLookupStarted() {
-  membershipButton.state = MembershipButtonState::PLEASE_WAIT;
-  if(state == MainWindowState::VEND_SCREEN) {
-    membershipButton.show();
-  }
-}
-void MainWindow::ordersRetrieved() {
-  membershipButton.state = MembershipButtonState::NUM_ORDERS;
-  if(state == MainWindowState::VEND_SCREEN) {
-    membershipButton.show();
+void MainWindow::customerLookupStarted(MainWindow* mainWindow) {
+  mainWindow->membershipButton.state = MembershipButtonState::PLEASE_WAIT;
+  if(mainWindow->state == MainWindowState::VEND_SCREEN) {
+    mainWindow->membershipButton.show();
   }
 }
 
-void MainWindow::sessionReset() {
-  membershipButton.state = MembershipButtonState::SCAN_CARD;
-  membershipButton.enabled = false;
-  cancelOrderButton.enabled = false;
-
-  if(state == MainWindowState::VEND_SCREEN) {
-    cancelOrderButton.show();
-    membershipButton.show();
+void MainWindow::ordersRetrieved(MainWindow* mainWindow) {
+  mainWindow->membershipButton.state = MembershipButtonState::NUM_ORDERS;
+  if(mainWindow->state == MainWindowState::VEND_SCREEN) {
+    mainWindow->membershipButton.show();
   }
 }
 
-void MainWindow::newSessionReset(MainWindow* mainWindow) {
-  mainWindow->sessionReset();
+void MainWindow::sessionReset(MainWindow* mainWindow) {
+  mainWindow->membershipButton.state = MembershipButtonState::SCAN_CARD;
+  mainWindow->membershipButton.enabled = false;
+  mainWindow->cancelOrderButton.enabled = false;
+
+  if(mainWindow->state == MainWindowState::VEND_SCREEN) {
+    mainWindow->cancelOrderButton.show();
+    mainWindow->membershipButton.show();
+  }
 }
 
-void MainWindow::membershipButtonTapped() {
+void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {
   if(Session::getNumOrders() == 1) {
     Session::setCurrentOrderNum(0);
   }
@@ -583,15 +566,15 @@ void MainWindow::membershipButtonTapped() {
   // TODO What if the order count isn't 1?
 }
 
-void MainWindow::currentOrderUpdated() {
-  drawOrder();
+void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
+  mainWindow->drawOrder();
 
   Order* order = Session::getCurrentOrder();
 
   if(order->getNumItems() > 0) {
-    cancelOrderButton.enabled = true;
-    if(state == MainWindowState::VEND_SCREEN) {
-      cancelOrderButton.show();
+    mainWindow->cancelOrderButton.enabled = true;
+    if(mainWindow->state == MainWindowState::VEND_SCREEN) {
+      mainWindow->cancelOrderButton.show();
     }
   }
 }
