@@ -7,6 +7,7 @@
 #include "denhac/wifi_bridge/RestRequest.h"
 
 #include "denhac/data/BridgeStatus.h"
+#include "denhac/data/OrderStatus.h"
 
 #include <ArduinoJson.h>
 #include <WiFi.h>

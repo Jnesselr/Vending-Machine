@@ -363,7 +363,27 @@ void DenhacWifiBridge::handleCardResponse() {
 
 void DenhacWifiBridge::sendOrder(JsonObject &order) {
   msgpck_write_integer(serial, (uint32_t) order["id"]);
-  msgpck_write_integer(serial, 0); // TODO Make match actual order status
+
+  JsonVariant orderStatus = order["status"];
+  uint8_t statusCode;
+  if(orderStatus == "pending") {
+    statusCode = static_cast<uint8_t>(OrderStatus::PENDING);
+  } else if(orderStatus == "processing") {
+    statusCode = static_cast<uint8_t>(OrderStatus::PROCESSING);
+  } else if(orderStatus == "on-hold") {
+    statusCode = static_cast<uint8_t>(OrderStatus::ON_HOLD);
+  } else if(orderStatus == "completed") {
+    statusCode = static_cast<uint8_t>(OrderStatus::COMPLETED);
+  } else if(orderStatus == "cancelled") {
+    statusCode = static_cast<uint8_t>(OrderStatus::CANCELLED);
+  } else if(orderStatus == "refunded") {
+    statusCode = static_cast<uint8_t>(OrderStatus::REFUNDED);
+  } else if(orderStatus == "failed") {
+    statusCode = static_cast<uint8_t>(OrderStatus::FAILED);
+  } else {
+    statusCode = static_cast<uint8_t>(OrderStatus::UNKNOWN);
+  }
+  msgpck_write_integer(serial, statusCode);
   msgpck_write_integer(serial, (uint32_t) order["paid"]);
   msgpck_write_integer(serial, (uint32_t) order["total"]);
 

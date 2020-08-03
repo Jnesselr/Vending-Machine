@@ -1,3 +1,5 @@
+#pragma once
+
 typedef enum {
   READY = 0x01,
   WIFI_TRYING_TO_CONNECT = 0x02,
