@@ -24,6 +24,12 @@ void MainWindow::show() {
 
   StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::mainWindow = this;
   Session::onCustomerLookupStarted = StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::callback;
+
+  StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::mainWindow = this;
+  Session::onOrdersRetrieved = StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::callback;
+
+  StaticCallback<StaticCallbackType::SESSION_RESET>::mainWindow = this;
+  Session::onReset = StaticCallback<StaticCallbackType::SESSION_RESET>::callback;
 }
 
 void MainWindow::setupMemberVariables() {
@@ -476,8 +482,6 @@ void MainWindow::back() {
 void MainWindow::cancelOrder() {
   Session::reset();
   drawOrder();
-  cancelOrderButton.enabled = false;
-  cancelOrderButton.show();
 }
 
 void MainWindow::rowTapped(uint8_t row) {
@@ -504,6 +508,10 @@ void MainWindow::colTapped(uint8_t col) {
 void MainWindow::moneyAvailable(uint32_t amount) {
   drawCurrentCredit();
 
+  if(amount == 0) {
+    return;
+  }
+
   if(!cancelOrderButton.enabled &&
     state == MainWindowState::VEND_SCREEN) {
     cancelOrderButton.enabled = true;
@@ -519,6 +527,23 @@ void MainWindow::addItemScreen() {
 void MainWindow::customerLookupStarted() {
   membershipButton.state = MembershipButtonState::PLEASE_WAIT;
   if(state == MainWindowState::VEND_SCREEN) {
+    membershipButton.show();
+  }
+}
+void MainWindow::ordersRetrieved() {
+  membershipButton.state = MembershipButtonState::NUM_ORDERS;
+  if(state == MainWindowState::VEND_SCREEN) {
+    membershipButton.show();
+  }
+}
+
+void MainWindow::sessionReset() {
+  membershipButton.state = MembershipButtonState::SCAN_CARD;
+  membershipButton.enabled = false;
+  cancelOrderButton.enabled = false;
+
+  if(state == MainWindowState::VEND_SCREEN) {
+    cancelOrderButton.show();
     membershipButton.show();
   }
 }

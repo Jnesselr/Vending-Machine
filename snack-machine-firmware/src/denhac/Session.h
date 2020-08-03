@@ -9,7 +9,10 @@ typedef void (*MoneyCallback)(uint32_t amount);
 class Session {
   public:
     static void reset();
+    static VoidCallback onReset;
 
+    static uint8_t getNumOrders();
+    static Order getOrder(uint8_t orderNum);
     static Order* getCurrentOrder();
     static bool isActive();
     static uint32_t getCurrentAvailableMoney();
@@ -21,6 +24,7 @@ class Session {
     static MoneyCallback moneyAvailableCallback;
 
     static VoidCallback onCustomerLookupStarted;
+    static VoidCallback onOrdersRetrieved;
   private:
     static void onGetOrdersByCardError(uint8_t statusCode);
     static void onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders);
@@ -29,6 +33,8 @@ class Session {
     static bool active;
     static uint32_t cardNum;
     static Order currentOrder;
+    static uint8_t numOrders;
+    static Order orders[8];
 
     static uint32_t moneyInsertedInMachine;
     static uint32_t onlineCredit;

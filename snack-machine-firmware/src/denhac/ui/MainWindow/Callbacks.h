@@ -8,6 +8,8 @@ enum class StaticCallbackType {
   MONEY_AVAILABLE,
   ADD_ITEM,
   CUSTOMER_LOOKUP_STARTED,
+  ORDERS_RETRIEVED,
+  SESSION_RESET,
 };
 
 template<StaticCallbackType type, typename... Args>

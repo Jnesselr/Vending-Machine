@@ -25,6 +25,8 @@ class MainWindow : public Window {
     void moneyAvailable(uint32_t amount);
     void addItemScreen();
     void customerLookupStarted();
+    void ordersRetrieved();
+    void sessionReset();
   private:
     void setupMemberVariables();
     void drawGrid();

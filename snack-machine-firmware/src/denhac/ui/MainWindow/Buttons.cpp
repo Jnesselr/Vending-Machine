@@ -2,6 +2,8 @@
 
 #include "denhac/ui/MainWindow/Buttons.h"
 
+#include "denhac/Session.h"
+
 CellButton::CellButton() {
   display = nullptr;
   enabled = true;
@@ -205,6 +207,12 @@ void MembershipButton::show() {
   word insetColor = WHITE;
   word textColor = BLACK;
 
+  uint8_t numOrders = Session::getNumOrders();
+
+  if(state == MembershipButtonState::NUM_ORDERS && numOrders > 0) {
+    enabled = true;
+  }
+
   if(!enabled) {
     borderColor = DARKGRAY;
     textColor = DARKGRAY;
@@ -233,6 +241,22 @@ void MembershipButton::show() {
     display->putstr((char*) "Please");
     display->gfx_MoveTo(left + 4 + 34, top + 42);
     display->putstr((char*) "Wait");
+  } else if(state == MembershipButtonState::NUM_ORDERS) {
+    if(numOrders == 0) {
+      display->gfx_MoveTo(left + 4 + 58, top + 6);
+      display->putstr((char*) "No");
+    } else {
+      display->gfx_MoveTo(left + 4 + 70, top + 6);
+      display->putCH(numOrders + '0');
+    }
+
+    if(numOrders == 0 || numOrders > 1) {
+      display->gfx_MoveTo(left + 4 + 10, top + 42);
+      display->putstr((char*) "Orders");
+    } else {
+      display->gfx_MoveTo(left + 4 + 22, top + 42);
+      display->putstr((char*) "Order");
+    }
   }
 }
 

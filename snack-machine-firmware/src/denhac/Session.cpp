@@ -8,11 +8,15 @@ unsigned long lastChangeMillis = 0;
 bool Session::active = false;
 uint32_t Session::cardNum = 0;
 Order Session::currentOrder;
+uint8_t Session::numOrders = 0;
+Order Session::orders[8];
 uint32_t Session::onlineCredit = 0;
 uint32_t Session::moneyInsertedInMachine = 0;
+VoidCallback Session::onReset = nullptr;
 MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
 VoidCallback Session::onCustomerLookupStarted = nullptr;
+VoidCallback Session::onOrdersRetrieved = nullptr;
 
 void Session::reset() {
   active = false;
@@ -21,7 +25,21 @@ void Session::reset() {
   moneyInsertedInMachine = 0;
   onlineCredit = 0;
 
+  for (uint8_t i = 0; i < numOrders; i++)
+  {
+    orders[i].reset();
+  }
+  numOrders = 0;
+
+  CALLBACK(onReset);
   CALLBACK(moneyAvailableCallback, 0);
+}
+
+uint8_t Session::getNumOrders() {
+  return numOrders;
+}
+Order Session::getOrder(uint8_t orderNum) {
+  return orders[orderNum];
 }
 
 Order* Session::getCurrentOrder() {
@@ -43,8 +61,16 @@ void Session::onGetOrdersByCardError(uint8_t statusCode) {
 }
 
 void Session::onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders) {
-  // TODO
+  Session::numOrders = numOrders;
+  for (uint8_t i = 0; i < numOrders; i++)
+  {
+    Session::orders[i] = orders[i];
+  }
+
   Serial.println("Got the orders!");
+  if(cardNum != 0) {
+    CALLBACK(onOrdersRetrieved);
+  }
 }
 
 bool Session::isActive() {
