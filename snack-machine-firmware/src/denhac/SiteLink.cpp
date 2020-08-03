@@ -20,7 +20,6 @@ OutputPort<PORT_H, 6, 1> SiteLink::huzzahResetPin;
 HardwareSerial* SiteLink::linkSerial = &Serial1;
 uint8_t SiteLink::handshakeCount = 0;
 uint8_t SiteLink::garbageLoopCount = 0;
-bool SiteLink::resetSent = false;
 bool SiteLink::fetchingProducts = false;
 bool SiteLink::firstProductFetch = false;
 bool SiteLink::hasProduct[64];
@@ -59,7 +58,6 @@ void SiteLink::handleWaiting() {
       // this loop alone
       if(handshakeCount == 5) {
         msgpck_write_nil(linkSerial); // Initiate the handshake
-        resetSent = false; // It's now safe to reset again if need be
         updateState(SiteLinkState::HANDSHAKE);
       }
     } else {
@@ -75,10 +73,9 @@ void SiteLink::handleWaiting() {
   // It's only used to determine if the HUZZAH needs a reset
   garbageLoopCount++;
 
-  if(garbageLoopCount > 10 && !resetSent) {
+  if(garbageLoopCount > 20) {
     huzzahResetPin.write(0xFF);
     updateState(SiteLinkState::UNKNOWN);
-    resetSent = true;
     garbageLoopCount = 0;
   }
 }
