@@ -536,6 +536,7 @@ void MainWindow::addItemScreen(MainWindow* mainWindow) {
 void MainWindow::customerLookupStarted(MainWindow* mainWindow) {
   mainWindow->membershipButton.state = MembershipButtonState::PLEASE_WAIT;
   if(mainWindow->state == MainWindowState::VEND_SCREEN) {
+    mainWindow->membershipButton.enabled = false;
     mainWindow->membershipButton.show();
   }
 }
