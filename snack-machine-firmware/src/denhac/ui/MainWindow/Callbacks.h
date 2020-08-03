@@ -10,6 +10,8 @@ enum class StaticCallbackType {
   CUSTOMER_LOOKUP_STARTED,
   ORDERS_RETRIEVED,
   SESSION_RESET,
+  MEMBERSHIP_BUTTON_TAPPED,
+  CURRENT_ORDER_UPDATED,
 };
 
 template<StaticCallbackType type, typename... Args>

@@ -30,6 +30,9 @@ void MainWindow::show() {
 
   StaticCallback<StaticCallbackType::SESSION_RESET>::mainWindow = this;
   Session::onReset = StaticCallback<StaticCallbackType::SESSION_RESET>::callback;
+
+  StaticCallback<StaticCallbackType::CURRENT_ORDER_UPDATED>::mainWindow = this;
+  Session::onCurrentOrderUpdated = StaticCallback<StaticCallbackType::CURRENT_ORDER_UPDATED>::callback;
 }
 
 void MainWindow::setupMemberVariables() {
@@ -228,6 +231,8 @@ void MainWindow::setupMemberVariables() {
   membershipButton.right = addItemButton.left - 5;
   membershipButton.bottom = vendButton.top - 5;
   membershipButton.top = addItemButton.top;
+  StaticCallback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>::mainWindow = this;
+  membershipButton.tapped = StaticCallback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>::callback;
 
   state = MainWindowState::LETTERS_VISIBLE;
   memberVariablesSet = true;
@@ -545,6 +550,27 @@ void MainWindow::sessionReset() {
   if(state == MainWindowState::VEND_SCREEN) {
     cancelOrderButton.show();
     membershipButton.show();
+  }
+}
+
+void MainWindow::membershipButtonTapped() {
+  if(Session::getNumOrders() == 1) {
+    Session::setCurrentOrderNum(0);
+  }
+
+  // TODO What if the order count isn't 1?
+}
+
+void MainWindow::currentOrderUpdated() {
+  drawOrder();
+
+  Order* order = Session::getCurrentOrder();
+
+  if(order->getNumItems() > 0) {
+    cancelOrderButton.enabled = true;
+    if(state == MainWindowState::VEND_SCREEN) {
+      cancelOrderButton.show();
+    }
   }
 }
 

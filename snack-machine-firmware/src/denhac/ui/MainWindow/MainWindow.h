@@ -27,6 +27,8 @@ class MainWindow : public Window {
     void customerLookupStarted();
     void ordersRetrieved();
     void sessionReset();
+    void membershipButtonTapped();
+    void currentOrderUpdated();
   private:
     void setupMemberVariables();
     void drawGrid();

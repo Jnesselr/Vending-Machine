@@ -14,6 +14,7 @@ class Session {
     static uint8_t getNumOrders();
     static Order getOrder(uint8_t orderNum);
     static Order* getCurrentOrder();
+    static void setCurrentOrderNum(uint8_t orderNum);
     static bool isActive();
     static uint32_t getCurrentAvailableMoney();
 
@@ -25,6 +26,8 @@ class Session {
 
     static VoidCallback onCustomerLookupStarted;
     static VoidCallback onOrdersRetrieved;
+
+    static VoidCallback onCurrentOrderUpdated;
   private:
     static void onGetOrdersByCardError(uint8_t statusCode);
     static void onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders);

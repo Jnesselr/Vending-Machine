@@ -17,6 +17,7 @@ MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
 VoidCallback Session::onCustomerLookupStarted = nullptr;
 VoidCallback Session::onOrdersRetrieved = nullptr;
+VoidCallback Session::onCurrentOrderUpdated = nullptr;
 
 void Session::reset() {
   active = false;
@@ -33,6 +34,7 @@ void Session::reset() {
 
   CALLBACK(onReset);
   CALLBACK(moneyAvailableCallback, 0);
+  CALLBACK(onCurrentOrderUpdated);
 }
 
 uint8_t Session::getNumOrders() {
@@ -46,12 +48,17 @@ Order* Session::getCurrentOrder() {
   return &currentOrder;
 }
 
+void Session::setCurrentOrderNum(uint8_t orderNum) {
+  currentOrder = orders[orderNum];
+
+  CALLBACK(onCurrentOrderUpdated);
+}
+
 void Session::cardScanned(uint32_t cardNum) {
+  Session::cardNum = cardNum;
   CALLBACK(onCustomerLookupStarted);
 
   SiteLink::getOrdersByCard(cardNum, onGetOrdersByCardError, onGetOrdersByCardSuccess);
-
-  Session::cardNum = cardNum;
 }
 
 void Session::onGetOrdersByCardError(uint8_t statusCode) {

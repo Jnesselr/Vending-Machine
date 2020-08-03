@@ -74,4 +74,14 @@ void StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::callback() {
   mainWindow->ordersRetrieved();
 }
 
+template<>
+void StaticCallback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>::callback() {
+  mainWindow->membershipButtonTapped();
+}
+
+template<>
+void StaticCallback<StaticCallbackType::CURRENT_ORDER_UPDATED>::callback() {
+  mainWindow->currentOrderUpdated();
+}
+
 #endif
