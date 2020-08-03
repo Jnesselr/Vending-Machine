@@ -83,7 +83,7 @@ void CancelOrderButton::show() {
     borderColor = DARKGRAY;
     textColor = DARKGRAY;
   } else if(pressed) {
-    insetColor = RED;
+    insetColor = borderColor;
     textColor = WHITE;
   }
 
@@ -110,9 +110,9 @@ void CancelOrderButton::show() {
   display->txt_FGcolour(textColor);
   display->txt_Width(3);
   display->txt_Height(3);
-  display->gfx_MoveTo(arrowLeftX + 2, top + 5);
+  display->gfx_MoveTo(arrowLeftX + 2, top + 6);
   display->putstr((char*) "Cancel");
-  display->gfx_MoveTo(arrowLeftX + 14, top + 41);
+  display->gfx_MoveTo(arrowLeftX + 14, top + 42);
   display->putstr((char*) "Order");
 }
 
@@ -132,7 +132,7 @@ void AddItemButton::show() {
   word textColor = BLACK;
 
   if(pressed) {
-    insetColor = BLACK;
+    insetColor = borderColor;
     textColor = WHITE;
   }
 
@@ -146,9 +146,9 @@ void AddItemButton::show() {
   display->txt_FGcolour(textColor);
   display->txt_Width(3);
   display->txt_Height(3);
-  display->gfx_MoveTo(left + 20, top + 5);
+  display->gfx_MoveTo(left + 20, top + 6);
   display->putstr((char*) "Add");
-  display->gfx_MoveTo(left + 4, top + 41);
+  display->gfx_MoveTo(left + 4, top + 42);
   display->putstr((char*) "Item");
 }
 
@@ -171,7 +171,7 @@ void VendButton::show() {
     borderColor = DARKGRAY;
     textColor = DARKGRAY;
   } else if(pressed) {
-    insetColor = GREEN;
+    insetColor = borderColor;
     textColor = WHITE;
   }
 
@@ -190,6 +190,44 @@ void VendButton::show() {
 }
 
 bool VendButton::inBounds(uint16_t x, uint16_t y) {
+  return x > left && x < right && y < bottom && y > top;
+}
+
+MembershipButton::MembershipButton() {
+  display = nullptr;
+  enabled = true;
+  left = right = top = bottom = 0;
+}
+
+void MembershipButton::show() {
+  word borderColor = BLUE;
+  word insetColor = WHITE;
+  word textColor = BLACK;
+
+  if(!enabled) {
+    borderColor = DARKGRAY;
+    textColor = DARKGRAY;
+  } else if(pressed) {
+    insetColor = borderColor;
+    textColor = WHITE;
+  }
+
+  display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
+
+  if(borderColor != insetColor) {
+    display->gfx_RectangleFilled(left + 4, top + 4, right - 4, bottom - 4, insetColor);
+  }
+  display->txt_BGcolour(insetColor);
+  display->txt_FGcolour(textColor);
+  display->txt_Width(3);
+  display->txt_Height(3);
+  display->gfx_MoveTo(left + 36, top + 6);
+  display->putstr((char*) "Scan");
+  display->gfx_MoveTo(left + 36, top + 42);
+  display->putstr((char*) "Card");
+}
+
+bool MembershipButton::inBounds(uint16_t x, uint16_t y) {
   return x > left && x < right && y < bottom && y > top;
 }
 

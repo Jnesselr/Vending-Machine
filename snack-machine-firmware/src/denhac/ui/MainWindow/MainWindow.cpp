@@ -213,6 +213,13 @@ void MainWindow::setupMemberVariables() {
   StaticCallback<StaticCallbackType::ADD_ITEM>::mainWindow = this;
   addItemButton.tapped = StaticCallback<StaticCallbackType::ADD_ITEM>::callback;
 
+  membershipButton.display = display;
+  membershipButton.enabled = false;
+  membershipButton.left = cancelOrderButton.right + 5;
+  membershipButton.right = addItemButton.left - 5;
+  membershipButton.bottom = vendButton.top - 5;
+  membershipButton.top = addItemButton.top;
+
   state = MainWindowState::LETTERS_VISIBLE;
   memberVariablesSet = true;
 }
@@ -254,6 +261,7 @@ void MainWindow::loop() {
 void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
   if(state == MainWindowState::VEND_SCREEN) {
     cancelOrderButton.touch(touchMode, x, y);
+    membershipButton.touch(touchMode, x, y);
     addItemButton.touch(touchMode, x, y);
     vendButton.touch(touchMode, x, y);
   } else if(state == MainWindowState::LETTERS_VISIBLE) {
@@ -330,6 +338,7 @@ void MainWindow::drawGridNumbers() {
 void MainWindow::drawVendScreen() {
   display->gfx_RectangleFilled(0, gridTop, screenWidth - 1, gridBottom, WHITESMOKE);
   cancelOrderButton.show();
+  membershipButton.show();
   addItemButton.show();
   vendButton.show();
 }
@@ -464,6 +473,8 @@ void MainWindow::back() {
 void MainWindow::cancelOrder() {
   Session::reset();
   drawOrder();
+  cancelOrderButton.enabled = false;
+  cancelOrderButton.show();
 }
 
 void MainWindow::rowTapped(uint8_t row) {

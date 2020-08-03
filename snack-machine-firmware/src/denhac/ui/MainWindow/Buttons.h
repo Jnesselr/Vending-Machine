@@ -79,3 +79,18 @@ class VendButton : public Button {
   protected:
     bool inBounds(uint16_t x, uint16_t y);
 };
+
+class MembershipButton : public Button {
+  public:
+    MembershipButton();
+    void show();
+
+    Diablo_Serial_4DLib* display;
+    uint16_t left;
+    uint16_t right;
+    uint16_t top;
+    uint16_t bottom;
+
+  protected:
+    bool inBounds(uint16_t x, uint16_t y);
+};

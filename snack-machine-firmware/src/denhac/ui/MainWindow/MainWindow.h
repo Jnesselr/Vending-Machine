@@ -83,4 +83,5 @@ class MainWindow : public Window {
     CancelOrderButton cancelOrderButton;
     AddItemButton addItemButton;
     VendButton vendButton;
+    MembershipButton membershipButton;
 };
