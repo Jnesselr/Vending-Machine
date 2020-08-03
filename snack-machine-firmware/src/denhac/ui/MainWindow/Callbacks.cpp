@@ -64,10 +64,10 @@ void StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::callback() {
   mainWindow->customerLookupStarted();
 }
 
-template<>
-void StaticCallback<StaticCallbackType::SESSION_RESET>::callback() {
-  mainWindow->sessionReset();
-}
+// template<>
+// void StaticCallback<StaticCallbackType::SESSION_RESET>::callback() {
+//   mainWindow->sessionReset();
+// }
 
 template<>
 void StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::callback() {

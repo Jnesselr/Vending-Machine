@@ -11,6 +11,11 @@
 #include "utils.h"
 #include <avr/wdt.h>
 
+template<MainWindowCallbackType type, typename... Args>
+MainWindow* MainWindowCallback<type, Args...>::mainWindow = nullptr;
+template<MainWindowCallbackType type, typename... Args>
+WindowCallback<Args...> MainWindowCallback<type, Args...>::windowCallback = nullptr;
+
 void MainWindow::show() {
   setupMemberVariables();
 
@@ -28,8 +33,9 @@ void MainWindow::show() {
   StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::mainWindow = this;
   Session::onOrdersRetrieved = StaticCallback<StaticCallbackType::ORDERS_RETRIEVED>::callback;
 
-  StaticCallback<StaticCallbackType::SESSION_RESET>::mainWindow = this;
-  Session::onReset = StaticCallback<StaticCallbackType::SESSION_RESET>::callback;
+  // StaticCallback<StaticCallbackType::SESSION_RESET>::mainWindow = this;
+  // Session::onReset = StaticCallback<StaticCallbackType::SESSION_RESET>::callback;
+  Session::onReset = callback<MainWindowCallbackType::SESSION_RESET>(newSessionReset);
 
   StaticCallback<StaticCallbackType::CURRENT_ORDER_UPDATED>::mainWindow = this;
   Session::onCurrentOrderUpdated = StaticCallback<StaticCallbackType::CURRENT_ORDER_UPDATED>::callback;
@@ -474,6 +480,18 @@ void MainWindow::drawCurrentCredit() {
   display->print(cents);
 }
 
+template<MainWindowCallbackType type, typename... Args>
+VariableCallback<Args...> MainWindow::callback(VariableCallback<MainWindow*, Args...> function) {
+  MainWindowCallback<type, Args...>::mainWindow = this;
+  MainWindowCallback<type, Args...>::windowCallback = function;
+  return MainWindowCallback<type, Args...>::callback;
+}
+
+template<MainWindowCallbackType type, typename... Args>
+void MainWindowCallback<type, Args...>::callback(Args... args) {
+  windowCallback(mainWindow, args...);
+}
+
 void MainWindow::back() {
   if(state == MainWindowState::LETTERS_VISIBLE) {
     state = MainWindowState::VEND_SCREEN;
@@ -551,6 +569,10 @@ void MainWindow::sessionReset() {
     cancelOrderButton.show();
     membershipButton.show();
   }
+}
+
+void MainWindow::newSessionReset(MainWindow* mainWindow) {
+  mainWindow->sessionReset();
 }
 
 void MainWindow::membershipButtonTapped() {

@@ -11,6 +11,21 @@ enum class MainWindowState {
   NUMBERS_VISIBLE
 };
 
+enum class MainWindowCallbackType {
+  BACK,
+  CANCEL_ORDER,
+  MONEY_AVAILABLE,
+  ADD_ITEM,
+  CUSTOMER_LOOKUP_STARTED,
+  ORDERS_RETRIEVED,
+  SESSION_RESET,
+  MEMBERSHIP_BUTTON_TAPPED,
+  CURRENT_ORDER_UPDATED,
+};
+
+template<typename... Args>
+using VariableCallback = void (*)(Args... args);
+
 class MainWindow : public Window {
   public:
     void show();
@@ -29,7 +44,12 @@ class MainWindow : public Window {
     void sessionReset();
     void membershipButtonTapped();
     void currentOrderUpdated();
+
+    static void newSessionReset(MainWindow* mainWindow);
   private:
+    template<MainWindowCallbackType type, typename... Args>
+    VariableCallback<Args...> callback(VariableCallback<MainWindow*, Args...> function);
+
     void setupMemberVariables();
     void drawGrid();
     void drawGridLetters();
@@ -89,4 +109,14 @@ class MainWindow : public Window {
     AddItemButton addItemButton;
     VendButton vendButton;
     MembershipButton membershipButton;
+};
+
+template<typename... Args>
+using WindowCallback = void (*)(MainWindow*, Args...);
+
+template<MainWindowCallbackType type, typename... Args>
+struct MainWindowCallback {
+  static MainWindow* mainWindow;
+  static WindowCallback<Args...> windowCallback;
+  static void callback(Args...);
 };
