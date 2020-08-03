@@ -24,6 +24,7 @@ class MainWindow : public Window {
     void cancelOrder();
     void moneyAvailable(uint32_t amount);
     void addItemScreen();
+    void customerLookupStarted();
   private:
     void setupMemberVariables();
     void drawGrid();

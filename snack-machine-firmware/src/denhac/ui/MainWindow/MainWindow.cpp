@@ -21,6 +21,9 @@ void MainWindow::show() {
 
   StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::mainWindow = this;
   Session::moneyAvailableCallback = StaticCallback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>::callback;
+
+  StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::mainWindow = this;
+  Session::onCustomerLookupStarted = StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::callback;
 }
 
 void MainWindow::setupMemberVariables() {
@@ -511,6 +514,13 @@ void MainWindow::moneyAvailable(uint32_t amount) {
 void MainWindow::addItemScreen() {
   state = MainWindowState::LETTERS_VISIBLE;
   gridRedrawNeeded = true;
+}
+
+void MainWindow::customerLookupStarted() {
+  membershipButton.state = MembershipButtonState::PLEASE_WAIT;
+  if(state == MainWindowState::VEND_SCREEN) {
+    membershipButton.show();
+  }
 }
 
 #endif

@@ -59,4 +59,9 @@ void StaticCallback<StaticCallbackType::ADD_ITEM>::callback() {
   mainWindow->addItemScreen();
 }
 
+template<>
+void StaticCallback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>::callback() {
+  mainWindow->customerLookupStarted();
+}
+
 #endif

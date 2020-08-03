@@ -197,6 +197,7 @@ MembershipButton::MembershipButton() {
   display = nullptr;
   enabled = true;
   left = right = top = bottom = 0;
+  state = MembershipButtonState::SCAN_CARD;
 }
 
 void MembershipButton::show() {
@@ -221,10 +222,18 @@ void MembershipButton::show() {
   display->txt_FGcolour(textColor);
   display->txt_Width(3);
   display->txt_Height(3);
-  display->gfx_MoveTo(left + 36, top + 6);
-  display->putstr((char*) "Scan");
-  display->gfx_MoveTo(left + 36, top + 42);
-  display->putstr((char*) "Card");
+
+  if(state == MembershipButtonState::SCAN_CARD) {
+    display->gfx_MoveTo(left + 38, top + 6);
+    display->putstr((char*) "Scan");
+    display->gfx_MoveTo(left + 38, top + 42);
+    display->putstr((char*) "Card");
+  } else if(state == MembershipButtonState::PLEASE_WAIT) {
+    display->gfx_MoveTo(left + 4 + 10, top + 6);
+    display->putstr((char*) "Please");
+    display->gfx_MoveTo(left + 4 + 34, top + 42);
+    display->putstr((char*) "Wait");
+  }
 }
 
 bool MembershipButton::inBounds(uint16_t x, uint16_t y) {

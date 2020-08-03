@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include "denhac/data/Order.h"
+#include "utils.h"
 
 typedef void (*MoneyCallback)(uint32_t amount);
 
@@ -19,6 +20,7 @@ class Session {
     static MoneyCallback moneyInsertedCallback;
     static MoneyCallback moneyAvailableCallback;
 
+    static VoidCallback onCustomerLookupStarted;
   private:
     static void onGetOrdersByCardError(uint8_t statusCode);
     static void onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders);

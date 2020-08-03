@@ -7,6 +7,7 @@ enum class StaticCallbackType {
   CANCEL_ORDER,
   MONEY_AVAILABLE,
   ADD_ITEM,
+  CUSTOMER_LOOKUP_STARTED,
 };
 
 template<StaticCallbackType type, typename... Args>

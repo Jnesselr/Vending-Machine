@@ -80,6 +80,12 @@ class VendButton : public Button {
     bool inBounds(uint16_t x, uint16_t y);
 };
 
+enum class MembershipButtonState {
+  SCAN_CARD,
+  PLEASE_WAIT,
+  NUM_ORDERS,
+};
+
 class MembershipButton : public Button {
   public:
     MembershipButton();
@@ -90,6 +96,8 @@ class MembershipButton : public Button {
     uint16_t right;
     uint16_t top;
     uint16_t bottom;
+
+    MembershipButtonState state;
 
   protected:
     bool inBounds(uint16_t x, uint16_t y);

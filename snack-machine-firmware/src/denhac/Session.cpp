@@ -12,6 +12,7 @@ uint32_t Session::onlineCredit = 0;
 uint32_t Session::moneyInsertedInMachine = 0;
 MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
+VoidCallback Session::onCustomerLookupStarted = nullptr;
 
 void Session::reset() {
   active = false;
@@ -28,13 +29,11 @@ Order* Session::getCurrentOrder() {
 }
 
 void Session::cardScanned(uint32_t cardNum) {
-  // If there's no active session, request orders by card
-  if(!active) {
-    SiteLink::getOrdersByCard(cardNum, onGetOrdersByCardError, onGetOrdersByCardSuccess);
-  }
+  CALLBACK(onCustomerLookupStarted);
+
+  SiteLink::getOrdersByCard(cardNum, onGetOrdersByCardError, onGetOrdersByCardSuccess);
 
   Session::cardNum = cardNum;
-  Session::active = true;
 }
 
 void Session::onGetOrdersByCardError(uint8_t statusCode) {
