@@ -58,6 +58,8 @@ class SiteLink {
     static void handleHandshake();
     static void handleNormalCommands();
 
+    static void ack();
+
     static void handleStatus();
     static void handleProductUpdated();
     static void handleAfterFirstProductFetched();

@@ -99,11 +99,16 @@ void SiteLink::handleHandshake() {
   uint8_t statusCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
   if(typeCode == 0x01 && statusCode == BridgeStatus::READY) {
+    ack();
     Serial.println("We did it!");
     updateState(SiteLinkState::IDLE);
     CALLBACK(statusCallback, statusCode);
   }
   Serial.flush();
+}
+
+void SiteLink::ack() {
+  msgpck_write_nil(linkSerial);
 }
 
 void SiteLink::handleNormalCommands() {
@@ -143,6 +148,7 @@ void SiteLink::handleStatus() {
   Serial.println("Status code!");
   uint8_t statusCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
+  ack();
   Serial.print("Code is: ");
   Serial.println(statusCode, HEX);
   Serial.flush();
@@ -192,6 +198,7 @@ void SiteLink::handleProductUpdated() {
   msgpck_read_integer(linkSerial, (byte*) &product.stockInMachine, sizeof(product.stockInMachine));
   msgpck_read_integer(linkSerial, (byte*) &product.row, sizeof(product.row));
   msgpck_read_integer(linkSerial, (byte*) &product.col, sizeof(product.col));
+  ack();
 
   hasProduct[8 * product.row + product.col] = true;
 
@@ -212,6 +219,7 @@ void SiteLink::handleOrdersByCard() {
   {
     orders[i] = readOrder();
   }
+  ack();
 
   // TODO Should we assume order is correct here
   SiteLinkCommand command = commandBuffer.pop();
@@ -288,6 +296,7 @@ void SiteLink::handleProductRemoved() {
 
   msgpck_read_integer(linkSerial, (byte*) &row, sizeof(row));
   msgpck_read_integer(linkSerial, (byte*) &col, sizeof(col));
+  ack();
 
   CALLBACK(productRemovedCallback, row, col)
 }
