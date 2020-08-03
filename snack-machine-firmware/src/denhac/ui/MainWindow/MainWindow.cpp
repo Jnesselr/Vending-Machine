@@ -552,10 +552,12 @@ void MainWindow::sessionReset(MainWindow* mainWindow) {
   mainWindow->membershipButton.state = MembershipButtonState::SCAN_CARD;
   mainWindow->membershipButton.enabled = false;
   mainWindow->cancelOrderButton.enabled = false;
+  mainWindow->vendButton.enabled = false;
 
   if(mainWindow->state == MainWindowState::VEND_SCREEN) {
     mainWindow->cancelOrderButton.show();
     mainWindow->membershipButton.show();
+    mainWindow->vendButton.show();
   }
 }
 
@@ -574,8 +576,13 @@ void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
 
   if(order->getNumItems() > 0) {
     mainWindow->cancelOrderButton.enabled = true;
+    if(order->status == OrderStatus::PROCESSING) {
+      mainWindow->vendButton.enabled = true;
+    }
+
     if(mainWindow->state == MainWindowState::VEND_SCREEN) {
       mainWindow->cancelOrderButton.show();
+      mainWindow->vendButton.show();
     }
   }
 }
