@@ -130,6 +130,9 @@ void SiteLink::handleNormalCommands() {
   case 3:
     handleOrdersByCard();
     break;
+  case 4:
+    handleOrdersById();
+    break;
   case 6:
     handleProductRemoved();
     break;
@@ -203,8 +206,6 @@ void SiteLink::handleProductUpdated() {
 }
 
 void SiteLink::handleOrdersByCard() {
-  Serial.println("Orders by card!");
-
   uint32_t cardNumber = 0;
   msgpck_read_integer(linkSerial, (byte*) &cardNumber, sizeof(cardNumber));
 
@@ -223,6 +224,17 @@ void SiteLink::handleOrdersByCard() {
   OrdersResponseCallback callback = (OrdersResponseCallback) command.commandCallback;
 
   CALLBACK(callback, orders, numOrders)
+}
+
+void SiteLink::handleOrdersById() {
+  Order order = readOrder();
+  ack();
+
+  // TODO Should we assume order is correct here
+  SiteLinkCommand command = commandBuffer.pop();
+  OrderResponseCallback callback = (OrderResponseCallback) command.commandCallback;
+
+  CALLBACK(callback, order)
 }
 
 Order SiteLink::readOrder() {
@@ -310,6 +322,18 @@ void SiteLink::getOrdersByCard(
         commandBuffer.push(command);
       }
 
+void SiteLink::getOrderById(
+      uint32_t id,
+      BridgeStatusCallback onStatus,
+      OrderResponseCallback onOrder) {
+        Serial.println("Calling get order by ID!");
+        msgpck_write_integer(linkSerial, 0x04);
+        msgpck_write_integer(linkSerial, id);
+
+        SiteLinkCommand command(onStatus, onOrder);
+        commandBuffer.push(command);
+      }
+
 void SiteLink::updateState(SiteLinkState siteLinkState) {
   SiteLinkState oldState = SiteLink::state;
   SiteLink::state = siteLinkState;
@@ -328,6 +352,11 @@ SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError) {
 }
 
 SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError, OrdersResponseCallback onOrders) {
+  this->errorCallback = onError;
+  this->commandCallback = (VoidCallback) onOrders;
+}
+
+SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError, OrderResponseCallback onOrders) {
   this->errorCallback = onError;
   this->commandCallback = (VoidCallback) onOrders;
 }

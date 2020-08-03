@@ -22,12 +22,14 @@ typedef void (*ProductUpdatedCallback)(const Product& product);
 typedef void (*ProductRemovedCallback)(uint8_t row, uint8_t col);
 
 typedef void (*OrdersResponseCallback)(Order orders[], uint8_t numOrders);
+typedef void (*OrderResponseCallback)(const Order& order);
 
 class SiteLinkCommand {
   public:
     SiteLinkCommand();
     SiteLinkCommand(BridgeStatusCallback onError);
     SiteLinkCommand(BridgeStatusCallback onError, OrdersResponseCallback onOrders);
+    SiteLinkCommand(BridgeStatusCallback onError, OrderResponseCallback onOrder);
 
     BridgeStatusCallback errorCallback;
     VoidCallback commandCallback;
@@ -42,7 +44,10 @@ class SiteLink {
       uint32_t cardNumber,
       BridgeStatusCallback onStatus,
       OrdersResponseCallback onOrders);
-
+    static void getOrderById(
+      uint32_t id,
+      BridgeStatusCallback onStatus,
+      OrderResponseCallback onOrder);
 
     // Callbacks
     static SiteLinkStateCallback onStateChanged;
@@ -64,6 +69,7 @@ class SiteLink {
     static void handleProductUpdated();
     static void handleAfterFirstProductFetched();
     static void handleOrdersByCard();
+    static void handleOrdersById();
     static void handleProductRemoved();
 
     static Order readOrder();
