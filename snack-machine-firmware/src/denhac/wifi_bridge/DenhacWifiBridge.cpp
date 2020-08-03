@@ -26,6 +26,7 @@ bool DenhacWifiBridge::has_product[NUM_PRODUCTS];
 unsigned long DenhacWifiBridge::lastProductUpdateMillis = 0;
 
 void DenhacWifiBridge::setup() {
+  pinMode(13, OUTPUT);
   serial->begin(9600);
 
   lastProductUpdateMillis = 0;
@@ -135,10 +136,6 @@ void DenhacWifiBridge::fetchProducts() {
     uint8_t hash_index = row * 8 + col;
 
     if(hashes[hash_index] != crc_value) {
-      // Products take up almost the entire buffer
-      // Give time on either side for the host to read
-      delay(100);
-
       msgpck_write_integer(serial, 2);
       msgpck_write_integer(serial, id);
       msgpck_write_string(serial, (char*) name_ref, name_length);
@@ -147,8 +144,7 @@ void DenhacWifiBridge::fetchProducts() {
       msgpck_write_integer(serial, stock_in_machine);
       msgpck_write_integer(serial, row);
       msgpck_write_integer(serial, col);
-
-      delay(100);
+      waitForAck();
 
       hashes[hash_index] = crc_value;
     }
@@ -166,6 +162,7 @@ void DenhacWifiBridge::fetchProducts() {
         msgpck_write_integer(serial, 6);
         msgpck_write_integer(serial, row);
         msgpck_write_integer(serial, col);
+        waitForAck();
       }
     }
   }
@@ -188,6 +185,7 @@ void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
   msgpck_write_integer(serial, 3);
   msgpck_write_integer(serial, cardNumber);
   handleCardResponse();
+  waitForAck();
 }
 
 void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
@@ -205,6 +203,7 @@ void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
   msgpck_write_integer(serial, 4);
   JsonObject order = jsonDoc.as<JsonObject>();
   sendOrder(order);
+  waitForAck();
 }
 
 void DenhacWifiBridge::updateOrder() {
@@ -269,6 +268,7 @@ void DenhacWifiBridge::updateOrder() {
   JsonObject order = jsonDoc.as<JsonObject>();
   msgpck_write_integer(serial, 5);
   sendOrder(order);
+  waitForAck();
 }
 
 void DenhacWifiBridge::cancelOrderById(uint32_t orderId) {
@@ -302,6 +302,7 @@ void DenhacWifiBridge::fetchCreditByCard(uint32_t cardNumber) {
   uint32_t credit = order["credit"];
   msgpck_write_integer(serial, 9);
   msgpck_write_integer(serial, credit);
+  waitForAck();
 }
 
 void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t difference) {
@@ -325,6 +326,7 @@ void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t differenc
   msgpck_write_integer(serial, 0x0A);
   msgpck_write_integer(serial, credit);
   msgpck_write_integer(serial, diff);
+  waitForAck();
 }
 
 bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
@@ -383,14 +385,22 @@ void DenhacWifiBridge::setupComm() {
   while(true) {
     msgpck_write_nil(serial);
     delay(100);
+
+    if(serial->available() == 0) {
+      continue;
+    }
+
     if(msgpck_nil_next(serial)) {
+      // Clear out anything sent to us
+      while(serial->available()) {
+        serial->read();
+      }
+
       sendStatus(BridgeStatus::READY);
       return;
     } else {
       // If got something that wasn't nil, we need to dispose of it
-      if(serial->available()) {
-        serial->read();
-      }
+      serial->read();
     }
   }
 }
@@ -398,12 +408,14 @@ void DenhacWifiBridge::setupComm() {
 void DenhacWifiBridge::sendStatus(uint8_t status) {
   msgpck_write_integer(serial, 0x01);
   msgpck_write_integer(serial, status);
+  waitForAck();
 }
 
 void DenhacWifiBridge::sendDebug(String msg) {
   #ifdef DEBUG_MODE
   msgpck_write_integer(serial, 0x07);
   msgpck_write_string(serial, msg);
+  waitForAck();
   #endif
 }
 
@@ -411,7 +423,30 @@ void DenhacWifiBridge::sendDebug(uint32_t value) {
   #ifdef DEBUG_MODE
   msgpck_write_integer(serial, 0x07);
   msgpck_write_integer(serial, value);
+  waitForAck();
   #endif
+}
+
+/**
+ * To prevent overflowing the receiving buffer on the host side,
+ * we wait for an ACK each time after sending a packet.
+ */
+void DenhacWifiBridge::waitForAck() {
+  digitalWrite(13, HIGH);
+  while(true) {
+    if(serial->available() == 0) {
+      continue;
+    }
+
+    if(msgpck_nil_next(serial)) {
+      serial->read();
+      digitalWrite(13, LOW);
+      return;
+    } else {
+      // If got something that wasn't nil, we need to dispose of it
+      serial->read();
+    }
+  }
 }
 
 #endif

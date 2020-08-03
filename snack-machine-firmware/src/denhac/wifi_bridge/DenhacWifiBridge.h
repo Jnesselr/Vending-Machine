@@ -30,6 +30,8 @@ class DenhacWifiBridge: public VendingMachine {
     static void handleIncomingRequest();
     static void handleCardResponse();
 
+    static void waitForAck();
+
     static void fetchProducts();
     static void fetchOrdersByCard(uint32_t cardNumber);
     static void fetchOrderById(uint32_t orderId);
