@@ -10,10 +10,17 @@ class Button {
     virtual void show() = 0;
     virtual void hide();
 
-    VoidCallback tapped;
+    bool isEnabled();
+    void setEnabled(bool enabled);
+    void enable();
+    void disable();
 
-    bool enabled = true;
+    void forceRedrawNeeded();
+
+    VoidCallback tapped;
   protected:
     virtual bool inBounds(uint16_t x, uint16_t y);
+    bool redrawNeeded = true;
     bool pressed = false;
+    bool enabled = true;
 };

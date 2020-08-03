@@ -16,13 +16,45 @@ MainWindow* StaticCallback<type, Args...>::mainWindow = nullptr;
 template<StaticCallbackType type, typename... Args>
 WindowCallback<Args...> StaticCallback<type, Args...>::windowCallback = nullptr;
 
+#define CALL_ON_BUTTONS(function_call) \
+if(state == MainWindowState::VEND_SCREEN) { \
+    cancelOrderButton.function_call; \
+    membershipButton.function_call; \
+    addItemButton.function_call; \
+    vendButton.function_call; \
+  } else if(state == MainWindowState::LETTERS_VISIBLE) { \
+    backButton.function_call; \
+    cellButtonA.function_call; \
+    cellButtonB.function_call; \
+    cellButtonC.function_call; \
+    cellButtonD.function_call; \
+    cellButtonE.function_call; \
+    cellButtonF.function_call; \
+    cellButtonG.function_call; \
+    cellButtonH.function_call; \
+  } else if(state == MainWindowState::NUMBERS_VISIBLE) { \
+    backButton.function_call; \
+    cellButton1.function_call; \
+    cellButton2.function_call; \
+    cellButton3.function_call; \
+    cellButton4.function_call; \
+    cellButton5.function_call; \
+    cellButton6.function_call; \
+    cellButton7.function_call; \
+    cellButton8.function_call; \
+  }
+
 void MainWindow::show() {
   setupMemberVariables();
 
   display->gfx_BGcolour(WHITESMOKE);
   display->gfx_Cls();
 
-  gridRedrawNeeded = true;
+  state = MainWindowState::LETTERS_VISIBLE;
+  oldLoopState = MainWindowState::VEND_SCREEN; // Technically not true, but it redraws the grid this way
+
+  drawCurrentCredit();
+  drawOrder();
 
   Session::moneyAvailableCallback = callback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>(moneyAvailable);
   Session::onCustomerLookupStarted = callback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>(customerLookupStarted);
@@ -197,19 +229,19 @@ void MainWindow::setupMemberVariables() {
   cellButton8.tapped = ColCallback<7>::tapped;
 
   vendButton.display = display;
-  vendButton.enabled = false;
   vendButton.left = gridLeft;
   vendButton.right = gridRight;
   vendButton.bottom = gridBottom;
   vendButton.top = vendButton.bottom - CELL_HEIGHT - 7;
+  vendButton.disable();
 
   cancelOrderButton.display = display;
-  cancelOrderButton.enabled = false;
   cancelOrderButton.left = gridLeft;
   cancelOrderButton.right = 193;
   cancelOrderButton.bottom = vendButton.top - 5;
   cancelOrderButton.top = cancelOrderButton.bottom - 74 - 7;
   cancelOrderButton.tapped = callback<StaticCallbackType::CANCEL_ORDER>(cancelOrder);
+  cancelOrderButton.disable();
 
   addItemButton.display = display;
   addItemButton.left = gridRight - 105;
@@ -219,14 +251,13 @@ void MainWindow::setupMemberVariables() {
   addItemButton.tapped = callback<StaticCallbackType::ADD_ITEM>(addItemScreen);
 
   membershipButton.display = display;
-  membershipButton.enabled = false;
   membershipButton.left = cancelOrderButton.right + 5;
   membershipButton.right = addItemButton.left - 5;
   membershipButton.bottom = vendButton.top - 5;
   membershipButton.top = addItemButton.top;
   membershipButton.tapped = callback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>(membershipButtonTapped);
+  membershipButton.disable();
 
-  state = MainWindowState::LETTERS_VISIBLE;
   memberVariablesSet = true;
 }
 
@@ -235,61 +266,27 @@ void MainWindow::loop() {
     verifyGridValidity();
   }
 
-  if(gridRedrawNeeded) {
+  if(state.gridIsShown() && !oldLoopState.gridIsShown()) {
     drawGrid();
-    gridRedrawNeeded = false;
-    gridContentRedrawNeeded = true;
+    verifyGridValidity();
+  } else if(!state.gridIsShown() && oldLoopState.gridIsShown()) {
+    // Currently only the VEND_SCREEN
+    display->gfx_RectangleFilled(0, gridTop, screenWidth - 1, gridBottom, WHITESMOKE);
   }
 
-  if(gridContentRedrawNeeded) {
-    if(state == MainWindowState::LETTERS_VISIBLE) {
-      drawGridLetters();
-      backButton.show();
-    } else if(state == MainWindowState::NUMBERS_VISIBLE) {
-      drawGridNumbers();
-      backButton.show();
-    }
-    gridContentRedrawNeeded = false;
-  }
+  CALL_ON_BUTTONS(show())
 
-  if(vendScreenRedrawNeeded) {
-    drawVendScreen();
-    vendScreenRedrawNeeded = false;
-  }
-
-  if(orderContentRedrawNeeded) {
-    drawOrder();
-    drawCurrentCredit();
-    orderContentRedrawNeeded = false;
-  }
+  oldLoopState = state;
 }
 
 void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
-  if(state == MainWindowState::VEND_SCREEN) {
-    cancelOrderButton.touch(touchMode, x, y);
-    membershipButton.touch(touchMode, x, y);
-    addItemButton.touch(touchMode, x, y);
-    vendButton.touch(touchMode, x, y);
-  } else if(state == MainWindowState::LETTERS_VISIBLE) {
-    backButton.touch(touchMode, x, y);
-    cellButtonA.touch(touchMode, x, y);
-    cellButtonB.touch(touchMode, x, y);
-    cellButtonC.touch(touchMode, x, y);
-    cellButtonD.touch(touchMode, x, y);
-    cellButtonE.touch(touchMode, x, y);
-    cellButtonF.touch(touchMode, x, y);
-    cellButtonG.touch(touchMode, x, y);
-    cellButtonH.touch(touchMode, x, y);
-  } else if(state == MainWindowState::NUMBERS_VISIBLE) {
-    backButton.touch(touchMode, x, y);
-    cellButton1.touch(touchMode, x, y);
-    cellButton2.touch(touchMode, x, y);
-    cellButton3.touch(touchMode, x, y);
-    cellButton4.touch(touchMode, x, y);
-    cellButton5.touch(touchMode, x, y);
-    cellButton6.touch(touchMode, x, y);
-    cellButton7.touch(touchMode, x, y);
-    cellButton8.touch(touchMode, x, y);
+  CALL_ON_BUTTONS(touch(touchMode, x, y))
+}
+
+void MainWindow::setState(MainWindowState state) {
+  if(this->state != state) {
+    this->state = state;
+    CALL_ON_BUTTONS(forceRedrawNeeded())
   }
 }
 
@@ -315,38 +312,6 @@ void MainWindow::drawGrid() {
   display->gfx_Line(gridLeft, row, gridRight, row, BLACK);
   row = row + CELL_HEIGHT + 1;
   display->gfx_Line(gridLeft, row, gridRight, row, BLACK);
-}
-
-void MainWindow::drawGridLetters() {
-  verifyGridValidity();
-  cellButtonA.show();
-  cellButtonB.show();
-  cellButtonC.show();
-  cellButtonD.show();
-  cellButtonE.show();
-  cellButtonF.show();
-  cellButtonG.show();
-  cellButtonH.show();
-}
-
-void MainWindow::drawGridNumbers() {
-  verifyGridValidity();
-  cellButton1.show();
-  cellButton2.show();
-  cellButton3.show();
-  cellButton4.show();
-  cellButton5.show();
-  cellButton6.show();
-  cellButton7.show();
-  cellButton8.show();
-}
-
-void MainWindow::drawVendScreen() {
-  display->gfx_RectangleFilled(0, gridTop, screenWidth - 1, gridBottom, WHITESMOKE);
-  cancelOrderButton.show();
-  membershipButton.show();
-  addItemButton.show();
-  vendButton.show();
 }
 
 CellButton* MainWindow::rowButton(uint8_t row) {
@@ -383,18 +348,16 @@ void MainWindow::verifyGridValidity() {
   for (uint8_t i = 0; i < 8; i++)
   {
     CellButton* button = rowButton(i);
-    bool isEnabled = button->enabled;
+    bool isEnabled = button->isEnabled();
     bool shouldBeEnabled = Motors::rowExists(i) && ProductManager::isValid(i);
+
     if(isEnabled != shouldBeEnabled) {
       if(state == MainWindowState::NUMBERS_VISIBLE && selectedRow == i) {
-        state = MainWindowState::LETTERS_VISIBLE;
-        gridContentRedrawNeeded = true;
-      } else if(state == MainWindowState::LETTERS_VISIBLE) {
-        gridContentRedrawNeeded = true;
+        setState(MainWindowState::LETTERS_VISIBLE);
       }
     }
 
-    button->enabled = shouldBeEnabled;
+    button->setEnabled(shouldBeEnabled);
   }
 
   if(state != MainWindowState::NUMBERS_VISIBLE) {
@@ -404,13 +367,8 @@ void MainWindow::verifyGridValidity() {
   for (uint8_t i = 0; i < 8; i++)
   {
     CellButton* button = colButton(i);
-    bool isEnabled = button->enabled;
     bool shouldBeEnabled = Motors::exists(selectedRow, i) && ProductManager::isValid(selectedRow, i);
-    if(isEnabled != shouldBeEnabled) {
-      gridContentRedrawNeeded = true;
-    }
-
-    button->enabled = shouldBeEnabled;
+    button->setEnabled(shouldBeEnabled);
   }
 }
 
@@ -480,11 +438,10 @@ void StaticCallback<type, Args...>::callback(Args... args) {
 
 void MainWindow::back(MainWindow* mainWindow) {
   if(mainWindow->state == MainWindowState::LETTERS_VISIBLE) {
-    mainWindow->state = MainWindowState::VEND_SCREEN;
-    mainWindow->vendScreenRedrawNeeded = true;
+    mainWindow->setState(MainWindowState::VEND_SCREEN);
   } else if(mainWindow->state == MainWindowState::NUMBERS_VISIBLE) {
-    mainWindow->state = MainWindowState::LETTERS_VISIBLE;
-    mainWindow->gridContentRedrawNeeded = true;
+    mainWindow->setState(MainWindowState::LETTERS_VISIBLE);
+    mainWindow->verifyGridValidity();
   }
 }
 
@@ -496,21 +453,17 @@ void MainWindow::cancelOrder(MainWindow* mainWindow) {
 void MainWindow::rowTapped(uint8_t row) {
   if(state == MainWindowState::LETTERS_VISIBLE) {
     selectedRow = row;
-    state = MainWindowState::NUMBERS_VISIBLE;
-    gridContentRedrawNeeded = true;
+    setState(MainWindowState::NUMBERS_VISIBLE);
+    verifyGridValidity();
   }
 }
 
 void MainWindow::colTapped(uint8_t col) {
   if(state == MainWindowState::NUMBERS_VISIBLE) {
-    Order* order = Session::getCurrentOrder();
+    Session::addToCurrentOrder(selectedRow, col);
 
-    order->add(ProductManager::get(selectedRow, col));
-    orderContentRedrawNeeded = true;
-
-    state = MainWindowState::VEND_SCREEN;
-    cancelOrderButton.enabled = true;
-    vendScreenRedrawNeeded = true;
+    setState(MainWindowState::VEND_SCREEN);
+    cancelOrderButton.enable();
   }
 }
 
@@ -521,44 +474,30 @@ void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
     return;
   }
 
-  if(!mainWindow->cancelOrderButton.enabled &&
-    mainWindow->state == MainWindowState::VEND_SCREEN) {
-    mainWindow->cancelOrderButton.enabled = true;
-    mainWindow->cancelOrderButton.show(); // Redraw since it's available now
-  }
+  mainWindow->cancelOrderButton.enable();
 }
 
 void MainWindow::addItemScreen(MainWindow* mainWindow) {
-  mainWindow->state = MainWindowState::LETTERS_VISIBLE;
-  mainWindow->gridRedrawNeeded = true;
+  mainWindow->setState(MainWindowState::LETTERS_VISIBLE);
 }
 
 void MainWindow::customerLookupStarted(MainWindow* mainWindow) {
-  mainWindow->membershipButton.state = MembershipButtonState::PLEASE_WAIT;
-  if(mainWindow->state == MainWindowState::VEND_SCREEN) {
-    mainWindow->membershipButton.enabled = false;
-    mainWindow->membershipButton.show();
-  }
+  mainWindow->membershipButton.setState(MembershipButtonState::PLEASE_WAIT);
+  mainWindow->membershipButton.disable();
 }
 
 void MainWindow::ordersRetrieved(MainWindow* mainWindow) {
-  mainWindow->membershipButton.state = MembershipButtonState::NUM_ORDERS;
+  mainWindow->membershipButton.setState(MembershipButtonState::NUM_ORDERS);
   if(mainWindow->state == MainWindowState::VEND_SCREEN) {
     mainWindow->membershipButton.show();
   }
 }
 
 void MainWindow::sessionReset(MainWindow* mainWindow) {
-  mainWindow->membershipButton.state = MembershipButtonState::SCAN_CARD;
-  mainWindow->membershipButton.enabled = false;
-  mainWindow->cancelOrderButton.enabled = false;
-  mainWindow->vendButton.enabled = false;
-
-  if(mainWindow->state == MainWindowState::VEND_SCREEN) {
-    mainWindow->cancelOrderButton.show();
-    mainWindow->membershipButton.show();
-    mainWindow->vendButton.show();
-  }
+  mainWindow->membershipButton.setState(MembershipButtonState::SCAN_CARD);
+  mainWindow->membershipButton.disable();
+  mainWindow->cancelOrderButton.disable();
+  mainWindow->vendButton.disable();
 }
 
 void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {
@@ -575,14 +514,9 @@ void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
   Order* order = Session::getCurrentOrder();
 
   if(order->getNumItems() > 0) {
-    mainWindow->cancelOrderButton.enabled = true;
+    mainWindow->cancelOrderButton.enable();
     if(order->status == OrderStatus::PROCESSING) {
-      mainWindow->vendButton.enabled = true;
-    }
-
-    if(mainWindow->state == MainWindowState::VEND_SCREEN) {
-      mainWindow->cancelOrderButton.show();
-      mainWindow->vendButton.show();
+      mainWindow->vendButton.enable();
     }
   }
 }

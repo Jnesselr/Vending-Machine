@@ -11,6 +11,10 @@ CellButton::CellButton() {
 }
 
 void CellButton::show() {
+  if(!redrawNeeded) {
+    return;
+  }
+
   display->txt_Width(8);
   display->txt_Height(8);
 
@@ -36,14 +40,25 @@ void CellButton::show() {
     (top + bottom) / 2 - 72 / 2 - 8
   );
   display->putCH(character);
+
+  redrawNeeded = false;
 }
 
 bool CellButton::inBounds(uint16_t x, uint16_t y) {
   return x > left && x < right && y < bottom && y > top;
 }
 
-void BackButton::show() {
+BackButton::BackButton() {
+  display = nullptr;
   enabled = true;
+  left = right = top = bottom = 0;
+}
+
+void BackButton::show() {
+  if(!redrawNeeded) {
+    return;
+  }
+
   word color = pressed ? BLUE : LIGHTSKYBLUE;
   display->gfx_RectangleFilled(left, top, right, bottom, color);
 
@@ -59,10 +74,12 @@ void BackButton::show() {
 
   SHIFT_POLY(xValues, -left);
   SHIFT_POLY(yValues, -top);
+
+  redrawNeeded = false;
 }
 
 void BackButton::hide() {
-  enabled = false;
+  disable();
   display->gfx_RectangleFilled(left, top, right, bottom, WHITESMOKE);
 }
 
@@ -77,6 +94,10 @@ CancelOrderButton::CancelOrderButton() {
 }
 
 void CancelOrderButton::show() {
+  if(!redrawNeeded) {
+    return;
+  }
+
   word borderColor = RED;
   word insetColor = WHITE;
   word textColor = BLACK;
@@ -116,6 +137,8 @@ void CancelOrderButton::show() {
   display->putstr((char*) "Cancel");
   display->gfx_MoveTo(arrowLeftX + 14, top + 42);
   display->putstr((char*) "Order");
+
+  redrawNeeded = false;
 }
 
 bool CancelOrderButton::inBounds(uint16_t x, uint16_t y) {
@@ -129,6 +152,10 @@ AddItemButton::AddItemButton() {
 }
 
 void AddItemButton::show() {
+  if(!redrawNeeded) {
+    return;
+  }
+  
   word borderColor = BLACK;
   word insetColor = WHITE;
   word textColor = BLACK;
@@ -152,6 +179,8 @@ void AddItemButton::show() {
   display->putstr((char*) "Add");
   display->gfx_MoveTo(left + 4, top + 42);
   display->putstr((char*) "Item");
+
+  redrawNeeded = false;
 }
 
 bool AddItemButton::inBounds(uint16_t x, uint16_t y) {
@@ -165,6 +194,10 @@ VendButton::VendButton() {
 }
 
 void VendButton::show() {
+  if(!redrawNeeded) {
+    return;
+  }
+  
   word borderColor = GREEN;
   word insetColor = WHITE;
   word textColor = BLACK;
@@ -189,6 +222,8 @@ void VendButton::show() {
   display->txt_BGcolour(insetColor);
   display->gfx_MoveTo(left + 110, top + 12);
   display->putstr((char*)"VEND");
+
+  redrawNeeded = false;
 }
 
 bool VendButton::inBounds(uint16_t x, uint16_t y) {
@@ -210,7 +245,11 @@ void MembershipButton::show() {
   uint8_t numOrders = Session::getNumOrders();
 
   if(state == MembershipButtonState::NUM_ORDERS && numOrders > 0) {
-    enabled = true;
+    enable();
+  }
+
+  if(!redrawNeeded) {
+    return;
   }
 
   if(!enabled) {
@@ -258,10 +297,20 @@ void MembershipButton::show() {
       display->putstr((char*) "Order");
     }
   }
+
+  redrawNeeded = false;
 }
 
 bool MembershipButton::inBounds(uint16_t x, uint16_t y) {
   return x > left && x < right && y < bottom && y > top;
+}
+
+void MembershipButton::setState(MembershipButtonState state) {
+  if(this->state != state) {
+    redrawNeeded = true;
+  }
+
+  this->state = state;
 }
 
 #endif

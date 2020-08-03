@@ -6,6 +6,7 @@
 
 class BackButton : public Button {
   public:
+    BackButton();
     void show();
     void hide();
 
@@ -91,14 +92,14 @@ class MembershipButton : public Button {
     MembershipButton();
     void show();
 
+    void setState(MembershipButtonState state);
+
     Diablo_Serial_4DLib* display;
     uint16_t left;
     uint16_t right;
     uint16_t top;
     uint16_t bottom;
-
-    MembershipButtonState state;
-
   protected:
     bool inBounds(uint16_t x, uint16_t y);
+    MembershipButtonState state;
 };

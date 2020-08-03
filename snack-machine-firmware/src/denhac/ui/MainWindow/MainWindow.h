@@ -5,10 +5,25 @@
 
 #include "denhac/ui/MainWindow/Buttons.h"
 
-enum class MainWindowState {
-  VEND_SCREEN,
-  LETTERS_VISIBLE,
-  NUMBERS_VISIBLE
+class MainWindowState
+{
+  public:
+    enum Value : uint8_t
+    {
+      VEND_SCREEN,
+      LETTERS_VISIBLE,
+      NUMBERS_VISIBLE
+    };
+
+    MainWindowState() = default;
+    constexpr MainWindowState(Value state) : value(state) { }
+
+    constexpr bool operator==(MainWindowState a) const { return value == a.value; }
+    constexpr bool operator!=(MainWindowState a) const { return value != a.value; }
+
+    constexpr bool gridIsShown() const { return value == LETTERS_VISIBLE || value == NUMBERS_VISIBLE; }
+  private:
+    Value value;
 };
 
 enum class StaticCallbackType {
@@ -52,29 +67,23 @@ class MainWindow : public Window {
 
     void setupMemberVariables();
     void drawGrid();
-    void drawGridLetters();
-    void drawGridNumbers();
     void drawCurrentCredit();
-    void drawVendScreen();;
+    void drawOrder();
 
     CellButton* rowButton(uint8_t row);
     CellButton* colButton(uint8_t col);
 
     void verifyGridValidity();
 
-    void drawOrder();
-
     bool memberVariablesSet = false;
-    bool gridRedrawNeeded = false;
-    bool gridContentRedrawNeeded = false;
-    bool orderContentRedrawNeeded = false;
-    bool vendScreenRedrawNeeded = false;
     unsigned long lastGridValidityScan = 0;
 
     uint16_t screenWidth;
     uint16_t screenHeight;
 
+    void setState(MainWindowState state);
     MainWindowState state;
+    MainWindowState oldLoopState;
 
     const uint8_t CELL_WIDTH = 156;
     const uint8_t CELL_HEIGHT = 104;

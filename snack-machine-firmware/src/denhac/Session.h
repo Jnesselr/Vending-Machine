@@ -15,6 +15,8 @@ class Session {
     static Order getOrder(uint8_t orderNum);
     static Order* getCurrentOrder();
     static void setCurrentOrderNum(uint8_t orderNum);
+    static void addToCurrentOrder(uint8_t row, uint8_t col);
+
     static bool isActive();
     static uint32_t getCurrentAvailableMoney();
 

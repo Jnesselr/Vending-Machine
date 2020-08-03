@@ -1,7 +1,7 @@
 #ifdef VENDING_MAIN_BOARD
 
 #include "denhac/Session.h"
-
+#include "denhac/ProductManager.h"
 #include "denhac/SiteLink.h"
 
 unsigned long lastChangeMillis = 0;
@@ -50,6 +50,12 @@ Order* Session::getCurrentOrder() {
 
 void Session::setCurrentOrderNum(uint8_t orderNum) {
   currentOrder = orders[orderNum];
+
+  CALLBACK(onCurrentOrderUpdated);
+}
+
+void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
+  currentOrder.add(ProductManager::get(row, col));
 
   CALLBACK(onCurrentOrderUpdated);
 }
