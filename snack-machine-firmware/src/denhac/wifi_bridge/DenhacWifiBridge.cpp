@@ -188,10 +188,12 @@ void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
   }
 
   waitForAck();
+
+  sendStatus(BridgeStatus::ORDERS_FETCHED_BY_CARD);
 }
 
 void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
-  sendStatus(BridgeStatus::FETCHING_ORDER);
+  sendStatus(BridgeStatus::FETCHING_ORDER_BY_ID);
 
   sprintf(urlBuffer, "/wp-json/wc-vending/v1/orders/%u", orderId);
   RestResponse* response = request.GET(urlBuffer);
@@ -206,6 +208,8 @@ void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
   JsonObject order = jsonDoc.as<JsonObject>();
   sendOrder(order);
   waitForAck();
+
+  sendStatus(BridgeStatus::ORDER_FETCHED_BY_ID);
 }
 
 void DenhacWifiBridge::updateOrder() {
@@ -278,6 +282,8 @@ void DenhacWifiBridge::updateOrder() {
   msgpck_write_integer(serial, 5);
   sendOrder(order);
   waitForAck();
+
+  sendStatus(BridgeStatus::ORDER_UPDATED);
 }
 
 void DenhacWifiBridge::cancelOrderById(uint32_t orderId) {
@@ -312,6 +318,8 @@ void DenhacWifiBridge::fetchCreditByCard(uint32_t cardNumber) {
   msgpck_write_integer(serial, 9);
   msgpck_write_integer(serial, credit);
   waitForAck();
+
+  sendStatus(BridgeStatus::CREDIT_FETCHED);
 }
 
 void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t difference) {
@@ -336,6 +344,8 @@ void DenhacWifiBridge::updateCreditByCard(uint32_t cardNumber, int32_t differenc
   msgpck_write_integer(serial, credit);
   msgpck_write_integer(serial, diff);
   waitForAck();
+
+  sendStatus(BridgeStatus::CREDIT_UPDATED);
 }
 
 bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
