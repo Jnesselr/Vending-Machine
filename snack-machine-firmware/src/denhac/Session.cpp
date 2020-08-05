@@ -16,6 +16,7 @@ uint32_t Session::moneyInsertedInMachine = 0;
 VoidCallback Session::onReset = nullptr;
 MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
+MoneyCallback Session::creditAvailableCallback = nullptr;
 VoidCallback Session::onCustomerLookupStarted = nullptr;
 VoidCallback Session::onOrdersRetrieved = nullptr;
 VoidCallback Session::onUnknownCard = nullptr;
@@ -66,12 +67,13 @@ void Session::cardScanned(uint32_t cardNum) {
   Session::cardNum = cardNum;
   CALLBACK(onCustomerLookupStarted);
 
+  SiteLink::getCreditByCard(cardNum, onGetCreditByCardError, onGetCreditByCardSuccess);
   SiteLink::getOrdersByCard(cardNum, onGetOrdersByCardError, onGetOrdersByCardSuccess);
 }
 
 void Session::onGetOrdersByCardError(uint8_t statusCode) {
   // TODO
-  Serial.println("Got a status from orders by card!");
+  Serial.println("Got an error status from orders by card!");
   Serial.println(statusCode);
 
   if(cardNum == 0) {
@@ -90,9 +92,23 @@ void Session::onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders) {
     Session::orders[i] = orders[i];
   }
 
-  Serial.println("Got the orders!");
   if(cardNum != 0) {
     CALLBACK(onOrdersRetrieved);
+  }
+}
+
+void Session::onGetCreditByCardError(uint8_t statusCode) {
+  // TODO
+  Serial.println("Got an error status from credit by card!");
+  Serial.println(statusCode);
+}
+
+void Session::onGetCreditByCardSuccess(uint32_t credit) {
+  if(cardNum != 0) {
+    Session::onlineCredit = credit;
+
+    CALLBACK(creditAvailableCallback, credit);
+    CALLBACK(moneyAvailableCallback, getCurrentAvailableMoney())
   }
 }
 

@@ -25,6 +25,7 @@ class Session {
     static void moneyInserted(uint32_t amount);
     static MoneyCallback moneyInsertedCallback;
     static MoneyCallback moneyAvailableCallback;
+    static MoneyCallback creditAvailableCallback;
 
     static VoidCallback onCustomerLookupStarted;
     static VoidCallback onOrdersRetrieved;
@@ -34,6 +35,8 @@ class Session {
   private:
     static void onGetOrdersByCardError(uint8_t statusCode);
     static void onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders);
+    static void onGetCreditByCardError(uint8_t statusCode);
+    static void onGetCreditByCardSuccess(uint32_t credit);
 
     static unsigned long lastChangeMillis;
     static bool active;
