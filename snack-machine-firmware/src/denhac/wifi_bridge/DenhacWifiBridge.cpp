@@ -1,6 +1,7 @@
 #ifdef VENDING_WIFI_BRIDGE_BOARD
 
 #include "denhac/wifi_bridge/DenhacWifiBridge.h"
+#include "denhac/data/MaxPacketSize.h"
 
 #include "CRC32.h"
 
@@ -22,6 +23,8 @@ char DenhacWifiBridge::urlBuffer[100];
 
 uint32_t DenhacWifiBridge::hashes[NUM_PRODUCTS];
 bool DenhacWifiBridge::has_product[NUM_PRODUCTS];
+
+uint8_t DenhacWifiBridge::packetMaxSizeSent = 0;
 
 void DenhacWifiBridge::setup() {
   pinMode(13, OUTPUT);
@@ -174,7 +177,16 @@ void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
 
   msgpck_write_integer(serial, 3);
   msgpck_write_integer(serial, cardNumber);
-  handleCardResponse();
+
+  JsonArray orders = jsonDoc.as<JsonArray>();
+  msgpck_write_integer(serial, orders.size());
+
+  packetWritten(PACKET_ORDERS_BY_CARD);
+
+  for(JsonObject order : orders) {
+    sendOrder(order);
+  }
+
   waitForAck();
 }
 
@@ -349,16 +361,9 @@ bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
   return true;
 }
 
-void DenhacWifiBridge::handleCardResponse() {
-  JsonArray orders = jsonDoc.as<JsonArray>();
-
-  msgpck_write_integer(serial, orders.size());
-  for(JsonObject order : orders) {
-    sendOrder(order);
-  }
-}
-
 void DenhacWifiBridge::sendOrder(JsonObject &order) {
+  waitForAckIfNeededFor(PACKET_ORDER_HEADER);
+
   msgpck_write_integer(serial, (uint32_t) order["id"]);
 
   JsonVariant orderStatus = order["status"];
@@ -386,16 +391,23 @@ void DenhacWifiBridge::sendOrder(JsonObject &order) {
 
   JsonArray items = order["items"];
   msgpck_write_integer(serial, items.size());
+
+  packetWritten(PACKET_ORDER_HEADER);
+
   for(JsonObject item : items) {
     sendItem(item);
   }
 }
 
 void DenhacWifiBridge::sendItem(JsonObject &item) {
+  waitForAckIfNeededFor(PACKET_ITEM);
+
   msgpck_write_integer(serial, (uint32_t) item["item_id"]);
   msgpck_write_integer(serial, (uint32_t) item["product_id"]);
   msgpck_write_integer(serial, (uint8_t) item["quantity"]);
   msgpck_write_integer(serial, (uint8_t) item["vended"]);
+
+  packetWritten(PACKET_ITEM);
 }
 
 void DenhacWifiBridge::setupComm() {
@@ -451,6 +463,9 @@ void DenhacWifiBridge::sendDebug(uint32_t value) {
  * we wait for an ACK each time after sending a packet.
  */
 void DenhacWifiBridge::waitForAck() {
+  // If we're waiting for ACK this field gets auto reset
+  packetMaxSizeSent = 0;
+
   digitalWrite(13, HIGH);
   while(true) {
     if(serial->available() == 0) {
@@ -465,6 +480,16 @@ void DenhacWifiBridge::waitForAck() {
       // If got something that wasn't nil, we need to dispose of it
       serial->read();
     }
+  }
+}
+
+void DenhacWifiBridge::packetWritten(uint8_t maxPacketSize) {
+  packetMaxSizeSent += maxPacketSize;
+}
+
+void DenhacWifiBridge::waitForAckIfNeededFor(uint8_t maxPacketSize) {
+  if(packetMaxSizeSent + maxPacketSize >= 63) {
+    waitForAck();
   }
 }
 

@@ -29,9 +29,10 @@ class DenhacWifiBridge: public VendingMachine {
 
     static bool handleCommonRestIssues(RestResponse * response); // return true if REST response is valid
     static void handleIncomingRequest();
-    static void handleCardResponse();
 
     static void waitForAck();
+    static void packetWritten(uint8_t maxPacketSize);
+    static void waitForAckIfNeededFor(uint8_t maxPacketSize);
 
     static void fetchProducts();
     static void fetchOrdersByCard(uint32_t cardNumber);
@@ -48,4 +49,5 @@ class DenhacWifiBridge: public VendingMachine {
     static bool has_product[];
     static RestRequest request;
     static char urlBuffer[];
+    static uint8_t packetMaxSizeSent;
 };
