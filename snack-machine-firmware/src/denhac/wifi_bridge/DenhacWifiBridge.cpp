@@ -16,7 +16,7 @@ WiFiClientSecure DenhacWifiBridge::client;
 // This value is enough to handle 64 products and a variable number of orders
 // We might want to implement paging to reduce the amount of memory needed here.
 DynamicJsonDocument DenhacWifiBridge::jsonDoc(JSON_ARRAY_SIZE(NUM_PRODUCTS) + NUM_PRODUCTS*JSON_OBJECT_SIZE(8));
-RestRequest DenhacWifiBridge::request(client, jsonDoc, server);
+RestRequest DenhacWifiBridge::request(&client, &jsonDoc, server);
 DebugCallback RestRequest::debug = &DenhacWifiBridge::sendDebug;
 char DenhacWifiBridge::urlBuffer[100];
 
@@ -207,19 +207,22 @@ void DenhacWifiBridge::fetchOrderById(uint32_t orderId) {
 }
 
 void DenhacWifiBridge::updateOrder() {
-  sendStatus(BridgeStatus::UPDATING_ORDER);
   jsonDoc.clear();
 
   uint32_t orderId = 0;
   msgpck_read_integer(serial, (byte*) &orderId, sizeof(orderId));
   uint32_t cardId = 0;
   msgpck_read_integer(serial, (byte*) &cardId, sizeof(cardId));
+  uint32_t cash = 0;
+  msgpck_read_integer(serial, (byte*) &cash, sizeof(cash));
   uint8_t numItems = 0;
   msgpck_read_integer(serial, (byte*) &numItems, sizeof(numItems));
   sendDebug("Got order id: ");
   sendDebug(orderId);
   sendDebug("Got card id: ");
   sendDebug(cardId);
+  sendDebug("Got cash: ");
+  sendDebug(cash);
   sendDebug("Got num items: ");
   sendDebug(numItems);
 
@@ -228,6 +231,9 @@ void DenhacWifiBridge::updateOrder() {
   }
   if(cardId != 0) {
     jsonDoc["card"] = cardId;
+  }
+  if(cash != 0) {
+    jsonDoc["cash"] = cash;
   }
   JsonArray items = jsonDoc.createNestedArray("items");
   for(uint8_t t = 0; t < numItems; t++) {
@@ -256,6 +262,7 @@ void DenhacWifiBridge::updateOrder() {
   }
 
   sendDebug("Out of loop!");
+  sendStatus(BridgeStatus::UPDATING_ORDER);
 
   RestResponse* response = request.POST("/wp-json/wc-vending/v1/orders");
 
@@ -435,7 +442,8 @@ void DenhacWifiBridge::sendDebug(String msg) {
   #ifdef DEBUG_MODE
   msgpck_write_integer(serial, 0x07);
   msgpck_write_string(serial, msg);
-  waitForAck();
+  // Debug doesn't wait for ACK because it's only used in testing
+  // and we don't want to mess up other commands
   #endif
 }
 
@@ -443,7 +451,8 @@ void DenhacWifiBridge::sendDebug(uint32_t value) {
   #ifdef DEBUG_MODE
   msgpck_write_integer(serial, 0x07);
   msgpck_write_integer(serial, value);
-  waitForAck();
+  // Debug doesn't wait for ACK because it's only used in testing
+  // and we don't want to mess up other commands
   #endif
 }
 

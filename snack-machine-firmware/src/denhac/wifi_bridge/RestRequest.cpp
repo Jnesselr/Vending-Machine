@@ -3,11 +3,11 @@
 #include "denhac/wifi_bridge/RestRequest.h"
 
 RestRequest::RestRequest(
-  WiFiClientSecure &client,
-  DynamicJsonDocument &jsonDoc,
+  WiFiClientSecure *client,
+  DynamicJsonDocument *jsonDoc,
   const char * server) {
-  this->client = &client;
-  this->jsonDoc = &jsonDoc;
+  this->client = client;
+  this->jsonDoc = jsonDoc;
   this->server = server;
   this->response = new RestResponse();
 }
@@ -62,6 +62,7 @@ RestResponse* RestRequest::makeRequest(const char * method, const char * url) {
     client->println(contentLength);
     client->println();
     client->print(jsonBuffer);
+    debug(String(jsonBuffer));
   } else {
     client->println();
   }

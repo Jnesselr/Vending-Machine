@@ -22,8 +22,8 @@ typedef void (*DebugCallback)(String msg);
 class RestRequest {
   public:
     RestRequest(
-      WiFiClientSecure &client,
-      DynamicJsonDocument &jsonDoc,
+      WiFiClientSecure* client,
+      DynamicJsonDocument* jsonDoc,
       const char * server);
     RestResponse* GET(const char * url);
     RestResponse* POST(const char * url);
