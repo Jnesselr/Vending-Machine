@@ -10,7 +10,7 @@ const char* root_ca = ROOT_CA;
 
 const uint8_t NUM_PRODUCTS = 64;
 
-HardwareSerial* DenhacWifiBridge::serial = &Serial2;
+HardwareSerial* DenhacWifiBridge::serial = &Serial;
 
 WiFiClientSecure DenhacWifiBridge::client;
 // This value is enough to handle 64 products and a variable number of orders
@@ -23,13 +23,10 @@ char DenhacWifiBridge::urlBuffer[100];
 uint32_t DenhacWifiBridge::hashes[NUM_PRODUCTS];
 bool DenhacWifiBridge::has_product[NUM_PRODUCTS];
 
-unsigned long DenhacWifiBridge::lastProductUpdateMillis = 0;
-
 void DenhacWifiBridge::setup() {
   pinMode(13, OUTPUT);
   serial->begin(9600);
 
-  lastProductUpdateMillis = 0;
   memset(hashes, 0, sizeof(uint32_t) * NUM_PRODUCTS);
 
   DenhacWifiBridge::setupComm();
@@ -43,15 +40,6 @@ void DenhacWifiBridge::setup() {
 }
 
 void DenhacWifiBridge::loop() {
-  unsigned long currentMillis = millis();
-
-  // Once a minute
-  if(lastProductUpdateMillis == 0 ||
-      currentMillis - lastProductUpdateMillis > 60 * 1000) {
-    fetchProducts();
-    lastProductUpdateMillis = currentMillis;
-  }
-
   if(serial->available()) {
     handleIncomingRequest();
   }
@@ -91,6 +79,8 @@ void DenhacWifiBridge::handleIncomingRequest() {
     msgpck_read_integer(serial, (byte*) &difference, sizeof(difference));
 
     updateCreditByCard(cardNumber, difference);
+  } else if(requestType == 0x0B) {
+    fetchProducts();
   }
 }
 
@@ -112,8 +102,8 @@ void DenhacWifiBridge::fetchProducts() {
     uint32_t id = obj["id"];
     const char * name_ref = obj["name"];
     uint32_t name_length = strlen(name_ref);
-    if(name_length > 51) {
-      name_length = 51;
+    if(name_length > 46) {
+      name_length = 46;
     }
     uint32_t price = obj["price"];
     uint8_t stock_available = obj["stock_available"];

@@ -48,6 +48,4 @@ class DenhacWifiBridge: public VendingMachine {
     static bool has_product[];
     static RestRequest request;
     static char urlBuffer[];
-
-    static unsigned long lastProductUpdateMillis;
 };
