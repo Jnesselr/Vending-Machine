@@ -41,6 +41,7 @@ union SiteLinkCommandBuffer {
 
 enum class SiteLinkCommandType : uint8_t {
   UNKNOWN,
+  GET_PRODUCTS,
   GET_ORDERS_BY_CARD,
   GET_ORDER_BY_ID,
   GET_CREDIT_BY_CARD,
@@ -60,6 +61,7 @@ class SiteLinkCommand {
     VoidCallback commandCallback;
     SiteLinkCommandBuffer buffer;
   private:
+    void runGetProducts();
     void runOrdersByCard();
     void runOrderById();
     void runCreditByCard();
@@ -129,4 +131,5 @@ class SiteLink {
     static bool hasProduct[64];
     static uint8_t packetMaxSizeSent;
     static uint8_t packetMaxSizeRead;
+    static unsigned long lastCommandRunMillis;
 };

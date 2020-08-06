@@ -33,6 +33,8 @@ extern unsigned long current_loop_millis;
 // Wait for it to be at least MS milliseconds since LAST
 #define LOOP_WAIT_MS(LAST, MS) if(current_loop_millis < LAST + MS) {return;}
 
+// Wait for it to be at least MS milliseconds since LAST unless LAST == 0
+#define LOOP_START_WAIT_MS(LAST, MS) if(LAST != 0 && current_loop_millis < (LAST + MS)) {return;}
 
 #define SHIFT_POLY(ARR, VAL) \
   for (uint8_t i = 0; i < (sizeof(ARR) / sizeof(word)); i++) { \

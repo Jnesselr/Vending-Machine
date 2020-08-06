@@ -28,6 +28,8 @@ bool SiteLink::hasProduct[64];
 uint8_t SiteLink::packetMaxSizeSent = 0;
 uint8_t SiteLink::packetMaxSizeRead = 0;
 
+unsigned long SiteLink::lastCommandRunMillis = 0;
+
 void SiteLink::setup() {
   linkSerial->begin(115200);
 }
@@ -105,7 +107,6 @@ void SiteLink::handleHandshake() {
     ack();
     Serial.println("We did it!");
     updateState(SiteLinkState::IDLE);
-    safeToSendCommand = true;
     CALLBACK(statusCallback, statusCode);
   }
   Serial.flush();
@@ -402,13 +403,22 @@ void SiteLink::maybeSendCommand() {
     return;
   }
 
+  SiteLinkCommand command;
+
   if(commandBuffer.isEmpty()) {
-    return;
+    // If the buffer is empty and it's been a minute since
+    // the last command, go ahead and fetch products
+    LOOP_START_WAIT_MS(lastCommandRunMillis, 60000)
+
+    command.type = SiteLinkCommandType::GET_PRODUCTS;
+    command.linkSerial = linkSerial;
+  } else {
+    command = commandBuffer.peek();
   }
 
-  SiteLinkCommand command = commandBuffer.peek();
   command.run();
   safeToSendCommand = false;
+  lastCommandRunMillis = current_loop_millis;
 }
 
 void SiteLink::getOrdersByCard(
@@ -486,6 +496,9 @@ void SiteLinkCommand::operator=(const SiteLinkCommand& command) {
 
 void SiteLinkCommand::run() {
   switch(type) {
+    case SiteLinkCommandType::GET_PRODUCTS:
+      runGetProducts();
+      break;
     case SiteLinkCommandType::GET_ORDERS_BY_CARD:
       runOrdersByCard();
       break;
@@ -498,6 +511,10 @@ void SiteLinkCommand::run() {
     case SiteLinkCommandType::UNKNOWN:
       return;
   }
+}
+
+void SiteLinkCommand::runGetProducts() {
+  msgpck_write_integer(linkSerial, 0x0B);
 }
 
 void SiteLinkCommand::runOrdersByCard() {
