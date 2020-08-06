@@ -7,8 +7,9 @@
 MotorSystemState Motors::systemState = MotorSystemState::UNKNOWN;
 MotorState Motors::motorState = MotorState::NONE_SELECTED;
 
-MotorSystemStateCallback Motors::onSystemStateChanged = NULL;
-MotorStateCallback Motors::onMotorStateChanged = NULL;
+MotorSystemStateCallback Motors::onSystemStateChanged = nullptr;
+MotorStateCallback Motors::onMotorStateChanged = nullptr;
+ItemVendedCallback Motors::onItemVended = nullptr;
 
 unsigned long Motors::lastStateChangeTime = 0;
 uint8_t Motors::motorsScanResult[8] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -82,10 +83,15 @@ void Motors::loop() {
   } else if (motorState == MotorState::VEND_WAIT) {
     LOOP_WAIT_MS(lastStateChangeTime, 3000);
 
+    uint8_t vendedRow = selectedRow;
+    uint8_t vendedCol = selectedCol;
+
     off();
     selectedRow = 0;
     selectedCol = 0;
     lastStateChangeTime = current_loop_millis;
+
+    CALLBACK(onItemVended, vendedRow, vendedCol)
   }
 }
 

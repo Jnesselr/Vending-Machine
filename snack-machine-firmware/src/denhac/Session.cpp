@@ -4,6 +4,7 @@
 #include "denhac/ProductManager.h"
 #include "denhac/SiteLink.h"
 #include "denhac/data/BridgeStatus.h"
+#include "motors.h"
 
 unsigned long lastChangeMillis = 0;
 bool Session::active = false;
@@ -147,6 +148,82 @@ void Session::saveMoneyInsertedToOnlineCredit() {
   }
 
   SiteLink::updateCreditByCard(cardNum, moneyInsertedInMachine, onUpdateCreditByCardError, onUpdateCreditByCardSuccess);
+}
+
+void Session::vend() {
+  Serial.println("Starting vend!");
+  bool anyVended = vendNextItem();
+
+  if(!anyVended) {
+    // TODO Update the order so it gets marked as "complete"
+    // Although it is very strange that nothing would be vended here
+  }
+}
+
+void Session::itemVended(uint8_t row, uint8_t col) {
+  ProductManager::reduceStock(row, col);
+  Product product = ProductManager::get(row, col);
+  Serial.println("Item vended!");
+  Serial.print("Row: ");
+  Serial.println(row);
+  Serial.print("Col: ");
+  Serial.println(col);
+
+  for (uint8_t i = 0; i < currentOrder.getNumItems(); i++)
+  {
+    Item& item = currentOrder.getItem(i);
+    if(item.productId == product.id) {
+      currentOrder.vendedItem(i);
+    }
+  }
+
+  bool anyVended = vendNextItem();
+
+  if(!anyVended) {
+    Serial.println("Vended them all woot!");
+    SiteLink::updateOrder(
+      Session::cardNum,
+      Session::moneyInsertedInMachine,
+      Session::currentOrder,
+      [](uint8_t bridgeStatus) {
+        Serial.print("Uh oh! Got bridge status: ");
+        Serial.println(bridgeStatus);
+      },
+      [](const Order& order) {
+        Serial.println("Yay it worked!");
+        Serial.print("Status is complete? ");
+        Serial.println(order.status == OrderStatus::COMPLETED ? "Yes!" : "No :(");
+      }
+    );
+  }
+}
+
+bool Session::vendNextItem() {
+  for (uint8_t i = 0; i < currentOrder.getNumItems(); i++)
+  {
+    Item& item = currentOrder.getItem(i);
+    if(item.quantity > item.vended) {
+      Serial.println("Found an item to vend!");
+      Serial.print("Item ID: ");
+      Serial.println(item.itemId);
+      Serial.print("Product ID: ");
+      Serial.println(item.productId);
+      Serial.print("Quantity: ");
+      Serial.println(item.quantity);
+      Serial.print("Vended: ");
+      Serial.println(item.vended);
+
+      Product product = ProductManager::get(item.productId);
+      Serial.print("Row: ");
+      Serial.println(product.row);
+      Serial.print("Col: ");
+      Serial.println(product.col);
+      Motors::vend(product.row, product.col);
+      return true;
+    }
+  }
+
+  return false;
 }
 
 #endif

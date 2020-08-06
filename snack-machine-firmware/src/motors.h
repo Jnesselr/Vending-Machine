@@ -15,6 +15,7 @@ enum class MotorState {
 
 typedef void (*MotorSystemStateCallback)(MotorSystemState oldState, MotorSystemState newState);
 typedef void (*MotorStateCallback)(MotorState oldState, MotorState newState);
+typedef void (*ItemVendedCallback)(uint8_t row, uint8_t col);
 
 class Motors {
   public:
@@ -29,6 +30,7 @@ class Motors {
     // Callbacks
     static MotorSystemStateCallback onSystemStateChanged;
     static MotorStateCallback onMotorStateChanged;
+    static ItemVendedCallback onItemVended;
   private:
     static bool valid(int row, int col);
 

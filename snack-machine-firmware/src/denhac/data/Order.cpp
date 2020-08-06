@@ -89,7 +89,7 @@ uint8_t Order::getNumItems() {
   return numItems;
 }
 
-Item Order::getItem(uint8_t itemNum) {
+Item& Order::getItem(uint8_t itemNum) {
   return items[itemNum];
 }
 

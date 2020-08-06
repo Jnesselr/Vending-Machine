@@ -29,7 +29,7 @@ class Order {
     void add(const Product& product);
 
     uint8_t getNumItems();
-    Item getItem(uint8_t itemNum);
+    Item& getItem(uint8_t itemNum);
     void vendedItem(uint8_t itemNum);
 
     void reset();

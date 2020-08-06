@@ -234,6 +234,7 @@ void MainWindow::setupMemberVariables() {
   vendButton.right = gridRight;
   vendButton.bottom = gridBottom;
   vendButton.top = vendButton.bottom - CELL_HEIGHT - 7;
+  vendButton.tapped = callback<StaticCallbackType::VEND>(vend);
   vendButton.disable();
 
   cancelOrderButton.display = display;
@@ -449,6 +450,12 @@ void MainWindow::back(MainWindow* mainWindow) {
 void MainWindow::cancelOrder(MainWindow* mainWindow) {
   Session::reset();
   mainWindow->drawOrder();
+}
+
+void MainWindow::vend(MainWindow* mainWindow) {
+  mainWindow->vendButton.disable();
+
+  Session::vend();
 }
 
 void MainWindow::rowTapped(uint8_t row) {

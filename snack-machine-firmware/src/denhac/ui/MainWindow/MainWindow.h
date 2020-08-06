@@ -27,11 +27,11 @@ class MainWindowState
 };
 
 enum class StaticCallbackType {
-  ROW,
   BACK,
   CANCEL_ORDER,
   MONEY_AVAILABLE,
   ADD_ITEM,
+  VEND,
   CUSTOMER_LOOKUP_STARTED,
   ORDERS_RETRIEVED,
   SESSION_RESET,
@@ -66,6 +66,7 @@ class MainWindow : public Window {
     static void cancelOrder(MainWindow*);
     static void addItemScreen(MainWindow*);
     static void membershipButtonTapped(MainWindow*);
+    static void vend(MainWindow*);
 
     void setupMemberVariables();
     void drawGrid();

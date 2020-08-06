@@ -23,6 +23,8 @@ void DenhacBindings::setup() {
   SiteLink::onStateChanged = DenhacBindings::onSiteLinkStateCallback;
   SiteLink::productUpdatedCallback = ProductManager::productUpdated;
   SiteLink::productRemovedCallback = ProductManager::productRemoved;
+
+  Motors::onItemVended = Session::itemVended;
 }
 
 void DenhacBindings::onCardScanned(unsigned long cardCode) {

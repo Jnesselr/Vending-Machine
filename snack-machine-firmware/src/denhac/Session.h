@@ -27,6 +27,9 @@ class Session {
     static MoneyCallback moneyAvailableCallback;
     static MoneyCallback creditAvailableCallback;
 
+    static void vend();
+    static void itemVended(uint8_t row, uint8_t col);
+
     static VoidCallback onCustomerLookupStarted;
     static VoidCallback onOrdersRetrieved;
     static VoidCallback onUnknownCard;
@@ -41,6 +44,10 @@ class Session {
     static void onUpdateCreditByCardSuccess(uint32_t totalCredit, uint32_t diffCredit);
 
     static void saveMoneyInsertedToOnlineCredit();
+
+    // Call vend on the next item
+    // Returns false if nothing to vend
+    static bool vendNextItem();
 
     static unsigned long lastChangeMillis;
     static bool active;
