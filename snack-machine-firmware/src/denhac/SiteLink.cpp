@@ -21,7 +21,7 @@ OutputPort<PORT_H, 6, 1> SiteLink::huzzahResetPin;
 HardwareSerial* SiteLink::linkSerial = &Serial1;
 uint8_t SiteLink::handshakeCount = 0;
 uint8_t SiteLink::garbageLoopCount = 0;
-bool SiteLink::fetchingProducts = false;
+bool SiteLink::safeToSendCommand = false;
 bool SiteLink::firstProductFetch = false;
 bool SiteLink::hasProduct[64];
 
@@ -47,6 +47,8 @@ void SiteLink::loop() {
     memset(hasProduct, false, sizeof(bool) * 64);
   } else {
     handleNormalCommands();
+
+    maybeSendCommand();
   }
 }
 
@@ -103,6 +105,7 @@ void SiteLink::handleHandshake() {
     ack();
     Serial.println("We did it!");
     updateState(SiteLinkState::IDLE);
+    safeToSendCommand = true;
     CALLBACK(statusCallback, statusCode);
   }
   Serial.flush();
@@ -209,11 +212,8 @@ void SiteLink::handleStatus() {
 
   switch (statusCode)
   {
-  case BridgeStatus::FETCHING_PRODUCTS:
-    fetchingProducts = true;
-    break;
   case BridgeStatus::PRODUCTS_FETCHED:
-    fetchingProducts = false;
+    safeToSendCommand = true;
     if(firstProductFetch) {
       firstProductFetch = false;
       for (uint8_t row = 0; row < 8; row++)
@@ -231,11 +231,23 @@ void SiteLink::handleStatus() {
   case BridgeStatus::REST_NOT_FOUND:
   case BridgeStatus::REST_UNKNOWN_FAILURE:
   case BridgeStatus::JSON_DECODE_FAILED:
-    if(!fetchingProducts) {
+    // If it's not safe to send a command, we probably already sent one
+    if(!safeToSendCommand && !commandBuffer.isEmpty()) {
+        safeToSendCommand = true;
         SiteLinkCommand command = commandBuffer.pop();
         CALLBACK(command.errorCallback, statusCode)
     }
 
+    break;
+
+  case BridgeStatus::WIFI_CONNECTED:
+  case BridgeStatus::ORDERS_FETCHED_BY_CARD:
+  case BridgeStatus::ORDER_FETCHED_BY_ID:
+  case BridgeStatus::ORDER_UPDATED:
+  case BridgeStatus::ORDER_CANCELLED:
+  case BridgeStatus::CREDIT_FETCHED:
+  case BridgeStatus::CREDIT_UPDATED:
+    safeToSendCommand = true;
     break;
   }
 
@@ -275,7 +287,6 @@ void SiteLink::handleOrdersByCard() {
   }
   ack();
 
-  // TODO Should we assume order is correct here
   SiteLinkCommand command = commandBuffer.pop();
   OrdersResponseCallback callback = (OrdersResponseCallback) command.commandCallback;
 
@@ -286,7 +297,6 @@ void SiteLink::handleOrdersById() {
   Order order = readOrder();
   ack();
 
-  // TODO Should we assume order is correct here
   SiteLinkCommand command = commandBuffer.pop();
   OrderResponseCallback callback = (OrderResponseCallback) command.commandCallback;
 
@@ -381,21 +391,37 @@ void SiteLink::handleCreditByCard() {
   msgpck_read_integer(linkSerial, (byte*) &credit, sizeof(credit));
   ack();
 
-  // TODO Should we assume order is correct here
   SiteLinkCommand command = commandBuffer.pop();
   CreditResponseCallback callback = (CreditResponseCallback) command.commandCallback;
 
   CALLBACK(callback, credit)
 }
 
+void SiteLink::maybeSendCommand() {
+  if(!safeToSendCommand) {
+    return;
+  }
+
+  if(commandBuffer.isEmpty()) {
+    return;
+  }
+
+  SiteLinkCommand command = commandBuffer.peek();
+  command.run();
+  safeToSendCommand = false;
+}
+
 void SiteLink::getOrdersByCard(
   uint32_t cardNumber,
   BridgeStatusCallback onStatus,
   OrdersResponseCallback onOrders) {
-    msgpck_write_integer(linkSerial, 0x03);
-    msgpck_write_integer(linkSerial, cardNumber);
+    SiteLinkCommand command;
+    command.linkSerial = linkSerial;
+    command.type = SiteLinkCommandType::GET_ORDERS_BY_CARD;
+    command.errorCallback = onStatus;
+    command.commandCallback = (VoidCallback) onOrders;
+    command.buffer.cardRequest.cardNumber = cardNumber;
 
-    SiteLinkCommand command(onStatus, onOrders);
     commandBuffer.push(command);
   }
 
@@ -403,10 +429,13 @@ void SiteLink::getOrderById(
   uint32_t id,
   BridgeStatusCallback onStatus,
   OrderResponseCallback onOrder) {
-    msgpck_write_integer(linkSerial, 0x04);
-    msgpck_write_integer(linkSerial, id);
+    SiteLinkCommand command;
+    command.linkSerial = linkSerial;
+    command.type = SiteLinkCommandType::GET_ORDER_BY_ID;
+    command.errorCallback = onStatus;
+    command.commandCallback = (VoidCallback) onOrder;
+    command.buffer.orderRequest.orderId = id;
 
-    SiteLinkCommand command(onStatus, onOrder);
     commandBuffer.push(command);
   }
 
@@ -414,10 +443,13 @@ void SiteLink::getCreditByCard(
   uint32_t cardNumber,
   BridgeStatusCallback onStatus,
   CreditResponseCallback onCredit) {
-    msgpck_write_integer(linkSerial, 0x09);
-    msgpck_write_integer(linkSerial, cardNumber);
+    SiteLinkCommand command;
+    command.linkSerial = linkSerial;
+    command.type = SiteLinkCommandType::GET_CREDIT_BY_CARD;
+    command.errorCallback = onStatus;
+    command.commandCallback = (VoidCallback) onCredit;
+    command.buffer.cardRequest.cardNumber = cardNumber;
 
-    SiteLinkCommand command(onStatus, onCredit);
     commandBuffer.push(command);
   }
 
@@ -429,28 +461,58 @@ void SiteLink::updateState(SiteLinkState siteLinkState) {
 }
 
 SiteLinkCommand::SiteLinkCommand() {
+  this->linkSerial = nullptr;
+  this->type = SiteLinkCommandType::UNKNOWN;
   this->errorCallback = nullptr;
   this->commandCallback = nullptr;
+  memset(this->buffer.bytes, 0, sizeof(this->buffer.bytes));
 }
 
-SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError) {
-  this->errorCallback = onError;
-  this->commandCallback = nullptr;
+SiteLinkCommand::SiteLinkCommand(const SiteLinkCommand& command) {
+  this->linkSerial = command.linkSerial;
+  this->type = command.type;
+  this->errorCallback = command.errorCallback;
+  this->commandCallback = command.commandCallback;
+  memcpy(this->buffer.bytes, command.buffer.bytes, sizeof(command.buffer.bytes));
 }
 
-SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError, OrdersResponseCallback onOrders) {
-  this->errorCallback = onError;
-  this->commandCallback = (VoidCallback) onOrders;
+void SiteLinkCommand::operator=(const SiteLinkCommand& command) {
+  this->linkSerial = command.linkSerial;
+  this->type = command.type;
+  this->errorCallback = command.errorCallback;
+  this->commandCallback = command.commandCallback;
+  memcpy(this->buffer.bytes, command.buffer.bytes, sizeof(command.buffer.bytes));
 }
 
-SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError, OrderResponseCallback onOrders) {
-  this->errorCallback = onError;
-  this->commandCallback = (VoidCallback) onOrders;
+void SiteLinkCommand::run() {
+  switch(type) {
+    case SiteLinkCommandType::GET_ORDERS_BY_CARD:
+      runOrdersByCard();
+      break;
+    case SiteLinkCommandType::GET_ORDER_BY_ID:
+      runOrderById();
+      break;
+    case SiteLinkCommandType::GET_CREDIT_BY_CARD:
+      runCreditByCard();
+      break;
+    case SiteLinkCommandType::UNKNOWN:
+      return;
+  }
 }
 
-SiteLinkCommand::SiteLinkCommand(BridgeStatusCallback onError, CreditResponseCallback onCredit) {
-  this->errorCallback = onError;
-  this->commandCallback = (VoidCallback) onCredit;
+void SiteLinkCommand::runOrdersByCard() {
+  msgpck_write_integer(linkSerial, 0x03);
+  msgpck_write_integer(linkSerial, buffer.cardRequest.cardNumber);
+}
+
+void SiteLinkCommand::runOrderById() {
+  msgpck_write_integer(linkSerial, 0x04);
+  msgpck_write_integer(linkSerial, buffer.orderRequest.orderId);
+}
+
+void SiteLinkCommand::runCreditByCard() {
+  msgpck_write_integer(linkSerial, 0x09);
+  msgpck_write_integer(linkSerial, buffer.cardRequest.cardNumber);
 }
 
 #endif

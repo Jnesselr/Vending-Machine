@@ -25,16 +25,44 @@ typedef void (*OrdersResponseCallback)(Order orders[], uint8_t numOrders);
 typedef void (*OrderResponseCallback)(const Order& order);
 typedef void (*CreditResponseCallback)(uint32_t credit);
 
+struct CardRequest {
+  uint32_t cardNumber;
+};
+
+struct OrderRequest {
+  uint32_t orderId;
+};
+
+union SiteLinkCommandBuffer {
+  struct CardRequest cardRequest;
+  struct OrderRequest orderRequest;
+  uint8_t bytes[max(sizeof(CardRequest), sizeof(OrderRequest))];
+};
+
+enum class SiteLinkCommandType : uint8_t {
+  UNKNOWN,
+  GET_ORDERS_BY_CARD,
+  GET_ORDER_BY_ID,
+  GET_CREDIT_BY_CARD,
+};
+
 class SiteLinkCommand {
   public:
     SiteLinkCommand();
-    SiteLinkCommand(BridgeStatusCallback onError);
-    SiteLinkCommand(BridgeStatusCallback onError, OrdersResponseCallback onOrders);
-    SiteLinkCommand(BridgeStatusCallback onError, OrderResponseCallback onOrder);
-    SiteLinkCommand(BridgeStatusCallback onError, CreditResponseCallback onCredit);
+    SiteLinkCommand(const SiteLinkCommand&);
+    void operator = (const SiteLinkCommand&);
 
+    void run();
+
+    HardwareSerial* linkSerial;
+    SiteLinkCommandType type;
     BridgeStatusCallback errorCallback;
     VoidCallback commandCallback;
+    SiteLinkCommandBuffer buffer;
+  private:
+    void runOrdersByCard();
+    void runOrderById();
+    void runCreditByCard();
 };
 
 class SiteLink {
@@ -68,6 +96,7 @@ class SiteLink {
     static void handleWaiting();
     static void handleHandshake();
     static void handleNormalCommands();
+    static void maybeSendCommand();
 
     static void waitForAck();
     static void packetWritten(uint8_t maxPacketSize);
@@ -95,7 +124,7 @@ class SiteLink {
     static HardwareSerial* linkSerial;
     static uint8_t handshakeCount;
     static uint8_t garbageLoopCount;
-    static bool fetchingProducts;
+    static bool safeToSendCommand;
     static bool firstProductFetch;
     static bool hasProduct[64];
     static uint8_t packetMaxSizeSent;
