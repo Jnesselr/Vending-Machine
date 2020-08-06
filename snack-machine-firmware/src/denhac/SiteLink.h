@@ -82,6 +82,20 @@ class SiteLinkCommand {
     void runUpdateCreditByCard();
 };
 
+class SiteLinkAck {
+  public:
+    static void waitForAck();
+    static void packetWritten(uint8_t maxPacketSize);
+    static void waitForAckIfNeededFor(uint8_t maxPacketSize);
+    static void ack();
+    static void packetRead(uint8_t maxPacketSize);
+    static void ackIfNeededFor(uint8_t maxPacketSize);
+  private:
+    static HardwareSerial* linkSerial;
+    static uint8_t packetMaxSizeSent;
+    static uint8_t packetMaxSizeRead;
+};
+
 class SiteLink {
   public:
     static void setup();
@@ -120,13 +134,6 @@ class SiteLink {
     static void handleNormalCommands();
     static void maybeSendCommand();
 
-    static void waitForAck();
-    static void packetWritten(uint8_t maxPacketSize);
-    static void waitForAckIfNeededFor(uint8_t maxPacketSize);
-    static void ack();
-    static void packetRead(uint8_t maxPacketSize);
-    static void ackIfNeededFor(uint8_t maxPacketSize);
-
     static void handleStatus();
     static void handleProductUpdated();
     static void handleAfterFirstProductFetched();
@@ -150,7 +157,5 @@ class SiteLink {
     static bool safeToSendCommand;
     static bool firstProductFetch;
     static bool hasProduct[64];
-    static uint8_t packetMaxSizeSent;
-    static uint8_t packetMaxSizeRead;
     static unsigned long lastCommandRunMillis;
 };

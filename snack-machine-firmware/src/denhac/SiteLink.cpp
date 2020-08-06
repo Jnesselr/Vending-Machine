@@ -25,8 +25,9 @@ bool SiteLink::safeToSendCommand = false;
 bool SiteLink::firstProductFetch = false;
 bool SiteLink::hasProduct[64];
 
-uint8_t SiteLink::packetMaxSizeSent = 0;
-uint8_t SiteLink::packetMaxSizeRead = 0;
+HardwareSerial* SiteLinkAck::linkSerial = &Serial1;
+uint8_t SiteLinkAck::packetMaxSizeSent = 0;
+uint8_t SiteLinkAck::packetMaxSizeRead = 0;
 
 unsigned long SiteLink::lastCommandRunMillis = 0;
 
@@ -104,7 +105,7 @@ void SiteLink::handleHandshake() {
   uint8_t statusCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
   if(typeCode == 0x01 && statusCode == BridgeStatus::READY) {
-    ack();
+    SiteLinkAck::ack();
     Serial.println("We did it!");
     updateState(SiteLinkState::IDLE);
     CALLBACK(statusCallback, statusCode);
@@ -112,7 +113,7 @@ void SiteLink::handleHandshake() {
   Serial.flush();
 }
 
-void SiteLink::waitForAck() {
+void SiteLinkAck::waitForAck() {
   // If we're waiting for ACK, this field gets reset
   packetMaxSizeSent = 0;
 
@@ -131,28 +132,28 @@ void SiteLink::waitForAck() {
   }
 }
 
-void SiteLink::packetWritten(uint8_t maxPacketSize) {
+void SiteLinkAck::packetWritten(uint8_t maxPacketSize) {
   packetMaxSizeSent += maxPacketSize;
 }
 
-void SiteLink::waitForAckIfNeededFor(uint8_t maxPacketSize) {
+void SiteLinkAck::waitForAckIfNeededFor(uint8_t maxPacketSize) {
   if(packetMaxSizeSent + maxPacketSize >= 63) {
     waitForAck();
   }
 }
 
-void SiteLink::ack() {
+void SiteLinkAck::ack() {
   // If we're sending an ACK, this field gets reset
   packetMaxSizeRead = 0;
 
   msgpck_write_nil(linkSerial);
 }
 
-void SiteLink::packetRead(uint8_t maxPacketSize) {
+void SiteLinkAck::packetRead(uint8_t maxPacketSize) {
   packetMaxSizeRead += maxPacketSize;
 }
 
-void SiteLink::ackIfNeededFor(uint8_t maxPacketSize) {
+void SiteLinkAck::ackIfNeededFor(uint8_t maxPacketSize) {
 if(packetMaxSizeRead + maxPacketSize >= 63) {
     ack();
   }
@@ -169,7 +170,7 @@ void SiteLink::handleNormalCommands() {
   uint8_t typeCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &typeCode, sizeof(typeCode));
 
-  packetRead(COMMAND_BYTES);
+  SiteLinkAck::packetRead(COMMAND_BYTES);
 
   Serial.print("Type: ");
   Serial.println(typeCode);
@@ -209,7 +210,7 @@ void SiteLink::handleStatus() {
   Serial.println("Status code!");
   uint8_t statusCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
-  ack();
+  SiteLinkAck::ack();
   Serial.print("Code is: ");
   Serial.println(statusCode, HEX);
   Serial.flush();
@@ -268,7 +269,7 @@ void SiteLink::handleProductUpdated() {
   msgpck_read_integer(linkSerial, (byte*) &product.stockInMachine, sizeof(product.stockInMachine));
   msgpck_read_integer(linkSerial, (byte*) &product.row, sizeof(product.row));
   msgpck_read_integer(linkSerial, (byte*) &product.col, sizeof(product.col));
-  ack();
+  SiteLinkAck::ack();
 
   hasProduct[8 * product.row + product.col] = true;
 
@@ -282,14 +283,14 @@ void SiteLink::handleOrdersByCard() {
   uint8_t numOrders = 0;
   msgpck_read_integer(linkSerial, (byte*) &numOrders, sizeof(numOrders));
 
-  packetRead(PACKET_ORDERS_BY_CARD);
+  SiteLinkAck::packetRead(PACKET_ORDERS_BY_CARD);
 
   Order orders[8];
   for (uint8_t i = 0; i < numOrders; i++)
   {
     orders[i] = readOrder();
   }
-  ack();
+  SiteLinkAck::ack();
 
   SiteLinkCommand command = commandBuffer.pop();
   OrdersResponseCallback callback = (OrdersResponseCallback) command.commandCallback;
@@ -299,7 +300,7 @@ void SiteLink::handleOrdersByCard() {
 
 void SiteLink::handleOrdersById() {
   Order order = readOrder();
-  ack();
+  SiteLinkAck::ack();
 
   SiteLinkCommand command = commandBuffer.pop();
   OrderResponseCallback callback = (OrderResponseCallback) command.commandCallback;
@@ -313,7 +314,7 @@ Order SiteLink::readOrder() {
   uint32_t paid = 0;
   uint32_t total = 0;
 
-  ackIfNeededFor(PACKET_ORDER_HEADER);
+  SiteLinkAck::ackIfNeededFor(PACKET_ORDER_HEADER);
 
   msgpck_read_integer(linkSerial, (byte*) &orderId, sizeof(orderId));
   msgpck_read_integer(linkSerial, (byte*) &status, sizeof(status));
@@ -335,7 +336,7 @@ Order SiteLink::readOrder() {
   uint8_t numItems = 0;
   msgpck_read_integer(linkSerial, (byte*) &numItems, sizeof(numItems));
 
-  packetRead(PACKET_ORDER_HEADER);
+  SiteLinkAck::packetRead(PACKET_ORDER_HEADER);
 
   Serial.print("Num Items: ");
   Serial.println(numItems);
@@ -355,14 +356,14 @@ Item SiteLink::readItem() {
   uint8_t quantity = 0;
   uint8_t vended = 0;
 
-  ackIfNeededFor(PACKET_ITEM);
+  SiteLinkAck::ackIfNeededFor(PACKET_ITEM);
 
   msgpck_read_integer(linkSerial, (byte*) &itemId, sizeof(itemId));
   msgpck_read_integer(linkSerial, (byte*) &productId, sizeof(productId));
   msgpck_read_integer(linkSerial, (byte*) &quantity, sizeof(quantity));
   msgpck_read_integer(linkSerial, (byte*) &vended, sizeof(vended));
 
-  packetRead(PACKET_ITEM);
+  SiteLinkAck::packetRead(PACKET_ITEM);
 
   Serial.print("Item ID: ");
   Serial.println(itemId);
@@ -384,7 +385,7 @@ void SiteLink::handleProductRemoved() {
 
   msgpck_read_integer(linkSerial, (byte*) &row, sizeof(row));
   msgpck_read_integer(linkSerial, (byte*) &col, sizeof(col));
-  ack();
+  SiteLinkAck::ack();
 
   CALLBACK(productRemovedCallback, row, col)
 }
@@ -393,7 +394,7 @@ void SiteLink::handleCreditByCard() {
   uint32_t credit = 0;
 
   msgpck_read_integer(linkSerial, (byte*) &credit, sizeof(credit));
-  ack();
+  SiteLinkAck::ack();
 
   SiteLinkCommand command = commandBuffer.pop();
   CreditResponseCallback callback = (CreditResponseCallback) command.commandCallback;
@@ -407,7 +408,7 @@ void SiteLink::handleCreditUpdateByCard() {
 
   msgpck_read_integer(linkSerial, (byte*) &totalCredit, sizeof(totalCredit));
   msgpck_read_integer(linkSerial, (byte*) &diffCredit, sizeof(diffCredit));
-  ack();
+  SiteLinkAck::ack();
 
   SiteLinkCommand command = commandBuffer.pop();
   CreditUpdateResponseCallback callback = (CreditUpdateResponseCallback) command.commandCallback;
