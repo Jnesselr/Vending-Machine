@@ -527,6 +527,7 @@ void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
     mainWindow->cancelOrderButton.enable();
     if(order->status == OrderStatus::PROCESSING) {
       mainWindow->vendButton.enable();
+      mainWindow->addItemButton.disable();
     }
   }
 }

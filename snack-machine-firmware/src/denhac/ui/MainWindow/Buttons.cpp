@@ -161,7 +161,11 @@ void AddItemButton::show() {
   word insetColor = WHITE;
   word textColor = BLACK;
 
-  if(pressed) {
+  if(!enabled) {
+    borderColor = DARKGRAY;
+    insetColor = WHITE;
+    textColor = DARKGRAY;
+  } else if(pressed) {
     insetColor = borderColor;
     textColor = WHITE;
   }
