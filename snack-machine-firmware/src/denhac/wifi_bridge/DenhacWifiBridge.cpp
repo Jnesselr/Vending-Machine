@@ -373,7 +373,8 @@ bool DenhacWifiBridge::handleCommonRestIssues(RestResponse * response) {
     return false;
   }
 
-  if(!response->validJSON) {
+  // Empty body will not have valid JSON
+  if(!response->validJSON && response->contentLength > 0) {
     sendStatus(BridgeStatus::JSON_DECODE_FAILED);
     return false;
   }

@@ -245,11 +245,19 @@ void SiteLink::handleStatus() {
 
     break;
 
+  case BridgeStatus::ORDER_CANCELLED:
+    // We should only get this command in response to a request for cancellation
+    safeToSendCommand = true;
+    if(!commandBuffer.isEmpty()) {
+      Serial.println("Order cancelled!");
+      SiteLinkCommand command = commandBuffer.pop();
+      CALLBACK(command.commandCallback)
+    }
+    break;
   case BridgeStatus::WIFI_CONNECTED:
   case BridgeStatus::ORDERS_FETCHED_BY_CARD:
   case BridgeStatus::ORDER_FETCHED_BY_ID:
   case BridgeStatus::ORDER_UPDATED:
-  case BridgeStatus::ORDER_CANCELLED:
   case BridgeStatus::CREDIT_FETCHED:
   case BridgeStatus::CREDIT_UPDATED:
     safeToSendCommand = true;
@@ -454,7 +462,7 @@ void SiteLink::getOrdersByCard(
   }
 
 void SiteLink::getOrderById(
-  uint32_t id,
+  uint32_t orderId,
   BridgeStatusCallback onStatus,
   OrderResponseCallback onOrder) {
     SiteLinkCommand command;
@@ -462,7 +470,7 @@ void SiteLink::getOrderById(
     command.type = SiteLinkCommandType::GET_ORDER_BY_ID;
     command.errorCallback = onStatus;
     command.commandCallback = (VoidCallback) onOrder;
-    command.buffer.orderRequest.orderId = id;
+    command.buffer.orderRequest.orderId = orderId;
 
     commandBuffer.push(command);
   }
@@ -493,6 +501,20 @@ void SiteLink::updateCreditByCard(
     command.commandCallback = (VoidCallback) onCreditUpdate;
     command.buffer.creditUpdateRequest.cardNumber = cardNumber;
     command.buffer.creditUpdateRequest.amount = amount;
+
+    commandBuffer.push(command);
+  }
+
+void SiteLink::cancelOrderById(
+  uint32_t orderId,
+  BridgeStatusCallback onStatus,
+  VoidCallback onOrderCancelled) {
+    SiteLinkCommand command;
+    command.linkSerial = linkSerial;
+    command.type = SiteLinkCommandType::CANCEL_ORDER_BY_ID;
+    command.errorCallback = onStatus;
+    command.commandCallback = onOrderCancelled;
+    command.buffer.orderRequest.orderId = orderId;
 
     commandBuffer.push(command);
   }
@@ -539,6 +561,9 @@ void SiteLinkCommand::run() {
     case SiteLinkCommandType::GET_ORDER_BY_ID:
       runOrderById();
       break;
+    case SiteLinkCommandType::CANCEL_ORDER_BY_ID:
+      runCancelOrderById();
+      break;
     case SiteLinkCommandType::GET_CREDIT_BY_CARD:
       runCreditByCard();
       break;
@@ -561,6 +586,11 @@ void SiteLinkCommand::runOrdersByCard() {
 
 void SiteLinkCommand::runOrderById() {
   msgpck_write_integer(linkSerial, 0x04);
+  msgpck_write_integer(linkSerial, buffer.orderRequest.orderId);
+}
+
+void SiteLinkCommand::runCancelOrderById() {
+  msgpck_write_integer(linkSerial, 0x08);
   msgpck_write_integer(linkSerial, buffer.orderRequest.orderId);
 }
 

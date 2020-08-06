@@ -57,6 +57,7 @@ enum class SiteLinkCommandType : uint8_t {
   GET_PRODUCTS,
   GET_ORDERS_BY_CARD,
   GET_ORDER_BY_ID,
+  CANCEL_ORDER_BY_ID,
   GET_CREDIT_BY_CARD,
   UPDATE_CREDIT_BY_CARD,
 };
@@ -80,6 +81,7 @@ class SiteLinkCommand {
     void runOrderById();
     void runCreditByCard();
     void runUpdateCreditByCard();
+    void runCancelOrderById();
 };
 
 class SiteLinkAck {
@@ -106,7 +108,7 @@ class SiteLink {
       BridgeStatusCallback onStatus,
       OrdersResponseCallback onOrders);
     static void getOrderById(
-      uint32_t id,
+      uint32_t orderId,
       BridgeStatusCallback onStatus,
       OrderResponseCallback onOrder);
     static void getCreditByCard(
@@ -118,6 +120,10 @@ class SiteLink {
       uint32_t amount,
       BridgeStatusCallback onStatus,
       CreditUpdateResponseCallback onCreditUpdate);
+    static void cancelOrderById(
+      uint32_t orderId,
+      BridgeStatusCallback onStatus,
+      VoidCallback onOrderCancelled);
 
     // Callbacks
     static SiteLinkStateCallback onStateChanged;

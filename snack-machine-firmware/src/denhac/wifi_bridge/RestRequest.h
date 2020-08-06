@@ -9,11 +9,13 @@ typedef struct {
   bool connected;
   uint16_t status;
   bool validJSON;
+  uint32_t contentLength;
 
   void reset() {
     connected = false;
     status = 0;
     validJSON = false;
+    contentLength = 0;
   }
 } RestResponse;
 

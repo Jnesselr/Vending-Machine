@@ -71,8 +71,9 @@ RestResponse* RestRequest::makeRequest(const char * method, const char * url) {
 
   while (client->connected()) {
     String line = client->readStringUntil('\n');
+    line.toLowerCase();
 
-    if(line.startsWith("HTTP")) {
+    if(line.startsWith("http")) {
       String statusCodeString = "";
       bool started = false;
       bool ended = false;
@@ -89,6 +90,18 @@ RestResponse* RestRequest::makeRequest(const char * method, const char * url) {
       }
 
       response->status = statusCodeString.toInt();
+    } else if(line.startsWith("content-length:")) {
+      String contentLengthString = "";
+      bool started = false;
+      for (int i=0; i<line.length(); i++) {
+        if(line[i] == ':') {
+          started = true;
+        } else if(started && line[i] != ' ') {
+          contentLengthString += (char) line[i];
+        }
+      }
+
+      response->contentLength = contentLengthString.toInt();
     }
 
     debug(line);
