@@ -37,6 +37,10 @@ class Session {
     static void onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders);
     static void onGetCreditByCardError(uint8_t statusCode);
     static void onGetCreditByCardSuccess(uint32_t credit);
+    static void onUpdateCreditByCardError(uint8_t statusCode);
+    static void onUpdateCreditByCardSuccess(uint32_t totalCredit, uint32_t diffCredit);
+
+    static void saveMoneyInsertedToOnlineCredit();
 
     static unsigned long lastChangeMillis;
     static bool active;

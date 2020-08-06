@@ -194,6 +194,9 @@ void SiteLink::handleNormalCommands() {
   case 9:
     handleCreditByCard();
     break;
+  case 0xA:
+    handleCreditUpdateByCard();
+    break;
   default:
     Serial.println("Unknown type code!");
     Serial.println(typeCode, HEX);
@@ -398,6 +401,20 @@ void SiteLink::handleCreditByCard() {
   CALLBACK(callback, credit)
 }
 
+void SiteLink::handleCreditUpdateByCard() {
+  uint32_t totalCredit = 0;
+  uint32_t diffCredit = 0;
+
+  msgpck_read_integer(linkSerial, (byte*) &totalCredit, sizeof(totalCredit));
+  msgpck_read_integer(linkSerial, (byte*) &diffCredit, sizeof(diffCredit));
+  ack();
+
+  SiteLinkCommand command = commandBuffer.pop();
+  CreditUpdateResponseCallback callback = (CreditUpdateResponseCallback) command.commandCallback;
+
+  CALLBACK(callback, totalCredit, diffCredit)
+}
+
 void SiteLink::maybeSendCommand() {
   if(!safeToSendCommand) {
     return;
@@ -463,6 +480,22 @@ void SiteLink::getCreditByCard(
     commandBuffer.push(command);
   }
 
+void SiteLink::updateCreditByCard(
+  uint32_t cardNumber,
+  uint32_t amount,
+  BridgeStatusCallback onStatus,
+  CreditUpdateResponseCallback onCreditUpdate) {
+    SiteLinkCommand command;
+    command.linkSerial = linkSerial;
+    command.type = SiteLinkCommandType::UPDATE_CREDIT_BY_CARD;
+    command.errorCallback = onStatus;
+    command.commandCallback = (VoidCallback) onCreditUpdate;
+    command.buffer.creditUpdateRequest.cardNumber = cardNumber;
+    command.buffer.creditUpdateRequest.amount = amount;
+
+    commandBuffer.push(command);
+  }
+
 void SiteLink::updateState(SiteLinkState siteLinkState) {
   SiteLinkState oldState = SiteLink::state;
   SiteLink::state = siteLinkState;
@@ -508,6 +541,9 @@ void SiteLinkCommand::run() {
     case SiteLinkCommandType::GET_CREDIT_BY_CARD:
       runCreditByCard();
       break;
+    case SiteLinkCommandType::UPDATE_CREDIT_BY_CARD:
+      runUpdateCreditByCard();
+      break;
     case SiteLinkCommandType::UNKNOWN:
       return;
   }
@@ -530,6 +566,12 @@ void SiteLinkCommand::runOrderById() {
 void SiteLinkCommand::runCreditByCard() {
   msgpck_write_integer(linkSerial, 0x09);
   msgpck_write_integer(linkSerial, buffer.cardRequest.cardNumber);
+}
+
+void SiteLinkCommand::runUpdateCreditByCard() {
+  msgpck_write_integer(linkSerial, 0x0A);
+  msgpck_write_integer(linkSerial, buffer.creditUpdateRequest.cardNumber);
+  msgpck_write_integer(linkSerial, buffer.creditUpdateRequest.amount);
 }
 
 #endif

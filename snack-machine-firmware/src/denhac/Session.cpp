@@ -24,6 +24,7 @@ VoidCallback Session::onCurrentOrderUpdated = nullptr;
 
 void Session::reset() {
   active = false;
+  saveMoneyInsertedToOnlineCredit();
   cardNum = 0;
   currentOrder.reset();
   moneyInsertedInMachine = 0;
@@ -112,6 +113,23 @@ void Session::onGetCreditByCardSuccess(uint32_t credit) {
   }
 }
 
+void Session::onUpdateCreditByCardError(uint8_t statusCode) {
+  // TODO
+  Serial.println("Got an error status from update credit by card!");
+  Serial.println(statusCode);
+}
+
+void Session::onUpdateCreditByCardSuccess(uint32_t totalCredit, uint32_t diffCredit) {
+  Serial.println("Yay, credit updated!");
+
+  if(cardNum != 0) {
+    Session::onlineCredit = totalCredit;
+
+    CALLBACK(creditAvailableCallback, totalCredit);
+    CALLBACK(moneyAvailableCallback, getCurrentAvailableMoney())
+  }
+}
+
 bool Session::isActive() {
   return active;
 }
@@ -125,6 +143,20 @@ void Session::moneyInserted(uint32_t amount) {
 
   CALLBACK(moneyInsertedCallback, amount)
   CALLBACK(moneyAvailableCallback, getCurrentAvailableMoney())
+}
+
+void Session::saveMoneyInsertedToOnlineCredit() {
+  if(cardNum == 0) {
+    return;
+  }
+
+  if(moneyInsertedInMachine == 0) {
+    return;
+  }
+
+  Serial.println("Let's save our money!");
+
+  SiteLink::updateCreditByCard(cardNum, moneyInsertedInMachine, onUpdateCreditByCardError, onUpdateCreditByCardSuccess);
 }
 
 #endif

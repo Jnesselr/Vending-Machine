@@ -24,6 +24,7 @@ typedef void (*ProductRemovedCallback)(uint8_t row, uint8_t col);
 typedef void (*OrdersResponseCallback)(Order orders[], uint8_t numOrders);
 typedef void (*OrderResponseCallback)(const Order& order);
 typedef void (*CreditResponseCallback)(uint32_t credit);
+typedef void (*CreditUpdateResponseCallback)(uint32_t totalCredit, uint32_t diffCredit);
 
 struct CardRequest {
   uint32_t cardNumber;
@@ -33,10 +34,22 @@ struct OrderRequest {
   uint32_t orderId;
 };
 
+struct CreditUpdateRequest {
+  uint32_t cardNumber;
+  uint32_t amount;
+};
+
+constexpr size_t bufferSize = max(max(
+  sizeof(CardRequest),
+  sizeof(OrderRequest)),
+  sizeof(CreditUpdateRequest)
+);
+
 union SiteLinkCommandBuffer {
   struct CardRequest cardRequest;
   struct OrderRequest orderRequest;
-  uint8_t bytes[max(sizeof(CardRequest), sizeof(OrderRequest))];
+  struct CreditUpdateRequest creditUpdateRequest;
+  uint8_t bytes[bufferSize];
 };
 
 enum class SiteLinkCommandType : uint8_t {
@@ -45,6 +58,7 @@ enum class SiteLinkCommandType : uint8_t {
   GET_ORDERS_BY_CARD,
   GET_ORDER_BY_ID,
   GET_CREDIT_BY_CARD,
+  UPDATE_CREDIT_BY_CARD,
 };
 
 class SiteLinkCommand {
@@ -65,6 +79,7 @@ class SiteLinkCommand {
     void runOrdersByCard();
     void runOrderById();
     void runCreditByCard();
+    void runUpdateCreditByCard();
 };
 
 class SiteLink {
@@ -84,6 +99,11 @@ class SiteLink {
       uint32_t cardNumber,
       BridgeStatusCallback onStatus,
       CreditResponseCallback onCredit);
+    static void updateCreditByCard(
+      uint32_t cardNumber,
+      uint32_t amount,
+      BridgeStatusCallback onStatus,
+      CreditUpdateResponseCallback onCreditUpdate);
 
     // Callbacks
     static SiteLinkStateCallback onStateChanged;
@@ -114,6 +134,7 @@ class SiteLink {
     static void handleOrdersById();
     static void handleProductRemoved();
     static void handleCreditByCard();
+    static void handleCreditUpdateByCard();
 
     static Order readOrder();
     static Item readItem();
