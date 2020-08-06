@@ -67,7 +67,7 @@ void Session::cardScanned(uint32_t cardNum) {
   Session::cardNum = cardNum;
   CALLBACK(onCustomerLookupStarted);
 
-  SiteLink::getCreditByCard(cardNum, onGetCreditByCardError, onGetCreditByCardSuccess);
+  // SiteLink::getCreditByCard(cardNum, onGetCreditByCardError, onGetCreditByCardSuccess);
   SiteLink::getOrdersByCard(cardNum, onGetOrdersByCardError, onGetOrdersByCardSuccess);
 }
 

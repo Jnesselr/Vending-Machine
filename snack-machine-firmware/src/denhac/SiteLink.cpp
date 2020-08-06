@@ -2,6 +2,7 @@
 
 #include "denhac/SiteLink.h"
 #include "denhac/data/BridgeStatus.h"
+#include "denhac/data/MaxPacketSize.h"
 #include "msgpck.h"
 
 #include "utils.h"
@@ -24,8 +25,11 @@ bool SiteLink::fetchingProducts = false;
 bool SiteLink::firstProductFetch = false;
 bool SiteLink::hasProduct[64];
 
+uint8_t SiteLink::packetMaxSizeSent = 0;
+uint8_t SiteLink::packetMaxSizeRead = 0;
+
 void SiteLink::setup() {
-  linkSerial->begin(9600);
+  linkSerial->begin(115200);
 }
 
 void SiteLink::loop() {
@@ -104,8 +108,50 @@ void SiteLink::handleHandshake() {
   Serial.flush();
 }
 
+void SiteLink::waitForAck() {
+  // If we're waiting for ACK, this field gets reset
+  packetMaxSizeSent = 0;
+
+  while(true) {
+    if(linkSerial->available() == 0) {
+      continue;
+    }
+
+    if(msgpck_nil_next(linkSerial)) {
+      linkSerial->read();
+      return;
+    } else {
+      // If got something that wasn't nil, we need to dispose of it
+      linkSerial->read();
+    }
+  }
+}
+
+void SiteLink::packetWritten(uint8_t maxPacketSize) {
+  packetMaxSizeSent += maxPacketSize;
+}
+
+void SiteLink::waitForAckIfNeededFor(uint8_t maxPacketSize) {
+  if(packetMaxSizeSent + maxPacketSize >= 63) {
+    waitForAck();
+  }
+}
+
 void SiteLink::ack() {
+  // If we're sending an ACK, this field gets reset
+  packetMaxSizeRead = 0;
+
   msgpck_write_nil(linkSerial);
+}
+
+void SiteLink::packetRead(uint8_t maxPacketSize) {
+  packetMaxSizeRead += maxPacketSize;
+}
+
+void SiteLink::ackIfNeededFor(uint8_t maxPacketSize) {
+if(packetMaxSizeRead + maxPacketSize >= 63) {
+    ack();
+  }
 }
 
 void SiteLink::handleNormalCommands() {
@@ -118,6 +164,9 @@ void SiteLink::handleNormalCommands() {
 
   uint8_t typeCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &typeCode, sizeof(typeCode));
+
+  packetRead(COMMAND_BYTES);
+
   Serial.print("Type: ");
   Serial.println(typeCode);
 
@@ -217,6 +266,8 @@ void SiteLink::handleOrdersByCard() {
   uint8_t numOrders = 0;
   msgpck_read_integer(linkSerial, (byte*) &numOrders, sizeof(numOrders));
 
+  packetRead(PACKET_ORDERS_BY_CARD);
+
   Order orders[8];
   for (uint8_t i = 0; i < numOrders; i++)
   {
@@ -248,6 +299,8 @@ Order SiteLink::readOrder() {
   uint32_t paid = 0;
   uint32_t total = 0;
 
+  ackIfNeededFor(PACKET_ORDER_HEADER);
+
   msgpck_read_integer(linkSerial, (byte*) &orderId, sizeof(orderId));
   msgpck_read_integer(linkSerial, (byte*) &status, sizeof(status));
   msgpck_read_integer(linkSerial, (byte*) &paid, sizeof(paid));
@@ -268,6 +321,8 @@ Order SiteLink::readOrder() {
   uint8_t numItems = 0;
   msgpck_read_integer(linkSerial, (byte*) &numItems, sizeof(numItems));
 
+  packetRead(PACKET_ORDER_HEADER);
+
   Serial.print("Num Items: ");
   Serial.println(numItems);
 
@@ -286,10 +341,14 @@ Item SiteLink::readItem() {
   uint8_t quantity = 0;
   uint8_t vended = 0;
 
+  ackIfNeededFor(PACKET_ITEM);
+
   msgpck_read_integer(linkSerial, (byte*) &itemId, sizeof(itemId));
   msgpck_read_integer(linkSerial, (byte*) &productId, sizeof(productId));
   msgpck_read_integer(linkSerial, (byte*) &quantity, sizeof(quantity));
   msgpck_read_integer(linkSerial, (byte*) &vended, sizeof(vended));
+
+  packetRead(PACKET_ITEM);
 
   Serial.print("Item ID: ");
   Serial.println(itemId);

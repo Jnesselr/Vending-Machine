@@ -69,7 +69,12 @@ class SiteLink {
     static void handleHandshake();
     static void handleNormalCommands();
 
+    static void waitForAck();
+    static void packetWritten(uint8_t maxPacketSize);
+    static void waitForAckIfNeededFor(uint8_t maxPacketSize);
     static void ack();
+    static void packetRead(uint8_t maxPacketSize);
+    static void ackIfNeededFor(uint8_t maxPacketSize);
 
     static void handleStatus();
     static void handleProductUpdated();
@@ -93,4 +98,6 @@ class SiteLink {
     static bool fetchingProducts;
     static bool firstProductFetch;
     static bool hasProduct[64];
+    static uint8_t packetMaxSizeSent;
+    static uint8_t packetMaxSizeRead;
 };
