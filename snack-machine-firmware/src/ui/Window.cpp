@@ -2,7 +2,9 @@
 
 #include "ui/Window.h"
 
-Window::Window() {}
+Window::Window() {
+  display = nullptr;
+}
 
 void Window::loop() {}
 

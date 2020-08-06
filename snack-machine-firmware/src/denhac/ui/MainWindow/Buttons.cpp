@@ -8,6 +8,7 @@ CellButton::CellButton() {
   display = nullptr;
   enabled = true;
   left = right = top = bottom = 0;
+  character = ' ';
 }
 
 void CellButton::show() {

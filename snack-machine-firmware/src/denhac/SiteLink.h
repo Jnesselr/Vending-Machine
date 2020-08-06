@@ -39,16 +39,32 @@ struct CreditUpdateRequest {
   uint32_t amount;
 };
 
-constexpr size_t bufferSize = max(max(
+struct UpdateOrderItemRequest {
+  uint32_t productId;
+  uint8_t wanted;
+  uint8_t vended;
+};
+
+struct UpdateOrderRequest {
+  uint32_t orderId;
+  uint32_t cardNumber;
+  uint32_t cash;
+  uint8_t numItems;
+  struct UpdateOrderItemRequest itemUpdates[8];
+};
+
+constexpr size_t bufferSize = max(max(max(
   sizeof(CardRequest),
   sizeof(OrderRequest)),
-  sizeof(CreditUpdateRequest)
+  sizeof(CreditUpdateRequest)),
+  sizeof(UpdateOrderRequest)
 );
 
 union SiteLinkCommandBuffer {
   struct CardRequest cardRequest;
   struct OrderRequest orderRequest;
   struct CreditUpdateRequest creditUpdateRequest;
+  struct UpdateOrderRequest UpdateOrderRequest;
   uint8_t bytes[bufferSize];
 };
 
@@ -133,7 +149,7 @@ class SiteLink {
     static ProductUpdatedCallback productUpdatedCallback;
     static ProductRemovedCallback productRemovedCallback;
   private:
-    static RingBuffer<8, SiteLinkCommand> commandBuffer;
+    static RingBuffer<3, SiteLinkCommand> commandBuffer;
 
     static void handleWaiting();
     static void handleHandshake();
