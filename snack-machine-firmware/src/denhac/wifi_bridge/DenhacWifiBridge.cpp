@@ -29,7 +29,7 @@ uint8_t DenhacWifiBridge::packetMaxSizeRead = 0;
 
 void DenhacWifiBridge::setup() {
   pinMode(13, OUTPUT);
-  serial->begin(9600);
+  serial->begin(115200);
 
   memset(hashes, 0, sizeof(uint32_t) * NUM_PRODUCTS);
 
