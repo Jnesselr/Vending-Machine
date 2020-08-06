@@ -33,7 +33,6 @@ void DenhacBindings::onMotorSystemStateChanged(
   MotorSystemState oldState,
   MotorSystemState newState) {
     if(newState == MotorSystemState::IDLE) {
-      Serial.println("Motor state is idle!");
       DenhacUI::bootWindow.setMotorsIdle(true);
     }
 }
@@ -42,15 +41,11 @@ void DenhacBindings::onBillValidatorStateCallback(
   BillValidatorState oldState,
   BillValidatorState newState) {
     if(newState == BillValidatorState::IDLE) {
-      Serial.println("Bill Validator is idle!");
       DenhacUI::bootWindow.setBillValidatorIdle(true);
     }
 }
 
 void DenhacBindings::onBillRoutedCallback(BillRouting routing, uint8_t billType) {
-  Serial.println("On bill routed!");
-  Serial.println((uint8_t)routing);
-  Serial.println(billType);
   switch(routing) {
     case BillRouting::ESCROW_POSITION:
       BillValidator::acceptBill();
@@ -66,7 +61,6 @@ void DenhacBindings::onCoinChangerStateCallback(
   CoinChangerState oldState,
   CoinChangerState newState) {
     if(newState == CoinChangerState::IDLE) {
-      Serial.println("Coin Changer is idle!");
       DenhacUI::bootWindow.setCoinChangerIdle(true);
     }
 }
@@ -85,7 +79,6 @@ void DenhacBindings::onSiteLinkStateCallback(
   SiteLinkState oldState,
   SiteLinkState newState) {
     if(newState == SiteLinkState::IDLE) {
-      Serial.println("Site Link is idle!");
       DenhacUI::bootWindow.setSiteLinkIdle(true);
     }
 }

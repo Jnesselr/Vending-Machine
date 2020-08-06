@@ -106,11 +106,9 @@ void SiteLink::handleHandshake() {
   msgpck_read_integer(linkSerial, (byte*) &statusCode, sizeof(statusCode));
   if(typeCode == 0x01 && statusCode == BridgeStatus::READY) {
     SiteLinkAck::ack();
-    Serial.println("We did it!");
     updateState(SiteLinkState::IDLE);
     CALLBACK(statusCallback, statusCode);
   }
-  Serial.flush();
 }
 
 void SiteLinkAck::waitForAck() {
@@ -164,16 +162,10 @@ void SiteLink::handleNormalCommands() {
     return;
   }
 
-  Serial.print("Available: ");
-  Serial.println(linkSerial->available());
-
   uint8_t typeCode = 0;
   msgpck_read_integer(linkSerial, (byte*) &typeCode, sizeof(typeCode));
 
   SiteLinkAck::packetRead(COMMAND_BYTES);
-
-  Serial.print("Type: ");
-  Serial.println(typeCode);
 
   switch (typeCode)
   {
@@ -249,7 +241,6 @@ void SiteLink::handleStatus() {
     // We should only get this command in response to a request for cancellation
     safeToSendCommand = true;
     if(!commandBuffer.isEmpty()) {
-      Serial.println("Order cancelled!");
       SiteLinkCommand command = commandBuffer.pop();
       CALLBACK(command.commandCallback)
     }
@@ -329,15 +320,6 @@ Order SiteLink::readOrder() {
   msgpck_read_integer(linkSerial, (byte*) &paid, sizeof(paid));
   msgpck_read_integer(linkSerial, (byte*) &total, sizeof(total));
 
-  Serial.print("Order ID: ");
-  Serial.println(orderId);
-  Serial.print("Status: ");
-  Serial.println(status);
-  Serial.print("Paid: ");
-  Serial.println(paid);
-  Serial.print("Total: ");
-  Serial.println(total);
-
   OrderStatus orderStatus = static_cast<OrderStatus>(status);
   Order order(orderId, orderStatus, paid, total);
 
@@ -345,9 +327,6 @@ Order SiteLink::readOrder() {
   msgpck_read_integer(linkSerial, (byte*) &numItems, sizeof(numItems));
 
   SiteLinkAck::packetRead(PACKET_ORDER_HEADER);
-
-  Serial.print("Num Items: ");
-  Serial.println(numItems);
 
   for (uint8_t i = 0; i < numItems; i++)
   {
@@ -372,15 +351,6 @@ Item SiteLink::readItem() {
   msgpck_read_integer(linkSerial, (byte*) &vended, sizeof(vended));
 
   SiteLinkAck::packetRead(PACKET_ITEM);
-
-  Serial.print("Item ID: ");
-  Serial.println(itemId);
-  Serial.print("Product ID: ");
-  Serial.println(productId);
-  Serial.print("Quantity: ");
-  Serial.println(quantity);
-  Serial.print("Vended: ");
-  Serial.println(vended);
 
   Item item(itemId, productId, quantity, vended);
 

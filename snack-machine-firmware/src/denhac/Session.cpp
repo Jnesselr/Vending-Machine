@@ -74,8 +74,6 @@ void Session::cardScanned(uint32_t cardNum) {
 
 void Session::onGetOrdersByCardError(uint8_t statusCode) {
   // TODO
-  Serial.println("Got an error status from orders by card!");
-  Serial.println(statusCode);
 
   if(cardNum == 0) {
     return;
@@ -100,8 +98,6 @@ void Session::onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders) {
 
 void Session::onGetCreditByCardError(uint8_t statusCode) {
   // TODO
-  Serial.println("Got an error status from credit by card!");
-  Serial.println(statusCode);
 }
 
 void Session::onGetCreditByCardSuccess(uint32_t credit) {
@@ -115,13 +111,9 @@ void Session::onGetCreditByCardSuccess(uint32_t credit) {
 
 void Session::onUpdateCreditByCardError(uint8_t statusCode) {
   // TODO
-  Serial.println("Got an error status from update credit by card!");
-  Serial.println(statusCode);
 }
 
 void Session::onUpdateCreditByCardSuccess(uint32_t totalCredit, uint32_t diffCredit) {
-  Serial.println("Yay, credit updated!");
-
   if(cardNum != 0) {
     Session::onlineCredit = totalCredit;
 
@@ -153,8 +145,6 @@ void Session::saveMoneyInsertedToOnlineCredit() {
   if(moneyInsertedInMachine == 0) {
     return;
   }
-
-  Serial.println("Let's save our money!");
 
   SiteLink::updateCreditByCard(cardNum, moneyInsertedInMachine, onUpdateCreditByCardError, onUpdateCreditByCardSuccess);
 }

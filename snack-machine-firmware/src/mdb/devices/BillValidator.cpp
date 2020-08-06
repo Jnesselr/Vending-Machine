@@ -243,7 +243,6 @@ void BillValidator::sendReset()
 
   if (mdbResult.timeout)
   {
-    // Serial.println("Cash reset timed out");
     return;
   }
 
