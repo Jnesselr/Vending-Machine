@@ -179,7 +179,8 @@ void SiteLink::handleNormalCommands() {
     handleOrdersByCard();
     break;
   case 4:
-    handleOrdersById();
+  case 5:
+    handleOrderById();
     break;
   case 6:
     handleProductRemoved();
@@ -297,7 +298,7 @@ void SiteLink::handleOrdersByCard() {
   CALLBACK(callback, orders, numOrders)
 }
 
-void SiteLink::handleOrdersById() {
+void SiteLink::handleOrderById() {
   Order order = readOrder();
   SiteLinkAck::ack();
 
@@ -445,6 +446,65 @@ void SiteLink::getOrderById(
     commandBuffer.push(command);
   }
 
+void SiteLink::cancelOrderById(
+  uint32_t orderId,
+  BridgeStatusCallback onStatus,
+  VoidCallback onOrderCancelled) {
+    SiteLinkCommand command;
+    command.linkSerial = linkSerial;
+    command.type = SiteLinkCommandType::CANCEL_ORDER_BY_ID;
+    command.errorCallback = onStatus;
+    command.commandCallback = onOrderCancelled;
+    command.buffer.orderRequest.orderId = orderId;
+
+    commandBuffer.push(command);
+  }
+
+void SiteLink::updateOrder(
+  uint32_t cardNumber,
+  uint32_t cash,
+  Order &order,
+  BridgeStatusCallback onStatus,
+  OrderResponseCallback onOrder) {
+    UpdateOrderRequest updateOrderRequest;
+    updateOrderRequest.cardNumber = cardNumber;
+    updateOrderRequest.cash = cash;
+    updateOrderRequest.orderId = order.orderId;
+    updateOrderRequest.numItems = order.getNumItems();
+    for (uint8_t i = 0; i < updateOrderRequest.numItems; i++)
+    {
+      Item item = order.getItem(i);
+      updateOrderRequest.itemUpdates[i].productId = item.productId;
+      updateOrderRequest.itemUpdates[i].wanted = item.quantity;
+      updateOrderRequest.itemUpdates[i].vended = item.vended;
+    }
+
+    updateOrder(updateOrderRequest, onStatus, onOrder);
+  }
+
+void SiteLink::updateOrder(
+  UpdateOrderRequest updateOrderRequest,
+  BridgeStatusCallback onStatus,
+  OrderResponseCallback onOrder) {
+    SiteLinkCommand command;
+    command.linkSerial = linkSerial;
+    command.type = SiteLinkCommandType::UPDATE_ORDER;
+    command.errorCallback = onStatus;
+    command.commandCallback = (VoidCallback) onOrder;
+    command.buffer.updateOrderRequest.orderId = updateOrderRequest.orderId;
+    command.buffer.updateOrderRequest.cardNumber = updateOrderRequest.cardNumber;
+    command.buffer.updateOrderRequest.cash = updateOrderRequest.cash;
+    command.buffer.updateOrderRequest.numItems = updateOrderRequest.numItems;
+    for (uint8_t i = 0; i < updateOrderRequest.numItems; i++)
+    {
+      command.buffer.updateOrderRequest.itemUpdates[i].productId = updateOrderRequest.itemUpdates[i].productId;
+      command.buffer.updateOrderRequest.itemUpdates[i].wanted = updateOrderRequest.itemUpdates[i].wanted;
+      command.buffer.updateOrderRequest.itemUpdates[i].vended = updateOrderRequest.itemUpdates[i].vended;
+    }
+
+    commandBuffer.push(command);
+  }
+
 void SiteLink::getCreditByCard(
   uint32_t cardNumber,
   BridgeStatusCallback onStatus,
@@ -471,20 +531,6 @@ void SiteLink::updateCreditByCard(
     command.commandCallback = (VoidCallback) onCreditUpdate;
     command.buffer.creditUpdateRequest.cardNumber = cardNumber;
     command.buffer.creditUpdateRequest.amount = amount;
-
-    commandBuffer.push(command);
-  }
-
-void SiteLink::cancelOrderById(
-  uint32_t orderId,
-  BridgeStatusCallback onStatus,
-  VoidCallback onOrderCancelled) {
-    SiteLinkCommand command;
-    command.linkSerial = linkSerial;
-    command.type = SiteLinkCommandType::CANCEL_ORDER_BY_ID;
-    command.errorCallback = onStatus;
-    command.commandCallback = onOrderCancelled;
-    command.buffer.orderRequest.orderId = orderId;
 
     commandBuffer.push(command);
   }
@@ -534,6 +580,9 @@ void SiteLinkCommand::run() {
     case SiteLinkCommandType::CANCEL_ORDER_BY_ID:
       runCancelOrderById();
       break;
+    case SiteLinkCommandType::UPDATE_ORDER:
+      runUpdateOrder();
+      break;
     case SiteLinkCommandType::GET_CREDIT_BY_CARD:
       runCreditByCard();
       break;
@@ -562,6 +611,29 @@ void SiteLinkCommand::runOrderById() {
 void SiteLinkCommand::runCancelOrderById() {
   msgpck_write_integer(linkSerial, 0x08);
   msgpck_write_integer(linkSerial, buffer.orderRequest.orderId);
+}
+
+void SiteLinkCommand::runUpdateOrder() {
+  msgpck_write_integer(linkSerial, 0x05);
+  msgpck_write_integer(linkSerial, buffer.updateOrderRequest.orderId);
+  msgpck_write_integer(linkSerial, buffer.updateOrderRequest.cardNumber);
+  msgpck_write_integer(linkSerial, buffer.updateOrderRequest.cash);
+  msgpck_write_integer(linkSerial, buffer.updateOrderRequest.numItems);
+
+  SiteLinkAck::packetWritten(PACKET_ORDER_UPDATE);
+
+  for (uint8_t i = 0; i < buffer.updateOrderRequest.numItems; i++)
+  {
+    SiteLinkAck::waitForAckIfNeededFor(PACKET_ITEM_UPDATE);
+
+    msgpck_write_integer(linkSerial, buffer.updateOrderRequest.itemUpdates[i].productId);
+    msgpck_write_integer(linkSerial, buffer.updateOrderRequest.itemUpdates[i].wanted);
+    msgpck_write_integer(linkSerial, buffer.updateOrderRequest.itemUpdates[i].vended);
+
+    SiteLinkAck::packetWritten(PACKET_ITEM_UPDATE);
+  }
+
+  SiteLinkAck::waitForAck();
 }
 
 void SiteLinkCommand::runCreditByCard() {

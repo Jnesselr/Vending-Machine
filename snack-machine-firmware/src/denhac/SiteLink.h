@@ -64,7 +64,7 @@ union SiteLinkCommandBuffer {
   struct CardRequest cardRequest;
   struct OrderRequest orderRequest;
   struct CreditUpdateRequest creditUpdateRequest;
-  struct UpdateOrderRequest UpdateOrderRequest;
+  struct UpdateOrderRequest updateOrderRequest;
   uint8_t bytes[bufferSize];
 };
 
@@ -74,6 +74,7 @@ enum class SiteLinkCommandType : uint8_t {
   GET_ORDERS_BY_CARD,
   GET_ORDER_BY_ID,
   CANCEL_ORDER_BY_ID,
+  UPDATE_ORDER,
   GET_CREDIT_BY_CARD,
   UPDATE_CREDIT_BY_CARD,
 };
@@ -95,9 +96,10 @@ class SiteLinkCommand {
     void runGetProducts();
     void runOrdersByCard();
     void runOrderById();
+    void runCancelOrderById();
+    void runUpdateOrder();
     void runCreditByCard();
     void runUpdateCreditByCard();
-    void runCancelOrderById();
 };
 
 class SiteLinkAck {
@@ -127,6 +129,20 @@ class SiteLink {
       uint32_t orderId,
       BridgeStatusCallback onStatus,
       OrderResponseCallback onOrder);
+    static void cancelOrderById(
+      uint32_t orderId,
+      BridgeStatusCallback onStatus,
+      VoidCallback onOrderCancelled);
+    static void updateOrder(
+      uint32_t cardNumber,
+      uint32_t cash,
+      Order &order,
+      BridgeStatusCallback onStatus,
+      OrderResponseCallback onOrder);
+    static void updateOrder(
+      UpdateOrderRequest updateOrderRequest,
+      BridgeStatusCallback onStatus,
+      OrderResponseCallback onOrder);
     static void getCreditByCard(
       uint32_t cardNumber,
       BridgeStatusCallback onStatus,
@@ -136,10 +152,6 @@ class SiteLink {
       uint32_t amount,
       BridgeStatusCallback onStatus,
       CreditUpdateResponseCallback onCreditUpdate);
-    static void cancelOrderById(
-      uint32_t orderId,
-      BridgeStatusCallback onStatus,
-      VoidCallback onOrderCancelled);
 
     // Callbacks
     static SiteLinkStateCallback onStateChanged;
@@ -160,7 +172,7 @@ class SiteLink {
     static void handleProductUpdated();
     static void handleAfterFirstProductFetched();
     static void handleOrdersByCard();
-    static void handleOrdersById();
+    static void handleOrderById();
     static void handleProductRemoved();
     static void handleCreditByCard();
     static void handleCreditUpdateByCard();

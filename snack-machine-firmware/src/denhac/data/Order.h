@@ -30,6 +30,7 @@ class Order {
 
     uint8_t getNumItems();
     Item getItem(uint8_t itemNum);
+    void vendedItem(uint8_t itemNum);
 
     void reset();
 

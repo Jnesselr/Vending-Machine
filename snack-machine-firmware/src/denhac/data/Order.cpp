@@ -93,6 +93,10 @@ Item Order::getItem(uint8_t itemNum) {
   return items[itemNum];
 }
 
+void Order::vendedItem(uint8_t itemNum) {
+  items[itemNum].vended++;
+}
+
 void Order::recalculateTotal() {
   uint32_t newTotal = 0;
   for (uint8_t i = 0; i < numItems; i++)
