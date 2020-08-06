@@ -386,8 +386,9 @@ void MainWindow::drawOrder() {
   uint16_t dollars = order->total / 100;
   uint8_t cents = order->total % 100;
   uint8_t dollarsWidth = (uint8_t) log10(dollars) + 1;
-  // Max is 30 wide, 4 of those are $. and cents
-  display->txt_MoveCursor(0, 26 - dollarsWidth);
+  // Max is 30 wide, 4 of those are $. and cents. 2 of those are spaces
+  display->txt_MoveCursor(0, 24 - dollarsWidth);
+  display->print("  ");
   display->print('$');
   display->print(dollars);
   display->print('.');
@@ -424,6 +425,30 @@ void MainWindow::drawCurrentCredit() {
     display->print('0');
   }
   display->print(cents);
+  display->print("  ");
+}
+
+void MainWindow::handleVendEnabled() {
+  Order* order = Session::getCurrentOrder();
+
+  if(order->status == OrderStatus::PROCESSING) {
+    vendButton.enable();
+    return;
+  }
+
+  if(order->getNumItems() == 0) {
+    return;
+  }
+
+  uint32_t total = order->total;
+  uint32_t paid = order->paid;
+  uint32_t remaining = total - paid;
+
+  if(Session::getCurrentAvailableMoney() >= remaining) {
+    vendButton.enable();
+  } else {
+    vendButton.disable();
+  }
 }
 
 template<StaticCallbackType type, typename... Args>
@@ -483,6 +508,7 @@ void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
   }
 
   mainWindow->cancelOrderButton.enable();
+  mainWindow->handleVendEnabled();
 }
 
 void MainWindow::addItemScreen(MainWindow* mainWindow) {
@@ -521,13 +547,13 @@ void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {
 
 void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
   mainWindow->drawOrder();
+  mainWindow->handleVendEnabled();
 
   Order* order = Session::getCurrentOrder();
 
   if(order->getNumItems() > 0) {
     mainWindow->cancelOrderButton.enable();
     if(order->status == OrderStatus::PROCESSING) {
-      mainWindow->vendButton.enable();
       mainWindow->addItemButton.disable();
     }
   }

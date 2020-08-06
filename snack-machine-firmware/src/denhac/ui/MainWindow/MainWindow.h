@@ -77,6 +77,7 @@ class MainWindow : public Window {
     CellButton* colButton(uint8_t col);
 
     void verifyGridValidity();
+    void handleVendEnabled();
 
     bool memberVariablesSet = false;
     unsigned long lastGridValidityScan = 0;
