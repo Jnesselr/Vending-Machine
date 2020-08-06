@@ -25,6 +25,7 @@ uint32_t DenhacWifiBridge::hashes[NUM_PRODUCTS];
 bool DenhacWifiBridge::has_product[NUM_PRODUCTS];
 
 uint8_t DenhacWifiBridge::packetMaxSizeSent = 0;
+uint8_t DenhacWifiBridge::packetMaxSizeRead = 0;
 
 void DenhacWifiBridge::setup() {
   pinMode(13, OUTPUT);
@@ -223,6 +224,9 @@ void DenhacWifiBridge::updateOrder() {
   msgpck_read_integer(serial, (byte*) &cash, sizeof(cash));
   uint8_t numItems = 0;
   msgpck_read_integer(serial, (byte*) &numItems, sizeof(numItems));
+
+  packetRead(PACKET_ORDER_UPDATE);
+
   sendDebug("Got order id: ");
   sendDebug(orderId);
   sendDebug("Got card id: ");
@@ -247,6 +251,9 @@ void DenhacWifiBridge::updateOrder() {
     sendDebug("Value of t is: ");
     sendDebug(t);
     sendDebug(numItems);
+
+    ackIfNeededFor(PACKET_ITEM_UPDATE);
+
     uint32_t productId = 0;
     msgpck_read_integer(serial, (byte*) &productId, sizeof(productId));
     uint32_t wanted = 0;
@@ -268,6 +275,9 @@ void DenhacWifiBridge::updateOrder() {
   }
 
   sendDebug("Out of loop!");
+
+  ack();
+
   sendStatus(BridgeStatus::UPDATING_ORDER);
 
   RestResponse* response = request.POST("/wp-json/wc-vending/v1/orders");
@@ -473,7 +483,7 @@ void DenhacWifiBridge::sendDebug(uint32_t value) {
  * we wait for an ACK each time after sending a packet.
  */
 void DenhacWifiBridge::waitForAck() {
-  // If we're waiting for ACK this field gets auto reset
+  // If we're waiting for ACK, this field gets reset
   packetMaxSizeSent = 0;
 
   digitalWrite(13, HIGH);
@@ -502,5 +512,23 @@ void DenhacWifiBridge::waitForAckIfNeededFor(uint8_t maxPacketSize) {
     waitForAck();
   }
 }
+
+void DenhacWifiBridge::ack() {
+  // If we're sending an ACK, this field gets reset
+  packetMaxSizeRead = 0;
+
+  msgpck_write_nil(serial);
+}
+
+void DenhacWifiBridge::packetRead(uint8_t maxPacketSize) {
+  packetMaxSizeRead += maxPacketSize;
+}
+
+void DenhacWifiBridge::ackIfNeededFor(uint8_t maxPacketSize) {
+if(packetMaxSizeRead + maxPacketSize >= 63) {
+    ack();
+  }
+}
+
 
 #endif

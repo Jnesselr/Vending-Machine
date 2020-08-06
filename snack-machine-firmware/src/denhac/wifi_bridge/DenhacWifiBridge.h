@@ -33,6 +33,9 @@ class DenhacWifiBridge: public VendingMachine {
     static void waitForAck();
     static void packetWritten(uint8_t maxPacketSize);
     static void waitForAckIfNeededFor(uint8_t maxPacketSize);
+    static void ack();
+    static void packetRead(uint8_t maxPacketSize);
+    static void ackIfNeededFor(uint8_t maxPacketSize);
 
     static void fetchProducts();
     static void fetchOrdersByCard(uint32_t cardNumber);
@@ -50,4 +53,5 @@ class DenhacWifiBridge: public VendingMachine {
     static RestRequest request;
     static char urlBuffer[];
     static uint8_t packetMaxSizeSent;
+    static uint8_t packetMaxSizeRead;
 };
