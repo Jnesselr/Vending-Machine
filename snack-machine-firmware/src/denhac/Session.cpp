@@ -123,6 +123,36 @@ void Session::onUpdateCreditByCardSuccess(uint32_t totalCredit, uint32_t diffCre
   }
 }
 
+void Session::onUpdateOrderError(uint8_t statusCode) {
+  // TODO
+  Serial.println("Update went wrong!");
+  Serial.print("Status: ");
+  Serial.println(statusCode);
+}
+void Session::onUpdateOrderSuccess(const Order& order) {
+  if(currentOrder.status == OrderStatus::PROCESSING) {
+    Serial.println("Order was already processing");
+    // We know this order has been paid for, so we're just updating
+    // vended amounts
+    if(order.status == OrderStatus::COMPLETED) {
+      Serial.println("It was all vended!");
+    }
+  } else {
+    // We did this update to verify the order was paid for
+    if(order.status == OrderStatus::PROCESSING) {
+      Serial.println("It was paid for yay!");
+      currentOrder = order;
+      // Good, it was paid for, we can vend
+      Session::vend();
+    } else {
+      // TODO Uh oh something went wrong
+      Serial.println("It wasn't paid for?");
+    }
+  }
+
+  currentOrder = order;
+}
+
 bool Session::isActive() {
   return active;
 }
@@ -151,6 +181,18 @@ void Session::saveMoneyInsertedToOnlineCredit() {
 }
 
 void Session::vend() {
+  if(currentOrder.status != OrderStatus::PROCESSING || currentOrder.orderId == 0) {
+    Serial.println("Verifying order was paid for");
+    SiteLink::updateOrder(
+      Session::cardNum,
+      Session::moneyInsertedInMachine,
+      Session::currentOrder,
+      onUpdateOrderError,
+      onUpdateOrderSuccess
+    );
+    return;
+  }
+
   Serial.println("Starting vend!");
   bool anyVended = vendNextItem();
 
@@ -185,15 +227,8 @@ void Session::itemVended(uint8_t row, uint8_t col) {
       Session::cardNum,
       Session::moneyInsertedInMachine,
       Session::currentOrder,
-      [](uint8_t bridgeStatus) {
-        Serial.print("Uh oh! Got bridge status: ");
-        Serial.println(bridgeStatus);
-      },
-      [](const Order& order) {
-        Serial.println("Yay it worked!");
-        Serial.print("Status is complete? ");
-        Serial.println(order.status == OrderStatus::COMPLETED ? "Yes!" : "No :(");
-      }
+      onUpdateOrderError,
+      onUpdateOrderSuccess
     );
   }
 }
