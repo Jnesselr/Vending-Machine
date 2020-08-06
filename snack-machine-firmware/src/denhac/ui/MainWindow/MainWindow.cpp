@@ -508,6 +508,7 @@ void MainWindow::sessionReset(MainWindow* mainWindow) {
   mainWindow->membershipButton.disable();
   mainWindow->cancelOrderButton.disable();
   mainWindow->vendButton.disable();
+  mainWindow->addItemButton.enable();
 }
 
 void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {

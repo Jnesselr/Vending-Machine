@@ -19,22 +19,20 @@ void CellButton::show() {
   display->txt_Width(8);
   display->txt_Height(8);
 
-  word backgroundColor;
-  if(enabled && pressed) {
-    backgroundColor = DARKGRAY;
-  } else {
-    backgroundColor = WHITESMOKE;
-  }
-  display->txt_BGcolour(backgroundColor);
-  display->gfx_RectangleFilled(left, top, right, bottom, backgroundColor);
+  word backgroundColor = WHITESMOKE;
+  word textColor = BLACK;
 
-  if(enabled && pressed) {
-    display->txt_FGcolour(WHITE);
-  } else if(enabled) {
-    display->txt_FGcolour(BLACK);
-  } else {
-    display->txt_FGcolour(LIGHTGREY);
+  if(!enabled) {
+    textColor = LIGHTGREY;
+  } else if(pressed) {
+    backgroundColor = BLACK;
+    textColor = WHITE;
   }
+
+  display->txt_BGcolour(backgroundColor);
+  display->txt_FGcolour(textColor);
+
+  display->gfx_RectangleFilled(left, top, right, bottom, backgroundColor);
 
   display->gfx_MoveTo(
     (left + right) / 2 - 56 / 2,
@@ -100,15 +98,16 @@ void CancelOrderButton::show() {
   }
 
   word borderColor = RED;
-  word insetColor = WHITE;
-  word textColor = BLACK;
+  word insetColor = borderColor;
+  word textColor = WHITE;
 
   if(!enabled) {
     borderColor = DARKGRAY;
+    insetColor = WHITE;
     textColor = DARKGRAY;
   } else if(pressed) {
-    insetColor = borderColor;
-    textColor = WHITE;
+    insetColor = WHITE;
+    textColor = BLACK;
   }
 
   uint16_t mid = (top + bottom) / 2;
@@ -158,16 +157,16 @@ void AddItemButton::show() {
   }
   
   word borderColor = BLACK;
-  word insetColor = WHITE;
-  word textColor = BLACK;
+  word insetColor = borderColor;
+  word textColor = WHITE;
 
   if(!enabled) {
     borderColor = DARKGRAY;
     insetColor = WHITE;
     textColor = DARKGRAY;
   } else if(pressed) {
-    insetColor = borderColor;
-    textColor = WHITE;
+    insetColor = WHITE;
+    textColor = BLACK;
   }
 
   display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
@@ -245,8 +244,8 @@ MembershipButton::MembershipButton() {
 
 void MembershipButton::show() {
   word borderColor = BLUE;
-  word insetColor = WHITE;
-  word textColor = BLACK;
+  word insetColor = borderColor;
+  word textColor = WHITE;
 
   uint8_t numOrders = Session::getNumOrders();
 
@@ -260,10 +259,11 @@ void MembershipButton::show() {
 
   if(!enabled) {
     borderColor = DARKGRAY;
+    insetColor = WHITE;
     textColor = DARKGRAY;
   } else if(pressed) {
-    insetColor = borderColor;
-    textColor = WHITE;
+    insetColor = WHITE;
+    textColor = BLACK;
   }
 
   display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
