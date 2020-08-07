@@ -30,11 +30,14 @@ typedef void (*VoidCallback)();
 // Defined/Updated in Looper.cpp
 extern unsigned long current_loop_millis;
 
+#define TIME_SINCE(LAST, MS) (current_loop_millis > (LAST + MS))
+#define START_TIME_SINCE(LAST, MS) (LAST != 0 || TIME_SINCE(LAST, MS))
+
 // Wait for it to be at least MS milliseconds since LAST
-#define LOOP_WAIT_MS(LAST, MS) if(current_loop_millis < LAST + MS) {return;}
+#define LOOP_WAIT_MS(LAST, MS) if(!TIME_SINCE(LAST, MS)) {return;}
 
 // Wait for it to be at least MS milliseconds since LAST unless LAST == 0
-#define LOOP_START_WAIT_MS(LAST, MS) if(LAST != 0 && current_loop_millis < (LAST + MS)) {return;}
+#define LOOP_START_WAIT_MS(LAST, MS) if(!START_TIME_SINCE(LAST, MS)) {return;}
 
 #define SHIFT_POLY(ARR, VAL) \
   for (uint8_t i = 0; i < (sizeof(ARR) / sizeof(word)); i++) { \

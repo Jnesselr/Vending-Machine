@@ -24,6 +24,7 @@ class CoinChanger {
   public:
     static void loop();
 
+    static void dispense(uint32_t amount);
     static void dispense(uint8_t coinType, uint8_t coinCount);
     static uint16_t getValue(uint8_t coinType);
 
@@ -33,6 +34,7 @@ class CoinChanger {
     static CoinDepositedCallback onCoinDeposited;
     static VoidCallback onEscrowRequest;
     static VoidCallback onChangerPayoutBusy;
+    static VoidCallback onChangerPayoutStopped;
     static VoidCallback onNoCredit;
     static VoidCallback onDefectiveTubeSensor;
     static VoidCallback onDoubleArrival;
@@ -62,6 +64,9 @@ class CoinChanger {
 
     static uint8_t pollFailures;
     static bool devicePolled;
+    static bool currentlyDispensing;
+    static bool needUpdatedTubeStatus;
+    static unsigned long lastUpdateTubeStatus;
 
     // Setup
     static uint8_t featureLevel;

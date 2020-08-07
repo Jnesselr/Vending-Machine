@@ -16,6 +16,9 @@ RingBuffer<8, MDBCommand> CoinChanger::commandBuffer(emptyMDBCommand);
 uint8_t CoinChanger::pollFailures;
 CoinChangerState CoinChanger::state = CoinChangerState::UNKNOWN;
 bool CoinChanger::devicePolled = false;
+bool CoinChanger::currentlyDispensing = false;
+bool CoinChanger::needUpdatedTubeStatus = false;
+unsigned long CoinChanger::lastUpdateTubeStatus = 0;
 
 uint8_t CoinChanger::featureLevel = 0;
 uint16_t CoinChanger::countryCode = 0;
@@ -27,22 +30,23 @@ uint8_t CoinChanger::coinTypeCredit[16];
 uint16_t CoinChanger::tubeFullStatus = 0;
 uint8_t CoinChanger::tubeStatus[16];
 
-CoinChangerStateCallback CoinChanger::onStateChanged = NULL;
-CoinDispensedCallback CoinChanger::onCoinDispensed = NULL;
-CoinDepositedCallback CoinChanger::onCoinDeposited = NULL;
-VoidCallback CoinChanger::onEscrowRequest = NULL;
-VoidCallback CoinChanger::onChangerPayoutBusy = NULL;
-VoidCallback CoinChanger::onNoCredit = NULL;
-VoidCallback CoinChanger::onDefectiveTubeSensor = NULL;
-VoidCallback CoinChanger::onDoubleArrival = NULL;
-VoidCallback CoinChanger::onAcceptorUnplugged = NULL;
-VoidCallback CoinChanger::onTubeJam = NULL;
-VoidCallback CoinChanger::onROMChecksumError = NULL;
-VoidCallback CoinChanger::onCoinRoutingError = NULL;
-VoidCallback CoinChanger::onChangerBusy = NULL;
-VoidCallback CoinChanger::onJustReset = NULL;
-VoidCallback CoinChanger::onCoinJam = NULL;
-VoidCallback CoinChanger::onPossibleCreditedCoinRemoval = NULL;
+CoinChangerStateCallback CoinChanger::onStateChanged = nullptr;
+CoinDispensedCallback CoinChanger::onCoinDispensed = nullptr;
+CoinDepositedCallback CoinChanger::onCoinDeposited = nullptr;
+VoidCallback CoinChanger::onEscrowRequest = nullptr;
+VoidCallback CoinChanger::onChangerPayoutBusy = nullptr;
+VoidCallback CoinChanger::onChangerPayoutStopped = nullptr;
+VoidCallback CoinChanger::onNoCredit = nullptr;
+VoidCallback CoinChanger::onDefectiveTubeSensor = nullptr;
+VoidCallback CoinChanger::onDoubleArrival = nullptr;
+VoidCallback CoinChanger::onAcceptorUnplugged = nullptr;
+VoidCallback CoinChanger::onTubeJam = nullptr;
+VoidCallback CoinChanger::onROMChecksumError = nullptr;
+VoidCallback CoinChanger::onCoinRoutingError = nullptr;
+VoidCallback CoinChanger::onChangerBusy = nullptr;
+VoidCallback CoinChanger::onJustReset = nullptr;
+VoidCallback CoinChanger::onCoinJam = nullptr;
+VoidCallback CoinChanger::onPossibleCreditedCoinRemoval = nullptr;
 
 void CoinChanger::loop()
 {
@@ -66,13 +70,54 @@ void CoinChanger::loop()
 
   sendPoll();
 
+  // Force an update every five seconds
+  if(TIME_SINCE(lastUpdateTubeStatus, 5000)) {
+    lastUpdateTubeStatus = current_loop_millis;
+    needUpdatedTubeStatus = true;
+  }
+
+  if(needUpdatedTubeStatus) {
+    needUpdatedTubeStatus = false;
+    sendTubeStatus();
+  }
+
   if (!commandBuffer.isEmpty())
   {
     DEBUG("Running command")
     MDBCommand command = commandBuffer.pop();
-    command.print("COIN CMD");
+    // command.print("COIN CMD");
     command.run();
     DEBUG("Command run")
+  }
+}
+
+void CoinChanger::dispense(uint32_t amount) {
+  while(amount > 0) {
+    uint8_t maxCreditValue = 0;
+    uint8_t maxCreditIndex = 0;
+    for (uint8_t i = 0; i < 16; i++)
+    {
+      uint16_t value = coinTypeCredit[i] * coinScalingFactor;
+      if(amount > value &&
+        value > maxCreditValue &&
+        tubeStatus[i] > 0) {
+        maxCreditValue = value;
+        maxCreditIndex = i;
+      }
+    }
+
+    if(maxCreditValue == 0) {
+      // No more change left I guess
+      // TODO Prevent this from happening?
+      return;
+    }
+
+    uint8_t maxAvailable = tubeStatus[maxCreditIndex];
+    uint8_t needed = amount / maxCreditValue;
+    uint8_t toDispense = min(maxAvailable, needed);
+    CoinChanger::dispense(maxCreditIndex, toDispense);
+
+    amount -= toDispense * maxCreditValue;
   }
 }
 
@@ -105,6 +150,11 @@ void CoinChanger::sendPoll()
 
         if (mdbResult.data[0] == mdbResult.ACK)
         {
+          if(currentlyDispensing) {
+            currentlyDispensing = false;
+            needUpdatedTubeStatus = true;
+            CALLBACK(onChangerPayoutStopped)
+          }
           return;
         }
 
@@ -173,6 +223,7 @@ void CoinChanger::handlePollData(const MDBResult& mdbResult)
     }
     else if (data == 0x02)
     {
+      currentlyDispensing = true;
       // Changer Payout Busy
       CALLBACK(onChangerPayoutBusy)
     }
@@ -265,6 +316,8 @@ void CoinChanger::sendSetup()
       [](const MDBResult &mdbResult) {
         MDB::ack();
 
+        // mdbResult.print("COIN SETUP");
+
         featureLevel = mdbResult.data[0];
         countryCode = BYTE2WORD(mdbResult.data[1], mdbResult.data[2]);
         coinScalingFactor = mdbResult.data[3];
@@ -283,6 +336,7 @@ void CoinChanger::sendCoinTypeSetup()
       CMD_COIN_TYPE_SETUP, LENGTH(CMD_COIN_TYPE_SETUP),
       onTimeout,
       [](const MDBResult &mdbResult) {
+        needUpdatedTubeStatus = true;
         updateState(CoinChangerState::IDLE);
       });
 
@@ -296,6 +350,7 @@ void CoinChanger::sendTubeStatus()
       CMD_TUBE_STATUS, LENGTH(CMD_TUBE_STATUS),
       onTimeout,
       [](const MDBResult& mdbResult) {
+        // mdbResult.print("COIN TUBE STATUS");
         tubeFullStatus = BYTE2WORD(mdbResult.data[0], mdbResult.data[1]);
         MDB::copyAtMost16(mdbResult, 2, tubeStatus);
 
