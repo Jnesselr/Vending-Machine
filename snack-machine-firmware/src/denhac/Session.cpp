@@ -4,6 +4,7 @@
 #include "denhac/ProductManager.h"
 #include "denhac/SiteLink.h"
 #include "denhac/data/BridgeStatus.h"
+#include "mdb/devices/CoinChanger.h"
 #include "motors.h"
 
 unsigned long lastChangeMillis = 0;
@@ -136,6 +137,9 @@ void Session::onUpdateOrderSuccess(const Order& order) {
     // vended amounts
     if(order.status == OrderStatus::COMPLETED) {
       Serial.println("It was all vended!");
+      if(moneyInsertedInMachine > order.total) {
+        CoinChanger::dispense(moneyInsertedInMachine - order.total);
+      }
     }
   } else {
     // We did this update to verify the order was paid for
@@ -177,19 +181,26 @@ void Session::saveMoneyInsertedToOnlineCredit() {
     return;
   }
 
-  SiteLink::updateCreditByCard(cardNum, moneyInsertedInMachine, onUpdateCreditByCardError, onUpdateCreditByCardSuccess);
+  uploadCurrentOrder();
+}
+
+void Session::uploadCurrentOrder() {
+  // Only upload as much cash as is needed for the order
+  uint32_t cashToUpload = min(moneyInsertedInMachine, currentOrder.total);
+
+  SiteLink::updateOrder(
+      cardNum,
+      cashToUpload,
+      currentOrder,
+      onUpdateOrderError,
+      onUpdateOrderSuccess
+    );
 }
 
 void Session::vend() {
   if(currentOrder.status != OrderStatus::PROCESSING || currentOrder.orderId == 0) {
     Serial.println("Verifying order was paid for");
-    SiteLink::updateOrder(
-      Session::cardNum,
-      Session::moneyInsertedInMachine,
-      Session::currentOrder,
-      onUpdateOrderError,
-      onUpdateOrderSuccess
-    );
+    uploadCurrentOrder();
     return;
   }
 

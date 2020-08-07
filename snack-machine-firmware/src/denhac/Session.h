@@ -46,6 +46,7 @@ class Session {
     static void onUpdateOrderSuccess(const Order& order);
 
     static void saveMoneyInsertedToOnlineCredit();
+    static void uploadCurrentOrder();
 
     // Call vend on the next item
     // Returns false if nothing to vend
