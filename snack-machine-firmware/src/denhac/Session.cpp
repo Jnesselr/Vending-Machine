@@ -74,7 +74,7 @@ void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
 }
 
 void Session::cardScanned(uint32_t cardNum) {
-  if(cardNum != 0 && cardNum != Session::cardNum) {
+  if(Session::cardNum != 0 && Session::cardNum != cardNum) {
     Session::reset();
   }
 
@@ -129,6 +129,7 @@ void Session::onUpdateCreditByCardError(uint8_t statusCode) {
 void Session::onUpdateCreditByCardSuccess(uint32_t totalCredit, uint32_t diffCredit) {
   if(cardNum != 0) {
     Session::onlineCredit = totalCredit;
+    Session::moneyInsertedInMachine -= diffCredit;
 
     CALLBACK(creditAvailableCallback, totalCredit);
     CALLBACK(moneyAvailableCallback, getCurrentAvailableMoney())
@@ -192,7 +193,7 @@ void Session::saveMoneyInsertedToOnlineCredit() {
     return;
   }
 
-  // uploadCurrentOrder();
+  SiteLink::updateCreditByCard(cardNum, moneyInsertedInMachine, onUpdateCreditByCardError, onUpdateCreditByCardSuccess);
 }
 
 void Session::uploadCurrentOrder() {

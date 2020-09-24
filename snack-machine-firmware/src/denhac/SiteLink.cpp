@@ -75,7 +75,7 @@ void SiteLink::handleWaiting() {
       handshakeCount = 0;
     }
 
-    uint8_t byteRead = linkSerial->read();
+    linkSerial->read();
     bytesToRead--;
   }
 
