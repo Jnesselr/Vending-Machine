@@ -65,6 +65,9 @@ void Order::operator = (const Order& order) {
 }
 
 void Order::add(const Item& item) {
+  if(numItems == 8) {
+    return;
+  }
   this->items[numItems] = item;
   numItems++;
   recalculateTotal();
