@@ -3,6 +3,7 @@
 #include <Arduino.h>
 
 #include "denhac/DenhacBindings.h"
+#include "denhac/data/BridgeStatus.h"
 #include "denhac/ui/DenhacUI.h"
 #include "denhac/Session.h"
 #include "denhac/ProductManager.h"
@@ -21,6 +22,7 @@ void DenhacBindings::setup() {
   CoinChanger::onCoinDeposited = DenhacBindings::onCoinDepositedCallback;
 
   SiteLink::onStateChanged = DenhacBindings::onSiteLinkStateCallback;
+  SiteLink::statusCallback = DenhacBindings::onSiteLinkStatusCallback;
   SiteLink::productUpdatedCallback = ProductManager::productUpdated;
   SiteLink::productRemovedCallback = ProductManager::productRemoved;
 
@@ -83,6 +85,12 @@ void DenhacBindings::onSiteLinkStateCallback(
     if(newState == SiteLinkState::IDLE) {
       DenhacUI::bootWindow.setSiteLinkIdle(true);
     }
+}
+
+void DenhacBindings::onSiteLinkStatusCallback(uint8_t statusCode) {
+  if(statusCode == BridgeStatus::WIFI_CONNECTED) {
+    DenhacUI::bootWindow.setWifiOnline(true);
+  }
 }
 
 #endif

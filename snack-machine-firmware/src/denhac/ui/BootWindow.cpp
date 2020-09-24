@@ -44,22 +44,22 @@ void BootWindow::show() {
   billValidatorY = 242 + (WindowManager::getHeight() - 242 - 210) / 2;
   coinChangerY = billValidatorY + 60;
   siteLinkY = coinChangerY + 60;
-  motorsY = siteLinkY + 60;
+  wifiY = siteLinkY + 60;
+  motorsY = wifiY + 60;
 
   display->gfx_MoveTo(102, billValidatorY);
-  // Width = 333, Height = 30
   display->putstr((char*) "Bill Validator");
 
   display->gfx_MoveTo(102, coinChangerY);
-  // Width = 285, Height = 30
   display->putstr((char*) "Coin Changer");
 
   display->gfx_MoveTo(102, siteLinkY);
-  // Width = 213 Height = 30
   display->putstr((char*) "Site Link");
 
+  display->gfx_MoveTo(102, wifiY);
+  display->putstr((char*) "WiFi Connected");
+
   display->gfx_MoveTo(102, motorsY);
-  // Width = 141 Height = 30
   display->putstr((char*) "Motors");
 }
 
@@ -100,6 +100,17 @@ void BootWindow::loop() {
     }
   }
 
+  if(redrawWifi) {
+    redrawWifi = false;
+    color = wifiOnline ? GREEN : RED;
+    display->gfx_CircleFilled(66, wifiY + 15, size, color);
+    if(wifiOnline) {
+      drawCheckAt(46, wifiY - 5);
+    } else {
+      drawXAt(46, wifiY - 5);
+    }
+  }
+
   if(redrawMotors) {
     redrawMotors = false;
     color = motorsIdle ? GREEN : RED;
@@ -114,6 +125,7 @@ void BootWindow::loop() {
   if(billValidatorIdle &&
     coinChangerIdle &&
     siteLinkIdle &&
+    wifiOnline &&
     motorsIdle) {
       LOOP_WAIT_MS(lastChangeMillis, 3000);
       WindowManager::show(DenhacUI::mainWindow);
@@ -136,20 +148,28 @@ void BootWindow::setCoinChangerIdle(bool isIdle) {
   coinChangerIdle = isIdle;
 }
 
-void BootWindow::setMotorsIdle(bool isIdle) {
-  if(isIdle != motorsIdle) {
-    redrawMotors = true;
-    lastChangeMillis = current_loop_millis;
-  }
-  motorsIdle = isIdle;
-}
-
 void BootWindow::setSiteLinkIdle(bool isIdle) {
   if(isIdle != siteLinkIdle) {
     redrawSiteLink = true;
     lastChangeMillis = current_loop_millis;
   }
   siteLinkIdle = isIdle;
+}
+
+void BootWindow::setWifiOnline(bool online) {
+  if(online != wifiOnline) {
+    redrawWifi = true;
+    lastChangeMillis = current_loop_millis;
+  }
+  wifiOnline = online;
+}
+
+void BootWindow::setMotorsIdle(bool isIdle) {
+  if(isIdle != motorsIdle) {
+    redrawMotors = true;
+    lastChangeMillis = current_loop_millis;
+  }
+  motorsIdle = isIdle;
 }
 
 void BootWindow::drawXAt(uint16_t x, uint16_t y) {

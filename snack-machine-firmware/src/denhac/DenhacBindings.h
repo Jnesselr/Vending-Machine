@@ -27,4 +27,5 @@ class DenhacBindings {
 
     // SiteLink
     static void onSiteLinkStateCallback(SiteLinkState oldState, SiteLinkState newState);
+    static void onSiteLinkStatusCallback(uint8_t statusCode);
 };
