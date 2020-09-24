@@ -188,6 +188,7 @@ class SiteLink {
     static HardwareSerial* linkSerial;
     static uint8_t handshakeCount;
     static uint8_t garbageLoopCount;
+    static unsigned long resetTime;
     static bool safeToSendCommand;
     static bool firstProductFetch;
     static bool hasProduct[64];

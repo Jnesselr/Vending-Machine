@@ -21,6 +21,7 @@ OutputPort<PORT_H, 6, 1> SiteLink::huzzahResetPin;
 HardwareSerial* SiteLink::linkSerial = &Serial1;
 uint8_t SiteLink::handshakeCount = 0;
 uint8_t SiteLink::garbageLoopCount = 0;
+unsigned long SiteLink::resetTime = 0;
 bool SiteLink::safeToSendCommand = false;
 bool SiteLink::firstProductFetch = false;
 bool SiteLink::hasProduct[64];
@@ -37,6 +38,7 @@ void SiteLink::setup() {
 
 void SiteLink::loop() {
   if(state == SiteLinkState::UNKNOWN) {
+    LOOP_START_WAIT_MS(resetTime, 1000);
     // We might have just powered on or forced a reset
     // Bring the reset pin low to be safe
     huzzahResetPin.write(0x0);
@@ -73,7 +75,7 @@ void SiteLink::handleWaiting() {
       handshakeCount = 0;
     }
 
-    linkSerial->read();
+    uint8_t byteRead = linkSerial->read();
     bytesToRead--;
   }
 
@@ -84,6 +86,7 @@ void SiteLink::handleWaiting() {
 
   if(garbageLoopCount > 20) {
     huzzahResetPin.write(0xFF);
+    resetTime = current_loop_millis;
     updateState(SiteLinkState::UNKNOWN);
     garbageLoopCount = 0;
   }

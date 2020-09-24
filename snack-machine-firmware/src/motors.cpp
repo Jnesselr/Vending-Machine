@@ -104,6 +104,7 @@ void Motors::handleInitialScan() {
     updateMotorState(MotorState::SCAN_SELECTED);
     return;
   } else if(motorState == MotorState::SCAN_SELECTED) {
+    LOOP_WAIT_MS(lastStateChangeTime, 100);
     // Serial.print("Motor (");
     // Serial.print(selectedRow);
     // Serial.print(", ");
