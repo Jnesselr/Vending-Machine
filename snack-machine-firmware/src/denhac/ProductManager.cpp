@@ -34,7 +34,8 @@ bool ProductManager::isValid(uint8_t row) {
 bool ProductManager::isValid(uint8_t row, uint8_t col) {
   uint16_t address = 62 * (8 * row + col);
 
-  return EEPROM.read(address) == 0xAA;
+  return EEPROM.read(address) == 0xAA &&
+    EEPROM.read(address + 60) > 0;
 }
 
 Product ProductManager::get(uint8_t row, uint8_t col) {

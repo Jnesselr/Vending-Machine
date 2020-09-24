@@ -75,8 +75,10 @@ void Order::add(const Product& product) {
   {
     Item* item = &(items[i]);
     if(item->productId == product.id) {
-      (item->quantity)++; // TODO Handle increasing past quantity limit
-      recalculateTotal();
+      if(item->quantity + 1 <= product.stockAvailable) {
+        (item->quantity)++;
+        recalculateTotal();
+      }
       return;
     }
   }
