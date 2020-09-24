@@ -74,6 +74,10 @@ void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
 }
 
 void Session::cardScanned(uint32_t cardNum) {
+  if(cardNum != 0 && cardNum != Session::cardNum) {
+    Session::reset();
+  }
+
   Session::cardNum = cardNum;
   CALLBACK(onCustomerLookupStarted);
 
