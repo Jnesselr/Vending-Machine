@@ -150,7 +150,8 @@ void Session::onUpdateOrderSuccess(const Order& order) {
     if(order.status == OrderStatus::COMPLETED) {
       Serial.println("It was all vended!");
       if(moneyInsertedInMachine > order.total) {
-        CoinChanger::dispense(moneyInsertedInMachine - order.total);
+        moneyInsertedInMachine -= order.total;
+        Session::reset();
       }
     }
   } else {
@@ -163,6 +164,7 @@ void Session::onUpdateOrderSuccess(const Order& order) {
     } else {
       // TODO Uh oh something went wrong
       Serial.println("It wasn't paid for?");
+      Session::reset();
     }
   }
 
@@ -246,13 +248,7 @@ void Session::itemVended(uint8_t row, uint8_t col) {
 
   if(!anyVended) {
     Serial.println("Vended them all woot!");
-    SiteLink::updateOrder(
-      Session::cardNum,
-      Session::moneyInsertedInMachine,
-      Session::currentOrder,
-      onUpdateOrderError,
-      onUpdateOrderSuccess
-    );
+    Session::uploadCurrentOrder();
   }
 }
 

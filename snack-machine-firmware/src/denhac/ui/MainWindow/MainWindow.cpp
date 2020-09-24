@@ -479,6 +479,7 @@ void MainWindow::cancelOrder(MainWindow* mainWindow) {
 
 void MainWindow::vend(MainWindow* mainWindow) {
   mainWindow->vendButton.disable();
+  mainWindow->cancelOrderButton.disable();
 
   Session::vend();
 }
@@ -538,7 +539,7 @@ void MainWindow::sessionReset(MainWindow* mainWindow) {
 }
 
 void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {
-  if(Session::getNumOrders() == 1) {
+  if(Session::getNumOrders() > 0) {
     Session::setCurrentOrderNum(0);
   }
 
