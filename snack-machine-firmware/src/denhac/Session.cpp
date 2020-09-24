@@ -26,7 +26,14 @@ VoidCallback Session::onCurrentOrderUpdated = nullptr;
 
 void Session::reset() {
   active = false;
-  saveMoneyInsertedToOnlineCredit();
+  if(moneyInsertedInMachine > 0) {
+    if(cardNum == 0) {
+      CoinChanger::dispense(moneyInsertedInMachine);
+    } else {
+      saveMoneyInsertedToOnlineCredit();
+    }
+  }
+
   cardNum = 0;
   currentOrder.reset();
   moneyInsertedInMachine = 0;
@@ -181,7 +188,7 @@ void Session::saveMoneyInsertedToOnlineCredit() {
     return;
   }
 
-  uploadCurrentOrder();
+  // uploadCurrentOrder();
 }
 
 void Session::uploadCurrentOrder() {

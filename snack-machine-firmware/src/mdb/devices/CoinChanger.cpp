@@ -98,7 +98,7 @@ void CoinChanger::dispense(uint32_t amount) {
     for (uint8_t i = 0; i < 16; i++)
     {
       uint16_t value = coinTypeCredit[i] * coinScalingFactor;
-      if(amount > value &&
+      if(amount >= value &&
         value > maxCreditValue &&
         tubeStatus[i] > 0) {
         maxCreditValue = value;
