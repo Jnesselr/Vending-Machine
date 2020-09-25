@@ -480,6 +480,7 @@ void MainWindow::cancelOrder(MainWindow* mainWindow) {
 void MainWindow::vend(MainWindow* mainWindow) {
   mainWindow->vendButton.disable();
   mainWindow->cancelOrderButton.disable();
+  mainWindow->addItemButton.disable();
 
   Session::vend();
 }
@@ -519,6 +520,7 @@ void MainWindow::addItemScreen(MainWindow* mainWindow) {
 void MainWindow::customerLookupStarted(MainWindow* mainWindow) {
   mainWindow->membershipButton.setState(MembershipButtonState::PLEASE_WAIT);
   mainWindow->membershipButton.disable();
+  mainWindow->cancelOrderButton.enable();
   mainWindow->setState(MainWindowState::VEND_SCREEN);
 }
 

@@ -141,7 +141,9 @@ void Session::onUpdateOrderError(uint8_t statusCode) {
   Serial.println("Update went wrong!");
   Serial.print("Status: ");
   Serial.println(statusCode);
+  Session::reset();
 }
+
 void Session::onUpdateOrderSuccess(const Order& order) {
   if(currentOrder.status == OrderStatus::PROCESSING) {
     Serial.println("Order was already processing");
@@ -151,8 +153,9 @@ void Session::onUpdateOrderSuccess(const Order& order) {
       Serial.println("It was all vended!");
       if(moneyInsertedInMachine > order.total) {
         moneyInsertedInMachine -= order.total;
-        Session::reset();
       }
+
+      Session::reset();
     }
   } else {
     // We did this update to verify the order was paid for
