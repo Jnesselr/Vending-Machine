@@ -379,7 +379,7 @@ void MainWindow::drawOrder() {
   display->txt_Height(2);
   display->txt_FGcolour(BLACK);
   display->txt_BGcolour(WHITESMOKE);
-  display->gfx_RectangleFilled(0, 24, screenWidth - 1, 300, WHITESMOKE);
+  display->gfx_RectangleFilled(0, 24, screenWidth - 1, gridTop - 1, WHITESMOKE);
 
   Order* order = Session::getCurrentOrder();
 

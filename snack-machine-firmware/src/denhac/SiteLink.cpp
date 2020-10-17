@@ -57,6 +57,15 @@ void SiteLink::loop() {
   }
 }
 
+void SiteLink::reset() {
+  huzzahResetPin.write(0xFF);
+  resetTime = current_loop_millis;
+  updateState(SiteLinkState::UNKNOWN);
+  commandBuffer.clear();
+  garbageLoopCount = 0;
+  lastCommandRunMillis = current_loop_millis;
+}
+
 void SiteLink::handleWaiting() {
   // Don't read more than X bytes in one go
   int bytesToRead = min(linkSerial->available(), 100);
@@ -85,10 +94,7 @@ void SiteLink::handleWaiting() {
   garbageLoopCount++;
 
   if(garbageLoopCount > 20) {
-    huzzahResetPin.write(0xFF);
-    resetTime = current_loop_millis;
-    updateState(SiteLinkState::UNKNOWN);
-    garbageLoopCount = 0;
+    reset();
   }
 }
 
@@ -400,6 +406,11 @@ void SiteLink::handleCreditUpdateByCard() {
 
 void SiteLink::maybeSendCommand() {
   if(!safeToSendCommand) {
+    // If it's been a minute since it was safe to run a command,
+    // We should just assume we need to run a reset
+    LOOP_WAIT_MS(lastCommandRunMillis, 60000)
+
+    reset();
     return;
   }
 

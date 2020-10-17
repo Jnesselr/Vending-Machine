@@ -181,6 +181,7 @@ class SiteLink {
     static Item readItem();
 
     static void updateState(SiteLinkState state);
+    static void reset();
 
     static SiteLinkState state;
 
