@@ -357,7 +357,7 @@ void MainWindow::verifyGridValidity() {
   {
     CellButton* button = rowButton(i);
     bool isEnabled = button->isEnabled();
-    bool shouldBeEnabled = Motors::rowExists(i) && ProductManager::isValid(i);
+    bool shouldBeEnabled = Motors::rowExists(i) && ProductManager::hasStockAvailable(i);
 
     if(isEnabled != shouldBeEnabled) {
       if(state == MainWindowState::NUMBERS_VISIBLE && selectedRow == i) {
@@ -375,7 +375,7 @@ void MainWindow::verifyGridValidity() {
   for (uint8_t i = 0; i < 8; i++)
   {
     CellButton* button = colButton(i);
-    bool shouldBeEnabled = Motors::exists(selectedRow, i) && ProductManager::isValid(selectedRow, i);
+    bool shouldBeEnabled = Motors::exists(selectedRow, i) && ProductManager::hasStockAvailable(selectedRow, i);
     button->setEnabled(shouldBeEnabled);
   }
 }

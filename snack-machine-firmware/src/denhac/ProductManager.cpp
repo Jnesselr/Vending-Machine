@@ -20,6 +20,8 @@
  * To find a particular product, it's start address is 62 * (8 * row + col)
  */
 
+#define START_ADDRESS(row, col) 62 * (8 * row + col)
+
 bool ProductManager::isValid(uint8_t row) {
   return isValid(row, 0) ||
         isValid(row, 1) ||
@@ -32,14 +34,29 @@ bool ProductManager::isValid(uint8_t row) {
 }
 
 bool ProductManager::isValid(uint8_t row, uint8_t col) {
-  uint16_t address = 62 * (8 * row + col);
+  uint16_t address = START_ADDRESS(row, col);
 
-  return EEPROM.read(address) == 0xAA &&
-    EEPROM.read(address + 60) > 0;
+  return EEPROM.read(address) == 0xAA;
+}
+
+bool ProductManager::hasStockAvailable(uint8_t row) {
+    return hasStockAvailable(row, 0) ||
+        hasStockAvailable(row, 1) ||
+        hasStockAvailable(row, 2) ||
+        hasStockAvailable(row, 3) ||
+        hasStockAvailable(row, 4) ||
+        hasStockAvailable(row, 5) ||
+        hasStockAvailable(row, 6) ||
+        hasStockAvailable(row, 7);
+}
+
+bool ProductManager::hasStockAvailable(uint8_t row, uint8_t col) {
+  uint16_t address = START_ADDRESS(row, col) + 60; // Stock available
+  return isValid(row, col) && EEPROM.read(address) > 0;
 }
 
 Product ProductManager::get(uint8_t row, uint8_t col) {
-  uint16_t startAddress = 62 * (8 * row + col);
+  uint16_t startAddress = START_ADDRESS(row, col);
 
   Product product;
 
@@ -94,7 +111,7 @@ Product ProductManager::get(uint32_t productId) {
 }
 
 void ProductManager::productUpdated(const Product& product) {
-  uint16_t startAddress = 62 * (8 * product.row + product.col);
+  uint16_t startAddress = START_ADDRESS(product.row, product.col);
 
   EEPROM.update(startAddress, 0xAA);
   writeLong(startAddress + 1, product.id);
@@ -105,7 +122,7 @@ void ProductManager::productUpdated(const Product& product) {
 }
 
 void ProductManager::productRemoved(uint8_t row, uint8_t col) {
-  uint16_t address = 62 * (8 * row + col);
+  uint16_t address = START_ADDRESS(row, col);
 
   // Invalidate the flag but don't overwite anything else to save
   // on EEPROM writes
@@ -127,7 +144,7 @@ void ProductManager::writeLong(uint16_t address, uint32_t value) {
  * match the reduced value so no EEPROM write needs to happen then.
  */
 void ProductManager::reduceStock(uint8_t row, uint8_t col) {
-  uint16_t address = 62 * (8 * row + col) + 61;
+  uint16_t address = START_ADDRESS(row, col) + 61;
 
   uint8_t stockInMachine = EEPROM.read(address);
   EEPROM.write(address, stockInMachine - 1);
