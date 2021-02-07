@@ -7,6 +7,7 @@ Item::Item() {
   productId = 0;
   quantity = 0;
   vended = 0;
+  skip = false;
 }
 
 Item::Item(uint32_t itemId, uint32_t productId, uint8_t quantity, uint8_t vended) {
@@ -14,6 +15,7 @@ Item::Item(uint32_t itemId, uint32_t productId, uint8_t quantity, uint8_t vended
   this->productId = productId;
   this->quantity = quantity;
   this->vended = vended;
+  this->skip = false;
 }
 
 void Item::reset() {
@@ -21,6 +23,7 @@ void Item::reset() {
   productId = 0;
   quantity = 0;
   vended = 0;
+  skip = false;
 }
 
 Order::Order() {
@@ -68,12 +71,17 @@ void Order::add(const Item& item) {
   if(numItems == 8) {
     return;
   }
+
   this->items[numItems] = item;
   numItems++;
   recalculateTotal();
 }
 
 void Order::add(const Product& product) {
+  if(! product.valid) {
+    return;
+  }
+
   for (uint8_t i = 0; i < numItems; i++)
   {
     Item* item = &(items[i]);

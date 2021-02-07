@@ -10,6 +10,7 @@ Product::Product() {
   stockInMachine = 0;
   row = 0;
   col = 0;
+  valid = true;
 }
 
 Product::Product(
@@ -27,6 +28,7 @@ Product::Product(
   this->stockInMachine = stockInMachine;
   this->row = row;
   this->col = col;
+  this->valid = true;
 
   memcpy(this->name, name, sizeof(this->name));
 }
@@ -38,6 +40,7 @@ Product::Product(const Product& product) {
   this->stockInMachine = product.stockInMachine;
   this->row = product.row;
   this->col = product.col;
+  this->valid = product.valid;
 
   memcpy(this->name, product.name, sizeof(product.name));
 }
@@ -49,6 +52,7 @@ void Product::operator=(const Product& product) {
   this->stockInMachine = product.stockInMachine;
   this->row = product.row;
   this->col = product.col;
+  this->valid = product.valid;
 
   memcpy(this->name, product.name, sizeof(product.name));
 }

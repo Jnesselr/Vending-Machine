@@ -15,6 +15,7 @@ class Item {
     uint32_t productId;
     uint8_t quantity;
     uint8_t vended;
+    bool skip;
 };
 
 class Order {

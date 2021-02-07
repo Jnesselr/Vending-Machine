@@ -25,4 +25,5 @@ class Product {
     uint8_t stockInMachine;
     uint8_t row;
     uint8_t col;
+    bool valid;
 };

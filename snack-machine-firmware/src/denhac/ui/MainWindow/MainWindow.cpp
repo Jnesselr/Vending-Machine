@@ -402,9 +402,11 @@ void MainWindow::drawOrder() {
     display->txt_MoveCursor(2 * i + 1, 0);
     Item item = order->getItem(i);
     Product product = ProductManager::get(item.productId);
-    display->print(product.name);
-    display->print(" => ");
-    display->print(item.quantity);
+    if(product.valid) {
+      display->print(product.name);
+      display->print(" => ");
+      display->print(item.quantity);
+    }
   }
 }
 

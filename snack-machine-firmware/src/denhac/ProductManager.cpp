@@ -41,8 +41,24 @@ bool ProductManager::isValid(uint8_t row, uint8_t col) {
 Product ProductManager::get(uint8_t row, uint8_t col) {
   uint16_t startAddress = 62 * (8 * row + col);
 
-  // TODO Handle invalid product
   Product product;
+
+  if(row < 0 || row > 8 || col < 0 || col > 8) {
+    Serial.println("row or col is out of bounds");
+    Serial.print(row);
+    Serial.print(" ");
+    Serial.println(col);
+
+    product.valid = false;
+    return product;
+  }
+
+  if(!isValid(row, col)) {
+    Serial.println("Product isn't valid!");
+
+    product.valid = false;
+    return product;
+  }
 
   product.id = readLong(startAddress + 1);
   readBytes(startAddress + 5, (uint8_t*) product.name, 51);
@@ -51,6 +67,7 @@ Product ProductManager::get(uint8_t row, uint8_t col) {
   product.stockInMachine = EEPROM.read(startAddress + 61);
   product.row = row;
   product.col = col;
+  product.valid = true;
 
   return product;
 }
@@ -71,8 +88,9 @@ Product ProductManager::get(uint32_t productId) {
     }
   }
 
-  // TODO Handle invalid product
-  return Product();
+  product.valid = false;
+
+  return product;
 }
 
 void ProductManager::productUpdated(const Product& product) {

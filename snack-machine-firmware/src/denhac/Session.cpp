@@ -68,7 +68,12 @@ void Session::setCurrentOrderNum(uint8_t orderNum) {
 }
 
 void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
-  currentOrder.add(ProductManager::get(row, col));
+  Product product = ProductManager::get(row, col);
+  if (! product.valid) {
+    Serial.println("Cannot add invalid product to order!");
+  } else {
+    currentOrder.add(product);
+  }
 
   CALLBACK(onCurrentOrderUpdated);
 }
@@ -259,7 +264,7 @@ bool Session::vendNextItem() {
   for (uint8_t i = 0; i < currentOrder.getNumItems(); i++)
   {
     Item& item = currentOrder.getItem(i);
-    if(item.quantity > item.vended) {
+    if(item.quantity > item.vended && !item.skip) {
       Serial.println("Found an item to vend!");
       Serial.print("Item ID: ");
       Serial.println(item.itemId);
@@ -271,6 +276,13 @@ bool Session::vendNextItem() {
       Serial.println(item.vended);
 
       Product product = ProductManager::get(item.productId);
+
+      // If we can't find this item, just skip it and pretend we vended something.
+      if (! product.valid) {
+        item.skip = true;
+        return true;
+      }
+
       Serial.print("Row: ");
       Serial.println(product.row);
       Serial.print("Col: ");
