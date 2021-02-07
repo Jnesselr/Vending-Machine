@@ -264,6 +264,12 @@ void MainWindow::setupMemberVariables() {
 }
 
 void MainWindow::loop() {
+  // This avoids the unsigned long rollover bug
+  if(current_loop_millis > 4000000000ul) {
+    // TOOD Check if session is active
+    while(true); // Force a reset with watchdog
+  }
+
   if(current_loop_millis > lastGridValidityScan + 200) {
     verifyGridValidity();
   }

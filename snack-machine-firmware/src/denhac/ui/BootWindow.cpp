@@ -64,6 +64,11 @@ void BootWindow::show() {
 }
 
 void BootWindow::loop() {
+  // If it's a minute and we're not done with this, hard reset
+  if(current_loop_millis > 60 * 1000) {
+    while(true); // Force a reset with watchdog
+  }
+
   uint8_t size = 20;
   word color = GREEN;
 
