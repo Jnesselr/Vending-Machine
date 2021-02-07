@@ -1,0 +1,42 @@
+### Module positions - created on Wednesday, December 02, 2020 at 07:30:48 PM ###
+### Printed by Pcbnew version kicad (5.1.2-1)-1
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val                      Package                                           PosX       PosY       Rot  Side
+C1        2.2uF_35V                C_0805_2012Metric_Pad1.15x1.40mm_HandSolder   120.2184   -90.2920    0.0000  top
+C5        22pF                     C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   132.1564   -93.5940   90.0000  top
+C9        100nF                    C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   148.2148   -54.5162  180.0000  top
+C10       100nF                    C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   151.2570   -97.7138    0.0000  top
+C11       100nF                    C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   128.7528   -97.7596  270.0000  top
+C12       100nF                    C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   141.5544   -92.3748  180.0000  top
+C13       100nF                    C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   150.1140   -94.5896   90.0000  top
+C14       100nF                    C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   151.5364  -107.5000    0.0000  top
+C15       100nF                    C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   139.9032  -115.3414  270.0000  top
+C16       1uF                      C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   126.0604   -93.5940  180.0000  top
+C18       1uF                      C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   148.2090   -56.1848  180.0000  top
+C20       1uF                      C_0603_1608Metric_Pad1.05x0.95mm_HandSolder   152.7812   -58.7452  180.0000  top
+D1        Q_TRIAC_A1A2G            SOT-223-3_TabPin2                             116.3310  -130.0816  270.0000  top
+D3        Q_TRIAC_A1A2G            SOT-223-3_TabPin2                             126.3310  -130.0816  270.0000  top
+D9        Q_TRIAC_A1A2G            SOT-223-3_TabPin2                             136.3310  -130.0816  270.0000  top
+D10       Q_TRIAC_A1A2G            SOT-223-3_TabPin2                             146.3310  -130.0816  270.0000  top
+J4        V2_Display_Ribbon_Cable  FPC30                                         170.8150   -85.0900    0.0000  top
+Q1        P-CH_30V_3.8A            SOT-23_Handsoldering_Lite                     163.6014  -127.2794    0.0000  top
+Q3        MMBT3904                 SOT-23_Handsoldering_Lite                     161.5440   -80.8990    0.0000  top
+R1        1k                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   159.6740  -123.4920   90.0000  top
+R2        1k                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   116.3310  -122.0816  180.0000  top
+R3        10k                      R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   161.4170  -113.6650    0.0000  top
+R4        10k                      R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   164.0560  -123.4920   90.0000  top
+R5        1k                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   162.0560  -123.4920   90.0000  top
+R6        1M                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   128.1432  -101.3664   90.0000  top
+R8        1k                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   126.3310  -122.0816  180.0000  top
+R9        1k                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   136.3310  -122.0816  180.0000  top
+R10       0R                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   157.6740  -123.4920   90.0000  top
+R13       0R                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   161.2900   -88.9000    0.0000  top
+R14       0R                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   161.2760   -90.6780    0.0000  top
+R17       1k                       R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   146.3310  -122.0816  180.0000  top
+R29       4.7k                     R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   160.2992   -85.3898   90.0000  top
+R30       4.7k                     R_0603_1608Metric_Pad1.05x0.95mm_HandSolder   162.2296   -85.4406  270.0000  top
+SW1       SW_SPST                  SW_SPST_FSMSM                                 113.9192   -44.6736    0.0000  top
+U3        ATmega2560-16AU          TQFP-100_14x14mm_P0.5mm                       140.3860  -103.3476  270.0000  top
+Y1        16MHz                    Resonator_SMD_ECS-CR2-16.00-B-TR              124.8156  -101.3460  270.0000  top
+## End
