@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 5
+Sheet 2 4
 Title ""
 Date ""
 Rev ""
@@ -125,8 +125,6 @@ Wire Wire Line
 	3550 6050 3550 6000
 Wire Wire Line
 	3550 6450 3550 6550
-Text HLabel 2350 6250 0    50   Input ~ 0
-RESET_DISPLAY
 Wire Wire Line
 	2350 6250 2750 6250
 Connection ~ 2750 6250
@@ -245,12 +243,16 @@ F 3 "" H 4150 4100 50  0001 C CNN
 	1    4150 4100
 	0    -1   -1   0   
 $EndComp
-Text HLabel 4250 3800 0    50   Input ~ 0
+Text GLabel 2350 6250 0    50   Input ~ 0
+DISPLAY_RESET
+Text Notes 1750 5850 0    50   ~ 0
+Check: Display reset is now 3.3V,\nwill this still work on the N-channel mosfet?
+Text GLabel 4250 3800 0    50   Input ~ 0
 DISPLAY_RX
-Text HLabel 4250 3900 0    50   Output ~ 0
+Text GLabel 5150 5700 0    50   Input ~ 0
+DISPLAY_RX
+Text GLabel 5150 5600 0    50   Input ~ 0
 DISPLAY_TX
-Text HLabel 5150 5700 0    50   Input ~ 0
-DISPLAY_RX
-Text HLabel 5150 5600 0    50   Output ~ 0
+Text GLabel 4250 3900 0    50   Input ~ 0
 DISPLAY_TX
 $EndSCHEMATC

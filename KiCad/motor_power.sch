@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr B 17000 11000
 encoding utf-8
-Sheet 2 5
+Sheet 3 4
 Title ""
 Date ""
 Rev ""
@@ -28,38 +28,6 @@ F 6 "34" H 5150 1750 50  0001 C CNN "Bin"
 	1    5150 1750
 	1    0    0    -1  
 $EndComp
-Text HLabel 4750 1450 0    50   Input ~ 0
-row_a_ctrl
-Text HLabel 4750 1550 0    50   Input ~ 0
-row_b_ctrl
-Text HLabel 4750 1650 0    50   Input ~ 0
-row_c_ctrl
-Text HLabel 4750 1750 0    50   Input ~ 0
-row_d_ctrl
-Text HLabel 4750 1850 0    50   Input ~ 0
-row_e_ctrl
-Text HLabel 4750 1950 0    50   Input ~ 0
-row_f_ctrl
-Text HLabel 4750 2050 0    50   Input ~ 0
-row_g_ctrl
-Text HLabel 4750 2150 0    50   Input ~ 0
-row_h_ctrl
-Text HLabel 5550 1450 2    50   Output ~ 0
-row_a_motor
-Text HLabel 5550 1550 2    50   Output ~ 0
-row_b_motor
-Text HLabel 5550 1650 2    50   Output ~ 0
-row_c_motor
-Text HLabel 5550 1750 2    50   Output ~ 0
-row_d_motor
-Text HLabel 5550 1850 2    50   Output ~ 0
-row_e_motor
-Text HLabel 5550 1950 2    50   Output ~ 0
-row_f_motor
-Text HLabel 5550 2050 2    50   Output ~ 0
-row_g_motor
-Text HLabel 5550 2150 2    50   Output ~ 0
-row_h_motor
 $Comp
 L power:GND #PWR0111
 U 1 1 5DBB77A2
@@ -98,10 +66,6 @@ F 3 "" H 3700 950 50  0001 C CNN
 	1    3700 950 
 	1    0    0    -1  
 $EndComp
-Wire Notes Line
-	6150 450  6150 2850
-Wire Notes Line
-	6150 2850 450  2850
 $Comp
 L Device:Q_TRIAC_A1A2G D1
 U 1 1 5DBD7FE7
@@ -127,28 +91,22 @@ F 3 "" H 1750 3250 50  0001 C CNN
 	1    1750 3250
 	1    0    0    -1  
 $EndComp
-Text HLabel 2500 2950 2    50   Output ~ 0
-col_1_motor
 Wire Wire Line
 	2500 2950 1750 2950
 $Comp
 L Device:R R2
 U 1 1 5DBDA986
-P 1200 3200
-F 0 "R2" V 1407 3200 50  0000 C CNN
-F 1 "1k" V 1316 3200 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1130 3200 50  0001 C CNN
-F 3 "~" H 1200 3200 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 1200 3200 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 1200 3200 50  0001 C CNN "Manufacturer"
-F 6 "1" V 1200 3200 50  0001 C CNN "Bin"
-	1    1200 3200
+P 1350 3200
+F 0 "R2" V 1557 3200 50  0000 C CNN
+F 1 "1k" V 1466 3200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1280 3200 50  0001 C CNN
+F 3 "~" H 1350 3200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1350 3200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1350 3200 50  0001 C CNN "Manufacturer"
+F 6 "1" V 1350 3200 50  0001 C CNN "Bin"
+	1    1350 3200
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	1350 3200 1600 3200
-Text HLabel 1050 3200 0    50   Input ~ 0
-col_1_ctrl
 $Comp
 L Device:Q_TRIAC_A1A2G D3
 U 1 1 5DBDFB59
@@ -174,28 +132,22 @@ F 3 "" H 1750 3900 50  0001 C CNN
 	1    1750 3900
 	1    0    0    -1  
 $EndComp
-Text HLabel 2500 3600 2    50   Output ~ 0
-col_3_motor
 Wire Wire Line
 	2500 3600 1750 3600
 $Comp
 L Device:R R8
 U 1 1 5DBDFB67
-P 1200 3850
-F 0 "R8" V 1407 3850 50  0000 C CNN
-F 1 "1k" V 1316 3850 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1130 3850 50  0001 C CNN
-F 3 "~" H 1200 3850 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 1200 3850 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 1200 3850 50  0001 C CNN "Manufacturer"
-F 6 "1" V 1200 3850 50  0001 C CNN "Bin"
-	1    1200 3850
+P 1350 3850
+F 0 "R8" V 1557 3850 50  0000 C CNN
+F 1 "1k" V 1466 3850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1280 3850 50  0001 C CNN
+F 3 "~" H 1350 3850 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1350 3850 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1350 3850 50  0001 C CNN "Manufacturer"
+F 6 "1" V 1350 3850 50  0001 C CNN "Bin"
+	1    1350 3850
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	1350 3850 1600 3850
-Text HLabel 1050 3850 0    50   Input ~ 0
-col_3_ctrl
 $Comp
 L Device:Q_TRIAC_A1A2G D9
 U 1 1 5DBE1AE3
@@ -221,28 +173,22 @@ F 3 "" H 1750 4550 50  0001 C CNN
 	1    1750 4550
 	1    0    0    -1  
 $EndComp
-Text HLabel 2500 4250 2    50   Output ~ 0
-col_5_motor
 Wire Wire Line
 	2500 4250 1750 4250
 $Comp
 L Device:R R9
 U 1 1 5DBE1AF1
-P 1200 4500
-F 0 "R9" V 1407 4500 50  0000 C CNN
-F 1 "1k" V 1316 4500 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1130 4500 50  0001 C CNN
-F 3 "~" H 1200 4500 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 1200 4500 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 1200 4500 50  0001 C CNN "Manufacturer"
-F 6 "1" V 1200 4500 50  0001 C CNN "Bin"
-	1    1200 4500
+P 1350 4500
+F 0 "R9" V 1557 4500 50  0000 C CNN
+F 1 "1k" V 1466 4500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1280 4500 50  0001 C CNN
+F 3 "~" H 1350 4500 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1350 4500 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1350 4500 50  0001 C CNN "Manufacturer"
+F 6 "1" V 1350 4500 50  0001 C CNN "Bin"
+	1    1350 4500
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	1350 4500 1600 4500
-Text HLabel 1050 4500 0    50   Input ~ 0
-col_5_ctrl
 $Comp
 L Device:Q_TRIAC_A1A2G D10
 U 1 1 5DBE2D93
@@ -268,230 +214,190 @@ F 3 "" H 1750 5200 50  0001 C CNN
 	1    1750 5200
 	1    0    0    -1  
 $EndComp
-Text HLabel 2500 4900 2    50   Output ~ 0
-col_7_motor
 Wire Wire Line
 	2500 4900 1750 4900
 $Comp
 L Device:R R17
 U 1 1 5DBE2DA1
-P 1200 5150
-F 0 "R17" V 1407 5150 50  0000 C CNN
-F 1 "1k" V 1316 5150 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1130 5150 50  0001 C CNN
-F 3 "~" H 1200 5150 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 1200 5150 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 1200 5150 50  0001 C CNN "Manufacturer"
-F 6 "1" V 1200 5150 50  0001 C CNN "Bin"
-	1    1200 5150
+P 1350 5150
+F 0 "R17" V 1557 5150 50  0000 C CNN
+F 1 "1k" V 1466 5150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 1280 5150 50  0001 C CNN
+F 3 "~" H 1350 5150 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 1350 5150 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 1350 5150 50  0001 C CNN "Manufacturer"
+F 6 "1" V 1350 5150 50  0001 C CNN "Bin"
+	1    1350 5150
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	1350 5150 1600 5150
-Text HLabel 1050 5150 0    50   Input ~ 0
-col_7_ctrl
 Wire Notes Line
-	3050 2850 3050 5450
+	2600 2850 2600 5450
 $Comp
 L Device:Q_TRIAC_A1A2G D11
 U 1 1 5DBEA91F
-P 4350 3100
-F 0 "D11" H 4478 3146 50  0000 L CNN
-F 1 "Q_TRIAC_A1A2G" H 4478 3055 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 4425 3125 50  0001 C CNN
-F 3 "~" V 4350 3100 50  0001 C CNN
-F 4 "Z0103MN,135" H 4350 3100 50  0001 C CNN "Part Number"
-F 5 "WeEn Semiconductors" H 4350 3100 50  0001 C CNN "Manufacturer"
-F 6 "27" H 4350 3100 50  0001 C CNN "Bin"
-	1    4350 3100
+P 3900 3100
+F 0 "D11" H 4028 3146 50  0000 L CNN
+F 1 "Q_TRIAC_A1A2G" H 4028 3055 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 3975 3125 50  0001 C CNN
+F 3 "~" V 3900 3100 50  0001 C CNN
+F 4 "Z0103MN,135" H 3900 3100 50  0001 C CNN "Part Number"
+F 5 "WeEn Semiconductors" H 3900 3100 50  0001 C CNN "Manufacturer"
+F 6 "27" H 3900 3100 50  0001 C CNN "Bin"
+	1    3900 3100
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0127
 U 1 1 5DBEA925
-P 4350 3250
-F 0 "#PWR0127" H 4350 3000 50  0001 C CNN
-F 1 "GND" H 4355 3077 50  0000 C CNN
-F 2 "" H 4350 3250 50  0001 C CNN
-F 3 "" H 4350 3250 50  0001 C CNN
-	1    4350 3250
+P 3900 3250
+F 0 "#PWR0127" H 3900 3000 50  0001 C CNN
+F 1 "GND" H 3905 3077 50  0000 C CNN
+F 2 "" H 3900 3250 50  0001 C CNN
+F 3 "" H 3900 3250 50  0001 C CNN
+	1    3900 3250
 	1    0    0    -1  
 $EndComp
-Text HLabel 5100 2950 2    50   Output ~ 0
-col_2_motor
 Wire Wire Line
-	5100 2950 4350 2950
+	4650 2950 3900 2950
 $Comp
 L Device:R R19
 U 1 1 5DBEA92D
-P 3800 3200
-F 0 "R19" V 4007 3200 50  0000 C CNN
-F 1 "1k" V 3916 3200 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3730 3200 50  0001 C CNN
-F 3 "~" H 3800 3200 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 3800 3200 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 3800 3200 50  0001 C CNN "Manufacturer"
-F 6 "1" V 3800 3200 50  0001 C CNN "Bin"
-	1    3800 3200
+P 3500 3200
+F 0 "R19" V 3707 3200 50  0000 C CNN
+F 1 "1k" V 3616 3200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3430 3200 50  0001 C CNN
+F 3 "~" H 3500 3200 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 3500 3200 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 3500 3200 50  0001 C CNN "Manufacturer"
+F 6 "1" V 3500 3200 50  0001 C CNN "Bin"
+	1    3500 3200
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	3950 3200 4200 3200
-Text HLabel 3650 3200 0    50   Input ~ 0
-col_2_ctrl
 $Comp
 L Device:Q_TRIAC_A1A2G D12
 U 1 1 5DBEA936
-P 4350 3750
-F 0 "D12" H 4478 3796 50  0000 L CNN
-F 1 "Q_TRIAC_A1A2G" H 4478 3705 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 4425 3775 50  0001 C CNN
-F 3 "~" V 4350 3750 50  0001 C CNN
-F 4 "Z0103MN,135" H 4350 3750 50  0001 C CNN "Part Number"
-F 5 "WeEn Semiconductors" H 4350 3750 50  0001 C CNN "Manufacturer"
-F 6 "27" H 4350 3750 50  0001 C CNN "Bin"
-	1    4350 3750
+P 3900 3750
+F 0 "D12" H 4028 3796 50  0000 L CNN
+F 1 "Q_TRIAC_A1A2G" H 4028 3705 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 3975 3775 50  0001 C CNN
+F 3 "~" V 3900 3750 50  0001 C CNN
+F 4 "Z0103MN,135" H 3900 3750 50  0001 C CNN "Part Number"
+F 5 "WeEn Semiconductors" H 3900 3750 50  0001 C CNN "Manufacturer"
+F 6 "27" H 3900 3750 50  0001 C CNN "Bin"
+	1    3900 3750
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0128
 U 1 1 5DBEA93C
-P 4350 3900
-F 0 "#PWR0128" H 4350 3650 50  0001 C CNN
-F 1 "GND" H 4355 3727 50  0000 C CNN
-F 2 "" H 4350 3900 50  0001 C CNN
-F 3 "" H 4350 3900 50  0001 C CNN
-	1    4350 3900
+P 3900 3900
+F 0 "#PWR0128" H 3900 3650 50  0001 C CNN
+F 1 "GND" H 3905 3727 50  0000 C CNN
+F 2 "" H 3900 3900 50  0001 C CNN
+F 3 "" H 3900 3900 50  0001 C CNN
+	1    3900 3900
 	1    0    0    -1  
 $EndComp
-Text HLabel 5100 3600 2    50   Output ~ 0
-col_4_motor
 Wire Wire Line
-	5100 3600 4350 3600
+	4650 3600 3900 3600
 $Comp
 L Device:R R20
 U 1 1 5DBEA944
-P 3800 3850
-F 0 "R20" V 4007 3850 50  0000 C CNN
-F 1 "1k" V 3916 3850 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3730 3850 50  0001 C CNN
-F 3 "~" H 3800 3850 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 3800 3850 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 3800 3850 50  0001 C CNN "Manufacturer"
-F 6 "1" V 3800 3850 50  0001 C CNN "Bin"
-	1    3800 3850
+P 3500 3850
+F 0 "R20" V 3707 3850 50  0000 C CNN
+F 1 "1k" V 3616 3850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3430 3850 50  0001 C CNN
+F 3 "~" H 3500 3850 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 3500 3850 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 3500 3850 50  0001 C CNN "Manufacturer"
+F 6 "1" V 3500 3850 50  0001 C CNN "Bin"
+	1    3500 3850
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	3950 3850 4200 3850
-Text HLabel 3650 3850 0    50   Input ~ 0
-col_4_ctrl
 $Comp
 L Device:Q_TRIAC_A1A2G D13
 U 1 1 5DBEA94D
-P 4350 4400
-F 0 "D13" H 4478 4446 50  0000 L CNN
-F 1 "Q_TRIAC_A1A2G" H 4478 4355 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 4425 4425 50  0001 C CNN
-F 3 "~" V 4350 4400 50  0001 C CNN
-F 4 "Z0103MN,135" H 4350 4400 50  0001 C CNN "Part Number"
-F 5 "WeEn Semiconductors" H 4350 4400 50  0001 C CNN "Manufacturer"
-F 6 "27" H 4350 4400 50  0001 C CNN "Bin"
-	1    4350 4400
+P 3900 4400
+F 0 "D13" H 4028 4446 50  0000 L CNN
+F 1 "Q_TRIAC_A1A2G" H 4028 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 3975 4425 50  0001 C CNN
+F 3 "~" V 3900 4400 50  0001 C CNN
+F 4 "Z0103MN,135" H 3900 4400 50  0001 C CNN "Part Number"
+F 5 "WeEn Semiconductors" H 3900 4400 50  0001 C CNN "Manufacturer"
+F 6 "27" H 3900 4400 50  0001 C CNN "Bin"
+	1    3900 4400
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0129
 U 1 1 5DBEA953
-P 4350 4550
-F 0 "#PWR0129" H 4350 4300 50  0001 C CNN
-F 1 "GND" H 4355 4377 50  0000 C CNN
-F 2 "" H 4350 4550 50  0001 C CNN
-F 3 "" H 4350 4550 50  0001 C CNN
-	1    4350 4550
+P 3900 4550
+F 0 "#PWR0129" H 3900 4300 50  0001 C CNN
+F 1 "GND" H 3905 4377 50  0000 C CNN
+F 2 "" H 3900 4550 50  0001 C CNN
+F 3 "" H 3900 4550 50  0001 C CNN
+	1    3900 4550
 	1    0    0    -1  
 $EndComp
-Text HLabel 5100 4250 2    50   Output ~ 0
-col_6_motor
 Wire Wire Line
-	5100 4250 4350 4250
+	4650 4250 3900 4250
 $Comp
 L Device:R R21
 U 1 1 5DBEA95B
-P 3800 4500
-F 0 "R21" V 4007 4500 50  0000 C CNN
-F 1 "1k" V 3916 4500 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3730 4500 50  0001 C CNN
-F 3 "~" H 3800 4500 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 3800 4500 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 3800 4500 50  0001 C CNN "Manufacturer"
-F 6 "1" V 3800 4500 50  0001 C CNN "Bin"
-	1    3800 4500
+P 3500 4500
+F 0 "R21" V 3707 4500 50  0000 C CNN
+F 1 "1k" V 3616 4500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3430 4500 50  0001 C CNN
+F 3 "~" H 3500 4500 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 3500 4500 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 3500 4500 50  0001 C CNN "Manufacturer"
+F 6 "1" V 3500 4500 50  0001 C CNN "Bin"
+	1    3500 4500
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	3950 4500 4200 4500
-Text HLabel 3650 4500 0    50   Input ~ 0
-col_6_ctrl
 $Comp
 L Device:Q_TRIAC_A1A2G D14
 U 1 1 5DBEA964
-P 4350 5050
-F 0 "D14" H 4478 5096 50  0000 L CNN
-F 1 "Q_TRIAC_A1A2G" H 4478 5005 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 4425 5075 50  0001 C CNN
-F 3 "~" V 4350 5050 50  0001 C CNN
-F 4 "Z0103MN,135" H 4350 5050 50  0001 C CNN "Part Number"
-F 5 "WeEn Semiconductors" H 4350 5050 50  0001 C CNN "Manufacturer"
-F 6 "27" H 4350 5050 50  0001 C CNN "Bin"
-	1    4350 5050
+P 3900 5050
+F 0 "D14" H 4028 5096 50  0000 L CNN
+F 1 "Q_TRIAC_A1A2G" H 4028 5005 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" V 3975 5075 50  0001 C CNN
+F 3 "~" V 3900 5050 50  0001 C CNN
+F 4 "Z0103MN,135" H 3900 5050 50  0001 C CNN "Part Number"
+F 5 "WeEn Semiconductors" H 3900 5050 50  0001 C CNN "Manufacturer"
+F 6 "27" H 3900 5050 50  0001 C CNN "Bin"
+	1    3900 5050
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0130
 U 1 1 5DBEA96A
-P 4350 5200
-F 0 "#PWR0130" H 4350 4950 50  0001 C CNN
-F 1 "GND" H 4355 5027 50  0000 C CNN
-F 2 "" H 4350 5200 50  0001 C CNN
-F 3 "" H 4350 5200 50  0001 C CNN
-	1    4350 5200
+P 3900 5200
+F 0 "#PWR0130" H 3900 4950 50  0001 C CNN
+F 1 "GND" H 3905 5027 50  0000 C CNN
+F 2 "" H 3900 5200 50  0001 C CNN
+F 3 "" H 3900 5200 50  0001 C CNN
+	1    3900 5200
 	1    0    0    -1  
 $EndComp
-Text HLabel 5100 4900 2    50   Output ~ 0
-col_8_motor
 Wire Wire Line
-	5100 4900 4350 4900
+	4650 4900 3900 4900
 $Comp
 L Device:R R22
 U 1 1 5DBEA972
-P 3800 5150
-F 0 "R22" V 4007 5150 50  0000 C CNN
-F 1 "1k" V 3916 5150 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3730 5150 50  0001 C CNN
-F 3 "~" H 3800 5150 50  0001 C CNN
-F 4 "RC0603FR-071KL" V 3800 5150 50  0001 C CNN "Part Number"
-F 5 "Yageo" V 3800 5150 50  0001 C CNN "Manufacturer"
-F 6 "1" V 3800 5150 50  0001 C CNN "Bin"
-	1    3800 5150
+P 3500 5150
+F 0 "R22" V 3707 5150 50  0000 C CNN
+F 1 "1k" V 3616 5150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 3430 5150 50  0001 C CNN
+F 3 "~" H 3500 5150 50  0001 C CNN
+F 4 "RC0603FR-071KL" V 3500 5150 50  0001 C CNN "Part Number"
+F 5 "Yageo" V 3500 5150 50  0001 C CNN "Manufacturer"
+F 6 "1" V 3500 5150 50  0001 C CNN "Bin"
+	1    3500 5150
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	3950 5150 4200 5150
-Text HLabel 3650 5150 0    50   Input ~ 0
-col_8_ctrl
 Wire Notes Line
-	5650 2850 5650 5450
-Wire Notes Line
-	450  3500 5650 3500
-Wire Notes Line
-	450  4150 5650 4150
-Wire Notes Line
-	450  4800 5650 4800
-Wire Notes Line
-	450  5450 5650 5450
-Text HLabel 1250 1950 0    50   Input ~ 0
-MOTORS_ENABLE
+	4750 2850 4750 5450
 $Comp
 L Device:R R18
 U 1 1 5E6B2322
@@ -684,8 +590,6 @@ Wire Wire Line
 	2900 850  3600 850 
 Connection ~ 2900 850 
 Connection ~ 3700 1250
-Text HLabel 2950 1250 2    50   Output ~ 0
-MOTOR_SENSE
 Wire Wire Line
 	2950 1250 2900 1250
 Connection ~ 2900 1250
@@ -693,4 +597,164 @@ Wire Wire Line
 	2900 1250 2900 1350
 Wire Wire Line
 	3600 1250 3700 1250
+Text GLabel 2950 1250 2    50   Input ~ 0
+MOTOR_SENSE
+Text GLabel 1250 1950 0    50   Input ~ 0
+MOTORS_ENABLE
+Text GLabel 1200 3200 0    50   Input ~ 0
+C1_MOTOR_CTRL
+Wire Wire Line
+	1500 3200 1600 3200
+Text GLabel 1200 3850 0    50   Input ~ 0
+C3_MOTOR_CTRL
+Text GLabel 1200 4500 0    50   Input ~ 0
+C5_MOTOR_CTRL
+Wire Wire Line
+	1500 4500 1600 4500
+Text GLabel 1200 5150 0    50   Input ~ 0
+C7_MOTOR_CTRL
+Wire Wire Line
+	1500 5150 1600 5150
+Wire Wire Line
+	1500 3850 1600 3850
+Wire Wire Line
+	3650 3200 3750 3200
+Wire Wire Line
+	3650 3850 3750 3850
+Wire Wire Line
+	3650 4500 3750 4500
+Wire Wire Line
+	3650 5150 3750 5150
+Text GLabel 3350 3200 0    50   Input ~ 0
+C2_MOTOR_CTRL
+Text GLabel 3350 3850 0    50   Input ~ 0
+C4_MOTOR_CTRL
+Text GLabel 3350 4500 0    50   Input ~ 0
+C6_MOTOR_CTRL
+Text GLabel 3350 5150 0    50   Input ~ 0
+C8_MOTOR_CTRL
+Text GLabel 4750 1450 0    50   Input ~ 0
+R1_MOTOR_CTRL
+Text GLabel 4750 1550 0    50   Input ~ 0
+R2_MOTOR_CTRL
+Text GLabel 4750 1650 0    50   Input ~ 0
+R3_MOTOR_CTRL
+Text GLabel 4750 1750 0    50   Input ~ 0
+R4_MOTOR_CTRL
+Text GLabel 4750 1850 0    50   Input ~ 0
+R5_MOTOR_CTRL
+Text GLabel 4750 1950 0    50   Input ~ 0
+R6_MOTOR_CTRL
+Text GLabel 4750 2050 0    50   Input ~ 0
+R7_MOTOR_CTRL
+Text GLabel 4750 2150 0    50   Input ~ 0
+R8_MOTOR_CTRL
+$Comp
+L Connector:Screw_Terminal_01x08 J?
+U 1 1 5FB01D47
+P 5850 1750
+AR Path="/5FB01D47" Ref="J?"  Part="1" 
+AR Path="/5BA75957/5FB01D47" Ref="J9"  Part="1" 
+F 0 "J9" H 5950 1450 50  0000 L CNN
+F 1 "Row Screw Terminal" H 5950 1350 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-8-5.0-H_1x08_P5.00mm_Horizontal" H 5850 1750 50  0001 C CNN
+F 3 "~" H 5850 1750 50  0001 C CNN
+F 4 "OQ0854500000G" H 5850 1750 50  0001 C CNN "Part Number"
+F 5 "Amphenol Anytek" H 5850 1750 50  0001 C CNN "Manufacturer"
+	1    5850 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 1450 5650 1450
+Wire Wire Line
+	5550 1550 5650 1550
+Wire Wire Line
+	5550 1650 5650 1650
+Wire Wire Line
+	5550 1750 5650 1750
+Wire Wire Line
+	5550 1850 5650 1850
+Wire Wire Line
+	5550 1950 5650 1950
+Wire Wire Line
+	5550 2050 5650 2050
+Wire Wire Line
+	5550 2150 5650 2150
+Wire Notes Line
+	6750 2850 450  2850
+$Comp
+L Connector:Screw_Terminal_01x08 J?
+U 1 1 5FB22324
+P 5550 3300
+AR Path="/5FB22324" Ref="J?"  Part="1" 
+AR Path="/5BA75957/5FB22324" Ref="J8"  Part="1" 
+F 0 "J8" H 5650 3550 50  0000 L CNN
+F 1 "Column Screw Terminal" H 5650 3450 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-8-5.0-H_1x08_P5.00mm_Horizontal" H 5550 3300 50  0001 C CNN
+F 3 "~" H 5550 3300 50  0001 C CNN
+F 4 "OQ0854500000G" H 5550 3300 50  0001 C CNN "Part Number"
+F 5 "Amphenol Anytek" H 5550 3300 50  0001 C CNN "Manufacturer"
+	1    5550 3300
+	1    0    0    -1  
+$EndComp
+Text Label 2500 2950 2    50   ~ 0
+c1_motor
+Text Label 4650 2950 2    50   ~ 0
+c2_motor
+Text Label 2500 3600 2    50   ~ 0
+c3_motor
+Text Label 4650 3600 2    50   ~ 0
+c4_motor
+Text Label 2500 4250 2    50   ~ 0
+c5_motor
+Text Label 4650 4250 2    50   ~ 0
+c6_motor
+Text Label 2500 4900 2    50   ~ 0
+c7_motor
+Text Label 4650 4900 2    50   ~ 0
+c8_motor
+Wire Notes Line
+	4750 3500 450  3500
+Wire Notes Line
+	4750 4150 450  4150
+Wire Notes Line
+	4750 4800 450  4800
+Wire Notes Line
+	4750 5450 450  5450
+Text Label 4950 3000 0    50   ~ 0
+c1_motor
+Wire Wire Line
+	4950 3000 5350 3000
+Text Label 4950 3100 0    50   ~ 0
+c2_motor
+Wire Wire Line
+	4950 3100 5350 3100
+Text Label 4950 3200 0    50   ~ 0
+c3_motor
+Wire Wire Line
+	4950 3200 5350 3200
+Text Label 4950 3300 0    50   ~ 0
+c4_motor
+Wire Wire Line
+	4950 3300 5350 3300
+Text Label 4950 3400 0    50   ~ 0
+c5_motor
+Wire Wire Line
+	4950 3400 5350 3400
+Text Label 4950 3500 0    50   ~ 0
+c6_motor
+Wire Wire Line
+	4950 3500 5350 3500
+Text Label 4950 3600 0    50   ~ 0
+c7_motor
+Wire Wire Line
+	4950 3600 5350 3600
+Text Label 4950 3700 0    50   ~ 0
+c8_motor
+Wire Wire Line
+	4950 3700 5350 3700
+Wire Notes Line
+	6750 3850 4750 3850
+Wire Notes Line
+	6750 450  6750 3850
 $EndSCHEMATC
