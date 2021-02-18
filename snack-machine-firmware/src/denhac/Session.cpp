@@ -156,7 +156,7 @@ void Session::onUpdateOrderSuccess(const Order& order) {
     // vended amounts
     if(order.status == OrderStatus::COMPLETED) {
       Serial.println("It was all vended!");
-      if(moneyInsertedInMachine > order.total) {
+      if(moneyInsertedInMachine >= order.total) {
         moneyInsertedInMachine -= order.total;
       }
 
