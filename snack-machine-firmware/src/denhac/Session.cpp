@@ -279,6 +279,7 @@ bool Session::vendNextItem() {
 
       // If we can't find this item, just skip it and pretend we vended something.
       if (! product.valid) {
+        Serial.println("Item wasn't valid, skipping.");
         item.skip = true;
         return true;
       }
