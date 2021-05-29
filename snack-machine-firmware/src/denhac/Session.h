@@ -27,6 +27,7 @@ class Session {
     static MoneyCallback moneyAvailableCallback;
     static MoneyCallback creditAvailableCallback;
 
+    static bool canVend();
     static void vend();
     static void itemVended(uint8_t row, uint8_t col);
 
@@ -39,7 +40,7 @@ class Session {
     static void onGetOrdersByCardError(uint8_t statusCode);
     static void onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders);
     static void onGetCreditByCardError(uint8_t statusCode);
-    static void onGetCreditByCardSuccess(uint32_t credit);
+    static void onGetCreditByCardSuccess(uint32_t credit, bool useRFIDForPayment);
     static void onUpdateCreditByCardError(uint8_t statusCode);
     static void onUpdateCreditByCardSuccess(uint32_t totalCredit, uint32_t diffCredit);
     static void onUpdateOrderError(uint8_t statusCode);
@@ -61,4 +62,5 @@ class Session {
 
     static uint32_t moneyInsertedInMachine;
     static uint32_t onlineCredit;
+    static bool useRFIDForPayment;
 };

@@ -325,8 +325,10 @@ void DenhacWifiBridge::fetchCreditByCard(uint32_t cardNumber) {
 
   JsonObject order = jsonDoc.as<JsonObject>();
   uint32_t credit = order["credit"];
+  bool useRFIDForPayment = order["rfid_payment"];
   msgpck_write_integer(serial, 9);
   msgpck_write_integer(serial, credit);
+  msgpck_write_bool(serial, useRFIDForPayment);
   waitForAck();
 
   sendStatus(BridgeStatus::CREDIT_FETCHED);

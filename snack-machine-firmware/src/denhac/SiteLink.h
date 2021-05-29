@@ -23,7 +23,7 @@ typedef void (*ProductRemovedCallback)(uint8_t row, uint8_t col);
 
 typedef void (*OrdersResponseCallback)(Order orders[], uint8_t numOrders);
 typedef void (*OrderResponseCallback)(const Order& order);
-typedef void (*CreditResponseCallback)(uint32_t credit);
+typedef void (*CreditResponseCallback)(uint32_t credit, bool useRFIDForPayment);
 typedef void (*CreditUpdateResponseCallback)(uint32_t totalCredit, uint32_t diffCredit);
 
 struct CardRequest {

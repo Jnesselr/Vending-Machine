@@ -380,14 +380,16 @@ void SiteLink::handleProductRemoved() {
 
 void SiteLink::handleCreditByCard() {
   uint32_t credit = 0;
+  bool useRFIDForPayment = false;
 
   msgpck_read_integer(linkSerial, (byte*) &credit, sizeof(credit));
+  msgpck_read_bool(linkSerial, (bool*) useRFIDForPayment);
   SiteLinkAck::ack();
 
   SiteLinkCommand command = commandBuffer.pop();
   CreditResponseCallback callback = (CreditResponseCallback) command.commandCallback;
 
-  CALLBACK(callback, credit)
+  CALLBACK(callback, credit, useRFIDForPayment)
 }
 
 void SiteLink::handleCreditUpdateByCard() {

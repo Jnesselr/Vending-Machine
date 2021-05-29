@@ -15,6 +15,7 @@ uint8_t Session::numOrders = 0;
 Order Session::orders[8];
 uint32_t Session::onlineCredit = 0;
 uint32_t Session::moneyInsertedInMachine = 0;
+bool Session::useRFIDForPayment = false;
 VoidCallback Session::onReset = nullptr;
 MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
@@ -38,6 +39,7 @@ void Session::reset() {
   currentOrder.reset();
   moneyInsertedInMachine = 0;
   onlineCredit = 0;
+  useRFIDForPayment = false;
 
   for (uint8_t i = 0; i < numOrders; i++)
   {
@@ -118,9 +120,10 @@ void Session::onGetCreditByCardError(uint8_t statusCode) {
   // TODO
 }
 
-void Session::onGetCreditByCardSuccess(uint32_t credit) {
+void Session::onGetCreditByCardSuccess(uint32_t credit, bool useRFIDForPayment) {
   if(cardNum != 0) {
     Session::onlineCredit = credit;
+    Session::useRFIDForPayment = useRFIDForPayment;
 
     CALLBACK(creditAvailableCallback, credit);
     CALLBACK(moneyAvailableCallback, getCurrentAvailableMoney())
@@ -217,6 +220,30 @@ void Session::uploadCurrentOrder() {
       onUpdateOrderError,
       onUpdateOrderSuccess
     );
+}
+
+bool Session::canVend() {
+  Order* order = Session::getCurrentOrder();
+
+  if(order->status == OrderStatus::PROCESSING) {
+    return true;
+  }
+
+  if(order->getNumItems() == 0) {
+    return false;
+  }
+
+  uint32_t total = order->total;
+  uint32_t paid = order->paid;
+  uint32_t remaining = total - paid;
+
+  if(Session::getCurrentAvailableMoney() >= remaining) {
+    return true;
+  } else if(Session::useRFIDForPayment) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 void Session::vend() {

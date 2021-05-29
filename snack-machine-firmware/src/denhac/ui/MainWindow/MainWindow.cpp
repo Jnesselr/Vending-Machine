@@ -437,22 +437,7 @@ void MainWindow::drawCurrentCredit() {
 }
 
 void MainWindow::handleVendEnabled() {
-  Order* order = Session::getCurrentOrder();
-
-  if(order->status == OrderStatus::PROCESSING) {
-    vendButton.enable();
-    return;
-  }
-
-  if(order->getNumItems() == 0) {
-    return;
-  }
-
-  uint32_t total = order->total;
-  uint32_t paid = order->paid;
-  uint32_t remaining = total - paid;
-
-  if(Session::getCurrentAvailableMoney() >= remaining) {
+  if(Session::canVend()) {
     vendButton.enable();
   } else {
     vendButton.disable();
