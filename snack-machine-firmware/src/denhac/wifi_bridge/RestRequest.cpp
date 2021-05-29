@@ -33,13 +33,17 @@ RestResponse* RestRequest::DELETE(const char * url) {
 }
 
 RestResponse* RestRequest::makeRequest(const char * method, const char * url) {
+  debug("Trying to reset response");
   response->reset();
+  debug("Reset response");
 
   bool connected = client->connect(server, 443);
+  debug("Tried connecting");
 
   response->connected = connected;
 
   if(!connected) {
+    debug("Oh no, couldn't connect!");
     return response;
   }
 

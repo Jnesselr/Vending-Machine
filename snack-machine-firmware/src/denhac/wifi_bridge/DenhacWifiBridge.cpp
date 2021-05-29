@@ -11,7 +11,7 @@ const char* root_ca = ROOT_CA;
 
 const uint8_t NUM_PRODUCTS = 64;
 
-HardwareSerial* DenhacWifiBridge::serial = &Serial2;
+HardwareSerial* DenhacWifiBridge::serial = &Serial;
 
 WiFiClientSecure DenhacWifiBridge::client;
 // This value is enough to handle 64 products and a variable number of orders
