@@ -5,13 +5,13 @@
 
 #include "CRC32.h"
 
-const char*  server = "www.denhac.org";  // Server URL
+const char*  server = "denhac.org";  // Server URL
 
 const char* root_ca = ROOT_CA;
 
 const uint8_t NUM_PRODUCTS = 64;
 
-HardwareSerial* DenhacWifiBridge::serial = &Serial;
+HardwareSerial* DenhacWifiBridge::serial = &Serial2;
 
 WiFiClientSecure DenhacWifiBridge::client;
 // This value is enough to handle 64 products and a variable number of orders
@@ -29,7 +29,7 @@ uint8_t DenhacWifiBridge::packetMaxSizeRead = 0;
 
 void DenhacWifiBridge::setup() {
   pinMode(13, OUTPUT);
-  serial->begin(115200);
+  serial->begin(9600);
 
   memset(hashes, 0, sizeof(uint32_t) * NUM_PRODUCTS);
 
@@ -41,6 +41,7 @@ void DenhacWifiBridge::setup() {
     delay(1000);
   }
   sendStatus(BridgeStatus::WIFI_CONNECTED);
+  client.setCACert(root_ca);
 }
 
 void DenhacWifiBridge::loop() {
@@ -434,6 +435,7 @@ void DenhacWifiBridge::sendItem(JsonObject &item) {
 }
 
 void DenhacWifiBridge::setupComm() {
+  digitalWrite(13, HIGH);
   while(true) {
     msgpck_write_nil(serial);
     delay(100);
@@ -448,6 +450,7 @@ void DenhacWifiBridge::setupComm() {
         serial->read();
       }
 
+      digitalWrite(13, LOW);
       sendStatus(BridgeStatus::READY);
       return;
     } else {

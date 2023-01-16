@@ -33,7 +33,7 @@ uint8_t SiteLinkAck::packetMaxSizeRead = 0;
 unsigned long SiteLink::lastCommandRunMillis = 0;
 
 void SiteLink::setup() {
-  linkSerial->begin(115200);
+  linkSerial->begin(9600);
 }
 
 void SiteLink::loop() {
@@ -383,7 +383,7 @@ void SiteLink::handleCreditByCard() {
   bool useRFIDForPayment = false;
 
   msgpck_read_integer(linkSerial, (byte*) &credit, sizeof(credit));
-  msgpck_read_bool(linkSerial, (bool*) useRFIDForPayment);
+  msgpck_read_bool(linkSerial, &useRFIDForPayment);
   SiteLinkAck::ack();
 
   SiteLinkCommand command = commandBuffer.pop();
@@ -552,6 +552,9 @@ void SiteLink::updateCreditByCard(
   }
 
 void SiteLink::updateState(SiteLinkState siteLinkState) {
+  Serial.print("Link state: ");
+  Serial.println((int)siteLinkState);
+  Serial.flush();
   SiteLinkState oldState = SiteLink::state;
   SiteLink::state = siteLinkState;
 

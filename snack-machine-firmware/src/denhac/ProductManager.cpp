@@ -142,12 +142,25 @@ void ProductManager::writeLong(uint16_t address, uint32_t value) {
  * In that time span, someone can try to vend more than the items we have
  * on hand, so we reduce stock manually and the update from the server should
  * match the reduced value so no EEPROM write needs to happen then.
+ * 
+ * We also reduce stock available which isn't guaranteed to be correct, but it
+ * addresses the problem of an order being created, then quickly vended so the
+ * product update hasn't adjusted stock available. From the user perspective,
+ * this may look like a product that should be in stock is suddenly out of stock.
+ * The next product update will address that though.
  */
 void ProductManager::reduceStock(uint8_t row, uint8_t col) {
-  uint16_t address = START_ADDRESS(row, col) + 61;
+  uint16_t baseAddress = START_ADDRESS(row, col);
 
-  uint8_t stockInMachine = EEPROM.read(address);
-  EEPROM.write(address, stockInMachine - 1);
+  uint8_t stockAvailable = EEPROM.read(baseAddress + 60);
+  if(stockAvailable > 0) {
+    EEPROM.write(baseAddress + 60, stockAvailable - 1); // Stock available
+  }
+
+  uint8_t stockInMachine = EEPROM.read(baseAddress + 61);
+  if(stockInMachine > 0) {
+    EEPROM.write(baseAddress + 61, stockInMachine - 1); // Stock in machine
+  }
 }
 
 void ProductManager::writeBytes(

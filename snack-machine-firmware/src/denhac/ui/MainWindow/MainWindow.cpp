@@ -10,6 +10,7 @@
 #include "motors.h"
 #include "utils.h"
 #include <avr/wdt.h>
+#include <EEPROM.h>
 
 template<StaticCallbackType type, typename... Args>
 MainWindow* StaticCallback<type, Args...>::mainWindow = nullptr;
@@ -437,9 +438,12 @@ void MainWindow::drawCurrentCredit() {
 }
 
 void MainWindow::handleVendEnabled() {
+  Serial.println("Handle vend enabled!");
   if(Session::canVend()) {
+    Serial.println("enabled");
     vendButton.enable();
   } else {
+    Serial.println("disabled");
     vendButton.disable();
   }
 }
@@ -497,13 +501,13 @@ void MainWindow::colTapped(uint8_t col) {
 
 void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
   mainWindow->drawCurrentCredit();
+  mainWindow->handleVendEnabled();
 
   if(amount == 0) {
     return;
   }
 
   mainWindow->cancelOrderButton.enable();
-  mainWindow->handleVendEnabled();
 }
 
 void MainWindow::addItemScreen(MainWindow* mainWindow) {
