@@ -86,11 +86,9 @@ void BillValidator::loop()
 
 void BillValidator::sendPoll()
 {
-  static MDBResult mdbResult;
+  MDB::writeForResult(CMD_POLL, LENGTH(CMD_POLL));
 
-  MDB::writeForResult(CMD_POLL, LENGTH(CMD_POLL), &mdbResult);
-
-  if (mdbResult.timeout)
+  if (MDB::mdbResult.timeout)
   {
     pollFailures++;
     devicePolled = false;
@@ -107,17 +105,17 @@ void BillValidator::sendPoll()
   }
   devicePolled = true;
 
-  if (mdbResult.data[0] == mdbResult.ACK)
+  if (MDB::mdbResult.data[0] == MDBResult::ACK)
   {
     return;
   }
 
-  mdbResult.print("CASH POLL");
+  MDB::mdbResult.print("CASH POLL");
 
   uint8_t i = 0;
 
-  while(i < mdbResult.length) {
-    uint16_t data = mdbResult.data[i];
+  while(i < MDB::mdbResult.length) {
+    uint16_t data = MDB::mdbResult.data[i];
 
     if(data & 0x100) {
       // Checksum byte
@@ -237,16 +235,14 @@ void BillValidator::sendPoll()
 void BillValidator::sendReset()
 {
   // DEBUG("Sending cash reset")
-  static MDBResult mdbResult;
+  MDB::writeForResult(CMD_RESET, LENGTH(CMD_RESET));
 
-  MDB::writeForResult(CMD_RESET, LENGTH(CMD_RESET), &mdbResult);
-
-  if (mdbResult.timeout)
+  if (MDB::mdbResult.timeout)
   {
     return;
   }
 
-  if (mdbResult.data[0] == mdbResult.ACK)
+  if (MDB::mdbResult.data[0] == MDBResult::ACK)
   {
     MDB::ack();
   }
@@ -255,11 +251,9 @@ void BillValidator::sendReset()
 void BillValidator::sendSetup()
 {
   DEBUG("Sending Cash Setup")
-  static MDBResult mdbResult;
-
-  MDB::writeForResult(CMD_SETUP, LENGTH(CMD_SETUP), &mdbResult);
+  MDB::writeForResult(CMD_SETUP, LENGTH(CMD_SETUP));
   
-  if (mdbResult.timeout)
+  if (MDB::mdbResult.timeout)
   {
     DEBUG("Cash Setup timed out")
     updateState(BillValidatorState::UNKNOWN);
@@ -271,25 +265,23 @@ void BillValidator::sendSetup()
 
   // mdbResult.print("CASH SETUP");
 
-  featureLevel = mdbResult.data[0];
-  currencyCode = BYTE2WORD(mdbResult.data[1], mdbResult.data[2]);
-  billScalingFactor = BYTE2WORD(mdbResult.data[3], mdbResult.data[4]);
-  decimalPlaces = mdbResult.data[5];
-  stackerCapacity = BYTE2WORD(mdbResult.data[6], mdbResult.data[7]);
-  billSecurityLevels = BYTE2WORD(mdbResult.data[8], mdbResult.data[9]);
-  canEscrow = mdbResult.data[10] == 0xFF;
-  MDB::copyAtMost16(mdbResult, 11, billTypeCredit);
+  featureLevel = MDB::mdbResult.data[0];
+  currencyCode = BYTE2WORD(MDB::mdbResult.data[1], MDB::mdbResult.data[2]);
+  billScalingFactor = BYTE2WORD(MDB::mdbResult.data[3], MDB::mdbResult.data[4]);
+  decimalPlaces = MDB::mdbResult.data[5];
+  stackerCapacity = BYTE2WORD(MDB::mdbResult.data[6], MDB::mdbResult.data[7]);
+  billSecurityLevels = BYTE2WORD(MDB::mdbResult.data[8], MDB::mdbResult.data[9]);
+  canEscrow = MDB::mdbResult.data[10] == 0xFF;
+  MDB::copyAtMost16(11, billTypeCredit);
 
   updateState(BillValidatorState::SETUP);
 }
 
 void BillValidator::sendBillSetup()
 {
-  static MDBResult mdbResult;
-
-  MDB::writeForResult(CMD_BILL_SETUP, LENGTH(CMD_BILL_SETUP), &mdbResult);
+  MDB::writeForResult(CMD_BILL_SETUP, LENGTH(CMD_BILL_SETUP));
   
-  if (mdbResult.timeout)
+  if (MDB::mdbResult.timeout)
   {
     updateState(BillValidatorState::UNKNOWN);
     updateRecyclerState(BillRecyclerState::UNKNOWN);
@@ -302,27 +294,21 @@ void BillValidator::sendBillSetup()
 }
 
 void BillValidator::sendLevelTwoOptionIdentification() {
-  static MDBResult mdbResult;
+  MDB::writeForResult(CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION, LENGTH(CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION));
 
-  MDB::writeForResult(
-    CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION,
-    LENGTH(CMD_EXPANSION_LEVEL_TWO_IDENTIFICATION),
-    &mdbResult
-  );
+  MDB::mdbResult.print("CASH OPTIONS");
 
-  mdbResult.print("CASH OPTIONS");
-
-  if(mdbResult.timeout) {
+  if(MDB::mdbResult.timeout) {
     return;
   }
 
   MDB::ack();
 
   levelTwoOptionalFeatures = BYTE2DWORD(
-    mdbResult.data[29],
-    mdbResult.data[30],
-    mdbResult.data[31],
-    mdbResult.data[32]
+    MDB::mdbResult.data[29],
+    MDB::mdbResult.data[30],
+    MDB::mdbResult.data[31],
+    MDB::mdbResult.data[32]
   );
 
   // Bill Recycling supported
@@ -334,16 +320,9 @@ void BillValidator::sendLevelTwoOptionIdentification() {
 }
 
 void BillValidator::sendRecyclerFeatureEnable() {
-  static MDBResult mdbResult;
+  MDB::writeForResult(CMD_RECYCLER_FEATURE_ENABLE, LENGTH(CMD_RECYCLER_FEATURE_ENABLE));
 
-
-  MDB::writeForResult(
-    CMD_RECYCLER_FEATURE_ENABLE,
-    LENGTH(CMD_RECYCLER_FEATURE_ENABLE),
-    &mdbResult
-  );
-
-  if (mdbResult.data[0] == mdbResult.ACK)
+  if (MDB::mdbResult.data[0] == MDBResult::ACK)
   {
     updateRecyclerState(BillRecyclerState::IDLE);
     return;
@@ -365,15 +344,11 @@ void BillValidator::updateRecyclerState(BillRecyclerState newState) {
 }
 
 void BillValidator::acceptBill() {
-  static MDBResult mdbResult;
-
-  MDB::writeForResult(CMD_ACCEPT_BILL, LENGTH(CMD_ACCEPT_BILL), &mdbResult);
+  MDB::writeForResult(CMD_ACCEPT_BILL, LENGTH(CMD_ACCEPT_BILL));
 }
 
 void BillValidator::rejectBill() {
-  static MDBResult mdbResult;
-
-  MDB::writeForResult(CMD_REJECT_BILL, LENGTH(CMD_REJECT_BILL), &mdbResult);
+  MDB::writeForResult(CMD_REJECT_BILL, LENGTH(CMD_REJECT_BILL));
 }
 
 uint16_t BillValidator::billValue(uint8_t billType) {

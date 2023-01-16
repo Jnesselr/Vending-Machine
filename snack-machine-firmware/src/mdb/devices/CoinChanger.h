@@ -55,12 +55,12 @@ class CoinChanger {
     static void sendSetup();
     static void sendTubeStatus();
     static void sendPoll();
-    static void handlePollData(const MDBResult&);
+    static void handlePollData();
     static void sendCoinTypeSetup();
 
     static void updateState(CoinChangerState newState);
 
-    static void onTimeout(const MDBResult &mdbResult);
+    static void onTimeout();
 
     static uint8_t pollFailures;
     static bool devicePolled;

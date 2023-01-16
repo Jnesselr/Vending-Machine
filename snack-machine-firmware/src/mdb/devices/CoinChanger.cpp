@@ -143,12 +143,12 @@ void CoinChanger::sendPoll()
   MDBCommand pollCommand(
       CMD_POLL, LENGTH(CMD_POLL),
       onTimeout,
-      [](const MDBResult& mdbResult) {
+      []() {
         MDB::ack();
         devicePolled = true;
         pollFailures = 0;
 
-        if (mdbResult.data[0] == mdbResult.ACK)
+        if (MDB::mdbResult.data[0] == MDBResult::ACK)
         {
           if(currentlyDispensing) {
             currentlyDispensing = false;
@@ -158,7 +158,7 @@ void CoinChanger::sendPoll()
           return;
         }
 
-        CoinChanger::handlePollData(mdbResult);
+        CoinChanger::handlePollData();
       });
 
   pollCommand.run();
@@ -166,14 +166,14 @@ void CoinChanger::sendPoll()
   // DEBUG(pollFailures)
 }
 
-void CoinChanger::handlePollData(const MDBResult& mdbResult)
+void CoinChanger::handlePollData()
 {
-  mdbResult.print("COIN POLL");
+  MDB::mdbResult.print("COIN POLL");
   uint8_t i = 0;
 
-  while (i < mdbResult.length)
+  while (i < MDB::mdbResult.length)
   {
-    uint16_t data = mdbResult.data[i];
+    uint16_t data = MDB::mdbResult.data[i];
 
     if (data & 0x100)
     {
@@ -297,7 +297,7 @@ void CoinChanger::sendReset()
   MDBCommand resetCommand(
       CMD_RESET, LENGTH(CMD_RESET),
       onTimeout,
-      [](const MDBResult &mdbResult) {
+      []() {
         DEBUG("On success for coin reset");
         MDB::ack();
       });
@@ -313,17 +313,17 @@ void CoinChanger::sendSetup()
   MDBCommand setupCommand(
       CMD_SETUP, LENGTH(CMD_SETUP),
       onTimeout,
-      [](const MDBResult &mdbResult) {
+      []() {
         MDB::ack();
 
         // mdbResult.print("COIN SETUP");
 
-        featureLevel = mdbResult.data[0];
-        countryCode = BYTE2WORD(mdbResult.data[1], mdbResult.data[2]);
-        coinScalingFactor = mdbResult.data[3];
-        decimalPlaces = mdbResult.data[4];
-        coinTypeRouting = BYTE2WORD(mdbResult.data[5], mdbResult.data[6]);
-        MDB::copyAtMost16(mdbResult, 7, coinTypeCredit);
+        featureLevel = MDB::mdbResult.data[0];
+        countryCode = BYTE2WORD(MDB::mdbResult.data[1], MDB::mdbResult.data[2]);
+        coinScalingFactor = MDB::mdbResult.data[3];
+        decimalPlaces = MDB::mdbResult.data[4];
+        coinTypeRouting = BYTE2WORD(MDB::mdbResult.data[5], MDB::mdbResult.data[6]);
+        MDB::copyAtMost16(7, coinTypeCredit);
       });
 
   commandBuffer.push(setupCommand);
@@ -335,7 +335,7 @@ void CoinChanger::sendCoinTypeSetup()
   MDBCommand coinSetupCommand(
       CMD_COIN_TYPE_SETUP, LENGTH(CMD_COIN_TYPE_SETUP),
       onTimeout,
-      [](const MDBResult &mdbResult) {
+      []() {
         needUpdatedTubeStatus = true;
         updateState(CoinChangerState::IDLE);
       });
@@ -349,10 +349,10 @@ void CoinChanger::sendTubeStatus()
   MDBCommand tubeStatusCommand(
       CMD_TUBE_STATUS, LENGTH(CMD_TUBE_STATUS),
       onTimeout,
-      [](const MDBResult& mdbResult) {
+      []() {
         // mdbResult.print("COIN TUBE STATUS");
-        tubeFullStatus = BYTE2WORD(mdbResult.data[0], mdbResult.data[1]);
-        MDB::copyAtMost16(mdbResult, 2, tubeStatus);
+        tubeFullStatus = BYTE2WORD(MDB::mdbResult.data[0], MDB::mdbResult.data[1]);
+        MDB::copyAtMost16(2, tubeStatus);
 
         MDB::ack();
       });
@@ -367,7 +367,7 @@ void CoinChanger::updateState(CoinChangerState newState) {
   CALLBACK(onStateChanged, oldState, newState)
 }
 
-void CoinChanger::onTimeout(const MDBResult &mdbResult)
+void CoinChanger::onTimeout()
 {
   DEBUG("Coin On timeout");
   DEBUG(pollFailures);

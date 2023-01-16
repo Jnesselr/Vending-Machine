@@ -3,6 +3,8 @@
 #include "MDB.h"
 #include "utils.h"
 
+MDBResult MDB::mdbResult;
+
 static RingBuffer<64, uint16_t> receiveBuffer(-1);
 static RingBuffer<64, uint16_t> transmitBuffer(-1);
 
@@ -132,14 +134,14 @@ MDBCommand::MDBCommand() : MDBCommand(NULL, 0) {}
 MDBCommand::MDBCommand(const uint16_t *data, size_t length)
     : MDBCommand(data, length, NULL) {}
 
-MDBCommand::MDBCommand(const uint16_t* data, size_t length, MDBCallback timeout)
+MDBCommand::MDBCommand(const uint16_t* data, size_t length, VoidCallback timeout)
     : MDBCommand(data, length, timeout, NULL) {}
 
 MDBCommand::MDBCommand(
     const uint16_t *data,
     size_t length,
-    MDBCallback timeout,
-    MDBCallback success)
+    VoidCallback timeout,
+    VoidCallback success)
 {
   memset(this->data, 0, sizeof(uint16_t) * DATA_SIZE);
   COPY(data, this->data, length);
@@ -167,24 +169,21 @@ void MDBCommand::operator=(const MDBCommand &command) {
 
 void MDBCommand::run()
 {
-  static MDBResult mdbResult;
+  // TODO Handle retry on checksum failure
+  MDB::writeForResult(this->data, this->length);
 
-  MDB::writeForResult(this->data, this->length, &mdbResult);
-
-  if (mdbResult.timeout)
+  if (MDB::mdbResult.timeout)
   {
     if (this->timeout != NULL)
     {
-      this->timeout(mdbResult);
+      this->timeout();
     }
-    return;
+  } else if (this->success != NULL)
+  {
+    this->success();
   }
 
-  // TODO Handle retry on checksum failure
-  if (this->success != NULL)
-  {
-    this->success(mdbResult);
-  }
+  MDB::mdbResult.reset();
 }
 
 void MDBCommand::print(const char type[]) const
@@ -233,9 +232,9 @@ void MDB::write(const uint16_t data[], size_t length)
   ::enableSend();
 }
 
-void MDB::writeForResult(const uint16_t data[], size_t length, MDBResult *result)
+void MDB::writeForResult(const uint16_t data[], size_t length)
 {
-  result->reset();
+  mdbResult.reset();
 
   write(data, length);
 
@@ -253,13 +252,13 @@ void MDB::writeForResult(const uint16_t data[], size_t length, MDBResult *result
 
       checksum = (checksum + data) & 0xFF;
 
-      result->data[i] = data;
-      result->length += 1;
+      mdbResult.data[i] = data;
+      mdbResult.length += 1;
       i++;
 
       if(data & 0x100) {
         if(checksum == (data & 0xFF)) {
-          result->checksumValid = true;
+          mdbResult.checksumValid = true;
         }
         return; // Good job, we got it all
       }
@@ -269,14 +268,14 @@ void MDB::writeForResult(const uint16_t data[], size_t length, MDBResult *result
       delay(10);
       // If we're still empty after 10 mS, we failed here
       if(receiveBuffer.isEmpty()) {
-        result->timeout = true;
+        mdbResult.timeout = true;
         return;
       }
     }
   }
 }
 
-void MDB::copyAtMost16(const MDBResult &mdbResult, uint8_t start, uint8_t destination[16])
+void MDB::copyAtMost16(uint8_t start, uint8_t destination[16])
 {
   memset(destination, 0, 16);
 
