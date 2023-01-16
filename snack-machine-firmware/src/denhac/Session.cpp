@@ -164,6 +164,7 @@ void Session::onUpdateOrderSuccess(const Order& order) {
       }
 
       Session::reset();
+      return;
     }
   } else {
     // We did this update to verify the order was paid for
@@ -176,6 +177,7 @@ void Session::onUpdateOrderSuccess(const Order& order) {
       // TODO Uh oh something went wrong
       Serial.println("It wasn't paid for?");
       Session::reset();
+      return;
     }
   }
 
