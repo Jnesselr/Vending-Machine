@@ -52,19 +52,11 @@ struct UpdateOrderRequest {
   struct UpdateOrderItemRequest itemUpdates[8];
 };
 
-constexpr size_t bufferSize = max(max(max(
-  sizeof(CardRequest),
-  sizeof(OrderRequest)),
-  sizeof(CreditUpdateRequest)),
-  sizeof(UpdateOrderRequest)
-);
-
 union SiteLinkCommandBuffer {
   struct CardRequest cardRequest;
   struct OrderRequest orderRequest;
   struct CreditUpdateRequest creditUpdateRequest;
   struct UpdateOrderRequest updateOrderRequest;
-  uint8_t bytes[bufferSize];
 };
 
 enum class SiteLinkCommandType : uint8_t {
@@ -169,7 +161,6 @@ class SiteLink {
 
     static void handleStatus();
     static void handleProductUpdated();
-    static void handleAfterFirstProductFetched();
     static void handleOrdersByCard();
     static void handleOrderById();
     static void handleProductRemoved();

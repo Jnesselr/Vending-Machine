@@ -38,7 +38,7 @@ Task DenhacBoard::motorLoop(40, []{
 
 // 9600 baud with a buffer of 64 bytes
 // Buffer can be filled in 53 ms so we
-// run this every 50 ms
+// run this every 40 ms
 Task DenhacBoard::siteLinkLoop(40, []{
   SiteLink::loop();
 });
