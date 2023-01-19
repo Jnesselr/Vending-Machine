@@ -522,7 +522,7 @@ void MainWindow::customerLookupStarted(MainWindow* mainWindow) {
 }
 
 void MainWindow::ordersRetrieved(MainWindow* mainWindow) {
-  mainWindow->membershipButton.setState(MembershipButtonState::NUM_ORDERS);
+  mainWindow->membershipButton.setState(MembershipButtonState::ORDER_AVAILALBLE);
 }
 
 void MainWindow::unknownCard(MainWindow* mainWindow) {
@@ -538,11 +538,7 @@ void MainWindow::sessionReset(MainWindow* mainWindow) {
 }
 
 void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {
-  if(Session::getNumOrders() > 0) {
-    Session::setCurrentOrderNum(0);
-  }
-
-  // TODO What if the order count isn't 1?
+  /// TODO Remove this method entirely when we remove that button
 }
 
 void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {

@@ -11,10 +11,7 @@ class Session {
     static void reset();
     static VoidCallback onReset;
 
-    static uint8_t getNumOrders();
-    static Order getOrder(uint8_t orderNum);
     static Order* getCurrentOrder();
-    static void setCurrentOrderNum(uint8_t orderNum);
     static void addToCurrentOrder(uint8_t row, uint8_t col);
 
     static bool isActive();
@@ -38,7 +35,7 @@ class Session {
     static VoidCallback onCurrentOrderUpdated;
   private:
     static void onGetOrdersByCardError(uint8_t statusCode);
-    static void onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders);
+    static void onGetOrdersByCardSuccess(const Order& order);
     static void onGetCreditByCardError(uint8_t statusCode);
     static void onGetCreditByCardSuccess(uint32_t credit, bool useRFIDForPayment);
     static void onUpdateCreditByCardError(uint8_t statusCode);

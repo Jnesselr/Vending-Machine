@@ -294,17 +294,16 @@ void SiteLink::handleOrdersByCard() {
 
   SiteLinkAck::packetRead(PACKET_ORDERS_BY_CARD);
 
-  Order orders[8];
-  for (uint8_t i = 0; i < numOrders; i++)
-  {
-    orders[i] = readOrder();
+  Order order;
+  if(numOrders > 0) {
+    order = readOrder();
   }
   SiteLinkAck::ack();
 
   SiteLinkCommand command = commandBuffer.pop();
-  OrdersResponseCallback callback = (OrdersResponseCallback) command.commandCallback;
+  OrderResponseCallback callback = (OrderResponseCallback) command.commandCallback;
 
-  CALLBACK(callback, orders, numOrders)
+  CALLBACK(callback, order)
 }
 
 void SiteLink::handleOrderById() {
@@ -437,7 +436,7 @@ void SiteLink::maybeSendCommand() {
 void SiteLink::getOrdersByCard(
   uint32_t cardNumber,
   BridgeStatusCallback onStatus,
-  OrdersResponseCallback onOrders) {
+  OrderResponseCallback onOrders) {
     SiteLinkCommand command;
     command.linkSerial = linkSerial;
     command.type = SiteLinkCommandType::GET_ORDERS_BY_CARD;

@@ -11,8 +11,6 @@ unsigned long lastChangeMillis = 0;
 bool Session::active = false;
 uint32_t Session::cardNum = 0;
 Order Session::currentOrder;
-uint8_t Session::numOrders = 0;
-Order Session::orders[8];
 uint32_t Session::onlineCredit = 0;
 uint32_t Session::moneyInsertedInMachine = 0;
 bool Session::useRFIDForPayment = false;
@@ -41,32 +39,13 @@ void Session::reset() {
   onlineCredit = 0;
   useRFIDForPayment = false;
 
-  for (uint8_t i = 0; i < numOrders; i++)
-  {
-    orders[i].reset();
-  }
-  numOrders = 0;
-
   CALLBACK(onReset);
   CALLBACK(moneyAvailableCallback, 0);
   CALLBACK(onCurrentOrderUpdated);
 }
 
-uint8_t Session::getNumOrders() {
-  return numOrders;
-}
-Order Session::getOrder(uint8_t orderNum) {
-  return orders[orderNum];
-}
-
 Order* Session::getCurrentOrder() {
   return &currentOrder;
-}
-
-void Session::setCurrentOrderNum(uint8_t orderNum) {
-  currentOrder = orders[orderNum];
-
-  CALLBACK(onCurrentOrderUpdated);
 }
 
 void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
@@ -81,6 +60,7 @@ void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
 }
 
 void Session::cardScanned(uint32_t cardNum) {
+  // If a new user scans their card, reset the session for the previous user first
   if(Session::cardNum != 0 && Session::cardNum != cardNum) {
     Session::reset();
   }
@@ -89,7 +69,12 @@ void Session::cardScanned(uint32_t cardNum) {
   CALLBACK(onCustomerLookupStarted);
 
   SiteLink::getCreditByCard(cardNum, onGetCreditByCardError, onGetCreditByCardSuccess);
-  SiteLink::getOrdersByCard(cardNum, onGetOrdersByCardError, onGetOrdersByCardSuccess);
+
+  // If we're in an active order, don't bother fetching any orders.
+  // Otherwise, we would overwrite the current active order.
+  if(! active) {
+    SiteLink::getOrdersByCard(cardNum, onGetOrdersByCardError, onGetOrdersByCardSuccess);
+  }
 }
 
 void Session::onGetOrdersByCardError(uint8_t statusCode) {
@@ -104,15 +89,15 @@ void Session::onGetOrdersByCardError(uint8_t statusCode) {
   }
 }
 
-void Session::onGetOrdersByCardSuccess(Order orders[], uint8_t numOrders) {
-  Session::numOrders = numOrders;
-  for (uint8_t i = 0; i < numOrders; i++)
-  {
-    Session::orders[i] = orders[i];
-  }
-
-  if(cardNum != 0) {
+void Session::onGetOrdersByCardSuccess(const Order& order) {
+  // Previous session should have been reset and then cardNum set,
+  // but user may have hit cancel on the lookup. Order status of Unknown
+  // just means we don't have any order to go off of.
+  if(order.status != OrderStatus::UNKNOWN && Session::cardNum != 0) {
+    Session::currentOrder = order;
+    Session::active = true;
     CALLBACK(onOrdersRetrieved);
+    CALLBACK(onCurrentOrderUpdated);
   }
 }
 

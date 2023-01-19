@@ -84,7 +84,7 @@ class VendButton : public Button {
 enum class MembershipButtonState {
   SCAN_CARD,
   PLEASE_WAIT,
-  NUM_ORDERS,
+  ORDER_AVAILALBLE,
   UNKNOWN_CARD,
 };
 

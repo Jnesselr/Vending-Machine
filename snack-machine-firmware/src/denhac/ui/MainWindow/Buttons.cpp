@@ -247,9 +247,7 @@ void MembershipButton::show() {
   word insetColor = borderColor;
   word textColor = WHITE;
 
-  uint8_t numOrders = Session::getNumOrders();
-
-  if(state == MembershipButtonState::NUM_ORDERS && numOrders > 0) {
+  if(state == MembershipButtonState::ORDER_AVAILALBLE) {
     enable();
   }
 
@@ -286,22 +284,11 @@ void MembershipButton::show() {
     display->putstr((char*) "Please");
     display->gfx_MoveTo(left + 4 + 34, top + 42);
     display->putstr((char*) "Wait");
-  } else if(state == MembershipButtonState::NUM_ORDERS) {
-    if(numOrders == 0) {
-      display->gfx_MoveTo(left + 4 + 58, top + 6);
-      display->putstr((char*) "No");
-    } else {
-      display->gfx_MoveTo(left + 4 + 70, top + 6);
-      display->putCH(numOrders + '0');
-    }
-
-    if(numOrders == 0 || numOrders > 1) {
-      display->gfx_MoveTo(left + 4 + 10, top + 42);
-      display->putstr((char*) "Orders");
-    } else {
-      display->gfx_MoveTo(left + 4 + 22, top + 42);
-      display->putstr((char*) "Order");
-    }
+  } else if(state == MembershipButtonState::ORDER_AVAILALBLE) {
+    display->gfx_MoveTo(left + 4 + 70, top + 6);
+    display->putCH('1');
+    display->gfx_MoveTo(left + 4 + 22, top + 42);
+     display->putstr((char*) "Order");
   } else if(state == MembershipButtonState::UNKNOWN_CARD) {
     display->txt_Width(2);
     display->txt_Height(2);

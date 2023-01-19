@@ -21,7 +21,6 @@ typedef void (*BridgeStatusCallback)(uint8_t statusCode);
 typedef void (*ProductUpdatedCallback)(const Product& product);
 typedef void (*ProductRemovedCallback)(uint8_t row, uint8_t col);
 
-typedef void (*OrdersResponseCallback)(Order orders[], uint8_t numOrders);
 typedef void (*OrderResponseCallback)(const Order& order);
 typedef void (*CreditResponseCallback)(uint32_t credit, bool useRFIDForPayment);
 typedef void (*CreditUpdateResponseCallback)(uint32_t totalCredit, uint32_t diffCredit);
@@ -124,7 +123,7 @@ class SiteLink {
     static void getOrdersByCard(
       uint32_t cardNumber,
       BridgeStatusCallback onStatus,
-      OrdersResponseCallback onOrders);
+      OrderResponseCallback onOrder);
     static void getOrderById(
       uint32_t orderId,
       BridgeStatusCallback onStatus,

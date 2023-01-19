@@ -181,11 +181,14 @@ void DenhacWifiBridge::fetchOrdersByCard(uint32_t cardNumber) {
   msgpck_write_integer(serial, cardNumber);
 
   JsonArray orders = jsonDoc.as<JsonArray>();
-  msgpck_write_integer(serial, orders.size());
+  uint8_t numOrders = orders.size();
+  msgpck_write_integer(serial, numOrders);
 
   packetWritten(PACKET_ORDERS_BY_CARD);
 
-  for(JsonObject order : orders) {
+  // We only send one order for Arduino to care about
+  if(numOrders > 0) {
+    JsonObject order = orders[0];
     sendOrder(order);
   }
 
