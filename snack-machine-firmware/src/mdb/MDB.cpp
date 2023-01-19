@@ -5,8 +5,8 @@
 
 MDBResult MDB::mdbResult;
 
-static RingBuffer<64, uint16_t> receiveBuffer(-1);
-static RingBuffer<64, uint16_t> transmitBuffer(-1);
+static RingBuffer<64, uint16_t> receiveBuffer;
+static RingBuffer<64, uint16_t> transmitBuffer;
 
 void enableSend()
 {

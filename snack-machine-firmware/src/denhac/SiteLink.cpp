@@ -12,8 +12,7 @@ BridgeStatusCallback SiteLink::statusCallback = nullptr;
 ProductUpdatedCallback SiteLink::productUpdatedCallback = nullptr;
 ProductRemovedCallback SiteLink::productRemovedCallback = nullptr;
 
-SiteLinkCommand emptySiteLinkCommand;
-RingBuffer<3, SiteLinkCommand> SiteLink::commandBuffer(emptySiteLinkCommand);
+RingBuffer<3, SiteLinkCommand> SiteLink::commandBuffer;
 
 SiteLinkState SiteLink::state = SiteLinkState::UNKNOWN;
 

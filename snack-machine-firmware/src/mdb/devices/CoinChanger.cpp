@@ -10,8 +10,7 @@ static const uint16_t CMD_COIN_TYPE_SETUP[] = {0x10C, 0xFF, 0xFF, 0xFF, 0xFF};
 static const uint16_t CMD_TUBE_STATUS[] = {0x10A};
 static uint16_t CMD_DISPENSE[] = {0x10D, 0};
 
-MDBCommand emptyMDBCommand;
-RingBuffer<8, MDBCommand> CoinChanger::commandBuffer(emptyMDBCommand);
+RingBuffer<4, MDBCommand> CoinChanger::commandBuffer;
 
 uint8_t CoinChanger::pollFailures;
 CoinChangerState CoinChanger::state = CoinChangerState::UNKNOWN;
@@ -76,7 +75,9 @@ void CoinChanger::loop()
     needUpdatedTubeStatus = true;
   }
 
-  if(needUpdatedTubeStatus) {
+  // The buffer doesn't technically have to be empty but we
+  // do that to minimize the # of buffer entries needed.
+  if(needUpdatedTubeStatus && commandBuffer.isEmpty()) {
     needUpdatedTubeStatus = false;
     sendTubeStatus();
   }

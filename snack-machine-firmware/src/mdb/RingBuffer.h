@@ -6,7 +6,7 @@ template <uint8_t bufferSize, typename T>
 class RingBuffer
 {
 public:
-  RingBuffer(const T& notFoundValue);
+  RingBuffer();
 
   boolean isEmpty();
   boolean isFull();
@@ -19,14 +19,13 @@ public:
 
 private:
   T ringBuffer[bufferSize];
-  const T notFoundValue;
 
   uint8_t head;
   uint8_t tail;
 };
 
 template <uint8_t bufferSize, typename T>
-RingBuffer<bufferSize, T>::RingBuffer(const T& notFoundValue) : notFoundValue(notFoundValue)
+RingBuffer<bufferSize, T>::RingBuffer()
 {
   memset(ringBuffer, 0, sizeof(T) * bufferSize);
 
@@ -71,12 +70,12 @@ T RingBuffer<bufferSize, T>::pop()
 {
   if (isEmpty())
   {
-    return notFoundValue;
+    // We're giving the caller garbage because they didn't
+    // bother to check if it's empty themselves.
+    return ringBuffer[tail];
   }
 
   T result = ringBuffer[tail];
-
-  ringBuffer[tail] = notFoundValue;
 
   tail = (tail + 1) % bufferSize;
 
@@ -88,7 +87,7 @@ T RingBuffer<bufferSize, T>::peek()
 {
   if (isEmpty())
   {
-    return notFoundValue;
+    return ringBuffer[tail];
   }
 
   T result = ringBuffer[tail];
