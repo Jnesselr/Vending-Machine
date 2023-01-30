@@ -61,6 +61,7 @@ class MainWindow : public Window {
     static void sessionReset(MainWindow*);
     static void customerLookupStarted(MainWindow*);
     static void ordersRetrieved(MainWindow*);
+    static void noOrders(MainWindow*);
     static void unknownCard(MainWindow*);
     static void currentOrderUpdated(MainWindow*);
     static void cancelOrder(MainWindow*);

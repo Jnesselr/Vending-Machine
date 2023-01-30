@@ -60,6 +60,7 @@ void MainWindow::show() {
   Session::moneyAvailableCallback = callback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>(moneyAvailable);
   Session::onCustomerLookupStarted = callback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>(customerLookupStarted);
   Session::onOrdersRetrieved = callback<StaticCallbackType::ORDERS_RETRIEVED>(ordersRetrieved);
+  Session::onNoOrders = callback<StaticCallbackType::ORDERS_RETRIEVED>(noOrders);
   Session::onUnknownCard = callback<StaticCallbackType::UNKNOWN_CARD>(unknownCard);
   Session::onReset = callback<StaticCallbackType::SESSION_RESET>(sessionReset);
   Session::onCurrentOrderUpdated = callback<StaticCallbackType::CURRENT_ORDER_UPDATED>(currentOrderUpdated);
@@ -525,6 +526,10 @@ void MainWindow::ordersRetrieved(MainWindow* mainWindow) {
   mainWindow->membershipButton.setState(MembershipButtonState::ORDER_AVAILALBLE);
 }
 
+void MainWindow::noOrders(MainWindow* mainWindow) {
+  mainWindow->membershipButton.setState(MembershipButtonState::NO_ORDERS);
+}
+
 void MainWindow::unknownCard(MainWindow* mainWindow) {
   mainWindow->membershipButton.setState(MembershipButtonState::UNKNOWN_CARD);
 }
@@ -549,6 +554,7 @@ void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
 
   if(order->getNumItems() > 0) {
     mainWindow->cancelOrderButton.enable();
+    // TODO PENDING and UNKNOWN may be the only two that CAN add an item
     if(order->status == OrderStatus::PROCESSING) {
       mainWindow->addItemButton.disable();
     }

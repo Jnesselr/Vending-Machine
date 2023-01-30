@@ -119,8 +119,24 @@ void CancelOrderButton::show() {
 
   display->gfx_PolygonFilled(nLarge, xValuesLarge, yValuesLarge, borderColor);
 
-  word xValuesSmaller[] = {left + 6, arrowLeftX + 2, right - 4, right - 4, arrowLeftX + 2};
-  word yValuesSmaller[] = { mid, top + 4, top + 4, bottom - 4, bottom - 4};
+
+  constexpr uint8_t borderThickness = 2; // This should be even
+  // The idea is that the arrow points left and the top left most point (not the left most point) should angle down and to the right for the border inset.
+  // I recognize that's hard to visualize, but it makes the most visual sense for how the arrow should look.
+  word xValuesSmaller[] = {
+    left + borderThickness + borderThickness / 2,
+    arrowLeftX + borderThickness / 2,
+    right - borderThickness,
+    right - borderThickness,
+    arrowLeftX + borderThickness / 2
+  };
+  word yValuesSmaller[] = {
+    mid,
+    top + borderThickness,
+    top + borderThickness,
+    bottom - borderThickness,
+    bottom - borderThickness
+  };
 
   uint8_t nSmaller = sizeof(xValuesSmaller) / sizeof(word);
 
@@ -133,10 +149,10 @@ void CancelOrderButton::show() {
   display->txt_FGcolour(textColor);
   display->txt_Width(3);
   display->txt_Height(3);
-  display->gfx_MoveTo(arrowLeftX + 2, top + 6);
+  display->gfx_MoveTo(arrowLeftX + 2, top + 24);
   display->putstr((char*) "Cancel");
-  display->gfx_MoveTo(arrowLeftX + 14, top + 42);
-  display->putstr((char*) "Order");
+  // display->gfx_MoveTo(arrowLeftX + 14, top + 42);
+  // display->putstr((char*) "Order");
 
   redrawNeeded = false;
 }
@@ -172,7 +188,14 @@ void AddItemButton::show() {
   display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
 
   if(borderColor != insetColor) {
-    display->gfx_RectangleFilled(left + 4, top + 4, right - 4, bottom - 4, insetColor);
+    constexpr uint8_t borderThickness = 2;
+    display->gfx_RectangleFilled(
+      left + borderThickness,
+      top + borderThickness,
+      right - borderThickness,
+      bottom - borderThickness,
+      insetColor
+    );
   }
 
   display->txt_BGcolour(insetColor);
@@ -218,7 +241,14 @@ void VendButton::show() {
   display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
 
   if(borderColor != insetColor) {
-    display->gfx_RectangleFilled(left + 4, top + 4, right - 4, bottom - 4, insetColor);
+    constexpr uint8_t borderThickness = 2;
+    display->gfx_RectangleFilled(
+      left + borderThickness,
+      top + borderThickness,
+      right - borderThickness,
+      bottom - borderThickness,
+      insetColor
+    );
   }
 
   display->txt_Width(8);
@@ -267,7 +297,14 @@ void MembershipButton::show() {
   display->gfx_RectangleFilled(left, top, right, bottom, borderColor);
 
   if(borderColor != insetColor) {
-    display->gfx_RectangleFilled(left + 4, top + 4, right - 4, bottom - 4, insetColor);
+    constexpr uint8_t borderThickness = 2;
+    display->gfx_RectangleFilled(
+      left + borderThickness,
+      top + borderThickness,
+      right - borderThickness,
+      bottom - borderThickness,
+      insetColor
+    );
   }
   display->txt_BGcolour(insetColor);
   display->txt_FGcolour(textColor);
@@ -285,10 +322,15 @@ void MembershipButton::show() {
     display->gfx_MoveTo(left + 4 + 34, top + 42);
     display->putstr((char*) "Wait");
   } else if(state == MembershipButtonState::ORDER_AVAILALBLE) {
-    display->gfx_MoveTo(left + 4 + 70, top + 6);
-    display->putCH('1');
+    display->gfx_MoveTo(left + 4 + 22, top + 6);
+    display->putstr((char*) "Order");
     display->gfx_MoveTo(left + 4 + 22, top + 42);
-     display->putstr((char*) "Order");
+    display->putstr((char*) "Ready");
+  } else if(state == MembershipButtonState::NO_ORDERS) {
+    display->gfx_MoveTo(left + 4 + 58, top + 6);
+    display->putstr((char*) "No");
+    display->gfx_MoveTo(left + 4 + 10, top + 42);
+    display->putstr((char*) "Orders");
   } else if(state == MembershipButtonState::UNKNOWN_CARD) {
     display->txt_Width(2);
     display->txt_Height(2);

@@ -20,6 +20,7 @@ MoneyCallback Session::moneyAvailableCallback = nullptr;
 MoneyCallback Session::creditAvailableCallback = nullptr;
 VoidCallback Session::onCustomerLookupStarted = nullptr;
 VoidCallback Session::onOrdersRetrieved = nullptr;
+VoidCallback Session::onNoOrders = nullptr;
 VoidCallback Session::onUnknownCard = nullptr;
 VoidCallback Session::onCurrentOrderUpdated = nullptr;
 
@@ -93,7 +94,15 @@ void Session::onGetOrdersByCardSuccess(const Order& order) {
   // Previous session should have been reset and then cardNum set,
   // but user may have hit cancel on the lookup. Order status of Unknown
   // just means we don't have any order to go off of.
-  if(order.status != OrderStatus::UNKNOWN && Session::cardNum != 0) {
+
+  if(Session::cardNum == 0) {  // User canceled this
+    return;
+  }
+
+  if(order.status == OrderStatus::UNKNOWN) {
+    Session::active = true;
+    CALLBACK(onNoOrders);
+  } else {
     Session::currentOrder = order;
     Session::active = true;
     CALLBACK(onOrdersRetrieved);

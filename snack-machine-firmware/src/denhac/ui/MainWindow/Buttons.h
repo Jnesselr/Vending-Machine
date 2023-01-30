@@ -85,6 +85,7 @@ enum class MembershipButtonState {
   SCAN_CARD,
   PLEASE_WAIT,
   ORDER_AVAILALBLE,
+  NO_ORDERS,
   UNKNOWN_CARD,
 };
 
