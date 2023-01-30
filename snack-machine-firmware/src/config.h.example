@@ -1,4 +1,3 @@
 #pragma once
 
-#define DENHAC_BOARD_CONFIG
-#define GIZMODOJO_BOARD_CONFIG
+// Any includes or defines your program needs that should NOT be committed to the main repo, define them here
