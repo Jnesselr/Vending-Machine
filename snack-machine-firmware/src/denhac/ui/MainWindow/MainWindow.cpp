@@ -54,7 +54,6 @@ void MainWindow::show() {
   state = MainWindowState::LETTERS_VISIBLE;
   oldLoopState = MainWindowState::VEND_SCREEN; // Technically not true, but it redraws the grid this way
 
-  drawCurrentCredit();
   drawOrder();
 
   Session::moneyAvailableCallback = callback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>(moneyAvailable);
@@ -281,7 +280,7 @@ void MainWindow::loop() {
     verifyGridValidity();
   } else if(!state.gridIsShown() && oldLoopState.gridIsShown()) {
     // Currently only the VEND_SCREEN
-    display->gfx_RectangleFilled(0, gridTop, screenWidth - 1, gridBottom, WHITESMOKE);
+    display->gfx_RectangleFilled(0, cancelOrderButton.top - 4, screenWidth - 1, gridBottom, WHITESMOKE);
   }
 
   CALL_ON_BUTTONS(show())
@@ -355,6 +354,7 @@ CellButton* MainWindow::colButton(uint8_t col) {
 void MainWindow::verifyGridValidity() {
   lastGridValidityScan = current_loop_millis;
 
+  // TODO Maybe add a "couldAddItem" and "couldAddRow" to Session that also takes into account current orer items
   for (uint8_t i = 0; i < 8; i++)
   {
     CellButton* button = rowButton(i);
@@ -383,51 +383,110 @@ void MainWindow::verifyGridValidity() {
 }
 
 void MainWindow::drawOrder() {
-  display->txt_Width(2);
-  display->txt_Height(2);
-  display->txt_FGcolour(BLACK);
-  display->txt_BGcolour(WHITESMOKE);
-  display->gfx_RectangleFilled(0, 24, screenWidth - 1, gridTop - 1, WHITESMOKE);
-
   Order* order = Session::getCurrentOrder();
 
-  uint16_t dollars = order->total / 100;
-  uint8_t cents = order->total % 100;
-  uint8_t dollarsWidth = (uint8_t) log10(dollars) + 1;
-  // Max is 30 wide, 4 of those are $. and cents. 2 of those are spaces
-  display->txt_MoveCursor(0, 24 - dollarsWidth);
-  display->print("  ");
-  display->print('$');
-  display->print(dollars);
-  display->print('.');
-  if(cents < 10) {
-    display->print('0');
-  }
-  display->print(cents);
-
-  for (uint8_t i = 0; i < order->getNumItems(); i++)
-  {
-    display->txt_MoveCursor(2 * i + 1, 0);
-    Item item = order->getItem(i);
-    Product product = ProductManager::get(item.productId);
-    if(product.valid) {
-      display->print(product.name);
-      display->print(" => ");
-      display->print(item.quantity);
-    }
-  }
-}
-
-void MainWindow::drawCurrentCredit() {
-  display->txt_Width(2);
-  display->txt_Height(2);
+  Serial.println("Draw order!");
   display->txt_FGcolour(BLACK);
   display->txt_BGcolour(WHITESMOKE);
+  
+  // This section allows us to draw the whole list of items but not overwrite letters/numbers
+  if(state == MainWindowState::LETTERS_VISIBLE || state == MainWindowState::NUMBERS_VISIBLE) {
+    display->gfx_ClipWindow(0, 0, screenWidth - 1, gridTop - 5);
+    display->gfx_Clipping(1);
+  } else {
+    display->gfx_Clipping(0);
+  }
 
-  uint32_t credit = Session::getCurrentAvailableMoney();
-  uint16_t dollars = credit / 100;
-  uint8_t cents = credit % 100;
-  display->txt_MoveCursor(0, 0);
+  uint16_t orderDrawBottom = cancelOrderButton.top - 4;
+  // - 3 is height of drawn bar. -48 is 2x 32 height text. -16 is spacing above, below, and between text
+  uint16_t totalsDrawTop = orderDrawBottom - 3 - (2 * 32) - 16;
+
+  display->gfx_RectangleFilled(0, 0, screenWidth - 1, orderDrawBottom - 1, WHITESMOKE);
+
+  // Draw totals and credit at a larger font size
+  display->txt_Width(3);
+  display->txt_Height(3);
+
+  // Draw credit
+  drawCredit();
+
+  display->gfx_MoveTo(8, totalsDrawTop + 44);
+  display->putstr((char*) "Total");
+  uint16_t totalWidth = 24 * moneyCharacterWidth(order->total);
+  display->gfx_MoveTo(screenWidth - totalWidth - 8, totalsDrawTop + 44);
+  drawMoney(order->total);
+
+  display->gfx_RectangleFilled(4, orderDrawBottom - 3, screenWidth - 5, orderDrawBottom - 1, GRAY);
+  display->gfx_RectangleFilled(4, totalsDrawTop - 3, screenWidth - 5, totalsDrawTop - 1, GRAY);
+
+  // 2 characters on the left at 16 px wide each. We're drawing in the space after that.
+  // Which means we're drawing between 32 and 47 inclusive.
+  display->gfx_RectangleFilled(38, 0, 41, totalsDrawTop - 1, GRAY);
+
+  display->txt_Width(2);
+  display->txt_Height(2);
+
+  uint16_t currentLineY = 8;
+  for (uint8_t i = 0; i < order->getNumItems(); i++)
+  {
+    Item item = order->getItem(i);
+    Product product = ProductManager::get(item.productId);
+    if(! product.valid) {
+      continue;
+    }
+
+    uint8_t offset = item.quantity < 10 ? 16 : 0;
+    display->gfx_MoveTo(offset, currentLineY);
+    display->print(item.quantity);
+
+    display->gfx_MoveTo(3 * 16, currentLineY);
+    display->print(product.name);
+
+    uint32_t price = product.price * item.quantity;
+    uint8_t moneyLength = moneyCharacterWidth(price);
+    uint8_t nameLength = strlen(product.name) + 1 + moneyLength;
+
+    while(nameLength > 27) {
+      nameLength -= 27;
+      currentLineY += 24;
+    }
+
+    uint16_t priceStartX = 480 - moneyLength * 16;
+    display->gfx_MoveTo(priceStartX, currentLineY);
+    drawMoney(price);
+
+    currentLineY += 24 + 8; // +24 for new line item, +8 for spacing between items
+  }
+
+  display->gfx_Clipping(0);  // Disable clipping so other graphics can run
+}
+
+void MainWindow::drawCredit() {
+  // Yes, this function redoes some stuff in drawOrder
+  if(state != MainWindowState::VEND_SCREEN) {
+    return;
+  }
+
+  display->txt_FGcolour(BLACK);
+  display->txt_BGcolour(WHITESMOKE);
+  display->txt_Width(3);
+  display->txt_Height(3);
+
+  // Math is explained above
+  uint16_t orderDrawBottom = cancelOrderButton.top - 4;
+  uint16_t totalsDrawTop = orderDrawBottom - 3 - (2 * 32) - 16;
+
+  display->gfx_MoveTo(8, totalsDrawTop + 4);
+  display->putstr((char*) "Credit");
+  uint32_t currentCredit = Session::getCurrentAvailableMoney();
+  uint16_t creditWidth = 24 * moneyCharacterWidth(currentCredit);
+  display->gfx_MoveTo(screenWidth - creditWidth - 8, totalsDrawTop + 4);
+  drawMoney(currentCredit);
+}
+
+void MainWindow::drawMoney(uint32_t money) {
+  uint16_t dollars = money / 100;
+  uint8_t cents = money % 100;
   display->print('$');
   display->print(dollars);
   display->print('.');
@@ -435,7 +494,16 @@ void MainWindow::drawCurrentCredit() {
     display->print('0');
   }
   display->print(cents);
-  display->print("  ");
+}
+
+uint8_t MainWindow::moneyCharacterWidth(uint32_t money) {
+  uint8_t numberWidth;
+  if(money == 0) {
+    numberWidth = 3; // Special case where log base 10 doesn't work as well.
+  } else {
+   numberWidth = (uint8_t) log10(money) + 1;  // Width of dollars and cents
+  }
+  return numberWidth + 2; // +2 is for "$" and ".";
 }
 
 void MainWindow::handleVendEnabled() {
@@ -464,6 +532,8 @@ void StaticCallback<type, Args...>::callback(Args... args) {
 void MainWindow::back(MainWindow* mainWindow) {
   if(mainWindow->state == MainWindowState::LETTERS_VISIBLE) {
     mainWindow->setState(MainWindowState::VEND_SCREEN);
+    // Force the order to draw since we might have been covering part of the screen
+    mainWindow->drawOrder();
   } else if(mainWindow->state == MainWindowState::NUMBERS_VISIBLE) {
     mainWindow->setState(MainWindowState::LETTERS_VISIBLE);
     mainWindow->verifyGridValidity();
@@ -493,15 +563,14 @@ void MainWindow::rowTapped(uint8_t row) {
 
 void MainWindow::colTapped(uint8_t col) {
   if(state == MainWindowState::NUMBERS_VISIBLE) {
+    setState(MainWindowState::VEND_SCREEN);
     Session::addToCurrentOrder(selectedRow, col);
 
-    setState(MainWindowState::VEND_SCREEN);
     cancelOrderButton.enable();
   }
 }
 
 void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
-  mainWindow->drawCurrentCredit();
   mainWindow->handleVendEnabled();
 
   if(amount == 0) {
@@ -509,9 +578,17 @@ void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
   }
 
   mainWindow->cancelOrderButton.enable();
+  mainWindow->drawCredit();
 }
 
 void MainWindow::addItemScreen(MainWindow* mainWindow) {
+  mainWindow->display->gfx_RectangleFilled(
+    0,
+    mainWindow->gridTop - 4,
+    mainWindow->screenWidth - 1,
+    mainWindow->screenHeight - 1,
+    WHITESMOKE
+  );
   mainWindow->setState(MainWindowState::LETTERS_VISIBLE);
 }
 

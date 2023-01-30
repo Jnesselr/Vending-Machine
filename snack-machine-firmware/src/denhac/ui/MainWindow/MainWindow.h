@@ -71,8 +71,10 @@ class MainWindow : public Window {
 
     void setupMemberVariables();
     void drawGrid();
-    void drawCurrentCredit();
     void drawOrder();
+    void drawCredit();
+    void drawMoney(uint32_t money);
+    uint8_t moneyCharacterWidth(uint32_t money);
 
     CellButton* rowButton(uint8_t row);
     CellButton* colButton(uint8_t col);

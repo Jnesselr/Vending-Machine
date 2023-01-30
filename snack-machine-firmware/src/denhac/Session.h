@@ -55,8 +55,6 @@ class Session {
     static bool active;
     static uint32_t cardNum;
     static Order currentOrder;
-    static uint8_t numOrders;
-    static Order orders[8];
 
     static uint32_t moneyInsertedInMachine;
     static uint32_t onlineCredit;
