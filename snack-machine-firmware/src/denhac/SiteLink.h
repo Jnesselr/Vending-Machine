@@ -52,11 +52,21 @@ struct UpdateOrderRequest {
   struct UpdateOrderItemRequest itemUpdates[8];
 };
 
+constexpr size_t bufferSize = max(max(max(
+  sizeof(CardRequest),
+  sizeof(OrderRequest)),
+  sizeof(CreditUpdateRequest)),
+  sizeof(UpdateOrderRequest)
+);
+
 union SiteLinkCommandBuffer {
   struct CardRequest cardRequest;
   struct OrderRequest orderRequest;
   struct CreditUpdateRequest creditUpdateRequest;
   struct UpdateOrderRequest updateOrderRequest;
+
+  // Bytes is included entirely so we can memcpy this structure easily
+  uint8_t bytes[bufferSize];
 };
 
 enum class SiteLinkCommandType : uint8_t {

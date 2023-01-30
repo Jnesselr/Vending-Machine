@@ -564,6 +564,7 @@ SiteLinkCommand::SiteLinkCommand() {
   this->type = SiteLinkCommandType::UNKNOWN;
   this->errorCallback = nullptr;
   this->commandCallback = nullptr;
+  memset(this->buffer.bytes, 0, sizeof(this->buffer.bytes));
 }
 
 SiteLinkCommand::SiteLinkCommand(const SiteLinkCommand& command) {
@@ -571,6 +572,7 @@ SiteLinkCommand::SiteLinkCommand(const SiteLinkCommand& command) {
   this->type = command.type;
   this->errorCallback = command.errorCallback;
   this->commandCallback = command.commandCallback;
+  memcpy(this->buffer.bytes, command.buffer.bytes, sizeof(command.buffer.bytes));
 }
 
 void SiteLinkCommand::operator=(const SiteLinkCommand& command) {
@@ -578,6 +580,7 @@ void SiteLinkCommand::operator=(const SiteLinkCommand& command) {
   this->type = command.type;
   this->errorCallback = command.errorCallback;
   this->commandCallback = command.commandCallback;
+  memcpy(this->buffer.bytes, command.buffer.bytes, sizeof(command.buffer.bytes));
 }
 
 void SiteLinkCommand::run() {
