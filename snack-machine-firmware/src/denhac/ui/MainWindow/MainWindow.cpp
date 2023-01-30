@@ -372,7 +372,6 @@ void MainWindow::verifyColsValidity() {
 void MainWindow::drawOrder() {
   Order* order = Session::getCurrentOrder();
 
-  Serial.println("Draw order!");
   display->txt_FGcolour(BLACK);
   display->txt_BGcolour(WHITESMOKE);
   
@@ -494,12 +493,9 @@ uint8_t MainWindow::moneyCharacterWidth(uint32_t money) {
 }
 
 void MainWindow::handleVendEnabled() {
-  Serial.println("Handle vend enabled!");
   if(Session::canVend()) {
-    Serial.println("enabled");
     vendButton.enable();
   } else {
-    Serial.println("disabled");
     vendButton.disable();
   }
 }

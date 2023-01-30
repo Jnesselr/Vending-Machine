@@ -45,17 +45,11 @@ Product ProductManager::get(uint8_t row, uint8_t col) {
   Product product;
 
   if(row < 0 || row > 8 || col < 0 || col > 8) {
-    Serial.println("row or col is out of bounds");
-    Serial.print(row);
-    Serial.print(" ");
-    Serial.println(col);
-
     product.valid = false;
     return product;
   }
 
   if(!isValid(row, col)) {
-    Serial.println("Product isn't valid!");
 
     product.valid = false;
     return product;
