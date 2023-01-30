@@ -60,6 +60,13 @@ void WindowManager::handleNonIdleStates() {
   if(state == WindowManagerState::SETUP) {
     LOOP_WAIT_MS(lastStateChangeTime, 3500)
 
+    bool baudRateSuccess = display.setbaudWait(BAUD_128000);
+    if(baudRateSuccess) {
+      Serial.println("WE CHANGED THE BAUD RATE!");
+    } else {
+      Serial.println("No baud rate change for us :'(");
+    }
+
     display.gfx_ScreenMode(PORTRAIT);
 
     width = display.gfx_Get(X_MAX) + 1;

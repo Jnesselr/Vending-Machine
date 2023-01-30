@@ -65,7 +65,7 @@ void BootWindow::show() {
 
 void BootWindow::loop() {
   // If it's a minute and we're not done with this, hard reset
-  uint32_t timeout = 30 * 1000;
+  uint32_t timeout = 15 * 1000;
   if(current_loop_millis > timeout) {
     while(true); // Force a reset with watchdog
   }
