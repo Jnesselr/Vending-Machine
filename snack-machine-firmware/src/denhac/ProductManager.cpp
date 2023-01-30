@@ -39,22 +39,6 @@ bool ProductManager::isValid(uint8_t row, uint8_t col) {
   return EEPROM.read(address) == 0xAA;
 }
 
-bool ProductManager::hasStockAvailable(uint8_t row) {
-    return hasStockAvailable(row, 0) ||
-        hasStockAvailable(row, 1) ||
-        hasStockAvailable(row, 2) ||
-        hasStockAvailable(row, 3) ||
-        hasStockAvailable(row, 4) ||
-        hasStockAvailable(row, 5) ||
-        hasStockAvailable(row, 6) ||
-        hasStockAvailable(row, 7);
-}
-
-bool ProductManager::hasStockAvailable(uint8_t row, uint8_t col) {
-  uint16_t address = START_ADDRESS(row, col) + 60; // Stock available
-  return isValid(row, col) && EEPROM.read(address) > 0;
-}
-
 Product ProductManager::get(uint8_t row, uint8_t col) {
   uint16_t startAddress = START_ADDRESS(row, col);
 

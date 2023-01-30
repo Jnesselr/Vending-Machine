@@ -28,6 +28,9 @@ class Session {
     static void vend();
     static void itemVended(uint8_t row, uint8_t col);
 
+    static bool canAddRow(uint8_t row);
+    static bool canAddItem(uint8_t row, uint8_t col);
+
     static VoidCallback onCustomerLookupStarted;
     static VoidCallback onOrdersRetrieved;
     static VoidCallback onNoOrders;

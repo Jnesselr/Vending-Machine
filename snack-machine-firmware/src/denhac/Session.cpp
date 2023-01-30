@@ -51,11 +51,7 @@ Order* Session::getCurrentOrder() {
 
 void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
   Product product = ProductManager::get(row, col);
-  if (! product.valid) {
-    Serial.println("Cannot add invalid product to order!");
-  } else {
-    currentOrder.add(product);
-  }
+  currentOrder.add(product);  // This is afe to call even if the product is invalid
 
   CALLBACK(onCurrentOrderUpdated);
 }
@@ -216,6 +212,43 @@ void Session::uploadCurrentOrder() {
       onUpdateOrderError,
       onUpdateOrderSuccess
     );
+}
+
+bool Session::canAddRow(uint8_t row) {
+  return canAddItem(row, 0) ||
+        canAddItem(row, 1) ||
+        canAddItem(row, 2) ||
+        canAddItem(row, 3) ||
+        canAddItem(row, 4) ||
+        canAddItem(row, 5) ||
+        canAddItem(row, 6) ||
+        canAddItem(row, 7);
+}
+
+bool Session::canAddItem(uint8_t row, uint8_t col) {
+  Product product = ProductManager::get(row, col);
+  if(! product.valid) {
+    return false;  // Can't add an invlid product
+  }
+
+  uint8_t currentStockAvailable = product.stockAvailable;
+  uint8_t numOrderItems = currentOrder.getNumItems();
+  bool seenItem = false;
+  for (uint8_t i = 0; i < numOrderItems; i++)
+  {
+    Item& item = currentOrder.getItem(i);
+    if(item.productId == product.id) {
+      currentStockAvailable -= item.quantity;
+      seenItem = true;
+      break;
+    }
+  }
+
+  if(! seenItem && numOrderItems == Order::MAX_NUM_ITEMS) {
+    return false; // We don't have this item already in the order and can't add a new line item
+  }
+
+  return currentStockAvailable > 0;
 }
 
 bool Session::canVend() {

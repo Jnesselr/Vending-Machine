@@ -79,11 +79,11 @@ class MainWindow : public Window {
     CellButton* rowButton(uint8_t row);
     CellButton* colButton(uint8_t col);
 
-    void verifyGridValidity();
+    void verifyRowsValidity();
+    void verifyColsValidity();
     void handleVendEnabled();
 
     bool memberVariablesSet = false;
-    unsigned long lastGridValidityScan = 0;
 
     uint16_t screenWidth;
     uint16_t screenHeight;

@@ -39,8 +39,10 @@ class Order {
     OrderStatus status;
     uint32_t paid;
     uint32_t total;
+
+    static const uint8_t MAX_NUM_ITEMS = 8;
   private:
     void recalculateTotal();
-    Item items[8];
+    Item items[Order::MAX_NUM_ITEMS];
     uint8_t numItems;
 };

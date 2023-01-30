@@ -262,6 +262,7 @@ void MainWindow::setupMemberVariables() {
   membershipButton.disable();
 
   memberVariablesSet = true;
+  verifyRowsValidity();
 }
 
 void MainWindow::loop() {
@@ -271,13 +272,8 @@ void MainWindow::loop() {
     while(true); // Force a reset with watchdog
   }
 
-  if(current_loop_millis > lastGridValidityScan + 200) {
-    verifyGridValidity();
-  }
-
   if(state.gridIsShown() && !oldLoopState.gridIsShown()) {
     drawGrid();
-    verifyGridValidity();
   } else if(!state.gridIsShown() && oldLoopState.gridIsShown()) {
     // Currently only the VEND_SCREEN
     display->gfx_RectangleFilled(0, cancelOrderButton.top - 4, screenWidth - 1, gridBottom, WHITESMOKE);
@@ -351,33 +347,24 @@ CellButton* MainWindow::colButton(uint8_t col) {
   }
 }
 
-void MainWindow::verifyGridValidity() {
-  lastGridValidityScan = current_loop_millis;
-
-  // TODO Maybe add a "couldAddItem" and "couldAddRow" to Session that also takes into account current orer items
+void MainWindow::verifyRowsValidity() {
+  bool anyEnabled = false;
   for (uint8_t i = 0; i < 8; i++)
   {
     CellButton* button = rowButton(i);
-    bool isEnabled = button->isEnabled();
-    bool shouldBeEnabled = Motors::rowExists(i) && ProductManager::hasStockAvailable(i);
-
-    if(isEnabled != shouldBeEnabled) {
-      if(state == MainWindowState::NUMBERS_VISIBLE && selectedRow == i) {
-        setState(MainWindowState::LETTERS_VISIBLE);
-      }
-    }
+    bool shouldBeEnabled = Motors::rowExists(i) && Session::canAddRow(i);
+    anyEnabled |= shouldBeEnabled;
 
     button->setEnabled(shouldBeEnabled);
   }
+  addItemButton.setEnabled(anyEnabled);
+}
 
-  if(state != MainWindowState::NUMBERS_VISIBLE) {
-    return;
-  }
-
+void MainWindow::verifyColsValidity() {
   for (uint8_t i = 0; i < 8; i++)
   {
     CellButton* button = colButton(i);
-    bool shouldBeEnabled = Motors::exists(selectedRow, i) && ProductManager::hasStockAvailable(selectedRow, i);
+    bool shouldBeEnabled = Motors::exists(selectedRow, i) && Session::canAddItem(selectedRow, i);
     button->setEnabled(shouldBeEnabled);
   }
 }
@@ -436,7 +423,7 @@ void MainWindow::drawOrder() {
     }
 
     uint8_t offset = item.quantity < 10 ? 16 : 0;
-    display->gfx_MoveTo(offset, currentLineY);
+    display->gfx_MoveTo(offset + 3, currentLineY);  // We add 3 to make it look better with the dividing line
     display->print(item.quantity);
 
     display->gfx_MoveTo(3 * 16, currentLineY);
@@ -536,7 +523,6 @@ void MainWindow::back(MainWindow* mainWindow) {
     mainWindow->drawOrder();
   } else if(mainWindow->state == MainWindowState::NUMBERS_VISIBLE) {
     mainWindow->setState(MainWindowState::LETTERS_VISIBLE);
-    mainWindow->verifyGridValidity();
   }
 }
 
@@ -557,7 +543,7 @@ void MainWindow::rowTapped(uint8_t row) {
   if(state == MainWindowState::LETTERS_VISIBLE) {
     selectedRow = row;
     setState(MainWindowState::NUMBERS_VISIBLE);
-    verifyGridValidity();
+    verifyColsValidity();
   }
 }
 
@@ -617,6 +603,7 @@ void MainWindow::sessionReset(MainWindow* mainWindow) {
   mainWindow->cancelOrderButton.disable();
   mainWindow->vendButton.disable();
   mainWindow->addItemButton.enable();
+  mainWindow->verifyRowsValidity();
 }
 
 void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {
@@ -636,6 +623,8 @@ void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
       mainWindow->addItemButton.disable();
     }
   }
+
+  mainWindow->verifyRowsValidity();
 }
 
 #endif
