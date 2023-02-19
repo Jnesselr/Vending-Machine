@@ -6,11 +6,11 @@
 #include "denhac/Session.h"
 
 #include "ui/WindowManager.h"
+#include "ui/Screen.h"
 
 #include "motors.h"
 #include "utils.h"
 #include <avr/wdt.h>
-#include <EEPROM.h>
 
 template<StaticCallbackType type, typename... Args>
 MainWindow* StaticCallback<type, Args...>::mainWindow = nullptr;
@@ -71,8 +71,8 @@ void MainWindow::setupMemberVariables() {
     return;
   }
 
-  screenWidth = WindowManager::getWidth();
-  screenHeight = WindowManager::getHeight();
+  screenWidth = Screen::getWidth();
+  screenHeight = Screen::getHeight();
   
   gridLeft = GRID_PADDING;
   gridRight = screenWidth - GRID_PADDING - 1;

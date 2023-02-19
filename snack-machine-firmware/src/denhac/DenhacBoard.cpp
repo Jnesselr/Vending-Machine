@@ -13,6 +13,7 @@
 #include "motors.h"
 
 #include "ui/WindowManager.h"
+#include "ui/Screen.h"
 #include "denhac/ui/DenhacUI.h"
 #include "denhac/DenhacBindings.h"
 
@@ -47,7 +48,8 @@ void DenhacBoard::setup()
 {
   Serial.begin(9600);
 
-  WindowManager::setup();
+
+  Screen::setup();
   MDB::setup();
   RFID::setup();
   Motors::setup();

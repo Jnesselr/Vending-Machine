@@ -3,6 +3,7 @@
 #include "denhac/ui/BootWindow.h"
 
 #include "ui/WindowManager.h"
+#include "ui/Screen.h"
 #include "denhac/ui/DenhacUI.h"
 
 #include "utils.h"
@@ -19,7 +20,7 @@ void BootWindow::show() {
   display->txt_Wrap(0);
 
   display->gfx_MoveTo(0, 0);
-  uint16_t width = WindowManager::getWidth();
+  uint16_t width = Screen::getWidth();
   display->gfx_MoveTo((width - 376) / 2, 10);
 
   // Width = 376, Height = 80
@@ -41,7 +42,7 @@ void BootWindow::show() {
   
   // Lowest Y of "machine" text == 242
   // Height of status text combined == 210
-  billValidatorY = 242 + (WindowManager::getHeight() - 242 - 210) / 2;
+  billValidatorY = 242 + (Screen::getHeight() - 242 - 210) / 2;
   coinChangerY = billValidatorY + 60;
   siteLinkY = coinChangerY + 60;
   wifiY = siteLinkY + 60;
