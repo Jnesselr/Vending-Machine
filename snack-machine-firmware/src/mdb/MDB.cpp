@@ -244,13 +244,11 @@ void MDB::writeForResult(const uint16_t data[], size_t length)
   // invalid checksum or something.
 
   uint8_t i = 0;
-  uint16_t checksum = 0;
+  uint8_t checksum = 0;
   while (true)
   {
     if(! receiveBuffer.isEmpty()) {
       uint16_t data = receiveBuffer.pop();
-
-      checksum = (checksum + data) & 0xFF;
 
       mdbResult.data[i] = data;
       mdbResult.length += 1;
@@ -261,6 +259,8 @@ void MDB::writeForResult(const uint16_t data[], size_t length)
           mdbResult.checksumValid = true;
         }
         return; // Good job, we got it all
+      } else {
+        checksum = checksum + data;
       }
 
       delay(1);

@@ -483,11 +483,10 @@ void MainWindow::drawMoney(uint32_t money) {
 }
 
 uint8_t MainWindow::moneyCharacterWidth(uint32_t money) {
-  uint8_t numberWidth;
-  if(money == 0) {
-    numberWidth = 3; // Special case where log base 10 doesn't work as well.
-  } else {
-   numberWidth = (uint8_t) log10(money) + 1;  // Width of dollars and cents
+  uint8_t numberWidth = (uint8_t) log10(money) + 1;  // Width of dollars and cents
+  if(numberWidth < 3) {
+    // Special case where log base 10 doesn't work as well. E.g. 25 is $0.25 which is 3 digits for the 0 and the 25.
+    numberWidth = 3;
   }
   return numberWidth + 2; // +2 is for "$" and ".";
 }
@@ -560,7 +559,14 @@ void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
   }
 
   mainWindow->cancelOrderButton.enable();
-  mainWindow->drawCredit();
+  if(mainWindow->state != MainWindowState::VEND_SCREEN) {
+    // If we're on an item selection screen, force us to the vend screen so we can see the money we put in
+    mainWindow->setState(MainWindowState::VEND_SCREEN);
+    mainWindow->drawOrder();
+  } else {
+    // If we're on the vend screen, just show the current credit
+    mainWindow->drawCredit();
+  }
 }
 
 void MainWindow::addItemScreen(MainWindow* mainWindow) {

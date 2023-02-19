@@ -157,6 +157,10 @@ void CoinChanger::sendPoll()
             CALLBACK(onChangerPayoutStopped)
           }
           return;
+        } else if(! MDB::mdbResult.checksumValid) {
+          Serial.println("MDB Poll invalid checksum!");
+          MDB::mdbResult.print("COIN POLL");
+          return;
         }
 
         CoinChanger::handlePollData();
@@ -198,12 +202,20 @@ void CoinChanger::handlePollData()
       // Coins Deposited
       uint8_t coinRoutingCode = (data & 0x30) >> 4;
       uint8_t coinType = (data & 0x0F);
-      CoinRouting coinRouting =
-          coinRoutingCode == 0x00
-              ? CoinRouting::CASH_BOX
-              : coinRoutingCode == 0x01
-                    ? CoinRouting::TUBES
-                    : CoinRouting::REJECT;
+      CoinRouting coinRouting;
+      switch(coinRoutingCode) {
+        case 0x00:
+          coinRouting = CoinRouting::CASH_BOX;
+          break;
+        case 0x01:
+          coinRouting = CoinRouting::TUBES;
+          break;
+        case 0x02:  // Not used
+          break;
+        case 0x03:
+          coinRouting = CoinRouting::REJECT;
+          break;
+      }
 
       CALLBACK(onCoinDeposited, coinRouting, coinType)
 
@@ -214,10 +226,7 @@ void CoinChanger::handlePollData()
     {
       // Slug
     }
-    else {
-    }
-    
-    if (data == 0x01)
+    else if (data == 0x01)
     {
       // Escrow request
       CALLBACK(onEscrowRequest)
