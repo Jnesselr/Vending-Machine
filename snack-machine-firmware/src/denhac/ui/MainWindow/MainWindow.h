@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ui/Window.h"
 #include "ui/Button.h"
 
 #include "denhac/ui/MainWindow/Buttons.h"
@@ -26,113 +25,85 @@ class MainWindowState
     Value value;
 };
 
-enum class StaticCallbackType {
-  BACK,
-  CANCEL_ORDER,
-  MONEY_AVAILABLE,
-  ADD_ITEM,
-  VEND,
-  CUSTOMER_LOOKUP_STARTED,
-  ORDERS_RETRIEVED,
-  SESSION_RESET,
-  MEMBERSHIP_BUTTON_TAPPED,
-  CURRENT_ORDER_UPDATED,
-  UNKNOWN_CARD,
-};
+class MainWindow {
+public:
+  static void setup();
+  static void loop();
+  static void teardown() {};
+  static void touch(uint8_t touchMode, uint16_t x, uint16_t y);
+private:
+  static Diablo_Serial_4DLib* display;
 
-template<typename... Args>
-using VariableCallback = void (*)(Args... args);
+  template <uint8_t row>
+  static void rowTapped();
+  template <uint8_t col>
+  static void colTapped();
 
-class MainWindow : public Window {
-  public:
-    void show();
-    void loop();
-    void touch(uint8_t touchMode, uint16_t x, uint16_t y);
+  static void back();
+  static void moneyAvailable(uint32_t amount);
+  static void sessionReset();
+  static void customerLookupStarted();
+  static void ordersRetrieved();
+  static void noOrders();
+  static void unknownCard();
+  static void currentOrderUpdated();
+  static void cancelOrder();
+  static void addItemScreen();
+  static void membershipButtonTapped();
+  static void vend();
 
-    // Public for callbacks
-    void rowTapped(uint8_t row);
-    void colTapped(uint8_t col);
-  private:
-    template<StaticCallbackType type, typename... Args>
-    VariableCallback<Args...> callback(VariableCallback<MainWindow*, Args...> function);
+  static void setupMemberVariables();
+  static void drawGrid();
+  static void drawOrder();
+  static void drawCredit();
+  static void drawMoney(uint32_t money);
+  static uint8_t moneyCharacterWidth(uint32_t money);
 
-    static void back(MainWindow*);
-    static void moneyAvailable(MainWindow*, uint32_t amount);
-    static void sessionReset(MainWindow*);
-    static void customerLookupStarted(MainWindow*);
-    static void ordersRetrieved(MainWindow*);
-    static void noOrders(MainWindow*);
-    static void unknownCard(MainWindow*);
-    static void currentOrderUpdated(MainWindow*);
-    static void cancelOrder(MainWindow*);
-    static void addItemScreen(MainWindow*);
-    static void membershipButtonTapped(MainWindow*);
-    static void vend(MainWindow*);
+  static CellButton* rowButton(uint8_t row);
+  static CellButton* colButton(uint8_t col);
 
-    void setupMemberVariables();
-    void drawGrid();
-    void drawOrder();
-    void drawCredit();
-    void drawMoney(uint32_t money);
-    uint8_t moneyCharacterWidth(uint32_t money);
+  static void verifyRowsValidity();
+  static void verifyColsValidity();
+  static void handleVendEnabled();
 
-    CellButton* rowButton(uint8_t row);
-    CellButton* colButton(uint8_t col);
+  static uint16_t screenWidth;
+  static uint16_t screenHeight;
 
-    void verifyRowsValidity();
-    void verifyColsValidity();
-    void handleVendEnabled();
+  static void setState(MainWindowState state);
+  static MainWindowState state;
+  static MainWindowState oldLoopState;
 
-    bool memberVariablesSet = false;
+  static const uint8_t CELL_WIDTH = 156;
+  static const uint8_t CELL_HEIGHT = 104;
+  static const uint16_t GRID_PADDING = 4;
+  static uint16_t gridLeft;
+  static uint16_t gridRight;
+  static uint16_t gridBottom;
+  static uint16_t gridTop;
 
-    uint16_t screenWidth;
-    uint16_t screenHeight;
+  static uint8_t selectedRow;
 
-    void setState(MainWindowState state);
-    MainWindowState state;
-    MainWindowState oldLoopState;
+  static BackButton backButton;
 
-    const uint8_t CELL_WIDTH = 156;
-    const uint8_t CELL_HEIGHT = 104;
-    const uint16_t GRID_PADDING = 4;
-    uint16_t gridLeft;
-    uint16_t gridRight;
-    uint16_t gridBottom;
-    uint16_t gridTop;
+  static CellButton cellButtonA;
+  static CellButton cellButtonB;
+  static CellButton cellButtonC;
+  static CellButton cellButtonD;
+  static CellButton cellButtonE;
+  static CellButton cellButtonF;
+  static CellButton cellButtonG;
+  static CellButton cellButtonH;
+  static CellButton cellButton1;
+  static CellButton cellButton2;
+  static CellButton cellButton3;
+  static CellButton cellButton4;
+  static CellButton cellButton5;
+  static CellButton cellButton6;
+  static CellButton cellButton7;
+  static CellButton cellButton8;
 
-    uint8_t selectedRow;
-
-    BackButton backButton;
-
-    CellButton cellButtonA;
-    CellButton cellButtonB;
-    CellButton cellButtonC;
-    CellButton cellButtonD;
-    CellButton cellButtonE;
-    CellButton cellButtonF;
-    CellButton cellButtonG;
-    CellButton cellButtonH;
-    CellButton cellButton1;
-    CellButton cellButton2;
-    CellButton cellButton3;
-    CellButton cellButton4;
-    CellButton cellButton5;
-    CellButton cellButton6;
-    CellButton cellButton7;
-    CellButton cellButton8;
-
-    CancelOrderButton cancelOrderButton;
-    AddItemButton addItemButton;
-    VendButton vendButton;
-    MembershipButton membershipButton;
-};
-
-template<typename... Args>
-using WindowCallback = void (*)(MainWindow*, Args...);
-
-template<StaticCallbackType type, typename... Args>
-struct StaticCallback {
-  static MainWindow* mainWindow;
-  static WindowCallback<Args...> windowCallback;
-  static void callback(Args...);
+  static CancelOrderButton cancelOrderButton;
+  static AddItemButton addItemButton;
+  static VendButton vendButton;
+  static MembershipButton membershipButton;
 };

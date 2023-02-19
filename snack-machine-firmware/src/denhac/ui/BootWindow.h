@@ -1,36 +1,43 @@
 #pragma once
 
-#include "ui/Window.h"
+#include <Diablo_Serial_4DLib.h>
 
-class BootWindow : public Window {
+#include "stdint.h"
+
+class BootWindow {
   public:
-    void show();
-    void loop();
+    static void setup();
+    static void loop();
+    static void teardown() {};
+    static void touch(uint8_t touchMode, uint16_t x, uint16_t y) {};
 
-    void setBillValidatorIdle(bool);
-    void setCoinChangerIdle(bool);
-    void setSiteLinkIdle(bool);
-    void setWifiOnline(bool);
-    void setMotorsIdle(bool);
+    static void setBillValidatorIdle(bool);
+    static void setCoinChangerIdle(bool);
+    static void setSiteLinkIdle(bool);
+    static void setWifiOnline(bool);
+    static void setMotorsIdle(bool);
   private:
-    void drawXAt(uint16_t x, uint16_t y);
-    void drawCheckAt(uint16_t x, uint16_t y);
-    unsigned long lastChangeMillis = 0;
-    bool billValidatorIdle = false;
-    bool coinChangerIdle = false;
-    bool siteLinkIdle = false;
-    bool wifiOnline = false;
-    bool motorsIdle = false;
+    static void drawXAt(uint16_t x, uint16_t y);
+    static void drawCheckAt(uint16_t x, uint16_t y);
 
-    bool redrawBillValidator = true;
-    bool redrawCoinChanger = true;
-    bool redrawSiteLink = true;
-    bool redrawWifi = true;
-    bool redrawMotors = true;
+    static Diablo_Serial_4DLib* display;
 
-    uint16_t billValidatorY;
-    uint16_t coinChangerY;
-    uint16_t siteLinkY;
-    uint16_t wifiY;
-    uint16_t motorsY;
+    static unsigned long lastChangeMillis;
+    static bool billValidatorIdle;
+    static bool coinChangerIdle;
+    static bool siteLinkIdle;
+    static bool wifiOnline;
+    static bool motorsIdle;
+
+    static bool redrawBillValidator;
+    static bool redrawCoinChanger;
+    static bool redrawSiteLink;
+    static bool redrawWifi;
+    static bool redrawMotors;
+
+    static uint16_t billValidatorY;
+    static uint16_t coinChangerY;
+    static uint16_t siteLinkY;
+    static uint16_t wifiY;
+    static uint16_t motorsY;
 };

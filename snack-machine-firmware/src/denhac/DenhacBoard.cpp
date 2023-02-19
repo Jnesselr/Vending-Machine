@@ -12,7 +12,7 @@
 #include "hid_rfid.h"
 #include "motors.h"
 
-#include "ui/WindowManager.h"
+#include "ui/WindowManager.hpp"
 #include "ui/Screen.h"
 #include "denhac/ui/DenhacUI.h"
 #include "denhac/DenhacBindings.h"
@@ -63,7 +63,8 @@ void DenhacBoard::setup()
   Looper::add(motorLoop);
   Looper::add(siteLinkLoop);
 
-  WindowManager::show(DenhacUI::bootWindow);
+  // WindowManager::show(DenhacUI::bootWindow);
+  WindowManager::show<BootWindow>();
 
   wdt_enable(WDTO_8S);
 }

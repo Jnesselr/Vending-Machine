@@ -1,21 +1,54 @@
 #ifdef VENDING_MAIN_BOARD
 
 #include "denhac/ui/MainWindow/MainWindow.h"
-#include "denhac/ui/MainWindow/Callbacks.h"
 #include "denhac/ProductManager.h"
 #include "denhac/Session.h"
 
-#include "ui/WindowManager.h"
+#include "ui/WindowManager.hpp"
 #include "ui/Screen.h"
 
 #include "motors.h"
 #include "utils.h"
 #include <avr/wdt.h>
 
-template<StaticCallbackType type, typename... Args>
-MainWindow* StaticCallback<type, Args...>::mainWindow = nullptr;
-template<StaticCallbackType type, typename... Args>
-WindowCallback<Args...> StaticCallback<type, Args...>::windowCallback = nullptr;
+Diablo_Serial_4DLib* MainWindow::display;
+
+uint16_t MainWindow::screenWidth;
+uint16_t MainWindow::screenHeight;
+
+MainWindowState MainWindow::state;
+MainWindowState MainWindow::oldLoopState;
+
+uint16_t MainWindow::gridLeft;
+uint16_t MainWindow::gridRight;
+uint16_t MainWindow::gridBottom;
+uint16_t MainWindow::gridTop;
+
+uint8_t MainWindow::selectedRow;
+
+BackButton MainWindow::backButton;
+
+CellButton MainWindow::cellButtonA;
+CellButton MainWindow::cellButtonB;
+CellButton MainWindow::cellButtonC;
+CellButton MainWindow::cellButtonD;
+CellButton MainWindow::cellButtonE;
+CellButton MainWindow::cellButtonF;
+CellButton MainWindow::cellButtonG;
+CellButton MainWindow::cellButtonH;
+CellButton MainWindow::cellButton1;
+CellButton MainWindow::cellButton2;
+CellButton MainWindow::cellButton3;
+CellButton MainWindow::cellButton4;
+CellButton MainWindow::cellButton5;
+CellButton MainWindow::cellButton6;
+CellButton MainWindow::cellButton7;
+CellButton MainWindow::cellButton8;
+
+CancelOrderButton MainWindow::cancelOrderButton;
+AddItemButton MainWindow::addItemButton;
+VendButton MainWindow::vendButton;
+MembershipButton MainWindow::membershipButton;
 
 #define CALL_ON_BUTTONS(function_call) \
 if(state == MainWindowState::VEND_SCREEN) { \
@@ -45,7 +78,8 @@ if(state == MainWindowState::VEND_SCREEN) { \
     cellButton8.function_call; \
   }
 
-void MainWindow::show() {
+void MainWindow::setup() {
+  display = &Screen::display;
   setupMemberVariables();
 
   display->gfx_BGcolour(WHITESMOKE);
@@ -56,21 +90,16 @@ void MainWindow::show() {
 
   drawOrder();
 
-  Session::moneyAvailableCallback = callback<StaticCallbackType::MONEY_AVAILABLE, uint32_t>(moneyAvailable);
-  Session::onCustomerLookupStarted = callback<StaticCallbackType::CUSTOMER_LOOKUP_STARTED>(customerLookupStarted);
-  Session::onOrdersRetrieved = callback<StaticCallbackType::ORDERS_RETRIEVED>(ordersRetrieved);
-  Session::onNoOrders = callback<StaticCallbackType::ORDERS_RETRIEVED>(noOrders);
-  Session::onUnknownCard = callback<StaticCallbackType::UNKNOWN_CARD>(unknownCard);
-  Session::onReset = callback<StaticCallbackType::SESSION_RESET>(sessionReset);
-  Session::onCurrentOrderUpdated = callback<StaticCallbackType::CURRENT_ORDER_UPDATED>(currentOrderUpdated);
+  Session::moneyAvailableCallback = moneyAvailable;
+  Session::onCustomerLookupStarted = customerLookupStarted;
+  Session::onOrdersRetrieved = ordersRetrieved;
+  Session::onNoOrders = noOrders;
+  Session::onUnknownCard = unknownCard;
+  Session::onReset = sessionReset;
+  Session::onCurrentOrderUpdated = currentOrderUpdated;
 }
 
 void MainWindow::setupMemberVariables() {
-  // We only need to do setup once
-  if(memberVariablesSet) {
-    return;
-  }
-
   screenWidth = Screen::getWidth();
   screenHeight = Screen::getHeight();
   
@@ -84,7 +113,7 @@ void MainWindow::setupMemberVariables() {
   backButton.right = backButton.left + CELL_WIDTH - 1;
   backButton.top = gridTop + 2 * CELL_HEIGHT + 3;
   backButton.bottom = backButton.top + CELL_HEIGHT - 1;
-  backButton.tapped = callback<StaticCallbackType::BACK>(back);
+  backButton.tapped = back;
 
   cellButtonA.display = display;
   cellButtonA.character = 'A';
@@ -92,8 +121,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonA.right = cellButtonA.left + CELL_WIDTH - 1;
   cellButtonA.top = gridTop + 1;
   cellButtonA.bottom = cellButtonA.top + CELL_HEIGHT - 1;
-  RowCallback<0>::mainWindow = this;
-  cellButtonA.tapped = RowCallback<0>::tapped;
+  cellButtonA.tapped = rowTapped<0>;
 
   cellButtonB.display = display;
   cellButtonB.character = 'B';
@@ -101,8 +129,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonB.right = cellButtonB.left + CELL_WIDTH - 1;
   cellButtonB.top = gridTop + 1;
   cellButtonB.bottom = cellButtonB.top + CELL_HEIGHT - 1;
-  RowCallback<1>::mainWindow = this;
-  cellButtonB.tapped = RowCallback<1>::tapped;
+  cellButtonB.tapped = rowTapped<1>;
 
   cellButtonC.display = display;
   cellButtonC.character = 'C';
@@ -110,8 +137,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonC.right = cellButtonC.left + CELL_WIDTH - 1;
   cellButtonC.top = gridTop + 1;
   cellButtonC.bottom = cellButtonC.top + CELL_HEIGHT - 1;
-  RowCallback<2>::mainWindow = this;
-  cellButtonC.tapped = RowCallback<2>::tapped;
+  cellButtonC.tapped = rowTapped<2>;
 
   cellButtonD.display = display;
   cellButtonD.character = 'D';
@@ -119,8 +145,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonD.right = cellButtonD.left + CELL_WIDTH - 1;
   cellButtonD.top = gridTop + CELL_HEIGHT + 2;
   cellButtonD.bottom = cellButtonD.top + CELL_HEIGHT - 1;
-  RowCallback<3>::mainWindow = this;
-  cellButtonD.tapped = RowCallback<3>::tapped;
+  cellButtonD.tapped = rowTapped<3>;
 
   cellButtonE.display = display;
   cellButtonE.character = 'E';
@@ -128,8 +153,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonE.right = cellButtonE.left + CELL_WIDTH - 1;
   cellButtonE.top = gridTop + CELL_HEIGHT + 2;
   cellButtonE.bottom = cellButtonE.top + CELL_HEIGHT - 1;
-  RowCallback<4>::mainWindow = this;
-  cellButtonE.tapped = RowCallback<4>::tapped;
+  cellButtonE.tapped = rowTapped<4>;
 
   cellButtonF.display = display;
   cellButtonF.character = 'F';
@@ -137,8 +161,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonF.right = cellButtonF.left + CELL_WIDTH - 1;
   cellButtonF.top = gridTop + CELL_HEIGHT + 2;
   cellButtonF.bottom = cellButtonF.top + CELL_HEIGHT - 1;
-  RowCallback<5>::mainWindow = this;
-  cellButtonF.tapped = RowCallback<5>::tapped;
+  cellButtonF.tapped = rowTapped<5>;
 
   cellButtonG.display = display;
   cellButtonG.character = 'G';
@@ -146,8 +169,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonG.right = cellButtonG.left + CELL_WIDTH - 1;
   cellButtonG.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButtonG.bottom = cellButtonG.top + CELL_HEIGHT - 1;
-  RowCallback<6>::mainWindow = this;
-  cellButtonG.tapped = RowCallback<6>::tapped;
+  cellButtonG.tapped = rowTapped<6>;
 
   cellButtonH.display = display;
   cellButtonH.character = 'H';
@@ -155,8 +177,7 @@ void MainWindow::setupMemberVariables() {
   cellButtonH.right = cellButtonH.left + CELL_WIDTH - 1;
   cellButtonH.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButtonH.bottom = cellButtonH.top + CELL_HEIGHT - 1;
-  RowCallback<7>::mainWindow = this;
-  cellButtonH.tapped = RowCallback<7>::tapped;
+  cellButtonH.tapped = rowTapped<7>;
 
   cellButton1.display = display;
   cellButton1.character = '1';
@@ -164,8 +185,7 @@ void MainWindow::setupMemberVariables() {
   cellButton1.right = cellButton1.left + CELL_WIDTH - 1;
   cellButton1.top = gridTop + 1;
   cellButton1.bottom = cellButton1.top + CELL_HEIGHT - 1;
-  ColCallback<0>::mainWindow = this;
-  cellButton1.tapped = ColCallback<0>::tapped;
+  cellButton1.tapped = colTapped<0>;
 
   cellButton2.display = display;
   cellButton2.character = '2';
@@ -173,8 +193,7 @@ void MainWindow::setupMemberVariables() {
   cellButton2.right = cellButton2.left + CELL_WIDTH - 1;
   cellButton2.top = gridTop + 1;
   cellButton2.bottom = cellButton2.top + CELL_HEIGHT - 1;
-  ColCallback<1>::mainWindow = this;
-  cellButton2.tapped = ColCallback<1>::tapped;
+  cellButton2.tapped = colTapped<1>;
 
   cellButton3.display = display;
   cellButton3.character = '3';
@@ -182,8 +201,7 @@ void MainWindow::setupMemberVariables() {
   cellButton3.right = cellButton3.left + CELL_WIDTH - 1;
   cellButton3.top = gridTop + 1;
   cellButton3.bottom = cellButton3.top + CELL_HEIGHT - 1;
-  ColCallback<2>::mainWindow = this;
-  cellButton3.tapped = ColCallback<2>::tapped;
+  cellButton3.tapped = colTapped<2>;
 
   cellButton4.display = display;
   cellButton4.character = '4';
@@ -191,8 +209,7 @@ void MainWindow::setupMemberVariables() {
   cellButton4.right = cellButton4.left + CELL_WIDTH - 1;
   cellButton4.top = gridTop + CELL_HEIGHT + 2;
   cellButton4.bottom = cellButton4.top + CELL_HEIGHT - 1;
-  ColCallback<3>::mainWindow = this;
-  cellButton4.tapped = ColCallback<3>::tapped;
+  cellButton4.tapped = colTapped<3>;
 
   cellButton5.display = display;
   cellButton5.character = '5';
@@ -200,8 +217,7 @@ void MainWindow::setupMemberVariables() {
   cellButton5.right = cellButton5.left + CELL_WIDTH - 1;
   cellButton5.top = gridTop + CELL_HEIGHT + 2;
   cellButton5.bottom = cellButton5.top + CELL_HEIGHT - 1;
-  ColCallback<4>::mainWindow = this;
-  cellButton5.tapped = ColCallback<4>::tapped;
+  cellButton5.tapped = colTapped<4>;
 
   cellButton6.display = display;
   cellButton6.character = '6';
@@ -209,8 +225,7 @@ void MainWindow::setupMemberVariables() {
   cellButton6.right = cellButton6.left + CELL_WIDTH - 1;
   cellButton6.top = gridTop + CELL_HEIGHT + 2;
   cellButton6.bottom = cellButton6.top + CELL_HEIGHT - 1;
-  ColCallback<5>::mainWindow = this;
-  cellButton6.tapped = ColCallback<5>::tapped;
+  cellButton6.tapped = colTapped<5>;
 
   cellButton7.display = display;
   cellButton7.character = '7';
@@ -218,8 +233,7 @@ void MainWindow::setupMemberVariables() {
   cellButton7.right = cellButton7.left + CELL_WIDTH - 1;
   cellButton7.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButton7.bottom = cellButton7.top + CELL_HEIGHT - 1;
-  ColCallback<6>::mainWindow = this;
-  cellButton7.tapped = ColCallback<6>::tapped;
+  cellButton7.tapped = colTapped<6>;
 
   cellButton8.display = display;
   cellButton8.character = '8';
@@ -227,15 +241,14 @@ void MainWindow::setupMemberVariables() {
   cellButton8.right = cellButton8.left + CELL_WIDTH - 1;
   cellButton8.top = gridTop + 2 * CELL_HEIGHT + 3;
   cellButton8.bottom = cellButton8.top + CELL_HEIGHT - 1;
-  ColCallback<7>::mainWindow = this;
-  cellButton8.tapped = ColCallback<7>::tapped;
+  cellButton8.tapped = colTapped<7>;
 
   vendButton.display = display;
   vendButton.left = gridLeft;
   vendButton.right = gridRight;
   vendButton.bottom = gridBottom;
   vendButton.top = vendButton.bottom - CELL_HEIGHT - 7;
-  vendButton.tapped = callback<StaticCallbackType::VEND>(vend);
+  vendButton.tapped = vend;
   vendButton.disable();
 
   cancelOrderButton.display = display;
@@ -243,7 +256,7 @@ void MainWindow::setupMemberVariables() {
   cancelOrderButton.right = 193;
   cancelOrderButton.bottom = vendButton.top - 5;
   cancelOrderButton.top = cancelOrderButton.bottom - 74 - 7;
-  cancelOrderButton.tapped = callback<StaticCallbackType::CANCEL_ORDER>(cancelOrder);
+  cancelOrderButton.tapped = cancelOrder;
   cancelOrderButton.disable();
 
   addItemButton.display = display;
@@ -251,17 +264,16 @@ void MainWindow::setupMemberVariables() {
   addItemButton.right = gridRight;
   addItemButton.bottom = vendButton.top - 5;
   addItemButton.top = addItemButton.bottom - 74 - 7;
-  addItemButton.tapped = callback<StaticCallbackType::ADD_ITEM>(addItemScreen);
+  addItemButton.tapped = addItemScreen;
 
   membershipButton.display = display;
   membershipButton.left = cancelOrderButton.right + 5;
   membershipButton.right = addItemButton.left - 5;
   membershipButton.bottom = vendButton.top - 5;
   membershipButton.top = addItemButton.top;
-  membershipButton.tapped = callback<StaticCallbackType::MEMBERSHIP_BUTTON_TAPPED>(membershipButtonTapped);
+  membershipButton.tapped = membershipButtonTapped;
   membershipButton.disable();
 
-  memberVariablesSet = true;
   verifyRowsValidity();
 }
 
@@ -288,9 +300,9 @@ void MainWindow::touch(uint8_t touchMode, uint16_t x, uint16_t y) {
   CALL_ON_BUTTONS(touch(touchMode, x, y))
 }
 
-void MainWindow::setState(MainWindowState state) {
-  if(this->state != state) {
-    this->state = state;
+void MainWindow::setState(MainWindowState newState) {
+  if(state != newState) {
+    state = newState;
     CALL_ON_BUTTONS(forceRedrawNeeded())
   }
 }
@@ -499,42 +511,31 @@ void MainWindow::handleVendEnabled() {
   }
 }
 
-template<StaticCallbackType type, typename... Args>
-VariableCallback<Args...> MainWindow::callback(VariableCallback<MainWindow*, Args...> function) {
-  StaticCallback<type, Args...>::mainWindow = this;
-  StaticCallback<type, Args...>::windowCallback = function;
-  return StaticCallback<type, Args...>::callback;
-}
-
-template<StaticCallbackType type, typename... Args>
-void StaticCallback<type, Args...>::callback(Args... args) {
-  windowCallback(mainWindow, args...);
-}
-
-void MainWindow::back(MainWindow* mainWindow) {
-  if(mainWindow->state == MainWindowState::LETTERS_VISIBLE) {
-    mainWindow->setState(MainWindowState::VEND_SCREEN);
+void MainWindow::back() {
+  if(state == MainWindowState::LETTERS_VISIBLE) {
+    setState(MainWindowState::VEND_SCREEN);
     // Force the order to draw since we might have been covering part of the screen
-    mainWindow->drawOrder();
-  } else if(mainWindow->state == MainWindowState::NUMBERS_VISIBLE) {
-    mainWindow->setState(MainWindowState::LETTERS_VISIBLE);
+    drawOrder();
+  } else if(state == MainWindowState::NUMBERS_VISIBLE) {
+    setState(MainWindowState::LETTERS_VISIBLE);
   }
 }
 
-void MainWindow::cancelOrder(MainWindow* mainWindow) {
+void MainWindow::cancelOrder() {
   Session::reset();
-  mainWindow->drawOrder();
+  drawOrder();
 }
 
-void MainWindow::vend(MainWindow* mainWindow) {
-  mainWindow->vendButton.disable();
-  mainWindow->cancelOrderButton.disable();
-  mainWindow->addItemButton.disable();
+void MainWindow::vend() {
+  vendButton.disable();
+  cancelOrderButton.disable();
+  addItemButton.disable();
 
   Session::vend();
 }
 
-void MainWindow::rowTapped(uint8_t row) {
+template <uint8_t row>
+void MainWindow::rowTapped() {
   if(state == MainWindowState::LETTERS_VISIBLE) {
     selectedRow = row;
     setState(MainWindowState::NUMBERS_VISIBLE);
@@ -542,7 +543,8 @@ void MainWindow::rowTapped(uint8_t row) {
   }
 }
 
-void MainWindow::colTapped(uint8_t col) {
+template <uint8_t col>
+void MainWindow::colTapped() {
   if(state == MainWindowState::NUMBERS_VISIBLE) {
     setState(MainWindowState::VEND_SCREEN);
     Session::addToCurrentOrder(selectedRow, col);
@@ -551,82 +553,82 @@ void MainWindow::colTapped(uint8_t col) {
   }
 }
 
-void MainWindow::moneyAvailable(MainWindow* mainWindow, uint32_t amount) {
-  mainWindow->handleVendEnabled();
+void MainWindow::moneyAvailable(uint32_t amount) {
+  handleVendEnabled();
 
   if(amount == 0) {
     return;
   }
 
-  mainWindow->cancelOrderButton.enable();
-  if(mainWindow->state != MainWindowState::VEND_SCREEN) {
+  cancelOrderButton.enable();
+  if(state != MainWindowState::VEND_SCREEN) {
     // If we're on an item selection screen, force us to the vend screen so we can see the money we put in
-    mainWindow->setState(MainWindowState::VEND_SCREEN);
-    mainWindow->drawOrder();
+    setState(MainWindowState::VEND_SCREEN);
+    drawOrder();
   } else {
     // If we're on the vend screen, just show the current credit
-    mainWindow->drawCredit();
+    drawCredit();
   }
 }
 
-void MainWindow::addItemScreen(MainWindow* mainWindow) {
-  mainWindow->display->gfx_RectangleFilled(
+void MainWindow::addItemScreen() {
+  display->gfx_RectangleFilled(
     0,
-    mainWindow->gridTop - 4,
-    mainWindow->screenWidth - 1,
-    mainWindow->screenHeight - 1,
+    gridTop - 4,
+    screenWidth - 1,
+    screenHeight - 1,
     WHITESMOKE
   );
-  mainWindow->setState(MainWindowState::LETTERS_VISIBLE);
+  setState(MainWindowState::LETTERS_VISIBLE);
 }
 
-void MainWindow::customerLookupStarted(MainWindow* mainWindow) {
-  mainWindow->membershipButton.setState(MembershipButtonState::PLEASE_WAIT);
-  mainWindow->membershipButton.disable();
-  mainWindow->cancelOrderButton.enable();
-  mainWindow->setState(MainWindowState::VEND_SCREEN);
+void MainWindow::customerLookupStarted() {
+  membershipButton.setState(MembershipButtonState::PLEASE_WAIT);
+  membershipButton.disable();
+  cancelOrderButton.enable();
+  setState(MainWindowState::VEND_SCREEN);
 }
 
-void MainWindow::ordersRetrieved(MainWindow* mainWindow) {
-  mainWindow->membershipButton.setState(MembershipButtonState::ORDER_AVAILALBLE);
+void MainWindow::ordersRetrieved() {
+  membershipButton.setState(MembershipButtonState::ORDER_AVAILALBLE);
 }
 
-void MainWindow::noOrders(MainWindow* mainWindow) {
-  mainWindow->membershipButton.setState(MembershipButtonState::NO_ORDERS);
+void MainWindow::noOrders() {
+  membershipButton.setState(MembershipButtonState::NO_ORDERS);
 }
 
-void MainWindow::unknownCard(MainWindow* mainWindow) {
-  mainWindow->membershipButton.setState(MembershipButtonState::UNKNOWN_CARD);
+void MainWindow::unknownCard() {
+  membershipButton.setState(MembershipButtonState::UNKNOWN_CARD);
 }
 
-void MainWindow::sessionReset(MainWindow* mainWindow) {
-  mainWindow->membershipButton.setState(MembershipButtonState::SCAN_CARD);
-  mainWindow->membershipButton.disable();
-  mainWindow->cancelOrderButton.disable();
-  mainWindow->vendButton.disable();
-  mainWindow->addItemButton.enable();
-  mainWindow->verifyRowsValidity();
+void MainWindow::sessionReset() {
+  membershipButton.setState(MembershipButtonState::SCAN_CARD);
+  membershipButton.disable();
+  cancelOrderButton.disable();
+  vendButton.disable();
+  addItemButton.enable();
+  verifyRowsValidity();
 }
 
-void MainWindow::membershipButtonTapped(MainWindow* mainWindow) {
+void MainWindow::membershipButtonTapped() {
   /// TODO Remove this method entirely when we remove that button
 }
 
-void MainWindow::currentOrderUpdated(MainWindow* mainWindow) {
-  mainWindow->drawOrder();
-  mainWindow->handleVendEnabled();
+void MainWindow::currentOrderUpdated() {
+  drawOrder();
+  handleVendEnabled();
 
   Order* order = Session::getCurrentOrder();
 
   if(order->getNumItems() > 0) {
-    mainWindow->cancelOrderButton.enable();
+    cancelOrderButton.enable();
     // TODO PENDING and UNKNOWN may be the only two that CAN add an item
     if(order->status == OrderStatus::PROCESSING) {
-      mainWindow->addItemButton.disable();
+      addItemButton.disable();
     }
   }
 
-  mainWindow->verifyRowsValidity();
+  verifyRowsValidity();
 }
 
 #endif

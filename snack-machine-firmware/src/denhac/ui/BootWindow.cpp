@@ -2,13 +2,36 @@
 
 #include "denhac/ui/BootWindow.h"
 
-#include "ui/WindowManager.h"
+#include "ui/WindowManager.hpp"
 #include "ui/Screen.h"
-#include "denhac/ui/DenhacUI.h"
+#include "denhac/ui/MainWindow/MainWindow.h"
 
 #include "utils.h"
 
-void BootWindow::show() {
+Diablo_Serial_4DLib* BootWindow::display;
+
+unsigned long BootWindow::lastChangeMillis = 0;
+bool BootWindow::billValidatorIdle = false;
+bool BootWindow::coinChangerIdle = false;
+bool BootWindow::siteLinkIdle = false;
+bool BootWindow::wifiOnline = false;
+bool BootWindow::motorsIdle = false;
+
+bool BootWindow::redrawBillValidator = true;
+bool BootWindow::redrawCoinChanger = true;
+bool BootWindow::redrawSiteLink = true;
+bool BootWindow::redrawWifi = true;
+bool BootWindow::redrawMotors = true;
+
+uint16_t BootWindow::billValidatorY;
+uint16_t BootWindow::coinChangerY;
+uint16_t BootWindow::siteLinkY;
+uint16_t BootWindow::wifiY;
+uint16_t BootWindow::motorsY;
+
+void BootWindow::setup() {
+  display = &Screen::display;
+
   display->gfx_BGcolour(WHITESMOKE);
   display->gfx_Cls();
 
@@ -135,7 +158,7 @@ void BootWindow::loop() {
     wifiOnline &&
     motorsIdle) {
       LOOP_WAIT_MS(lastChangeMillis, 3000);
-      WindowManager::show(DenhacUI::mainWindow);
+      WindowManager::show<MainWindow>();
     }
 }
 
