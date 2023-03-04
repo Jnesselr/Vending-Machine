@@ -10,6 +10,7 @@ MotorState Motors::motorState = MotorState::NONE_SELECTED;
 MotorSystemStateCallback Motors::onSystemStateChanged = nullptr;
 MotorStateCallback Motors::onMotorStateChanged = nullptr;
 ItemVendedCallback Motors::onItemVended = nullptr;
+MotorAvailableCallback Motors::onMotorAvailability = nullptr;
 
 unsigned long Motors::lastStateChangeTime = 0;
 uint8_t Motors::motorsScanResult[8] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -112,9 +113,11 @@ void Motors::handleInitialScan() {
     // Serial.print(") ");
 
     int value = analogRead(MOTORS_SENSE);
+    bool motorAvailable = false;
     if(value < 100) {
       uint64_t mask = 1 << selectedCol;
       motorsScanResult[selectedRow] |= mask;
+      motorAvailable = true;
       // Serial.println("EXISTS");
     } else {
       // Serial.println("does NOT exist");
@@ -122,6 +125,7 @@ void Motors::handleInitialScan() {
     Serial.flush();
 
     off();
+    CALLBACK(onMotorAvailability, selectedRow, selectedCol, motorAvailable);
 
     selectedCol++;
     if(selectedCol == 8) {

@@ -29,8 +29,18 @@ uint16_t BootWindow::siteLinkY;
 uint16_t BootWindow::wifiY;
 uint16_t BootWindow::motorsY;
 
+uint8_t BootWindow::numStepsCompleted = 0;
+uint8_t BootWindow::numStepsTotal = 64 + 5;
+
 void BootWindow::setup() {
   display = &Screen::display;
+
+  Motors::onSystemStateChanged = BootWindow::onMotorSystemStateChanged;
+  Motors::onMotorAvailability = BootWindow::onMotorAvailability;
+  BillValidator::onStateChanged = BootWindow::onBillValidatorStateCallback;
+  CoinChanger::onStateChanged = BootWindow::onCoinChangerStateCallback;
+  SiteLink::onStateChanged = BootWindow::onSiteLinkStateCallback;
+  SiteLink::statusCallback = BootWindow::onSiteLinkStatusCallback;
 
   display->gfx_BGcolour(WHITESMOKE);
   display->gfx_Cls();
@@ -89,7 +99,7 @@ void BootWindow::setup() {
 
 void BootWindow::loop() {
   // If it's a minute and we're not done with this, hard reset
-  uint32_t timeout = 15 * 1000;
+  uint32_t timeout = 60000;
   if(current_loop_millis > timeout) {
     while(true); // Force a reset with watchdog
   }
@@ -152,6 +162,14 @@ void BootWindow::loop() {
     }
   }
 
+  // display->gfx_Rectangle(39, motorsY + 80, Screen::getWidth() - 39, motorsY + 85, LIGHTGREY);
+  display->gfx_Rectangle(38, motorsY + 79, Screen::getWidth() - 38, motorsY + 86, LIGHTGREY);
+
+  uint16_t totalWidth = Screen::getWidth() - 80;
+  uint16_t widthUsed = (numStepsCompleted * totalWidth) / numStepsTotal;
+
+  display->gfx_RectangleFilled(40, motorsY + 81, 40 + widthUsed, motorsY + 84, GREEN);
+
   if(billValidatorIdle &&
     coinChangerIdle &&
     siteLinkIdle &&
@@ -162,44 +180,71 @@ void BootWindow::loop() {
     }
 }
 
-void BootWindow::setBillValidatorIdle(bool isIdle) {
-  if(isIdle != billValidatorIdle) {
+void BootWindow::onMotorSystemStateChanged(
+  MotorSystemState oldState,
+  MotorSystemState newState) {
+  if(newState != MotorSystemState::IDLE || redrawMotors) {
+    return;
+  }
+
+  motorsIdle = true;
+  redrawMotors = true;
+  lastChangeMillis = current_loop_millis;
+  numStepsCompleted++;
+}
+
+void BootWindow::onBillValidatorStateCallback(
+  BillValidatorState oldState,
+  BillValidatorState newState) {
+    if(newState != BillValidatorState::IDLE || redrawBillValidator) {
+      return;
+    }
+
     redrawBillValidator = true;
     lastChangeMillis = current_loop_millis;
-  }
-  billValidatorIdle = isIdle;
+    billValidatorIdle = true;
+    numStepsCompleted++;
 }
 
-void BootWindow::setCoinChangerIdle(bool isIdle) {
-  if(isIdle != coinChangerIdle) {
+void BootWindow::onCoinChangerStateCallback(
+  CoinChangerState oldState,
+  CoinChangerState newState) {
+    if(newState == CoinChangerState::IDLE || coinChangerIdle) {
+      return;
+    }
+
     redrawCoinChanger = true;
+    coinChangerIdle = true;
     lastChangeMillis = current_loop_millis;
-  }
-  coinChangerIdle = isIdle;
+    numStepsCompleted++;
 }
 
-void BootWindow::setSiteLinkIdle(bool isIdle) {
-  if(isIdle != siteLinkIdle) {
+void BootWindow::onSiteLinkStateCallback(
+  SiteLinkState oldState,
+  SiteLinkState newState) {
+    if(newState == SiteLinkState::IDLE || siteLinkIdle) {
+      return;
+    }
+
     redrawSiteLink = true;
+    siteLinkIdle = true;
     lastChangeMillis = current_loop_millis;
-  }
-  siteLinkIdle = isIdle;
+    numStepsCompleted++;
 }
 
-void BootWindow::setWifiOnline(bool online) {
-  if(online != wifiOnline) {
-    redrawWifi = true;
-    lastChangeMillis = current_loop_millis;
+void BootWindow::onSiteLinkStatusCallback(uint8_t statusCode) {
+  if(statusCode != BridgeStatus::WIFI_CONNECTED || wifiOnline) {
+    return;
   }
-  wifiOnline = online;
+
+  redrawWifi = true;
+  wifiOnline = true;
+  lastChangeMillis = current_loop_millis;
+  numStepsCompleted++;
 }
 
-void BootWindow::setMotorsIdle(bool isIdle) {
-  if(isIdle != motorsIdle) {
-    redrawMotors = true;
-    lastChangeMillis = current_loop_millis;
-  }
-  motorsIdle = isIdle;
+void BootWindow::onMotorAvailability(uint8_t row, uint8_t col, bool available) {
+  numStepsCompleted++;
 }
 
 void BootWindow::drawXAt(uint16_t x, uint16_t y) {

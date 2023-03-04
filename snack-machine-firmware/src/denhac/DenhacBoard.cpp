@@ -14,8 +14,8 @@
 
 #include "ui/WindowManager.hpp"
 #include "ui/Screen.h"
-#include "denhac/ui/DenhacUI.h"
 #include "denhac/DenhacBindings.h"
+#include "denhac/ui/BootWindow.h"
 
 Task DenhacBoard::billValidatorLoop(200, []{
   BillValidator::loop();

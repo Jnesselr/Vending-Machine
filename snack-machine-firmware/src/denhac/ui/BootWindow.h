@@ -3,6 +3,11 @@
 #include <Diablo_Serial_4DLib.h>
 
 #include "stdint.h"
+#include "motors.h"
+#include "mdb/devices/BillValidator.h"
+#include "mdb/devices/CoinChanger.h"
+#include "denhac/SiteLink.h"
+#include "denhac/data/BridgeStatus.h"
 
 class BootWindow {
   public:
@@ -11,11 +16,13 @@ class BootWindow {
     static void teardown() {};
     static void touch(uint8_t touchMode, uint16_t x, uint16_t y) {};
 
-    static void setBillValidatorIdle(bool);
-    static void setCoinChangerIdle(bool);
-    static void setSiteLinkIdle(bool);
-    static void setWifiOnline(bool);
-    static void setMotorsIdle(bool);
+
+    static void onCoinChangerStateCallback(CoinChangerState oldState, CoinChangerState newState);
+    static void onBillValidatorStateCallback(BillValidatorState oldState, BillValidatorState newState);
+    static void onMotorSystemStateChanged(MotorSystemState oldState, MotorSystemState newState);
+    static void onSiteLinkStateCallback(SiteLinkState oldState, SiteLinkState newState);
+    static void onSiteLinkStatusCallback(uint8_t statusCode);
+    static void onMotorAvailability(uint8_t row, uint8_t col, bool available);
   private:
     static void drawXAt(uint16_t x, uint16_t y);
     static void drawCheckAt(uint16_t x, uint16_t y);
@@ -40,4 +47,7 @@ class BootWindow {
     static uint16_t siteLinkY;
     static uint16_t wifiY;
     static uint16_t motorsY;
+
+    static uint8_t numStepsCompleted;
+    static uint8_t numStepsTotal;
 };

@@ -4,7 +4,6 @@
 
 #include "denhac/DenhacBindings.h"
 #include "denhac/data/BridgeStatus.h"
-#include "denhac/ui/DenhacUI.h"
 #include "denhac/Session.h"
 #include "denhac/ProductManager.h"
 
@@ -13,16 +12,10 @@
 void DenhacBindings::setup() {
   RFID::onCardScanned = DenhacBindings::onCardScanned;
 
-  Motors::onSystemStateChanged = DenhacBindings::onMotorSystemStateChanged;
-
-  BillValidator::onStateChanged = DenhacBindings::onBillValidatorStateCallback;
   BillValidator::onBillRouted = DenhacBindings::onBillRoutedCallback;
 
-  CoinChanger::onStateChanged = DenhacBindings::onCoinChangerStateCallback;
   CoinChanger::onCoinDeposited = DenhacBindings::onCoinDepositedCallback;
 
-  SiteLink::onStateChanged = DenhacBindings::onSiteLinkStateCallback;
-  SiteLink::statusCallback = DenhacBindings::onSiteLinkStatusCallback;
   SiteLink::productUpdatedCallback = ProductManager::productUpdated;
   SiteLink::productRemovedCallback = ProductManager::productRemoved;
 
@@ -31,22 +24,6 @@ void DenhacBindings::setup() {
 
 void DenhacBindings::onCardScanned(unsigned long cardCode) {
   Session::cardScanned((uint32_t) cardCode);
-}
-
-void DenhacBindings::onMotorSystemStateChanged(
-  MotorSystemState oldState,
-  MotorSystemState newState) {
-    if(newState == MotorSystemState::IDLE) {
-      DenhacUI::bootWindow.setMotorsIdle(true);
-    }
-}
-
-void DenhacBindings::onBillValidatorStateCallback(
-  BillValidatorState oldState,
-  BillValidatorState newState) {
-    if(newState == BillValidatorState::IDLE) {
-      DenhacUI::bootWindow.setBillValidatorIdle(true);
-    }
 }
 
 void DenhacBindings::onBillRoutedCallback(BillRouting routing, uint8_t billType) {
@@ -61,14 +38,6 @@ void DenhacBindings::onBillRoutedCallback(BillRouting routing, uint8_t billType)
   }
 }
 
-void DenhacBindings::onCoinChangerStateCallback(
-  CoinChangerState oldState,
-  CoinChangerState newState) {
-    if(newState == CoinChangerState::IDLE) {
-      DenhacUI::bootWindow.setCoinChangerIdle(true);
-    }
-}
-
 void DenhacBindings::onCoinDepositedCallback(
   CoinRouting routing,
   uint8_t coinType) {
@@ -77,20 +46,6 @@ void DenhacBindings::onCoinDepositedCallback(
     }
 
     Session::moneyInserted(CoinChanger::getValue(coinType));
-}
-
-void DenhacBindings::onSiteLinkStateCallback(
-  SiteLinkState oldState,
-  SiteLinkState newState) {
-    if(newState == SiteLinkState::IDLE) {
-      DenhacUI::bootWindow.setSiteLinkIdle(true);
-    }
-}
-
-void DenhacBindings::onSiteLinkStatusCallback(uint8_t statusCode) {
-  if(statusCode == BridgeStatus::WIFI_CONNECTED) {
-    DenhacUI::bootWindow.setWifiOnline(true);
-  }
 }
 
 #endif
