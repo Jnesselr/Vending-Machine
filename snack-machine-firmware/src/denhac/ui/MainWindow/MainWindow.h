@@ -42,6 +42,7 @@ private:
   static void back();
   static void moneyAvailable(uint32_t amount);
   static void sessionReset();
+  static void sessionActive();
   static void customerLookupStarted();
   static void ordersRetrieved();
   static void noOrders();
@@ -66,6 +67,8 @@ private:
   static void verifyColsValidity();
   static void handleVendEnabled();
 
+  static void handleCardSwipedTimeout();
+
   static uint16_t screenWidth;
   static uint16_t screenHeight;
 
@@ -82,6 +85,8 @@ private:
   static uint16_t gridTop;
 
   static uint8_t selectedRow;
+
+  static unsigned long lastInteractionTimeInSession;
 
   static BackButton backButton;
 

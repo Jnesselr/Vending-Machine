@@ -27,6 +27,8 @@ uint16_t MainWindow::gridTop;
 
 uint8_t MainWindow::selectedRow;
 
+unsigned long MainWindow::lastInteractionTimeInSession = 0;
+
 BackButton MainWindow::backButton;
 
 CellButton MainWindow::cellButtonA;
@@ -97,6 +99,7 @@ void MainWindow::setup() {
   Session::onNoOrders = noOrders;
   Session::onUnknownCard = unknownCard;
   Session::onReset = sessionReset;
+  Session::onSessionActive = sessionActive;
   Session::onCurrentOrderUpdated = currentOrderUpdated;
 }
 
@@ -281,7 +284,7 @@ void MainWindow::setupMemberVariables() {
 void MainWindow::loop() {
   // This avoids the unsigned long rollover bug
   if(current_loop_millis > 4000000000ul) {
-    // TOOD Check if session is active
+    // TODO Check if session is active
     while(true); // Force a reset with watchdog
   }
 
@@ -293,6 +296,8 @@ void MainWindow::loop() {
   }
 
   CALL_ON_BUTTONS(show())
+
+  handleCardSwipedTimeout();
 
   oldLoopState = state;
 }
@@ -513,6 +518,7 @@ void MainWindow::handleVendEnabled() {
 }
 
 void MainWindow::back() {
+  lastInteractionTimeInSession = current_loop_millis;
   if(state == MainWindowState::LETTERS_VISIBLE) {
     setState(MainWindowState::VEND_SCREEN);
     // Force the order to draw since we might have been covering part of the screen
@@ -538,6 +544,7 @@ void MainWindow::vend() {
 template <uint8_t row>
 void MainWindow::rowTapped() {
   if(state == MainWindowState::LETTERS_VISIBLE) {
+    lastInteractionTimeInSession = current_loop_millis;
     selectedRow = row;
     setState(MainWindowState::NUMBERS_VISIBLE);
     verifyColsValidity();
@@ -547,10 +554,9 @@ void MainWindow::rowTapped() {
 template <uint8_t col>
 void MainWindow::colTapped() {
   if(state == MainWindowState::NUMBERS_VISIBLE) {
+    lastInteractionTimeInSession = current_loop_millis;
     setState(MainWindowState::VEND_SCREEN);
     Session::addToCurrentOrder(selectedRow, col);
-
-    cancelOrderButton.enable();
   }
 }
 
@@ -581,6 +587,8 @@ void MainWindow::addItemScreen() {
     WHITESMOKE
   );
   setState(MainWindowState::LETTERS_VISIBLE);
+
+  lastInteractionTimeInSession = current_loop_millis;
 }
 
 void MainWindow::customerLookupStarted() {
@@ -588,6 +596,7 @@ void MainWindow::customerLookupStarted() {
   membershipButton.disable();
   cancelOrderButton.enable();
   setState(MainWindowState::VEND_SCREEN);
+  drawOrder();
 }
 
 void MainWindow::ordersRetrieved() {
@@ -609,6 +618,13 @@ void MainWindow::sessionReset() {
   vendButton.disable();
   addItemButton.enable();
   verifyRowsValidity();
+  lastInteractionTimeInSession = 0;
+}
+
+void MainWindow::sessionActive() {
+  lastInteractionTimeInSession = current_loop_millis;
+
+  cancelOrderButton.enable();
 }
 
 void MainWindow::membershipButtonTapped() {
@@ -630,6 +646,21 @@ void MainWindow::currentOrderUpdated() {
   }
 
   verifyRowsValidity();
+}
+
+void MainWindow::handleCardSwipedTimeout() {
+  if(lastInteractionTimeInSession == 0) {
+    return; // No badge scan at all yet
+  }
+  if(! TIME_SINCE(lastInteractionTimeInSession, 300000ul)) {  // 5 minutes = 300,000 ms
+    return; // We haven't timed out yet
+  }
+
+  // TODO Notify the user that we're reseting their session and give them time to keep it going
+
+  if(Session::isActive()) {
+    Session::reset();
+  }
 }
 
 #endif

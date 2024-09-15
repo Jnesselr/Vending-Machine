@@ -9,6 +9,7 @@ typedef void (*MoneyCallback)(uint32_t amount);
 class Session {
   public:
     static void reset();
+    static VoidCallback onSessionActive;
     static VoidCallback onReset;
 
     static Order* getCurrentOrder();

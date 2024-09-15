@@ -15,6 +15,7 @@ uint32_t Session::onlineCredit = 0;
 uint32_t Session::moneyInsertedInMachine = 0;
 bool Session::useRFIDForPayment = false;
 VoidCallback Session::onReset = nullptr;
+VoidCallback Session::onSessionActive = nullptr;
 MoneyCallback Session::moneyInsertedCallback = nullptr;
 MoneyCallback Session::moneyAvailableCallback = nullptr;
 MoneyCallback Session::creditAvailableCallback = nullptr;
@@ -50,6 +51,10 @@ Order* Session::getCurrentOrder() {
 }
 
 void Session::addToCurrentOrder(uint8_t row, uint8_t col) {
+  if(! active) {
+    active = true;
+    CALLBACK(onSessionActive);
+  }
   Product product = ProductManager::get(row, col);
   currentOrder.add(product);  // This is afe to call even if the product is invalid
 
@@ -96,11 +101,11 @@ void Session::onGetOrdersByCardSuccess(const Order& order) {
   }
 
   if(order.status == OrderStatus::UNKNOWN) {
-    Session::active = true;
     CALLBACK(onNoOrders);
   } else {
     Session::currentOrder = order;
     Session::active = true;
+    CALLBACK(onSessionActive);
     CALLBACK(onOrdersRetrieved);
     CALLBACK(onCurrentOrderUpdated);
   }
@@ -112,9 +117,11 @@ void Session::onGetCreditByCardError(uint8_t statusCode) {
 
 void Session::onGetCreditByCardSuccess(uint32_t credit, bool useRFIDForPayment) {
   if(cardNum != 0) {
+    Session::active = true;
     Session::onlineCredit = credit;
     Session::useRFIDForPayment = useRFIDForPayment;
 
+    CALLBACK(onSessionActive);
     CALLBACK(creditAvailableCallback, credit);
     CALLBACK(moneyAvailableCallback, getCurrentAvailableMoney())
   }
