@@ -35,6 +35,19 @@ uint16_t BootWindow::motorsY;
 uint8_t BootWindow::numStepsCompleted = 0;
 uint8_t BootWindow::numStepsTotal = 64 + 6;
 
+constexpr uint16_t text_x_value = 96;
+constexpr uint16_t circle_x_value = text_x_value - 36;
+constexpr uint16_t check_x_value = circle_x_value - 20;
+
+void BootWindow::teardown() {
+  Motors::onSystemStateChanged = nullptr;
+  Motors::onMotorAvailability = nullptr;
+  BillValidator::onStateChanged = nullptr;
+  CoinChanger::onStateChanged = nullptr;
+  SiteLink::onStateChanged = nullptr;
+  SiteLink::statusCallback = nullptr;
+}
+
 void BootWindow::setup() {
   display = &Screen::display;
 
@@ -85,22 +98,22 @@ void BootWindow::setup() {
   denhacOrgY = wifiY + 60;
   motorsY = denhacOrgY + 60;
 
-  display->gfx_MoveTo(102, billValidatorY);
+  display->gfx_MoveTo(text_x_value, billValidatorY);
   display->putstr((char*) "Bill Validator");
 
-  display->gfx_MoveTo(102, coinChangerY);
+  display->gfx_MoveTo(text_x_value, coinChangerY);
   display->putstr((char*) "Coin Changer");
 
-  display->gfx_MoveTo(102, siteLinkY);
+  display->gfx_MoveTo(text_x_value, siteLinkY);
   display->putstr((char*) "Site Link");
 
-  display->gfx_MoveTo(102, wifiY);
+  display->gfx_MoveTo(text_x_value, wifiY);
   display->putstr((char*) "WiFi Connected");
 
-  display->gfx_MoveTo(102, denhacOrgY);
+  display->gfx_MoveTo(text_x_value, denhacOrgY);
   display->putstr((char*) "denhac.org link");
 
-  display->gfx_MoveTo(102, motorsY);
+  display->gfx_MoveTo(text_x_value, motorsY);
   display->putstr((char*) "Motors");
 
   // Reset it back to normal
@@ -120,70 +133,69 @@ void BootWindow::loop() {
   if(redrawBillValidator) {
     redrawBillValidator = false;
     color = billValidatorIdle ? GREEN : RED;
-    display->gfx_CircleFilled(66, billValidatorY + 15, size, color);
+    display->gfx_CircleFilled(circle_x_value, billValidatorY + 15, size, color);
     if(billValidatorIdle) {
-      drawCheckAt(46, billValidatorY - 5);
+      drawCheckAt(check_x_value, billValidatorY - 5);
     } else {
-      drawXAt(46, billValidatorY - 5);
+      drawXAt(check_x_value, billValidatorY - 5);
     }
   }
 
   if(redrawCoinChanger) {
     redrawCoinChanger = false;
     color = coinChangerIdle ? GREEN : RED;
-    display->gfx_CircleFilled(66, coinChangerY + 15, size, color);
+    display->gfx_CircleFilled(circle_x_value, coinChangerY + 15, size, color);
     if(coinChangerIdle) {
-      drawCheckAt(46, coinChangerY - 5);
+      drawCheckAt(check_x_value, coinChangerY - 5);
     } else {
-      drawXAt(46, coinChangerY - 5);
+      drawXAt(check_x_value, coinChangerY - 5);
     }
   }
 
   if(redrawSiteLink) {
     redrawSiteLink = false;
     color = siteLinkIdle ? GREEN : RED;
-    display->gfx_CircleFilled(66, siteLinkY + 15, size, color);
+    display->gfx_CircleFilled(circle_x_value, siteLinkY + 15, size, color);
     if(siteLinkIdle) {
-      drawCheckAt(46, siteLinkY - 5);
+      drawCheckAt(check_x_value, siteLinkY - 5);
     } else {
-      drawXAt(46, siteLinkY - 5);
+      drawXAt(check_x_value, siteLinkY - 5);
     }
   }
 
   if(redrawWifi) {
     redrawWifi = false;
     color = wifiOnline ? GREEN : RED;
-    display->gfx_CircleFilled(66, wifiY + 15, size, color);
+    display->gfx_CircleFilled(circle_x_value, wifiY + 15, size, color);
     if(wifiOnline) {
-      drawCheckAt(46, wifiY - 5);
+      drawCheckAt(check_x_value, wifiY - 5);
     } else {
-      drawXAt(46, wifiY - 5);
+      drawXAt(check_x_value, wifiY - 5);
     }
   }
 
   if(redrawDenhacOrg) {
     redrawDenhacOrg = false;
     color = denhacOrgLink ? GREEN : RED;
-    display->gfx_CircleFilled(66, denhacOrgY + 15, size, color);
+    display->gfx_CircleFilled(circle_x_value, denhacOrgY + 15, size, color);
     if(denhacOrgLink) {
-      drawCheckAt(46, denhacOrgY - 5);
+      drawCheckAt(check_x_value, denhacOrgY - 5);
     } else {
-      drawXAt(46, denhacOrgY - 5);
+      drawXAt(check_x_value, denhacOrgY - 5);
     }
   }
 
   if(redrawMotors) {
     redrawMotors = false;
     color = motorsIdle ? GREEN : RED;
-    display->gfx_CircleFilled(66, motorsY + 15, size, color);
+    display->gfx_CircleFilled(circle_x_value, motorsY + 15, size, color);
     if(motorsIdle) {
-      drawCheckAt(46, motorsY - 5);
+      drawCheckAt(check_x_value, motorsY - 5);
     } else {
-      drawXAt(46, motorsY - 5);
+      drawXAt(check_x_value, motorsY - 5);
     }
   }
 
-  // display->gfx_Rectangle(39, motorsY + 80, Screen::getWidth() - 39, motorsY + 85, LIGHTGREY);
   display->gfx_Rectangle(38, motorsY + 79, Screen::getWidth() - 38, motorsY + 86, LIGHTGREY);
 
   uint16_t totalWidth = Screen::getWidth() - 80;

@@ -103,6 +103,17 @@ void MainWindow::setup() {
   Session::onCurrentOrderUpdated = currentOrderUpdated;
 }
 
+void MainWindow::teardown() {
+  Session::moneyAvailableCallback = nullptr;
+  Session::onCustomerLookupStarted = nullptr;
+  Session::onOrdersRetrieved = nullptr;
+  Session::onNoOrders = nullptr;
+  Session::onUnknownCard = nullptr;
+  Session::onReset = nullptr;
+  Session::onSessionActive = nullptr;
+  Session::onCurrentOrderUpdated = nullptr;
+}
+
 void MainWindow::setupMemberVariables() {
   screenWidth = Screen::getWidth();
   screenHeight = Screen::getHeight();

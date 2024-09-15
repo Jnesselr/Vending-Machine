@@ -29,7 +29,7 @@ class MainWindow {
 public:
   static void setup();
   static void loop();
-  static void teardown() {};
+  static void teardown();
   static void touch(uint8_t touchMode, uint16_t x, uint16_t y);
 private:
   static Diablo_Serial_4DLib* display;
