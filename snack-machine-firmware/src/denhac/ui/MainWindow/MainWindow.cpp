@@ -16,8 +16,9 @@ Diablo_Serial_4DLib* MainWindow::display;
 uint16_t MainWindow::screenWidth;
 uint16_t MainWindow::screenHeight;
 
-MainWindowState MainWindow::state;
-MainWindowState MainWindow::oldLoopState;
+
+MainWindowState MainWindow::state = MainWindowState::LETTERS_VISIBLE;
+MainWindowState MainWindow::oldLoopState = MainWindowState::VEND_SCREEN;
 
 uint16_t MainWindow::gridLeft;
 uint16_t MainWindow::gridRight;

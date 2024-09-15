@@ -17,7 +17,7 @@ class Button {
 
     void forceRedrawNeeded();
 
-    VoidCallback tapped;
+    VoidCallback tapped = nullptr;
   protected:
     virtual bool inBounds(uint16_t x, uint16_t y);
     bool redrawNeeded = true;

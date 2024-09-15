@@ -25,7 +25,7 @@ class RestRequest {
   public:
     RestRequest(
       WiFiClientSecure* client,
-      DynamicJsonDocument* jsonDoc,
+      JsonDocument* jsonDoc,
       const char * server);
     RestResponse* GET(const char * url);
     RestResponse* POST(const char * url);
@@ -38,7 +38,7 @@ class RestRequest {
 
     RestResponse* response;
     WiFiClientSecure* client;
-    DynamicJsonDocument *jsonDoc;
+    JsonDocument *jsonDoc;
     const char * server;
     char jsonBuffer[500];
     static String auth;

@@ -14,9 +14,7 @@ const uint8_t NUM_PRODUCTS = 64;
 HardwareSerial* DenhacWifiBridge::serial = &Serial2;
 
 WiFiClientSecure DenhacWifiBridge::client;
-// This value is enough to handle 64 products and a variable number of orders
-// We might want to implement paging to reduce the amount of memory needed here.
-DynamicJsonDocument DenhacWifiBridge::jsonDoc(JSON_ARRAY_SIZE(NUM_PRODUCTS) + NUM_PRODUCTS*JSON_OBJECT_SIZE(8));
+JsonDocument DenhacWifiBridge::jsonDoc {};
 RestRequest DenhacWifiBridge::request(&client, &jsonDoc, server);
 DebugCallback RestRequest::debug = &DenhacWifiBridge::sendDebug;
 char DenhacWifiBridge::urlBuffer[100];

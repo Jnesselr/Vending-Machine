@@ -47,7 +47,7 @@ class DenhacWifiBridge: public VendingMachine {
 
     static WiFiClientSecure client;
     static HardwareSerial* serial;
-    static DynamicJsonDocument jsonDoc;
+    static JsonDocument jsonDoc;
     static uint32_t hashes[];
     static bool has_product[];
     static RestRequest request;

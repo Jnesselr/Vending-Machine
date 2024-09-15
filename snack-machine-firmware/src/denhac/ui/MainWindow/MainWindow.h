@@ -14,7 +14,7 @@ class MainWindowState
       NUMBERS_VISIBLE
     };
 
-    MainWindowState() = default;
+    MainWindowState() = delete;
     constexpr MainWindowState(Value state) : value(state) { }
 
     constexpr bool operator==(MainWindowState a) const { return value == a.value; }

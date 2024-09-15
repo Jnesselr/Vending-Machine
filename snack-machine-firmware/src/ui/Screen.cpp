@@ -1,3 +1,5 @@
+#ifdef VENDING_MAIN_BOARD
+
 #include "Screen.h"
 
 #include "utils.h"
@@ -49,3 +51,5 @@ uint16_t Screen::getWidth() {
 uint16_t Screen::getHeight() {
   return Screen::height;
 }
+
+#endif

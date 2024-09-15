@@ -4,7 +4,7 @@
 
 RestRequest::RestRequest(
   WiFiClientSecure *client,
-  DynamicJsonDocument *jsonDoc,
+  JsonDocument *jsonDoc,
   const char * server) {
   this->client = client;
   this->jsonDoc = jsonDoc;
