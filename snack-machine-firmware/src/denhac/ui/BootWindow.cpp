@@ -95,6 +95,9 @@ void BootWindow::setup() {
 
   display->gfx_MoveTo(102, motorsY);
   display->putstr((char*) "Motors");
+
+  // Reset it back to normal
+  display->gfx_MoveTo(0, 0);
 }
 
 void BootWindow::loop() {
