@@ -34,18 +34,21 @@ class BootWindow {
     static bool coinChangerIdle;
     static bool siteLinkIdle;
     static bool wifiOnline;
+    static bool denhacOrgLink;
     static bool motorsIdle;
 
     static bool redrawBillValidator;
     static bool redrawCoinChanger;
     static bool redrawSiteLink;
     static bool redrawWifi;
+    static bool redrawDenhacOrg;
     static bool redrawMotors;
 
     static uint16_t billValidatorY;
     static uint16_t coinChangerY;
     static uint16_t siteLinkY;
     static uint16_t wifiY;
+    static uint16_t denhacOrgY;
     static uint16_t motorsY;
 
     static uint8_t numStepsCompleted;

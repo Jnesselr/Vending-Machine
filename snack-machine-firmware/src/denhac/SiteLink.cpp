@@ -13,6 +13,7 @@ ProductUpdatedCallback SiteLink::productUpdatedCallback = nullptr;
 ProductRemovedCallback SiteLink::productRemovedCallback = nullptr;
 
 RingBuffer<3, SiteLinkCommand> SiteLink::commandBuffer;
+SiteLinkCommand SiteLink::currentCommand;
 
 SiteLinkState SiteLink::state = SiteLinkState::UNKNOWN;
 
@@ -30,6 +31,7 @@ uint8_t SiteLinkAck::packetMaxSizeSent = 0;
 uint8_t SiteLinkAck::packetMaxSizeRead = 0;
 
 unsigned long SiteLink::lastCommandRunMillis = 0;
+
 
 void SiteLink::setup() {
   linkSerial->begin(9600);
@@ -232,6 +234,7 @@ void SiteLink::handleStatus() {
         }
       }
     }
+
     break;
   case BridgeStatus::CONNECTION_FAILED:
   case BridgeStatus::REST_NOT_FOUND:
@@ -240,8 +243,7 @@ void SiteLink::handleStatus() {
     // If it's not safe to send a command, we probably already sent one
     if(!safeToSendCommand && !commandBuffer.isEmpty()) {
         safeToSendCommand = true;
-        SiteLinkCommand command = commandBuffer.pop();
-        CALLBACK(command.errorCallback, statusCode)
+        CALLBACK(currentCommand.errorCallback, statusCode)
     }
 
     break;
@@ -250,8 +252,7 @@ void SiteLink::handleStatus() {
     // We should only get this command in response to a request for cancellation
     safeToSendCommand = true;
     if(!commandBuffer.isEmpty()) {
-      SiteLinkCommand command = commandBuffer.pop();
-      CALLBACK(command.commandCallback)
+      CALLBACK(currentCommand.commandCallback)
     }
     break;
   case BridgeStatus::WIFI_CONNECTED:
@@ -299,8 +300,7 @@ void SiteLink::handleOrdersByCard() {
   }
   SiteLinkAck::ack();
 
-  SiteLinkCommand command = commandBuffer.pop();
-  OrderResponseCallback callback = (OrderResponseCallback) command.commandCallback;
+  OrderResponseCallback callback = (OrderResponseCallback) currentCommand.commandCallback;
 
   CALLBACK(callback, order)
 }
@@ -309,8 +309,7 @@ void SiteLink::handleOrderById() {
   Order order = readOrder();
   SiteLinkAck::ack();
 
-  SiteLinkCommand command = commandBuffer.pop();
-  OrderResponseCallback callback = (OrderResponseCallback) command.commandCallback;
+  OrderResponseCallback callback = (OrderResponseCallback) currentCommand.commandCallback;
 
   CALLBACK(callback, order)
 }
@@ -384,8 +383,7 @@ void SiteLink::handleCreditByCard() {
   msgpck_read_bool(linkSerial, &useRFIDForPayment);
   SiteLinkAck::ack();
 
-  SiteLinkCommand command = commandBuffer.pop();
-  CreditResponseCallback callback = (CreditResponseCallback) command.commandCallback;
+  CreditResponseCallback callback = (CreditResponseCallback) currentCommand.commandCallback;
 
   CALLBACK(callback, credit, useRFIDForPayment)
 }
@@ -398,8 +396,7 @@ void SiteLink::handleCreditUpdateByCard() {
   msgpck_read_integer(linkSerial, (byte*) &diffCredit, sizeof(diffCredit));
   SiteLinkAck::ack();
 
-  SiteLinkCommand command = commandBuffer.pop();
-  CreditUpdateResponseCallback callback = (CreditUpdateResponseCallback) command.commandCallback;
+  CreditUpdateResponseCallback callback = (CreditUpdateResponseCallback) currentCommand.commandCallback;
 
   CALLBACK(callback, totalCredit, diffCredit)
 }
@@ -414,22 +411,27 @@ void SiteLink::maybeSendCommand() {
     return;
   }
 
-  SiteLinkCommand command;
-
   if(commandBuffer.isEmpty()) {
     // If the buffer is empty and it's been a minute since
     // the last command, go ahead and fetch products
     LOOP_START_WAIT_MS(lastCommandRunMillis, 60000)
 
-    command.type = SiteLinkCommandType::GET_PRODUCTS;
-    command.linkSerial = linkSerial;
-  } else {
-    command = commandBuffer.peek();
+    fetchProducts();
   }
 
-  command.run();
+  currentCommand = commandBuffer.pop();
+
+  currentCommand.run();
   safeToSendCommand = false;
   lastCommandRunMillis = current_loop_millis;
+}
+
+void SiteLink::fetchProducts() {
+  SiteLinkCommand command;
+  command.linkSerial = linkSerial;
+  command.type = SiteLinkCommandType::GET_PRODUCTS;
+
+  commandBuffer.push(command);
 }
 
 void SiteLink::getOrdersByCard(

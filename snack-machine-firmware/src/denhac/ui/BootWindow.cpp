@@ -15,22 +15,25 @@ bool BootWindow::billValidatorIdle = false;
 bool BootWindow::coinChangerIdle = false;
 bool BootWindow::siteLinkIdle = false;
 bool BootWindow::wifiOnline = false;
+bool BootWindow::denhacOrgLink = false;
 bool BootWindow::motorsIdle = false;
 
 bool BootWindow::redrawBillValidator = true;
 bool BootWindow::redrawCoinChanger = true;
 bool BootWindow::redrawSiteLink = true;
 bool BootWindow::redrawWifi = true;
+bool BootWindow::redrawDenhacOrg = true;
 bool BootWindow::redrawMotors = true;
 
 uint16_t BootWindow::billValidatorY;
 uint16_t BootWindow::coinChangerY;
 uint16_t BootWindow::siteLinkY;
 uint16_t BootWindow::wifiY;
+uint16_t BootWindow::denhacOrgY;
 uint16_t BootWindow::motorsY;
 
 uint8_t BootWindow::numStepsCompleted = 0;
-uint8_t BootWindow::numStepsTotal = 64 + 5;
+uint8_t BootWindow::numStepsTotal = 64 + 6;
 
 void BootWindow::setup() {
   display = &Screen::display;
@@ -75,11 +78,12 @@ void BootWindow::setup() {
   
   // Lowest Y of "machine" text == 242
   // Height of status text combined == 210
-  billValidatorY = 242 + (Screen::getHeight() - 242 - 210) / 2;
+  billValidatorY = 350; // 242 + (Screen::getHeight() - 242 - 210) / 2;
   coinChangerY = billValidatorY + 60;
   siteLinkY = coinChangerY + 60;
   wifiY = siteLinkY + 60;
-  motorsY = wifiY + 60;
+  denhacOrgY = wifiY + 60;
+  motorsY = denhacOrgY + 60;
 
   display->gfx_MoveTo(102, billValidatorY);
   display->putstr((char*) "Bill Validator");
@@ -92,6 +96,9 @@ void BootWindow::setup() {
 
   display->gfx_MoveTo(102, wifiY);
   display->putstr((char*) "WiFi Connected");
+
+  display->gfx_MoveTo(102, denhacOrgY);
+  display->putstr((char*) "denhac.org link");
 
   display->gfx_MoveTo(102, motorsY);
   display->putstr((char*) "Motors");
@@ -154,6 +161,17 @@ void BootWindow::loop() {
     }
   }
 
+  if(redrawDenhacOrg) {
+    redrawDenhacOrg = false;
+    color = denhacOrgLink ? GREEN : RED;
+    display->gfx_CircleFilled(66, denhacOrgY + 15, size, color);
+    if(denhacOrgLink) {
+      drawCheckAt(46, denhacOrgY - 5);
+    } else {
+      drawXAt(46, denhacOrgY - 5);
+    }
+  }
+
   if(redrawMotors) {
     redrawMotors = false;
     color = motorsIdle ? GREEN : RED;
@@ -177,6 +195,7 @@ void BootWindow::loop() {
     coinChangerIdle &&
     siteLinkIdle &&
     wifiOnline &&
+    denhacOrgLink &&
     motorsIdle) {
       LOOP_WAIT_MS(lastChangeMillis, 3000);
       WindowManager::show<MainWindow>();
@@ -236,14 +255,22 @@ void BootWindow::onSiteLinkStateCallback(
 }
 
 void BootWindow::onSiteLinkStatusCallback(uint8_t statusCode) {
-  if(statusCode != BridgeStatus::WIFI_CONNECTED || wifiOnline) {
-    return;
+  if(statusCode == BridgeStatus::WIFI_CONNECTED) {
+    if(!wifiOnline) {
+      SiteLink::fetchProducts();
+    }
+
+    redrawWifi = true;
+    wifiOnline = true;
+    lastChangeMillis = current_loop_millis;
+    numStepsCompleted++;
+  } else if(statusCode == BridgeStatus::PRODUCTS_FETCHED) {
+    redrawDenhacOrg = true;
+    denhacOrgLink = true;
+    lastChangeMillis = current_loop_millis;
+    numStepsCompleted++;
   }
 
-  redrawWifi = true;
-  wifiOnline = true;
-  lastChangeMillis = current_loop_millis;
-  numStepsCompleted++;
 }
 
 void BootWindow::onMotorAvailability(uint8_t row, uint8_t col, bool available) {

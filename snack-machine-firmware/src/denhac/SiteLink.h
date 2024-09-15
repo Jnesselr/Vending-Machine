@@ -122,6 +122,7 @@ class SiteLink {
     static void setup();
     static void loop();
 
+    static void fetchProducts();
     static void getOrdersByCard(
       uint32_t cardNumber,
       BridgeStatusCallback onStatus,
@@ -163,6 +164,7 @@ class SiteLink {
     static ProductRemovedCallback productRemovedCallback;
   private:
     static RingBuffer<3, SiteLinkCommand> commandBuffer;
+    static SiteLinkCommand currentCommand;
 
     static void handleWaiting();
     static void handleHandshake();
