@@ -243,7 +243,7 @@ void BootWindow::onBillValidatorStateCallback(
 void BootWindow::onCoinChangerStateCallback(
   CoinChangerState oldState,
   CoinChangerState newState) {
-    if(newState == CoinChangerState::IDLE || coinChangerIdle) {
+    if(newState != CoinChangerState::IDLE || coinChangerIdle) {
       return;
     }
 
@@ -256,7 +256,7 @@ void BootWindow::onCoinChangerStateCallback(
 void BootWindow::onSiteLinkStateCallback(
   SiteLinkState oldState,
   SiteLinkState newState) {
-    if(newState == SiteLinkState::IDLE || siteLinkIdle) {
+    if(newState != SiteLinkState::IDLE || siteLinkIdle) {
       return;
     }
 
