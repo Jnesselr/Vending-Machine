@@ -25,11 +25,18 @@ private:
 
 template<typename T>
 void WindowManager::show() {
-  T::setup();
+  // Tear down the old window, if there is one
+  if(WindowManager::windowTeardown != nullptr) {
+    windowTeardown();
+  }
 
+  // Ensure any internal variables are referring to the window we want to show
   WindowManager::windowLoop = T::loop;
-  WindowManager::windowTeardown = T::teardown;
   WindowManager::windowTouch = T::touch;
+  WindowManager::windowTeardown = T::teardown;
+
+  // Allow the window to setup anything it needs to before we start calling its loop/touch methods
+  T::setup();
 }
 
 #endif
